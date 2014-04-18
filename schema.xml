@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<database name="TotalDefense">
+  <table name="castle">
+    <column name="id" type="Integer" size="10" autoIncrement="true" primaryKey="true"/>
+    <column name="user" type="Integer" size="4"/>
+    <column name="name" type="Varchar" size="50"/>
+    <column name="castle_type_id" type="Integer" size="6"/>
+    <column name="castle_location_id" type="Integer" size="6"/>
+    <column name="coordinates" type="Varchar" size="40"/>
+    <column name="X" type="Integer" size="6"/>
+    <column name="Y" type="Integer" size="6"/>
+    <column name="silver" type="Integer" size="5"/>
+    <column name="copper" type="Integer" size="5"/>
+    <column name="current_st" type="Integer" size="4"/>
+    <column name="current_as" type="Integer" size="4"/>
+    <column name="current_pr" type="Integer" size="4"/>
+    <column name="current_sk" type="Integer" size="4"/>
+    <column name="current_bs" type="Integer" size="4"/>
+    <column name="current_lr" type="Integer" size="4"/>
+    <column name="current_hk" type="Integer" size="4"/>
+    <column name="current_ok" type="Integer" size="4"/>
+    <column name="mission_st" type="Integer" size="4"/>
+    <column name="mission_as" type="Integer" size="4"/>
+    <column name="mission_pr" type="Integer" size="4"/>
+    <column name="mission_sk" type="Integer" size="4"/>
+    <column name="mission_bs" type="Integer" size="4"/>
+    <column name="mission_lr" type="Integer" size="4"/>
+    <column name="usage_off" type="Boolean"/>
+    <column name="usage_def" type="Boolean"/>
+    <column name="mission_priority" type="Boolean"/>
+    <column name="environment_card" type="Boolean"/>
+    <column name="autodef_coordinates" type="Varchar" size="40"/>
+    <column name="autodef_X" type="Integer" size="6"/>
+    <column name="autodef_Y" type="Integer" size="6"/>
+    <column name="points" type="Integer" size="3"/>
+    <column name="open_population" type="Integer" size="4"/>
+    <column name="last_import" type="Timestamp"/>
+    <foreign-key foreignTable="castle_type">
+      <reference foreign="id" local="castle_type_id"/>
+    </foreign-key>
+    <foreign-key foreignTable="castle_location">
+      <reference foreign="id" local="castle_location_id"/>
+    </foreign-key>
+    <behavior name="timestampable"/>
+  </table>
+  <table name="castle_type">
+    <column name="id" type="Integer" size="6" autoIncrement="true" primaryKey="true"/>
+    <column name="user" type="Integer" size="4"/>
+    <column name="type" description="Off, Def, Mix" type="Char" size="3"/>
+    <column name="name" type="Varchar" size="50"/>
+    <column name="total_st" type="Integer" size="4"/>
+    <column name="total_as" type="Integer" size="4"/>
+    <column name="total_pr" type="Integer" size="4"/>
+    <column name="total_sk" type="Integer" size="4"/>
+    <column name="total_bs" type="Integer" size="4"/>
+    <column name="total_lr" type="Integer" size="4"/>
+    <column name="total_hk" type="Integer" size="4"/>
+    <column name="total_ok" type="Integer" size="4"/>
+    <column name="mission_st" type="Integer" size="4"/>
+    <column name="mission_as" type="Integer" size="4"/>
+    <column name="mission_pr" type="Integer" size="4"/>
+    <column name="mission_sk" type="Integer" size="4"/>
+    <column name="mission_bs" type="Integer" size="4"/>
+    <column name="mission_lr" type="Integer" size="4"/>
+    <column name="bergfried" type="Integer" size="2"/>
+    <column name="zeughaus" type="Integer" size="2"/>
+    <column name="taverne" type="Integer" size="2"/>
+    <column name="bibliothek" type="Integer" size="2"/>
+    <column name="wehranlage" type="Integer" size="2"/>
+    <column name="markt" type="Integer" size="2"/>
+    <column name="bauernhof" type="Integer" size="2"/>
+    <column name="holzfaeller" type="Integer" size="2"/>
+    <column name="holzlager" type="Integer" size="2"/>
+    <column name="steinbruch" type="Integer" size="2"/>
+    <column name="steinlager" type="Integer" size="2"/>
+    <column name="erzmine" type="Integer" size="2"/>
+    <column name="erzlager" type="Integer" size="2"/>
+    <column name="langbogen" type="Boolean"/>
+    <column name="dreifelderwirtschaft" type="Boolean"/>
+    <column name="kummet" type="Boolean"/>
+    <column name="vorratskeller" type="Boolean"/>
+    <column name="steigbuegel" type="Boolean"/>
+    <column name="waffenschmied" type="Boolean"/>
+    <column name="ruestungsschmied" type="Boolean"/>
+    <column name="bierpruefer" type="Boolean"/>
+    <column name="schwertschmied" type="Boolean"/>
+    <column name="eisenhaertung" type="Boolean"/>
+    <column name="armbrust" type="Boolean"/>
+    <column name="giftpfeile" type="Boolean"/>
+    <column name="pferdezucht" type="Boolean"/>
+    <column name="waffenherstellung" type="Boolean"/>
+    <column name="pferdepanzerung" type="Boolean"/>
+    <column name="schubkarren" type="Boolean"/>
+    <column name="brandpfeile" type="Boolean"/>
+    <column name="hufschmied" type="Boolean"/>
+    <column name="umgebungskarte" type="Boolean"/>
+    <column name="zisterne" type="Boolean"/>
+    <unique name="alternate_1">
+      <unique-column name="user"/>
+      <unique-column name="name"/>
+      <unique-column name="type"/>
+    </unique>
+    <behavior name="timestampable"/>
+  </table>
+  <table name="attack">
+    <column name="id" type="Integer" size="6" autoIncrement="true" primaryKey="true"/>
+    <column name="user" type="Integer" size="6"/>
+    <column name="attack_time" type="Timestamp"/>
+    <column name="duration" description="&lt;998 = Anzahl Stunden; 998: bis zum Nachtmodus; 999: unendlich" type="Integer" size="4"/>
+    <behavior name="timestampable"/>
+  </table>
+  <table name="user">
+    <column name="id" type="Integer" autoIncrement="true" primaryKey="true"/>
+    <column name="name" type="Varchar" size="50"/>
+    <column name="password" type="Varchar" size="30"/>
+    <column name="server" description="DE-7" type="Char" size="6"/>
+    <column name="playerid" description="Vollst&#xE4;ndiger Spielerlink" type="Char" size="20"/>
+    <column name="phone" type="Char" size="20"/>
+    <column name="email" type="Char" size="30"/>
+    <column name="sms" type="Boolean"/>
+    <column name="import_status" description="10=only tavernbrawl; 20=only sourcecode; 100=ok" type="Integer" size="2"/>
+    <column name="import_date" type="Timestamp"/>
+  </table>
+  <table name="time_table">
+    <column name="id" type="Integer" autoIncrement="true" primaryKey="true"/>
+    <column name="type" description="int / ext" type="Char" size="3"/>
+    <column name="from" type="Time"/>
+    <column name="to" type="Time"/>
+    <column name="user_id" type="Integer"/>
+    <foreign-key foreignTable="user">
+      <reference foreign="id" local="user_id"/>
+    </foreign-key>
+  </table>
+  <table name="castle_location">
+    <column name="id" type="Integer" size="6" autoIncrement="true" primaryKey="true"/>
+    <column name="user" type="Integer" size="6"/>
+    <column name="name" type="Varchar" size="50"/>
+    <column name="parent_id" type="Integer" size="6"/>
+    <behavior name="timestampable"/>
+    <behavior name="nested_set"/>
+  </table>
+  <table name="target">
+    <column name="id" type="Integer" autoIncrement="true" primaryKey="true"/>
+    <column name="user" type="Integer" size="6"/>
+    <column name="name" type="Varchar" size="50"/>
+    <column name="coordinates" type="Char" size="12"/>
+    <column name="attack_time" type="Timestamp"/>
+    <behavior name="timestampable"/>
+  </table>
+  <table name="castle_2_attack" isCrossRef="true">
+    <column name="castle_id" type="Integer" size="10" required="true" primaryKey="true"/>
+    <column name="attack_id" type="Integer" size="6" required="true" primaryKey="true"/>
+    <foreign-key foreignTable="attack">
+      <reference local="attack_id" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="castle">
+      <reference local="castle_id" foreign="id"/>
+    </foreign-key>
+  </table>
+</database>
