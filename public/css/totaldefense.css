@@ -1,0 +1,171 @@
+@CHARSET "UTF-8";
+
+/* Swipe works with mouse as well but often causes text selection. */
+#totaldefense-page * {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.controlgroup-textinput{
+    padding-top:.22em;
+    padding-bottom:.22em;
+}
+
+.number-2d {
+    width: 2em;
+}
+
+.td-center {
+	text-align: center;
+}
+
+.td-right {
+	text-align: right;
+}
+
+.td-label-margin-top {
+	margin-top: 1em    !important;
+}
+
+.td-link-margin-top {
+	margin-top: 2em;
+}
+
+.ui-field-contain {
+    border-bottom: 0px;
+}
+
+.number-4d {
+    width: 4em   !important;
+}
+
+textarea.ui-input-text { height: inherit !important}
+
+.jd_title {
+    display: block;
+    font-size: 1em;
+    margin: 0 30%;
+    min-height: 1.1em;
+    outline: 0 none !important;
+    overflow: hidden;
+    padding: 0.7em 0;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.td-field-contain > label {
+    width: 26%;
+}
+
+.td-title {
+
+}
+
+.td-field-contain > label ~ [class*="ui-"] {
+    float: right;
+    width: 72%;
+}
+
+.td-field-contain-troops > label {
+    width: 66%;
+}
+
+.td-field-contain-troops > label ~ [class*="ui-"] {
+    float: right;
+    width: 34%;
+}
+
+.ui-footer .ui-navbar .ui-grid-b li {
+	width: 33.33%;
+}
+/******************************************/
+/* Basic styles */
+
+/* Stack all blocks to start */
+.ui-grid-0 .ui-block-a,
+.ui-grid-0 .ui-block-b,
+.ui-grid-0 .ui-block-c {
+    width: 99%;
+    float: none;
+    margin: 0.5em;
+    padding: 0.5em;
+}
+
+/* 1st breakpoint - Float B and C, leave A full width on top */
+@media all and (min-width: 10em)
+{
+	.td-right {
+/*		text-align: right;
+*/		clear: both;
+	}
+    .ui-grid-b {
+        overflow: hidden; /* Use this or a "clearfix" to give the container height */
+    }
+    
+.ui-field-contain > label ~ [class*="ui-"], .ui-field-contain .ui-controlgroup-controls {
+    -moz-box-sizing: border-box;
+    margin: 0;
+}
+.ui-field-contain > label, .ui-field-contain .ui-controlgroup-label, .ui-field-contain > .ui-rangeslider > label {
+    float: left;
+    margin: 0.5em 2% 0 0;
+    width: 20%;
+}
+	.td-block-a,
+	.td-block-b,
+    .td-block-c { margin: 0.5em; }
+    
+    .ui-grid-b .ui-block-a,
+    .ui-grid-b .ui-block-b,
+    .ui-grid-b .ui-block-c {
+      float: left;
+      width: 94%;
+    }
+}
+
+/* 2nd breakpoint - Float all, 50/25/25 */
+@media all and (min-width: 30em)
+{
+	.td-block-a { margin: 0.5em 0em 0.5em 0em; }
+	.td-block-b { margin: 0.5em 0.5em 0.5em 0em }
+	.td-block-c { margin: 0.5em 0em 0.5em 0.5em }
+	
+    .ui-grid-b .ui-block-a
+	{
+      float: left;
+      width: 96%;
+    }
+    .ui-grid-b .ui-block-b,
+    .ui-grid-b .ui-block-c 
+   	{
+      float: left;
+      width: 46%;
+    }
+}
+/* 3rd breakpoint - Bump up font size at very wide screens */
+@media all and (min-width: 50em)
+{
+	.ui-content {
+	    padding: 0em;
+	}
+	
+	.td-block-a,
+	.td-block-b,
+	.td-block-c 
+	{ 
+		margin: 0.5em 1.5em 0.5em 1.5em;
+	}
+	
+    .ui-grid-b .ui-block-a,
+	.ui-grid-b .ui-block-b,
+    .ui-grid-b .ui-block-c 
+   	{
+      float: left;
+      width: 27%;
+    }
+
+}
