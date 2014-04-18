@@ -1,0 +1,42 @@
+<form method="post" action="">
+	<table data-role="table" id="table-custom-2" data-mode="columntoggle" class="ui-body-d ui-shadow table-stripe ui-responsive" data-column-btn-theme="b" data-column-btn-text="Columns to display..." data-column-popup-theme="a">
+         <thead>
+           <tr class="ui-bar-d">
+             <th data-priority="6">Nr.</th>
+             <th>Burg</th>
+             <th data-priority="4">Silber</th>
+             <th data-priority="4">Kupfer</abbr></th>
+             <th data-priority="2">Speer</th>
+             <th data-priority="2">Armbrust</th>
+             <th data-priority="2">Panzer</th>
+             <th data-priority="3">Schwert</th>
+             <th data-priority="3">Bogen</th>
+             <th data-priority="3">Lanzen</th>
+             <th data-priority="6">Handkarren</th>
+             <th data-priority="6">Ochsenkarren</th>
+           </tr>
+         </thead>
+         <tbody>
+         	<?php
+         	$no = 0;
+         	foreach($this->castles as $castle): 
+         		$no++;?>
+            	<tr>
+            		<td><?php echo $no; ?></td>
+		            <td><a href="/castle/update/<?php echo $castle->getid(); ?>"><?php echo $castle->getName(); ?></a></td>
+		            <td><?php echo $castle->getSilver(); ?></td>
+		            <td><?php echo $castle->getCopper(); ?></td>
+		            <td><?php echo $castle->getCurrentSt(); ?></td>
+		            <td><?php echo $castle->getCurrentAs(); ?></td>
+		            <td><?php echo $castle->getCurrentPr(); ?></td>
+		            <td><?php echo $castle->getCurrentSk(); ?></td>
+		            <td><?php echo $castle->getCurrentBs(); ?></td>
+		            <td><?php echo $castle->getCurrentLr(); ?></td>
+		            <td><?php echo $castle->getCurrentHk(); ?></td>
+		            <td><?php echo $castle->getCurrentOk(); ?></td>
+           		</tr>
+           		<?php 
+			endforeach; ?>
+    	</tbody>
+	</table>	
+</form>

@@ -1,0 +1,23 @@
+<form method="post" action="">
+
+	<div class="ui-field-contain">
+		<label for="name">Name</label>
+		<input type="text" name="Name" id="name" value="<?php echo $this->castleLocation->getName(); ?>">
+	</div>
+	
+	<div class="ui-field-contain">
+	    <label for="parent_id">Zugeh&ouml;rigkeit:</label>
+	    <select name="ParentId" id="parent_id">
+		    <?php 
+			foreach($this->parentLocations as $parentLocation): 
+				if($this->castleLocation->getId() != $parentLocation->getId()):?>
+		        	<option value="<?php echo $parentLocation->getId(); ?>"><?php echo $parentLocation->getName(); ?></option>
+					<?php 
+				endif;
+			endforeach; ?>
+	    </select>
+	</div>
+	
+	<button class="ui-btn ui-btn-inline" name="save">Sichern</button>
+    <button class="ui-btn ui-btn-inline" name="cancel">Abbruch</button>
+</form>

@@ -1,0 +1,14 @@
+<form method="post" action="">
+	<div class="ui-grid-0">
+		<div class="ui-block-a">
+			<label for="burgenliste">Sourcecode Burgenliste:</label>
+		    <textarea name="burgenliste" rows="10" id="burgenliste" class="ui-input-text ui-shadow-inset ui-body-inherit ui-corner-all"><?php echo $this->burgenliste;?></textarea>
+		    <input type="submit" value="Importieren">
+    	</div>
+	</div>
+	
+	<div data-role="popup" id="import" class="ui-content" style="max-width:280px">
+    	<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-left">Close</a>
+		<p>Import durchgef&uuml;hrt.</p>
+	</div>
+</form>

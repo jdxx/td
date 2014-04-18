@@ -1,0 +1,9 @@
+<form method="post" action="">
+	<ul data-role="listview">
+		<?php 
+		foreach($this->castleTypes as $castleType): ?>
+			<li><a href="/castletype/update/<?php echo $castleType->getId(); ?>"><?php echo $castleType->getType() . "-" . $castleType->getName(); ?></a></li>
+			<?php 
+		endforeach; ?>
+	</ul>
+</form>

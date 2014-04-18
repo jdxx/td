@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="de">
+
+	<head>
+	    <meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="shortcut icon" href="/img/totaldefense_32.png" />
+		<link rel="apple-touch-icon" href="/img/totaldefense_64.png" />
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+		<link href="/css/totaldefense.css" rel="stylesheet" type="text/css"/>
+		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+		<script src="/js/totaldefense.js"></script>
+		<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+	</head>
+	
+	<body>
+		<div data-role="page" data-url="totaldefense-page" class="jqm-demos ui-responsive-panel" id="totaldefense-page" data-title="<?php echo APP_TITLE . $this->layoutTitle; ?>">
+			<div data-role="header" data-position="fixed" data-theme="b">
+				<a href="#menue-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+				<h1><?php echo $this->layoutTitle; ?></h1>
+				<a href="<?php echo $this->layoutHelp; ?>" title="Hilfe" class="ui-btn ui-shadow ui-corner-all ui-icon-info ui-btn-icon-left ui-btn-icon-notext"></a>	
+			</div>
+			
+			<div data-role="main" class="ui-content">
+				<?php echo $this->layout()->content; ?>
+			</div>
+			
+			<div data-role="footer" data-position="fixed" data-theme='b'>
+				<?php if(!$this->layoutNoNavbar): ?>
+					<div data-role="navbar">
+				        <ul>
+				        	<?php
+				        	if(isset($this->layoutNavLeft)):
+				        		foreach($this->layoutNavLeft as $label => $link): ?>
+				            	<li><a href="<?php echo $link;?>"><?php echo $label; ?></a></li>
+				            	<?php 
+				            	endforeach;
+			            	else: ?>
+				            	<li><a href="/">Home</a></li>
+				        		<?php
+			        		endif;
+				        	if(isset($this->layoutNavCenter)):
+				            	foreach($this->layoutNavCenter as $label => $link): ?>
+				            	<li><a href="<?php echo $link;?>"><?php echo $label; ?></a></li>
+				            	<?php 
+				            	endforeach;
+			            	else: ?>
+				            	<li><a>.</a></li>
+				        		<?php
+			        		endif;
+			        		if(isset($this->layoutNavRight)):
+			        			foreach($this->layoutNavRight as $label => $link): ?>
+        							<li><a href="<?php echo $link;?>"><?php echo $label; ?></a></li>
+        						    <?php 
+        				       	endforeach;
+			            	else: ?>
+				            	<li><a>.</a></li>
+				            	<?php
+			        		endif;?>
+				        </ul>
+				    </div>
+			    <?php 
+			    endif; ?>
+				<h4>TotalDefense v0.1</h4>
+			</div>
+			
+			<div data-role="panel" data-display="push" data-theme="b" id="menue-panel">
+        		<ul data-role="listview">
+        			<li data-icon="delete"><a href="#" data-rel="close">Menue schlie&szlig;en</a></li>
+        			<br/><br/>
+					<li data-role="list-divider">Burgen</li>
+				    <li><a href="/castle">Pflege</a></li>
+				    <li><a href="/castle/list">&Uuml;bersicht</a></li>
+				    <li><a href="/castletype">Typen</a></li>
+				    <li><a href="/castle/import">Importieren</a></li>
+				    <li data-role="list-divider">Standorte</li>
+				    <li><a href="/castlelocation">Pflege</a>
+				    <li><a href="/castlelocation/overview">&Uuml;bersicht</a></li>
+				    <li><a href="/castlelocation/attach">Zuordnen</a></li>
+				    <li><a href="/castlelocation/detach">Aufheben</a></li>
+				    
+				    <li data-role="list-divider">Verteidigung</li>
+				    <li><a href="/defbridge">Def-Br&uuml;cke</a></li>
+				    
+				    <li data-role="list-divider">Angriffe</li>
+				    <li><a href="#">Angriff</a></li>
+				    <li><a href="#">Off-Br&uuml;cke</a></li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>
