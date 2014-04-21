@@ -42,6 +42,10 @@
     width: 4em   !important;
 }
 
+.td-popup-padding {
+    padding: 1em;
+}
+	
 textarea.ui-input-text { height: inherit !important}
 
 .jd_title {
@@ -79,6 +83,23 @@ textarea.ui-input-text { height: inherit !important}
     width: 34%;
 }
 
+.td-field-contain-buildings > label {
+    width: 31%      !important;
+}
+
+.td-field-contain-buildings > label ~ [class*="ui-"] {
+    float: right;
+	width: 70%;
+}
+
+.ui-field-contain > label ~ [class*="ui-"], .ui-field-contain .ui-controlgroup-controls {
+    width: 100%;
+}
+
+.td-controlgroup {
+    width: 180px   !important;
+}
+
 .ui-footer .ui-navbar .ui-grid-b li {
 	width: 33.33%;
 }
@@ -107,7 +128,7 @@ textarea.ui-input-text { height: inherit !important}
     }
     
 .ui-field-contain > label ~ [class*="ui-"], .ui-field-contain .ui-controlgroup-controls {
-    -moz-box-sizing: border-box;
+    -moz-box-sizing: border-box;    
     margin: 0;
 }
 .ui-field-contain > label, .ui-field-contain .ui-controlgroup-label, .ui-field-contain > .ui-rangeslider > label {

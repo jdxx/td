@@ -62,7 +62,9 @@ class CastleTypeController extends Zend_Controller_Action
 
     public function indexAction()
     {
-    	$this->view->header_add = true;
+    	$this->view->layoutTitle = 'Burgtypen bearbeiten';
+    	$this->view->layoutHelp  = '/castletype/help_index';    	
+    	$this->view->layout_add  = true;
     	
         $castleType = new CastleTypeQuery();
         $this->view->castleTypes = $castleType->find();

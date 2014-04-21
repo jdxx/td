@@ -1,14 +1,22 @@
 <form method="post" action="">
+	<input type="hidden" id="show-popup" name="imported_castles" value="<?php echo $this->imported_castles; ?>"> 
 	<div class="ui-grid-0">
 		<div class="ui-block-a">
-			<label for="burgenliste">Sourcecode Burgenliste:</label>
+			<label for="burgenliste">Sourcecode der Burgenliste vom LaK Desktop-Client:</label>
 		    <textarea name="burgenliste" rows="10" id="burgenliste" class="ui-input-text ui-shadow-inset ui-body-inherit ui-corner-all"><?php echo $this->burgenliste;?></textarea>
-		    <input type="submit" value="Importieren">
+		    <div class="td-right">
+		    	<a href="#import" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-transition="pop">Basic Popup</a>
+			    <input data-wrapper-class="td-right" data-theme="b" data-inline="true" name="import" value="Importieren" type="submit">
+		    </div>
     	</div>
 	</div>
 	
-	<div data-role="popup" id="import" class="ui-content" style="max-width:280px">
+	<div data-role="popup" id="import" class="td-popup-padding">
     	<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-left">Close</a>
-		<p>Import durchgef&uuml;hrt.</p>
+		<p>
+			<?php echo $this->imported_castles; ?> Burgen 
+			<br/>
+			importiert.
+		</p>
 	</div>
 </form>

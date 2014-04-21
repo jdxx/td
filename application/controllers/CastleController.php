@@ -15,11 +15,13 @@ class CastleController extends Zend_Controller_Action
     	
         $castle = new CastleQuery();
         $this->view->castles = $castle->orderById()->find();
-        
     }
 
     public function listAction()
     {
+    	$this->view->layoutTitle    = '&Uuml;bersicht Burgen';
+    	$this->view->layoutHelp     = '/castle/help_list';
+    	
     	$castle = new CastleQuery();
     	$this->view->castles = $castle->orderById()->find();
     
@@ -37,9 +39,6 @@ class CastleController extends Zend_Controller_Action
     	
     	$id = $this->_request->getParam('id');
         $castle = CastleQuery::create()->findPk($id);
-
-//         $this->view->layoutNavCenter = array('Sichern' => "/castle/save/$id");
-//     	$this->view->layoutNavRight  = array('L&ouml;schen' => "/castle/delete/$id");
 
     	if ($this->_request->isPost()) {
     		if(isset($_POST["cancel"]))
@@ -72,7 +71,11 @@ class CastleController extends Zend_Controller_Action
     {
 		$this->view->layoutTitle    = 'Burgen importieren';
     	$this->view->layoutHelp     = '/castle/help_import';
+    	$this->view->layoutNoNavbar = true;
     	
+
+    	$imported_castles = 2;
+    		
     	if ($this->_request->isPost()) {
                 $post['burgenliste'] = $_POST['burgenliste'];
                 
@@ -140,18 +143,23 @@ class CastleController extends Zend_Controller_Action
 				    	$source_array[] = explode(" ", $text);
 				    }
 				}
-			
+
 			foreach($source_array as $_source_array) 
 			{
 				$coord = array_search($_source_array[1], $tavern_array);
 				
-				$castle = CastleQuery::create()->findOneByCoordinates($coord);
-				
-// 				echo "<xmp>" . var_dump($castle); exit;
-				
-				if(is_null($castle))
+				if(!$coord == false)
 				{
-					$castle = new Castle();
+					$castle = CastleQuery::create()->findOneByCoordinates($coord);
+				}
+				else
+				{
+					$castle = CastleQuery::create()->findOneByName($_source_array[1]);
+					
+					if(is_null($castle))
+					{
+						$castle = new Castle();
+					}
 				}
 				
 				$castle->setName($_source_array[1]);
@@ -169,15 +177,19 @@ class CastleController extends Zend_Controller_Action
 				$castle->setCurrentOk($_source_array[17]);
 				$castle->setLastImport(time());
 				
-				$castle->setCoordinates($coord);
+				if(!$coord == false)
+				{	
+					$castle->setCoordinates($coord);
+					preg_match("/([0-9]{1,5}),([0-9]{1,5})/", $coord, $coordXY);
+					$castle->setX($coordXY[0]);
+					$castle->setX($coordXY[1]);
+				}
 
-				preg_match("/([\d]{1,5}),([\d]{1,5})/", $coord, $coordXY);
-				$castle->setX($coordXY[0]);
-				$castle->setX($coordXY[1]);
-
-				$castle->save();	
+				$castle->save();
+				$imported_castles++;	
 			}
     	}
+    	$this->view->imported_castles = $imported_castles;
     }
 
     public function saveAction()

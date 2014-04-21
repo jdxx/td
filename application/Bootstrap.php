@@ -25,7 +25,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	protected function _initConstants()
 	{
 		define("APP_NAME", 			"TotalDefense v0.1");
-		define("APP_TITLE", 		"TD :: ");
+		define("APP_TITLE", 		"TotalDefense");
 		define("POPULATION_MAX", 	4300);
 		
 	}

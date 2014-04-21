@@ -1,169 +1,183 @@
 <form method="post" action="">
+	<div class="ui-grid-b">
+		<div class="ui-block-a td-block-a">
+			<div class="ui-field-contain td-field-contain">
+				<label for="name">Name</label>
+				<input type="text" name="Name" id="name" value="<?php echo $this->castleType->getName(); ?>">
+			</div>
+		
+			<div class="ui-field-contain td-field-contain">
+			    <label for="type">Typ:</label>
+			    <select name="Type" id="type">
+			        <option value="Off">Off</option>
+			        <option value="Def">Def</option>
+			        <option value="Mix">Mix</option>
+			    </select>
+			</div>
+			
+			<div class="ui-field-contain td-field-contain">
+				<label for="maxpopulation">Bev&ouml;lkerung</label>
+				<input type="text" name="MaxPopulation" id="maxpopulation" value="4300">
+			</div>
+	 	</div>
 	
-	<div class="ui-field-contain">
-	    <label for="type">Typ:</label>
-	    <select name="Type" id="type">
-	        <option value="Off">Off</option>
-	        <option value="Def">Def</option>
-	        <option value="Mix">Mix</option>
-	    </select>
-	</div>
-	
-	<div class="ui-field-contain">
-		<label for="name">Name</label>
-		<input type="text" name="Name" id="name" value="<?php echo $this->castleType->getName(); ?>">
-	</div>
-	
-	<h3 class="ui-bar ui-bar-a">Geb&auml;ude</h3>
-	<div class="ui-field-contain">
-         <label for="bergfried">Bergfried</label>
-         <div data-role="controlgroup" data-type="horizontal">
-	         <input id="bergfried-minus" data-icon="minus" data-iconpos="notext" value="-1" type="button">
-	         <input name="Bergfried" id="bergfried" value="<?php echo $this->castleType->getBergfried(); ?>" data-wrapper-class="number-2d controlgroup-textinput ui-btn" type="number">
-	         <input id="bergfried-plus" data-icon="plus" data-iconpos="notext" value="+1" type="button">
-         </div>
-    </div>
-    <div class="ui-field-contain">
-         <label for="zeughaus">Zeughaus</label>
-         <div data-role="controlgroup" data-type="horizontal">
-	         <input data-icon="minus" data-iconpos="notext" value="-1" type="button">
-	         <input name="Zeughaus" id="zeughaus" value="<?php echo $this->castleType->getZeughaus(); ?>" data-wrapper-class="number-2d controlgroup-textinput ui-btn" type="number">
-	         <input data-icon="plus" data-iconpos="notext" value="+1" type="button">
-         </div>
-    </div>
-    <div class="ui-field-contain">
-         <label for="taverne">Taverne</label>
-         <div data-role="controlgroup" data-type="horizontal">
-	         <input data-icon="minus" data-iconpos="notext" value="-1" type="button">
-	         <input name="Taverne" id="taverne" value="<?php echo $this->castleType->getTaverne(); ?>" data-wrapper-class="number-2d controlgroup-textinput ui-btn" type="number">
-	         <input data-icon="plus" data-iconpos="notext" value="+1" type="button">
-         </div>
-    </div>
-    <div class="ui-field-contain">
-         <label for="bibliothek">Bibliothek</label>
-         <div data-role="controlgroup" data-type="horizontal">
-	         <input data-icon="minus" data-iconpos="notext" value="-1" type="button">
-	         <input name="Bibliothek" id="bibliothek" value="<?php echo $this->castleType->getBibliothek(); ?>" data-wrapper-class="number-2d controlgroup-textinput ui-btn" type="number">
-	         <input data-icon="plus" data-iconpos="notext" value="+1" type="button">
-         </div>
-    </div>
-    <div class="ui-field-contain">
-         <label for="wehranlage">Wehranlage</label>
-         <div data-role="controlgroup" data-type="horizontal">
-	         <input data-icon="minus" data-iconpos="notext" value="-1" type="button">
-	         <input name="Wehranlage" id="wehranlage" value="<?php echo $this->castleType->getWehranlage(); ?>" data-wrapper-class="number-2d controlgroup-textinput ui-btn" type="number">
-	         <input data-icon="plus" data-iconpos="notext" value="+1" type="button">
-         </div>
-    </div>
-    <div class="ui-field-contain">
-         <label for="markt">Markt</label>
-         <div data-role="controlgroup" data-type="horizontal">
-	         <input data-icon="minus" data-iconpos="notext" value="-1" type="button">
-	         <input name="Markt" id="markt" value="<?php echo $this->castleType->getMarkt(); ?>" data-wrapper-class="number-2d controlgroup-textinput ui-btn" type="number">
-	         <input data-icon="plus" data-iconpos="notext" value="+1" type="button">
-         </div>
-    </div>
-    <div class="ui-field-contain">
-         <label for="bauernhof">Bauernhof</label>
-         <div data-role="controlgroup" data-type="horizontal">
-	         <input data-icon="minus" data-iconpos="notext" value="-1" type="button">
-	         <input name="Bauernhof" id="bauernhof" value="<?php echo $this->castleType->getBauernhof(); ?>" data-wrapper-class="number-2d controlgroup-textinput ui-btn" type="number">
-	         <input data-icon="plus" data-iconpos="notext" value="+1" type="button">
-         </div>
-    </div>
-    <div class="ui-field-contain">
-         <label for="holzfaeller">Holzf&auml;ller</label>
-         <div data-role="controlgroup" data-type="horizontal">
-	         <input data-icon="minus" data-iconpos="notext" value="-1" type="button">
-	         <input name="Holzfaeller" id="holzfaeller" value="<?php echo $this->castleType->getHolzfaeller(); ?>" data-wrapper-class="number-2d controlgroup-textinput ui-btn" type="number">
-	         <input data-icon="plus" data-iconpos="notext" value="+1" type="button">
-         </div>
-    </div>
-    <div class="ui-field-contain">
-         <label for="holzlager">Holzlager</label>
-         <div data-role="controlgroup" data-type="horizontal">
-	         <input data-icon="minus" data-iconpos="notext" value="-1" type="button">
-	         <input name="Holzlager" id="holzlager" value="<?php echo $this->castleType->getHolzlager(); ?>" data-wrapper-class="number-2d controlgroup-textinput ui-btn" type="number">
-	         <input data-icon="plus" data-iconpos="notext" value="+1" type="button">
-         </div>
-    </div>
-    <div class="ui-field-contain">
-         <label for="steinbruch">Steinbruch</label>
-         <div data-role="controlgroup" data-type="horizontal">
-	         <input data-icon="minus" data-iconpos="notext" value="-1" type="button">
-	         <input name="Steinbruch" id="steinbruch" value="<?php echo $this->castleType->getSteinbruch(); ?>" data-wrapper-class="number-2d controlgroup-textinput ui-btn" type="number">
-	         <input data-icon="plus" data-iconpos="notext" value="+1" type="button">
-         </div>
-    </div>
-    <div class="ui-field-contain">
-         <label for="steinlager">Steinlager</label>
-         <div data-role="controlgroup" data-type="horizontal">
-	         <input data-icon="minus" data-iconpos="notext" value="-1" type="button">
-	         <input name="Steinlager" id="steinlager" value="<?php echo $this->castleType->getSteinlager(); ?>" data-wrapper-class="number-2d controlgroup-textinput ui-btn" type="number">
-	         <input data-icon="plus" data-iconpos="notext" value="+1" type="button">
-         </div>
-    </div>
-    <div class="ui-field-contain">
-         <label for="erzmine">Erzmine</label>
-         <div data-role="controlgroup" data-type="horizontal">
-	         <input data-icon="minus" data-iconpos="notext" value="-1" type="button">
-	         <input name="Erzmine" id="erzmine" value="<?php echo $this->castleType->getErzmine(); ?>" data-wrapper-class="number-2d controlgroup-textinput ui-btn" type="number">
-	         <input data-icon="plus" data-iconpos="notext" value="+1" type="button">
-         </div>
-    </div>  
-    <div class="ui-field-contain">
-         <label for="erzlager">Erzlager</label>
-         <div data-role="controlgroup" data-type="horizontal">
-	         <input data-icon="minus" data-iconpos="notext" value="-1" type="button">
-	         <input name="Erzlager" id="erzlager" value="<?php echo $this->castleType->getErzlager(); ?>" data-wrapper-class="number-2d controlgroup-textinput ui-btn" type="number">
-	         <input data-icon="plus" data-iconpos="notext" value="+1" type="button">
-         </div>
-    </div>  
+		<div class="ui-block-b td-block-b">
+			<h3 class="ui-bar ui-bar-a">Geb&auml;ude</h3>
+			<div class="ui-field-contain td-field-contain-buildings">
+		         <label for="bergfried">Bergfried</label>
+		         <div data-role="controlgroup" class="td-controlgroup" data-type="horizontal">
+			         <input data-icon="minus" data-iconpos="notext" value="-1" type="button" onclick="updatePopulation('bergfried', -1)">
+			         <input name="Bergfried" id="bergfried" value="<?php echo $this->castleType->getBergfried(); ?>" data-wrapper-class="number-2d controlgroup-textinput ui-btn" type="number">
+			         <input data-icon="plus" data-iconpos="notext" value="+1" type="button" onclick="updatePopulation('bergfried', 1)">
+		         </div>
+		    </div>
+		    <div class="ui-field-contain td-field-contain-buildings">
+		         <label for="zeughaus">Zeughaus</label>
+		         <div data-role="controlgroup" class="td-controlgroup" data-type="horizontal">
+			         <input data-icon="minus" data-iconpos="notext" value="-1" type="button" onclick="updatePopulation('zeughaus', -1)">
+			         <input name="Zeughaus" id="zeughaus" value="<?php echo $this->castleType->getZeughaus(); ?>" data-wrapper-class="number-2d controlgroup-textinput ui-btn" type="number">
+			         <input data-icon="plus" data-iconpos="notext" value="+1" type="button" onclick="updatePopulation('zeughaus', 1)">
+		         </div>
+		    </div>
+		    <div class="ui-field-contain td-field-contain-buildings">
+		         <label for="taverne">Taverne</label>
+		         <div data-role="controlgroup" class="td-controlgroup" data-type="horizontal">
+			         <input data-icon="minus" data-iconpos="notext" value="-1" type="button" onclick="updatePopulation('taverne', -1)">
+			         <input name="Taverne" id="taverne" value="<?php echo $this->castleType->getTaverne(); ?>" data-wrapper-class="number-2d controlgroup-textinput ui-btn" type="number">
+			         <input data-icon="plus" data-iconpos="notext" value="+1" type="button" onclick="updatePopulation('taverne', 1)">
+		         </div>
+		    </div>
+		    <div class="ui-field-contain td-field-contain-buildings">
+		         <label for="bibliothek">Bibliothek</label>
+		         <div data-role="controlgroup" class="td-controlgroup" data-type="horizontal">
+			         <input data-icon="minus" data-iconpos="notext" value="-1" type="button" onclick="updatePopulation('bibliothek', -1)">
+			         <input name="Bibliothek" id="bibliothek" value="<?php echo $this->castleType->getBibliothek(); ?>" data-wrapper-class="number-2d controlgroup-textinput ui-btn" type="number">
+			         <input data-icon="plus" data-iconpos="notext" value="+1" type="button" onclick="updatePopulation('bibliothek', 1)">
+		         </div>
+		    </div>
+		    <div class="ui-field-contain td-field-contain-buildings">
+		         <label for="wehranlage">Wehranlage</label>
+		         <div data-role="controlgroup" class="td-controlgroup" data-type="horizontal">
+			         <input data-icon="minus" data-iconpos="notext" value="-1" type="button" onclick="updatePopulation('wehranlage', -1)">
+			         <input name="Wehranlage" id="wehranlage" value="<?php echo $this->castleType->getWehranlage(); ?>" data-wrapper-class="number-2d controlgroup-textinput ui-btn" type="number">
+			         <input data-icon="plus" data-iconpos="notext" value="+1" type="button" onclick="updatePopulation('wehranlage', 1)">
+		         </div>
+		    </div>
+		    <div class="ui-field-contain td-field-contain-buildings">
+		         <label for="markt">Markt</label>
+		         <div data-role="controlgroup" class="td-controlgroup" data-type="horizontal">
+			         <input data-icon="minus" data-iconpos="notext" value="-1" type="button" onclick="updatePopulation('markt', -1)">
+			         <input name="Markt" id="markt" value="<?php echo $this->castleType->getMarkt(); ?>" data-wrapper-class="number-2d controlgroup-textinput ui-btn" type="number">
+			         <input data-icon="plus" data-iconpos="notext" value="+1" type="button" onclick="updatePopulation('markt', 1)">
+		         </div>
+		    </div>
+		    <div class="ui-field-contain td-field-contain-buildings">
+		         <label for="bauernhof">Bauernhof</label>
+		         <div data-role="controlgroup" class="td-controlgroup" data-type="horizontal">
+			         <input data-icon="minus" data-iconpos="notext" value="-1" type="button" onclick="updatePopulation('bauernhof', -1)">
+			         <input name="Bauernhof" id="bauernhof" value="<?php echo $this->castleType->getBauernhof(); ?>" data-wrapper-class="number-2d controlgroup-textinput ui-btn" type="number">
+			         <input data-icon="plus" data-iconpos="notext" value="+1" type="button" onclick="updatePopulation('bauernhof', 1)">
+		         </div>
+		    </div>
+		    <div class="ui-field-contain td-field-contain-buildings">
+		         <label for="holzfaeller">Holzf&auml;ller</label>
+		         <div data-role="controlgroup" class="td-controlgroup" data-type="horizontal">
+			         <input data-icon="minus" data-iconpos="notext" value="-1" type="button" onclick="updatePopulation('holzfaeller', -1)">
+			         <input name="Holzfaeller" id="holzfaeller" value="<?php echo $this->castleType->getHolzfaeller(); ?>" data-wrapper-class="number-2d controlgroup-textinput ui-btn" type="number">
+			         <input data-icon="plus" data-iconpos="notext" value="+1" type="button" onclick="updatePopulation('holzfaeller', 1)">
+		         </div>
+		    </div>
+		    <div class="ui-field-contain td-field-contain-buildings">
+		         <label for="holzlager">Holzlager</label>
+		         <div data-role="controlgroup" class="td-controlgroup" data-type="horizontal">
+			         <input data-icon="minus" data-iconpos="notext" value="-1" type="button" onclick="updatePopulation('holzlager', -1)">
+			         <input name="Holzlager" id="holzlager" value="<?php echo $this->castleType->getHolzlager(); ?>" data-wrapper-class="number-2d controlgroup-textinput ui-btn" type="number">
+			         <input data-icon="plus" data-iconpos="notext" value="+1" type="button" onclick="updatePopulation('holzlager', 1)">
+		         </div>
+		    </div>
+		    <div class="ui-field-contain td-field-contain-buildings">
+		         <label for="steinbruch">Steinbruch</label>
+		         <div data-role="controlgroup" class="td-controlgroup" data-type="horizontal">
+			         <input data-icon="minus" data-iconpos="notext" value="-1" type="button" onclick="updatePopulation('steinbruch', -1)">
+			         <input name="Steinbruch" id="steinbruch" value="<?php echo $this->castleType->getSteinbruch(); ?>" data-wrapper-class="number-2d controlgroup-textinput ui-btn" type="number">
+			         <input data-icon="plus" data-iconpos="notext" value="+1" type="button" onclick="updatePopulation('steinbruch', 1)">
+		         </div>
+		    </div>
+		    <div class="ui-field-contain td-field-contain-buildings">
+		         <label for="steinlager">Steinlager</label>
+		         <div data-role="controlgroup" class="td-controlgroup" data-type="horizontal">
+			         <input data-icon="minus" data-iconpos="notext" value="-1" type="button" onclick="updatePopulation('steinlager', -1)">
+			         <input name="Steinlager" id="steinlager" value="<?php echo $this->castleType->getSteinlager(); ?>" data-wrapper-class="number-2d controlgroup-textinput ui-btn" type="number">
+			         <input data-icon="plus" data-iconpos="notext" value="+1" type="button" onclick="updatePopulation('steinlager', 1)">
+		         </div>
+		    </div>
+		    <div class="ui-field-contain td-field-contain-buildings">
+		         <label for="erzmine">Erzmine</label>
+		         <div data-role="controlgroup" class="td-controlgroup" data-type="horizontal">
+			         <input data-icon="minus" data-iconpos="notext" value="-1" type="button" onclick="updatePopulation('erzmine', -1)">
+			         <input name="Erzmine" id="erzmine" value="<?php echo $this->castleType->getErzmine(); ?>" data-wrapper-class="number-2d controlgroup-textinput ui-btn" type="number">
+			         <input data-icon="plus" data-iconpos="notext" value="+1" type="button" onclick="updatePopulation('erzmine', 1)">
+		         </div>
+		    </div>  
+		    <div class="ui-field-contain td-field-contain-buildings">
+		         <label for="erzlager">Erzlager</label>
+		         <div data-role="controlgroup" class="td-controlgroup" data-type="horizontal">
+			         <input data-icon="minus" data-iconpos="notext" value="-1" type="button" onclick="updatePopulation('erzlager', -1)">
+			         <input name="Erzlager" id="erzlager" value="<?php echo $this->castleType->getErzlager(); ?>" data-wrapper-class="number-2d controlgroup-textinput ui-btn" type="number">
+			         <input data-icon="plus" data-iconpos="notext" value="+1" type="button" onclick="updatePopulation('erzlager', 1)">
+		         </div>
+		    </div>  
+        </div>
     
-	<h3 class="ui-bar ui-bar-a">Forschung Bibliothek</h3>
-	<fieldset data-role="controlgroup">
-        <input name="Langbogen" id="langbogen" value="1" <?php if($this->castleType->getLangbogen()): echo "checked"; endif; ?> type="checkbox">
-        <label for="langbogen">Langbogen</label>
-        <input name="Dreifelderwirtschaft" id="dreifelderwirtschaft" value="1" <?php if($this->castleType->getDreifelderwirtschaft()): echo "checked"; endif; ?> type="checkbox">
-        <label for="dreifelderwirtschaft">Dreifelderwirtschaft</label>
-        <input name="Kummet" id="kummet" value="1" <?php if($this->castleType->getKummet()): echo "checked"; endif; ?> type="checkbox">
-        <label for="kummet">Kummet</label>
-        <input name="Vorratskeller" id="vorratskeller" value="1" <?php if($this->castleType->getVorratskeller()): echo "checked"; endif; ?> type="checkbox">
-        <label for="vorratskeller">Vorratskeller</label>
-        <input name="Steigbuegel" id="steigbuegel" value="1" <?php if($this->castleType->getSteigbuegel()): echo "checked"; endif; ?> type="checkbox">
-        <label for="steigbuegel">Steigb&uuml;gel</label>
-        <input name="Waffenschmied" id="waffenschmied" value="1" <?php if($this->castleType->getWaffenschmied()): echo "checked"; endif; ?> type="checkbox">
-        <label for="waffenschmied">Waffenschmied</label>
-        <input name="Ruestungsschmied" id="ruestungsschmied" value="1" <?php if($this->castleType->getRuestungsschmied()): echo "checked"; endif; ?> type="checkbox">
-        <label for="ruestungsschmied">R&uuml;stungsschmied</label>
-        <input name="Bierpruefer" id="bierpruefer" value="1" <?php if($this->castleType->getBierpruefer()): echo "checked"; endif; ?> type="checkbox">
-        <label for="bierpruefer">Bierpr&uuml;fer</label>
-        <input name="Schwertschmied" id="schwertschmied" value="1" <?php if($this->castleType->getSchwertschmied()): echo "checked"; endif; ?> type="checkbox">
-        <label for="schwertschmied">Schwertschmied</label>
-        <input name="Eisenhaertung" id="eisenhaertung" value="1" <?php if($this->castleType->getEisenhaertung()): echo "checked"; endif; ?> type="checkbox">
-        <label for="eisenhaertung">Eisenh&auml;ertung</label>
-        <input name="Armbrust" id="armbrust" value="1" <?php if($this->castleType->getArmbrust()): echo "checked"; endif; ?> type="checkbox">
-        <label for="armbrust">Armbrust</label>
-        <input name="Giftpfeile" id="giftpfeile" value="1" <?php if($this->castleType->getGiftpfeile()): echo "checked"; endif; ?> type="checkbox">
-        <label for="giftpfeile">Giftpfeile</label>
-        <input name="Pferdezucht" id="pferdezucht" value="1" <?php if($this->castleType->getPferdezucht()): echo "checked"; endif; ?> type="checkbox">
-        <label for="pferdezucht">Pferdezucht</label>
-        <input name="Waffenherstellung" id="waffenherstellung" value="1" <?php if($this->castleType->getWaffenherstellung()): echo "checked"; endif; ?> type="checkbox">
-        <label for="waffenherstellung">Waffenherstellung</label>
-        <input name="Pferdepanzerung" id="pferdepanzerung" value="1" <?php if($this->castleType->getPferdepanzerung()): echo "checked"; endif; ?> type="checkbox">
-        <label for="pferdepanzerung">Pferdepanzerung</label>
-        <input name="Schubkarren" id="schubkarren" value="1" <?php if($this->castleType->getSchubkarren()): echo "checked"; endif; ?> type="checkbox">
-        <label for="schubkarren">Schubkarren</label>
-        <input name="Brandpfeile" id="brandpfeile" value="1" <?php if($this->castleType->getBrandpfeile()): echo "checked"; endif; ?> type="checkbox">
-        <label for="brandpfeile">Brandpfeile</label>
-        <input name="Hufschmied" id="hufschmied" value="1" <?php if($this->castleType->getHufschmied()): echo "checked"; endif; ?> type="checkbox">
-        <label for="hufschmied">Hufschmied</label>
-        <input name="Umgebungskarte" id="umgebungskarte" value="1" <?php if($this->castleType->getUmgebungskarte()): echo "checked"; endif; ?> type="checkbox">
-        <label for="umgebungskarte">Umgebungskarte</label>
-        <input name="Zisterne" id="zisterne" value="1" <?php if($this->castleType->getZisterne()): echo "checked"; endif; ?> type="checkbox">
-        <label for="zisterne">Zisterne</label>
-    </fieldset>
-    
-    <button class="ui-btn ui-btn-inline" name="save">Sichern</button>
-    <button class="ui-btn ui-btn-inline" name="cancel">Abbruch</button>
+    	<div class="ui-block-c td-block-c">
+			<h3 class="ui-bar ui-bar-a">Forschung Bibliothek</h3>
+			<fieldset data-role="controlgroup">
+		        <input name="Langbogen" id="langbogen" value="1" <?php if($this->castleType->getLangbogen()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <label id='langbogen-chk' for="langbogen">Langbogen</label>
+		        <input name="Dreifelderwirtschaft" id="dreifelderwirtschaft" value="1" <?php if($this->castleType->getDreifelderwirtschaft()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <label id='dreifelderwirtschaft-chk' for="dreifelderwirtschaft">Dreifelderwirtschaft</label>
+		        <input name="Kummet" id="kummet" value="1" <?php if($this->castleType->getKummet()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <label id='kummet-chk' for="kummet">Kummet</label>
+		        <input name="Vorratskeller" id="vorratskeller" value="1" <?php if($this->castleType->getVorratskeller()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <label id='vorratskeller-chk' for="vorratskeller">Vorratskeller</label>
+		        <input name="Steigbuegel" id="steigbuegel" value="1" <?php if($this->castleType->getSteigbuegel()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <label id='steigbuegel-chk' for="steigbuegel">Steigb&uuml;gel</label>
+		        <input name="Waffenschmied" id="waffenschmied" value="1" <?php if($this->castleType->getWaffenschmied()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <label id='waffenschmied-chk' for="waffenschmied">Waffenschmied</label>
+		        <input name="Ruestungsschmied" id="ruestungsschmied" value="1" <?php if($this->castleType->getRuestungsschmied()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <label id='ruestungsschmied-chk' for="ruestungsschmied">R&uuml;stungsschmied</label>
+		        <input name="Bierpruefer" id="bierpruefer" value="1" <?php if($this->castleType->getBierpruefer()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <label id='bierpruefer-chk' for="bierpruefer">Bierpr&uuml;fer</label>
+		        <input name="Schwertschmied" id="schwertschmied" value="1" <?php if($this->castleType->getSchwertschmied()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <label id='schwertschmied-chk' for="schwertschmied">Schwertschmied</label>
+		        <input name="Eisenhaertung" id="eisenhaertung" value="1" <?php if($this->castleType->getEisenhaertung()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <label id='eisenhaertung-chk' for="eisenhaertung">Eisenh&auml;ertung</label>
+		        <input name="Armbrust" id="armbrust" value="1" <?php if($this->castleType->getArmbrust()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <label id='armbrust-chk' for="armbrust">Armbrust</label>
+		        <input name="Giftpfeile" id="giftpfeile" value="1" <?php if($this->castleType->getGiftpfeile()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <label id='giftpfeile-chk' for="giftpfeile">Giftpfeile</label>
+		        <input name="Pferdezucht" id="pferdezucht" value="1" <?php if($this->castleType->getPferdezucht()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <label id='pferdezucht-chk' for="pferdezucht">Pferdezucht</label>
+		        <input name="Waffenherstellung" id="waffenherstellung" value="1" <?php if($this->castleType->getWaffenherstellung()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <label id='waffenherstellung-chk' for="waffenherstellung">Waffenherstellung</label>
+		        <input name="Pferdepanzerung" id="pferdepanzerung" value="1" <?php if($this->castleType->getPferdepanzerung()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <label id='pferdepanzerung-chk' for="pferdepanzerung">Pferdepanzerung</label>
+		        <input name="Schubkarren" id="schubkarren" value="1" <?php if($this->castleType->getSchubkarren()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <label id='schubkarren-chk' for="schubkarren">Schubkarren</label>
+		        <input name="Brandpfeile" id="brandpfeile" value="1" <?php if($this->castleType->getBrandpfeile()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <label id='brandpfeile-chk' for="brandpfeile">Brandpfeile</label>
+		        <input name="Hufschmied" id="hufschmied" value="1" <?php if($this->castleType->getHufschmied()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <label id='hufschmied-chk' for="hufschmied">Hufschmied</label>
+		        <input name="Umgebungskarte" id="umgebungskarte" value="1" <?php if($this->castleType->getUmgebungskarte()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <label id='umgebungskarte-chk' for="umgebungskarte">Umgebungskarte</label>
+		        <input name="Zisterne" id="zisterne" value="1" <?php if($this->castleType->getZisterne()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <label id='zisterne-chk' for="zisterne">Zisterne</label>
+		    </fieldset>
+		    
+		    <div class="td-right">
+			    <input data-wrapper-class="td-right" data-theme="b" data-inline="true" name="save" value="Sichern" type="submit">
+			    <input data-wrapper-class="td-right" data-theme="b" data-inline="true" name="cancel" value="Verwerfen" type="submit">
+		    </div>
+		</div>
+	</div>
 </form>
