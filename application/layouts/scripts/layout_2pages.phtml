@@ -9,23 +9,13 @@
 		<link rel="shortcut icon" href="/img/totaldefense_32.png" />
 		<link rel="apple-touch-icon" href="/img/totaldefense_64.png" />
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
-		<link href="/css/jquery.swipeButton.css" rel="stylesheet" type="text/css"/>
 		<link href="/css/totaldefense.css" rel="stylesheet" type="text/css"/>
 		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-<!-- 		<script src="/js/jquery.swipeButton.js"></script> -->
 		<script src="/js/totaldefense.js"></script>
 		<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
 	</head>
 	
 	<body>
-		<div data-role="page" class="jqm-demos ui-responsive-panel" id="td-page-1" data-title="<?php echo APP_TITLE; ?>">
-			<?php echo $this->render('header.phtml'); ?>
-			
-			<div data-role="main" class="ui-content">
-				<?php echo $this->layout()->content; ?>
-			</div>
-			
-			<?php echo $this->render('footer.phtml'); ?>
-		</div>
+		<?php echo $this->layout()->content; ?>
 	</body>
 </html>

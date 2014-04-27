@@ -57,6 +57,8 @@
  * @method CastleTypeQuery orderByHufschmied($order = Criteria::ASC) Order by the hufschmied column
  * @method CastleTypeQuery orderByUmgebungskarte($order = Criteria::ASC) Order by the umgebungskarte column
  * @method CastleTypeQuery orderByZisterne($order = Criteria::ASC) Order by the zisterne column
+ * @method CastleTypeQuery orderByMaxPopulation($order = Criteria::ASC) Order by the max_population column
+ * @method CastleTypeQuery orderByFreePopulation($order = Criteria::ASC) Order by the free_population column
  * @method CastleTypeQuery orderByCreatedAt($order = Criteria::ASC) Order by the created_at column
  * @method CastleTypeQuery orderByUpdatedAt($order = Criteria::ASC) Order by the updated_at column
  *
@@ -111,6 +113,8 @@
  * @method CastleTypeQuery groupByHufschmied() Group by the hufschmied column
  * @method CastleTypeQuery groupByUmgebungskarte() Group by the umgebungskarte column
  * @method CastleTypeQuery groupByZisterne() Group by the zisterne column
+ * @method CastleTypeQuery groupByMaxPopulation() Group by the max_population column
+ * @method CastleTypeQuery groupByFreePopulation() Group by the free_population column
  * @method CastleTypeQuery groupByCreatedAt() Group by the created_at column
  * @method CastleTypeQuery groupByUpdatedAt() Group by the updated_at column
  *
@@ -175,6 +179,8 @@
  * @method CastleType findOneByHufschmied(boolean $hufschmied) Return the first CastleType filtered by the hufschmied column
  * @method CastleType findOneByUmgebungskarte(boolean $umgebungskarte) Return the first CastleType filtered by the umgebungskarte column
  * @method CastleType findOneByZisterne(boolean $zisterne) Return the first CastleType filtered by the zisterne column
+ * @method CastleType findOneByMaxPopulation(int $max_population) Return the first CastleType filtered by the max_population column
+ * @method CastleType findOneByFreePopulation(int $free_population) Return the first CastleType filtered by the free_population column
  * @method CastleType findOneByCreatedAt(string $created_at) Return the first CastleType filtered by the created_at column
  * @method CastleType findOneByUpdatedAt(string $updated_at) Return the first CastleType filtered by the updated_at column
  *
@@ -229,6 +235,8 @@
  * @method array findByHufschmied(boolean $hufschmied) Return CastleType objects filtered by the hufschmied column
  * @method array findByUmgebungskarte(boolean $umgebungskarte) Return CastleType objects filtered by the umgebungskarte column
  * @method array findByZisterne(boolean $zisterne) Return CastleType objects filtered by the zisterne column
+ * @method array findByMaxPopulation(int $max_population) Return CastleType objects filtered by the max_population column
+ * @method array findByFreePopulation(int $free_population) Return CastleType objects filtered by the free_population column
  * @method array findByCreatedAt(string $created_at) Return CastleType objects filtered by the created_at column
  * @method array findByUpdatedAt(string $updated_at) Return CastleType objects filtered by the updated_at column
  *
@@ -338,7 +346,7 @@ abstract class BaseCastleTypeQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `id`, `user`, `type`, `name`, `total_st`, `total_as`, `total_pr`, `total_sk`, `total_bs`, `total_lr`, `total_hk`, `total_ok`, `mission_st`, `mission_as`, `mission_pr`, `mission_sk`, `mission_bs`, `mission_lr`, `bergfried`, `zeughaus`, `taverne`, `bibliothek`, `wehranlage`, `markt`, `bauernhof`, `holzfaeller`, `holzlager`, `steinbruch`, `steinlager`, `erzmine`, `erzlager`, `langbogen`, `dreifelderwirtschaft`, `kummet`, `vorratskeller`, `steigbuegel`, `waffenschmied`, `ruestungsschmied`, `bierpruefer`, `schwertschmied`, `eisenhaertung`, `armbrust`, `giftpfeile`, `pferdezucht`, `waffenherstellung`, `pferdepanzerung`, `schubkarren`, `brandpfeile`, `hufschmied`, `umgebungskarte`, `zisterne`, `created_at`, `updated_at` FROM `castle_type` WHERE `id` = :p0';
+        $sql = 'SELECT `id`, `user`, `type`, `name`, `total_st`, `total_as`, `total_pr`, `total_sk`, `total_bs`, `total_lr`, `total_hk`, `total_ok`, `mission_st`, `mission_as`, `mission_pr`, `mission_sk`, `mission_bs`, `mission_lr`, `bergfried`, `zeughaus`, `taverne`, `bibliothek`, `wehranlage`, `markt`, `bauernhof`, `holzfaeller`, `holzlager`, `steinbruch`, `steinlager`, `erzmine`, `erzlager`, `langbogen`, `dreifelderwirtschaft`, `kummet`, `vorratskeller`, `steigbuegel`, `waffenschmied`, `ruestungsschmied`, `bierpruefer`, `schwertschmied`, `eisenhaertung`, `armbrust`, `giftpfeile`, `pferdezucht`, `waffenherstellung`, `pferdepanzerung`, `schubkarren`, `brandpfeile`, `hufschmied`, `umgebungskarte`, `zisterne`, `max_population`, `free_population`, `created_at`, `updated_at` FROM `castle_type` WHERE `id` = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -2241,6 +2249,90 @@ abstract class BaseCastleTypeQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(CastleTypePeer::ZISTERNE, $zisterne, $comparison);
+    }
+
+    /**
+     * Filter the query on the max_population column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByMaxPopulation(1234); // WHERE max_population = 1234
+     * $query->filterByMaxPopulation(array(12, 34)); // WHERE max_population IN (12, 34)
+     * $query->filterByMaxPopulation(array('min' => 12)); // WHERE max_population >= 12
+     * $query->filterByMaxPopulation(array('max' => 12)); // WHERE max_population <= 12
+     * </code>
+     *
+     * @param     mixed $maxPopulation The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return CastleTypeQuery The current query, for fluid interface
+     */
+    public function filterByMaxPopulation($maxPopulation = null, $comparison = null)
+    {
+        if (is_array($maxPopulation)) {
+            $useMinMax = false;
+            if (isset($maxPopulation['min'])) {
+                $this->addUsingAlias(CastleTypePeer::MAX_POPULATION, $maxPopulation['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($maxPopulation['max'])) {
+                $this->addUsingAlias(CastleTypePeer::MAX_POPULATION, $maxPopulation['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(CastleTypePeer::MAX_POPULATION, $maxPopulation, $comparison);
+    }
+
+    /**
+     * Filter the query on the free_population column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByFreePopulation(1234); // WHERE free_population = 1234
+     * $query->filterByFreePopulation(array(12, 34)); // WHERE free_population IN (12, 34)
+     * $query->filterByFreePopulation(array('min' => 12)); // WHERE free_population >= 12
+     * $query->filterByFreePopulation(array('max' => 12)); // WHERE free_population <= 12
+     * </code>
+     *
+     * @param     mixed $freePopulation The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return CastleTypeQuery The current query, for fluid interface
+     */
+    public function filterByFreePopulation($freePopulation = null, $comparison = null)
+    {
+        if (is_array($freePopulation)) {
+            $useMinMax = false;
+            if (isset($freePopulation['min'])) {
+                $this->addUsingAlias(CastleTypePeer::FREE_POPULATION, $freePopulation['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($freePopulation['max'])) {
+                $this->addUsingAlias(CastleTypePeer::FREE_POPULATION, $freePopulation['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(CastleTypePeer::FREE_POPULATION, $freePopulation, $comparison);
     }
 
     /**

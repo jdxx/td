@@ -1,10 +1,10 @@
 <form method="post" action="">
 	<div class="ui-grid-0">
 		<div class="ui-block-a">
-			<ul data-role="listview">
+			<ul id="swipeDelete" data-role="listview">
 				<?php 
 				foreach($this->castleTypes as $castleType): ?>
-					<li><a href="/castletype/update/<?php echo $castleType->getId(); ?>"><?php echo $castleType->getType() . " - " . $castleType->getName(); ?></a></li>
+					<li><a data-swipeurl="/castletype/delete/<?php echo $castleType->getId(); ?>" href="/castletype/update/<?php echo $castleType->getId(); ?>"><?php echo $castleType->getType() . " - " . $castleType->getName(); ?></a></li>
 					<?php 
 				endforeach; ?>
 			</ul>

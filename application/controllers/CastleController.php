@@ -10,8 +10,9 @@ class CastleController extends Zend_Controller_Action
 
     public function indexAction()
     {
-    	$this->view->layoutTitle    = 'Burg bearbeiten';
-    	$this->view->layoutHelp     = '/castle/help_index';
+    	$this->view->layoutTitle = 'Burg bearbeiten';
+    	$this->view->layoutHelp  = '/castle/help_index';
+    	$this->view->layoutAdd   = '/castle/create';
     	
         $castle = new CastleQuery();
         $this->view->castles = $castle->orderById()->find();

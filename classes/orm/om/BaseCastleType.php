@@ -336,6 +336,18 @@ abstract class BaseCastleType extends BaseObject implements Persistent
     protected $zisterne;
 
     /**
+     * The value for the max_population field.
+     * @var        int
+     */
+    protected $max_population;
+
+    /**
+     * The value for the free_population field.
+     * @var        int
+     */
+    protected $free_population;
+
+    /**
      * The value for the created_at field.
      * @var        string
      */
@@ -938,6 +950,28 @@ abstract class BaseCastleType extends BaseObject implements Persistent
     {
 
         return $this->zisterne;
+    }
+
+    /**
+     * Get the [max_population] column value.
+     *
+     * @return int
+     */
+    public function getMaxPopulation()
+    {
+
+        return $this->max_population;
+    }
+
+    /**
+     * Get the [free_population] column value.
+     *
+     * @return int
+     */
+    public function getFreePopulation()
+    {
+
+        return $this->free_population;
     }
 
     /**
@@ -2252,6 +2286,48 @@ abstract class BaseCastleType extends BaseObject implements Persistent
     } // setZisterne()
 
     /**
+     * Set the value of [max_population] column.
+     *
+     * @param  int $v new value
+     * @return CastleType The current object (for fluent API support)
+     */
+    public function setMaxPopulation($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (int) $v;
+        }
+
+        if ($this->max_population !== $v) {
+            $this->max_population = $v;
+            $this->modifiedColumns[] = CastleTypePeer::MAX_POPULATION;
+        }
+
+
+        return $this;
+    } // setMaxPopulation()
+
+    /**
+     * Set the value of [free_population] column.
+     *
+     * @param  int $v new value
+     * @return CastleType The current object (for fluent API support)
+     */
+    public function setFreePopulation($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (int) $v;
+        }
+
+        if ($this->free_population !== $v) {
+            $this->free_population = $v;
+            $this->modifiedColumns[] = CastleTypePeer::FREE_POPULATION;
+        }
+
+
+        return $this;
+    } // setFreePopulation()
+
+    /**
      * Sets the value of [created_at] column to a normalized version of the date/time value specified.
      *
      * @param mixed $v string, integer (timestamp), or DateTime value.
@@ -2380,8 +2456,10 @@ abstract class BaseCastleType extends BaseObject implements Persistent
             $this->hufschmied = ($row[$startcol + 48] !== null) ? (boolean) $row[$startcol + 48] : null;
             $this->umgebungskarte = ($row[$startcol + 49] !== null) ? (boolean) $row[$startcol + 49] : null;
             $this->zisterne = ($row[$startcol + 50] !== null) ? (boolean) $row[$startcol + 50] : null;
-            $this->created_at = ($row[$startcol + 51] !== null) ? (string) $row[$startcol + 51] : null;
-            $this->updated_at = ($row[$startcol + 52] !== null) ? (string) $row[$startcol + 52] : null;
+            $this->max_population = ($row[$startcol + 51] !== null) ? (int) $row[$startcol + 51] : null;
+            $this->free_population = ($row[$startcol + 52] !== null) ? (int) $row[$startcol + 52] : null;
+            $this->created_at = ($row[$startcol + 53] !== null) ? (string) $row[$startcol + 53] : null;
+            $this->updated_at = ($row[$startcol + 54] !== null) ? (string) $row[$startcol + 54] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -2391,7 +2469,7 @@ abstract class BaseCastleType extends BaseObject implements Persistent
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 53; // 53 = CastleTypePeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 55; // 55 = CastleTypePeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating CastleType object", $e);
@@ -2787,6 +2865,12 @@ abstract class BaseCastleType extends BaseObject implements Persistent
         if ($this->isColumnModified(CastleTypePeer::ZISTERNE)) {
             $modifiedColumns[':p' . $index++]  = '`zisterne`';
         }
+        if ($this->isColumnModified(CastleTypePeer::MAX_POPULATION)) {
+            $modifiedColumns[':p' . $index++]  = '`max_population`';
+        }
+        if ($this->isColumnModified(CastleTypePeer::FREE_POPULATION)) {
+            $modifiedColumns[':p' . $index++]  = '`free_population`';
+        }
         if ($this->isColumnModified(CastleTypePeer::CREATED_AT)) {
             $modifiedColumns[':p' . $index++]  = '`created_at`';
         }
@@ -2956,6 +3040,12 @@ abstract class BaseCastleType extends BaseObject implements Persistent
                         break;
                     case '`zisterne`':
                         $stmt->bindValue($identifier, (int) $this->zisterne, PDO::PARAM_INT);
+                        break;
+                    case '`max_population`':
+                        $stmt->bindValue($identifier, $this->max_population, PDO::PARAM_INT);
+                        break;
+                    case '`free_population`':
+                        $stmt->bindValue($identifier, $this->free_population, PDO::PARAM_INT);
                         break;
                     case '`created_at`':
                         $stmt->bindValue($identifier, $this->created_at, PDO::PARAM_STR);
@@ -3259,9 +3349,15 @@ abstract class BaseCastleType extends BaseObject implements Persistent
                 return $this->getZisterne();
                 break;
             case 51:
-                return $this->getCreatedAt();
+                return $this->getMaxPopulation();
                 break;
             case 52:
+                return $this->getFreePopulation();
+                break;
+            case 53:
+                return $this->getCreatedAt();
+                break;
+            case 54:
                 return $this->getUpdatedAt();
                 break;
             default:
@@ -3344,8 +3440,10 @@ abstract class BaseCastleType extends BaseObject implements Persistent
             $keys[48] => $this->getHufschmied(),
             $keys[49] => $this->getUmgebungskarte(),
             $keys[50] => $this->getZisterne(),
-            $keys[51] => $this->getCreatedAt(),
-            $keys[52] => $this->getUpdatedAt(),
+            $keys[51] => $this->getMaxPopulation(),
+            $keys[52] => $this->getFreePopulation(),
+            $keys[53] => $this->getCreatedAt(),
+            $keys[54] => $this->getUpdatedAt(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -3544,9 +3642,15 @@ abstract class BaseCastleType extends BaseObject implements Persistent
                 $this->setZisterne($value);
                 break;
             case 51:
-                $this->setCreatedAt($value);
+                $this->setMaxPopulation($value);
                 break;
             case 52:
+                $this->setFreePopulation($value);
+                break;
+            case 53:
+                $this->setCreatedAt($value);
+                break;
+            case 54:
                 $this->setUpdatedAt($value);
                 break;
         } // switch()
@@ -3624,8 +3728,10 @@ abstract class BaseCastleType extends BaseObject implements Persistent
         if (array_key_exists($keys[48], $arr)) $this->setHufschmied($arr[$keys[48]]);
         if (array_key_exists($keys[49], $arr)) $this->setUmgebungskarte($arr[$keys[49]]);
         if (array_key_exists($keys[50], $arr)) $this->setZisterne($arr[$keys[50]]);
-        if (array_key_exists($keys[51], $arr)) $this->setCreatedAt($arr[$keys[51]]);
-        if (array_key_exists($keys[52], $arr)) $this->setUpdatedAt($arr[$keys[52]]);
+        if (array_key_exists($keys[51], $arr)) $this->setMaxPopulation($arr[$keys[51]]);
+        if (array_key_exists($keys[52], $arr)) $this->setFreePopulation($arr[$keys[52]]);
+        if (array_key_exists($keys[53], $arr)) $this->setCreatedAt($arr[$keys[53]]);
+        if (array_key_exists($keys[54], $arr)) $this->setUpdatedAt($arr[$keys[54]]);
     }
 
     /**
@@ -3688,6 +3794,8 @@ abstract class BaseCastleType extends BaseObject implements Persistent
         if ($this->isColumnModified(CastleTypePeer::HUFSCHMIED)) $criteria->add(CastleTypePeer::HUFSCHMIED, $this->hufschmied);
         if ($this->isColumnModified(CastleTypePeer::UMGEBUNGSKARTE)) $criteria->add(CastleTypePeer::UMGEBUNGSKARTE, $this->umgebungskarte);
         if ($this->isColumnModified(CastleTypePeer::ZISTERNE)) $criteria->add(CastleTypePeer::ZISTERNE, $this->zisterne);
+        if ($this->isColumnModified(CastleTypePeer::MAX_POPULATION)) $criteria->add(CastleTypePeer::MAX_POPULATION, $this->max_population);
+        if ($this->isColumnModified(CastleTypePeer::FREE_POPULATION)) $criteria->add(CastleTypePeer::FREE_POPULATION, $this->free_population);
         if ($this->isColumnModified(CastleTypePeer::CREATED_AT)) $criteria->add(CastleTypePeer::CREATED_AT, $this->created_at);
         if ($this->isColumnModified(CastleTypePeer::UPDATED_AT)) $criteria->add(CastleTypePeer::UPDATED_AT, $this->updated_at);
 
@@ -3803,6 +3911,8 @@ abstract class BaseCastleType extends BaseObject implements Persistent
         $copyObj->setHufschmied($this->getHufschmied());
         $copyObj->setUmgebungskarte($this->getUmgebungskarte());
         $copyObj->setZisterne($this->getZisterne());
+        $copyObj->setMaxPopulation($this->getMaxPopulation());
+        $copyObj->setFreePopulation($this->getFreePopulation());
         $copyObj->setCreatedAt($this->getCreatedAt());
         $copyObj->setUpdatedAt($this->getUpdatedAt());
 
@@ -4191,6 +4301,8 @@ abstract class BaseCastleType extends BaseObject implements Persistent
         $this->hufschmied = null;
         $this->umgebungskarte = null;
         $this->zisterne = null;
+        $this->max_population = null;
+        $this->free_population = null;
         $this->created_at = null;
         $this->updated_at = null;
         $this->alreadyInSave = false;

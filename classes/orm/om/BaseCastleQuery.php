@@ -38,7 +38,7 @@
  * @method CastleQuery orderByAutodefX($order = Criteria::ASC) Order by the autodef_X column
  * @method CastleQuery orderByAutodefY($order = Criteria::ASC) Order by the autodef_Y column
  * @method CastleQuery orderByPoints($order = Criteria::ASC) Order by the points column
- * @method CastleQuery orderByOpenPopulation($order = Criteria::ASC) Order by the open_population column
+ * @method CastleQuery orderByFreePopulation($order = Criteria::ASC) Order by the free_population column
  * @method CastleQuery orderByLastImport($order = Criteria::ASC) Order by the last_import column
  * @method CastleQuery orderByCreatedAt($order = Criteria::ASC) Order by the created_at column
  * @method CastleQuery orderByUpdatedAt($order = Criteria::ASC) Order by the updated_at column
@@ -75,7 +75,7 @@
  * @method CastleQuery groupByAutodefX() Group by the autodef_X column
  * @method CastleQuery groupByAutodefY() Group by the autodef_Y column
  * @method CastleQuery groupByPoints() Group by the points column
- * @method CastleQuery groupByOpenPopulation() Group by the open_population column
+ * @method CastleQuery groupByFreePopulation() Group by the free_population column
  * @method CastleQuery groupByLastImport() Group by the last_import column
  * @method CastleQuery groupByCreatedAt() Group by the created_at column
  * @method CastleQuery groupByUpdatedAt() Group by the updated_at column
@@ -130,7 +130,7 @@
  * @method Castle findOneByAutodefX(int $autodef_X) Return the first Castle filtered by the autodef_X column
  * @method Castle findOneByAutodefY(int $autodef_Y) Return the first Castle filtered by the autodef_Y column
  * @method Castle findOneByPoints(int $points) Return the first Castle filtered by the points column
- * @method Castle findOneByOpenPopulation(int $open_population) Return the first Castle filtered by the open_population column
+ * @method Castle findOneByFreePopulation(int $free_population) Return the first Castle filtered by the free_population column
  * @method Castle findOneByLastImport(string $last_import) Return the first Castle filtered by the last_import column
  * @method Castle findOneByCreatedAt(string $created_at) Return the first Castle filtered by the created_at column
  * @method Castle findOneByUpdatedAt(string $updated_at) Return the first Castle filtered by the updated_at column
@@ -167,7 +167,7 @@
  * @method array findByAutodefX(int $autodef_X) Return Castle objects filtered by the autodef_X column
  * @method array findByAutodefY(int $autodef_Y) Return Castle objects filtered by the autodef_Y column
  * @method array findByPoints(int $points) Return Castle objects filtered by the points column
- * @method array findByOpenPopulation(int $open_population) Return Castle objects filtered by the open_population column
+ * @method array findByFreePopulation(int $free_population) Return Castle objects filtered by the free_population column
  * @method array findByLastImport(string $last_import) Return Castle objects filtered by the last_import column
  * @method array findByCreatedAt(string $created_at) Return Castle objects filtered by the created_at column
  * @method array findByUpdatedAt(string $updated_at) Return Castle objects filtered by the updated_at column
@@ -278,7 +278,7 @@ abstract class BaseCastleQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `id`, `user`, `name`, `castle_type_id`, `castle_location_id`, `coordinates`, `X`, `Y`, `silver`, `copper`, `current_st`, `current_as`, `current_pr`, `current_sk`, `current_bs`, `current_lr`, `current_hk`, `current_ok`, `mission_st`, `mission_as`, `mission_pr`, `mission_sk`, `mission_bs`, `mission_lr`, `usage_off`, `usage_def`, `mission_priority`, `environment_card`, `autodef_coordinates`, `autodef_X`, `autodef_Y`, `points`, `open_population`, `last_import`, `created_at`, `updated_at` FROM `castle` WHERE `id` = :p0';
+        $sql = 'SELECT `id`, `user`, `name`, `castle_type_id`, `castle_location_id`, `coordinates`, `X`, `Y`, `silver`, `copper`, `current_st`, `current_as`, `current_pr`, `current_sk`, `current_bs`, `current_lr`, `current_hk`, `current_ok`, `mission_st`, `mission_as`, `mission_pr`, `mission_sk`, `mission_bs`, `mission_lr`, `usage_off`, `usage_def`, `mission_priority`, `environment_card`, `autodef_coordinates`, `autodef_X`, `autodef_Y`, `points`, `free_population`, `last_import`, `created_at`, `updated_at` FROM `castle` WHERE `id` = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -1617,17 +1617,17 @@ abstract class BaseCastleQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the open_population column
+     * Filter the query on the free_population column
      *
      * Example usage:
      * <code>
-     * $query->filterByOpenPopulation(1234); // WHERE open_population = 1234
-     * $query->filterByOpenPopulation(array(12, 34)); // WHERE open_population IN (12, 34)
-     * $query->filterByOpenPopulation(array('min' => 12)); // WHERE open_population >= 12
-     * $query->filterByOpenPopulation(array('max' => 12)); // WHERE open_population <= 12
+     * $query->filterByFreePopulation(1234); // WHERE free_population = 1234
+     * $query->filterByFreePopulation(array(12, 34)); // WHERE free_population IN (12, 34)
+     * $query->filterByFreePopulation(array('min' => 12)); // WHERE free_population >= 12
+     * $query->filterByFreePopulation(array('max' => 12)); // WHERE free_population <= 12
      * </code>
      *
-     * @param     mixed $openPopulation The value to use as filter.
+     * @param     mixed $freePopulation The value to use as filter.
      *              Use scalar values for equality.
      *              Use array values for in_array() equivalent.
      *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
@@ -1635,16 +1635,16 @@ abstract class BaseCastleQuery extends ModelCriteria
      *
      * @return CastleQuery The current query, for fluid interface
      */
-    public function filterByOpenPopulation($openPopulation = null, $comparison = null)
+    public function filterByFreePopulation($freePopulation = null, $comparison = null)
     {
-        if (is_array($openPopulation)) {
+        if (is_array($freePopulation)) {
             $useMinMax = false;
-            if (isset($openPopulation['min'])) {
-                $this->addUsingAlias(CastlePeer::OPEN_POPULATION, $openPopulation['min'], Criteria::GREATER_EQUAL);
+            if (isset($freePopulation['min'])) {
+                $this->addUsingAlias(CastlePeer::FREE_POPULATION, $freePopulation['min'], Criteria::GREATER_EQUAL);
                 $useMinMax = true;
             }
-            if (isset($openPopulation['max'])) {
-                $this->addUsingAlias(CastlePeer::OPEN_POPULATION, $openPopulation['max'], Criteria::LESS_EQUAL);
+            if (isset($freePopulation['max'])) {
+                $this->addUsingAlias(CastlePeer::FREE_POPULATION, $freePopulation['max'], Criteria::LESS_EQUAL);
                 $useMinMax = true;
             }
             if ($useMinMax) {
@@ -1655,7 +1655,7 @@ abstract class BaseCastleQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(CastlePeer::OPEN_POPULATION, $openPopulation, $comparison);
+        return $this->addUsingAlias(CastlePeer::FREE_POPULATION, $freePopulation, $comparison);
     }
 
     /**

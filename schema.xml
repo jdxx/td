@@ -33,7 +33,7 @@
     <column name="autodef_X" type="Integer" size="6"/>
     <column name="autodef_Y" type="Integer" size="6"/>
     <column name="points" type="Integer" size="3"/>
-    <column name="open_population" type="Integer" size="4"/>
+    <column name="free_population" type="Integer" size="4"/>
     <column name="last_import" type="Timestamp"/>
     <foreign-key foreignTable="castle_type">
       <reference foreign="id" local="castle_type_id"/>
@@ -95,6 +95,8 @@
     <column name="hufschmied" type="Boolean"/>
     <column name="umgebungskarte" type="Boolean"/>
     <column name="zisterne" type="Boolean"/>
+    <column name="max_population" type="Integer" size="5"/>
+    <column name="free_population" type="Integer" size="5"/>
     <unique name="alternate_1">
       <unique-column name="user"/>
       <unique-column name="name"/>

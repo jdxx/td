@@ -1,0 +1,9 @@
+<div data-role="header" data-position="fixed" data-theme="b">
+	<a href="#menue-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+	<h1><?php echo $this->layoutTitle; ?></h1>
+	<?php 
+	if(isset($this->layoutAdd)):?>
+		<a href="<?php echo $this->layoutAdd; ?>" title="Erstellen" class="ui-btn ui-shadow ui-corner-all ui-icon-plus ui-btn-icon-left ui-btn-icon-notext"></a>	
+		<?php 
+	endif;?>
+</div>

@@ -89,6 +89,8 @@ class CastleTypeTableMap extends TableMap
         $this->addColumn('hufschmied', 'Hufschmied', 'BOOLEAN', false, 1, null);
         $this->addColumn('umgebungskarte', 'Umgebungskarte', 'BOOLEAN', false, 1, null);
         $this->addColumn('zisterne', 'Zisterne', 'BOOLEAN', false, 1, null);
+        $this->addColumn('max_population', 'MaxPopulation', 'INTEGER', false, 5, null);
+        $this->addColumn('free_population', 'FreePopulation', 'INTEGER', false, 5, null);
         $this->addColumn('created_at', 'CreatedAt', 'TIMESTAMP', false, null, null);
         $this->addColumn('updated_at', 'UpdatedAt', 'TIMESTAMP', false, null, null);
         // validators

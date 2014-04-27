@@ -70,7 +70,7 @@ class CastleTableMap extends TableMap
         $this->addColumn('autodef_X', 'AutodefX', 'INTEGER', false, 6, null);
         $this->addColumn('autodef_Y', 'AutodefY', 'INTEGER', false, 6, null);
         $this->addColumn('points', 'Points', 'INTEGER', false, 3, null);
-        $this->addColumn('open_population', 'OpenPopulation', 'INTEGER', false, 4, null);
+        $this->addColumn('free_population', 'FreePopulation', 'INTEGER', false, 4, null);
         $this->addColumn('last_import', 'LastImport', 'TIMESTAMP', false, null, null);
         $this->addColumn('created_at', 'CreatedAt', 'TIMESTAMP', false, null, null);
         $this->addColumn('updated_at', 'UpdatedAt', 'TIMESTAMP', false, null, null);

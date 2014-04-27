@@ -18,6 +18,10 @@
     width: 2em;
 }
 
+.td-field-contain-troops > .ui-select {
+    width: 78%    !important;
+}
+
 .td-center {
 	text-align: center;
 }
@@ -28,6 +32,10 @@
 
 .td-label-margin-top {
 	margin-top: 1em    !important;
+}
+
+.td-label-width {
+	width: 5em        !important;
 }
 
 .td-link-margin-top {
@@ -94,6 +102,10 @@ textarea.ui-input-text { height: inherit !important}
 
 .ui-field-contain > label ~ [class*="ui-"], .ui-field-contain .ui-controlgroup-controls {
     width: 100%;
+}
+
+.ui-disabled, .ui-state-disabled, button[disabled], .ui-select .ui-btn.ui-state-disabled {
+    opacity: 0.6;
 }
 
 .td-controlgroup {

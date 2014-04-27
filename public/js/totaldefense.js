@@ -1,6 +1,6 @@
-//$(document).on( "mobileinit", function() {
-//	$.mobile.ajaxEnabled = false;
-//});
+$(document).on( "mobileinit", function() {
+	$.mobile.ajaxEnabled = false;
+});
 
 //$( document ).on( "mobileinit", function() {
 //	$.extend( $.mobile , {
@@ -8,26 +8,52 @@
 //	});
 //});
 
-$( document ).on( "pageinit", "#totaldefense-page", function() {
-    $( document ).on( "swipeleft swiperight", "#totaldefense-page", function( e ) {
-    	if ( e.type === "swiperight" ) {
-            $( "#menue-panel" ).panel( "open" );
-    	} else if ( e.type === "swipeleft" ) {
-            $( "#menue-panel" ).panel( "close" );
-        }
-    });
 
-	$( document ).on('#show-popup', function() {
-		alert(1);
-		var value = ($this).attr('value');
-		if(value > 0) {		
-			$("#import").popup("open");
-		}
-	});
+/* Funktioniert. Öffnet aber immer
+$(document).on('pagebeforeshow', '#totaldefense-page', function(){       
+	$( "#menue-panel" ).panel( "open"); });
+*/
 
+//$(document).on("pagecreate", "#td-page-1", function( event ) {
+//	$('#swipeDelete li').swipeDelete({
+//		btnTheme: 'e',
+//		btnLabel: 'Delete',
+//		btnClass: 'aSwipeButton',
+//		click: function(e){
+//			e.preventDefault();
+//			var url = $(e.target).attr('href');
+//			$(this).parents('li').slideUp();
+//			$.post(url, function(data) {
+//				console.log(data);
+//			});
+//		}
+//	});
+//});
+
+//$(document).on( "pagecreate", "#td-page-1", function() {
+//    $(document).on( "swipeleft swiperight", "#totaldefense-page", function( e ) {
+//    	if ( e.type === "swiperight" ) {
+//            $( "#menue-panel" ).panel( "open" );
+//    	} else if ( e.type === "swipeleft" ) {
+//            $( "#menue-panel" ).panel( "close" );
+//        }
+//    });
+
+//	$(document).on('#show-popup', function() {
+//		var value = ($this).attr('value');
+//		if(value > 0) {		
+//			$("#import").popup("open");
+//		}
+//	});
+//
+//});
+
+$(document).on('pageinit', '#td-castletype-update-1', function( event ) {
+    calcPopulation();
 });
 
 function updatePopulation(building, update) {
+//	alert('udatePopulation');
     var value = document.getElementById(building).value;
     
     switch(building)
@@ -58,7 +84,10 @@ function updatePopulation(building, update) {
     calcPopulation();
 }
 
-function calcPopulation() {
+function calcPopulation(forschung_trigger) {
+//	alert('calcPopulation');
+	forschung_trigger = typeof forschung_trigger !== 'undefined' ? forschung_trigger : 'not_relevant';
+	
 	var bergfried = new Array();
 	bergfried[1]  = 0;
 	bergfried[2]  = 1;
@@ -128,36 +157,36 @@ function calcPopulation() {
 	bibliothek[10] = 140;
 
 	var wehranlage = new Array();
-	zeughaus[1]  = 0;
-	zeughaus[2]  = 1;
-	zeughaus[3]  = 2;
-	zeughaus[4]  = 3;
-	zeughaus[5]  = 4;
-	zeughaus[6]  = 5;
-	zeughaus[7]  = 6;
-	zeughaus[8]  = 7;
-	zeughaus[9]  = 8;
-	zeughaus[10] = 9;
-	zeughaus[11] = 10;
-	zeughaus[12] = 11;
-	zeughaus[13] = 12;
-	zeughaus[14] = 13;
-	zeughaus[15] = 14;
-	zeughaus[16] = 15;
-	zeughaus[17] = 16;
-	zeughaus[18] = 17;
-	zeughaus[19] = 18;
-	zeughaus[20] = 19;
+	wehranlage[1]  = 0;
+	wehranlage[2]  = 1;
+	wehranlage[3]  = 2;
+	wehranlage[4]  = 4;
+	wehranlage[5]  = 6;
+	wehranlage[6]  = 9;
+	wehranlage[7]  = 12;
+	wehranlage[8]  = 16;
+	wehranlage[9]  = 20;
+	wehranlage[10] = 25;
+	wehranlage[11] = 30;
+	wehranlage[12] = 36;
+	wehranlage[13] = 42;
+	wehranlage[14] = 49;
+	wehranlage[15] = 56;
+	wehranlage[16] = 64;
+	wehranlage[17] = 72;
+	wehranlage[18] = 81;
+	wehranlage[19] = 90;
+	wehranlage[20] = 100;
 	
 	var markt = new Array();
 	markt[1]  = 0;
 	markt[2]  = 1;
-	markt[3]  = 4;
-	markt[4]  = 10;
-	markt[5]  = 20;
-	markt[6]  = 35;
-	markt[7]  = 56;
-	markt[8]  = 84;
+	markt[3]  = 3;
+	markt[4]  = 6;
+	markt[5]  = 10;
+	markt[6]  = 15;
+	markt[7]  = 21;
+	markt[8]  = 28;
 
 // Maximales Bevölkerungslimit; Bevölkerungskosten beim Bauernhof immer 0.
 	var bauernhof = new Array();
@@ -223,28 +252,6 @@ function calcPopulation() {
 	holzfaeller[28] = 105;
 	holzfaeller[29] = 112;
 	holzfaeller[30] = 120;
-	
-	var holzlager = new Array();
-	holzlager[1]  = 0;
-	holzlager[2]  = 1;
-	holzlager[3]  = 2;
-	holzlager[4]  = 3;
-	holzlager[5]  = 4;
-	holzlager[6]  = 5;
-	holzlager[7]  = 6;
-	holzlager[8]  = 7;
-	holzlager[9]  = 8;
-	holzlager[10] = 9;
-	holzlager[11] = 10;
-	holzlager[12] = 11;
-	holzlager[13] = 12;
-	holzlager[14] = 13;
-	holzlager[15] = 14;
-	holzlager[16] = 15;
-	holzlager[17] = 16;
-	holzlager[18] = 17;
-	holzlager[19] = 18;
-	holzlager[20] = 19;
 
 	var steinbruch = new Array();
 	steinbruch[1]  = 0;
@@ -277,28 +284,6 @@ function calcPopulation() {
 	steinbruch[28] = 105;
 	steinbruch[29] = 112;
 	steinbruch[30] = 120;
-	
-	var steinlager = new Array();
-	steinlager[1]  = 0;
-	steinlager[2]  = 1;
-	steinlager[3]  = 2;
-	steinlager[4]  = 3;
-	steinlager[5]  = 4;
-	steinlager[6]  = 5;
-	steinlager[7]  = 6;
-	steinlager[8]  = 7;
-	steinlager[9]  = 8;
-	steinlager[10] = 9;
-	steinlager[11] = 10;
-	steinlager[12] = 11;
-	steinlager[13] = 12;
-	steinlager[14] = 13;
-	steinlager[15] = 14;
-	steinlager[16] = 15;
-	steinlager[17] = 16;
-	steinlager[18] = 17;
-	steinlager[19] = 18;
-	steinlager[20] = 19;
 
 	var erzmine = new Array();
 	erzmine[1]  = 0;
@@ -331,28 +316,6 @@ function calcPopulation() {
 	erzmine[28] = 105;
 	erzmine[29] = 112;
 	erzmine[30] = 120;
-	
-	var erzlager = new Array();
-	erzlager[1]  = 0;
-	erzlager[2]  = 1;
-	erzlager[3]  = 2;
-	erzlager[4]  = 3;
-	erzlager[5]  = 4;
-	erzlager[6]  = 5;
-	erzlager[7]  = 6;
-	erzlager[8]  = 7;
-	erzlager[9]  = 8;
-	erzlager[10] = 9;
-	erzlager[11] = 10;
-	erzlager[12] = 11;
-	erzlager[13] = 12;
-	erzlager[14] = 13;
-	erzlager[15] = 14;
-	erzlager[16] = 15;
-	erzlager[17] = 16;
-	erzlager[18] = 17;
-	erzlager[19] = 18;
-	erzlager[20] = 19;
 
     var ix_bergfried   = document.getElementById('bergfried').value;
     var ix_zeughaus    = document.getElementById('zeughaus').value;
@@ -362,82 +325,119 @@ function calcPopulation() {
     var ix_markt       = document.getElementById('markt').value;
     var ix_bauernhof   = document.getElementById('bauernhof').value;
     var ix_holzfaeller = document.getElementById('holzfaeller').value;
-    var ix_holzlager   = document.getElementById('holzlager').value;
     var ix_steinbruch  = document.getElementById('steinbruch').value;
-    var ix_steinlager  = document.getElementById('steinlager').value;
     var ix_erzmine     = document.getElementById('erzmine').value;
-    var ix_erzlager    = document.getElementById('erzlager').value;
     
     forschung = 0;
-    forschung = forschung + checkForschung('langbogen', 3);
-    alert(forschung);
-    forschung = forschung - checkForschung('dreifelderwirtschaft', 3);
-    alert(forschung);
-    forschung = forschung + checkForschung('kummet', 3);
-    alert(forschung);
-    forschung = forschung + checkForschung('vorratskeller', 3);
-    forschung = forschung + checkForschung('steigbuegel', 3);
-    forschung = forschung + checkForschung('waffenschmied', 3);
-    forschung = forschung + checkForschung('ruestungsschmied', 3);
-    forschung = forschung + checkForschung('bierpruefer', 3);
-    forschung = forschung + checkForschung('schwertschmied', 3);
-    forschung = forschung + checkForschung('eisenhaertung', 3);
-    forschung = forschung + checkForschung('armbrust', 3);
-    forschung = forschung + checkForschung('giftpfeile', 3);
-    forschung = forschung + checkForschung('pferdezucht', 3);
-    forschung = forschung + checkForschung('waffenherstellung', 3);
-    forschung = forschung + checkForschung('pferdepanzerung', 3);
-    forschung = forschung + checkForschung('schubkarren', 3);
-    forschung = forschung + checkForschung('brandpfeile', 3);
-    forschung = forschung + checkForschung('hufschmied', 3);
-    forschung = forschung + checkForschung('umgebungskarte', 3);
-    forschung = forschung + checkForschung('zisterne', 3);
+    forschung = forschung + checkForschung(forschung_trigger, 'langbogen', 1);
+    forschung = forschung + checkForschung(forschung_trigger, 'steigbuegel', 2);
+    forschung = forschung + checkForschung(forschung_trigger, 'waffenschmied', 3);
+    forschung = forschung + checkForschung(forschung_trigger, 'ruestungsschmied', 3);
+    forschung = forschung + checkForschung(forschung_trigger, 'bierpruefer', 3);
+    forschung = forschung + checkForschung(forschung_trigger, 'schwertschmied', 4);
+    forschung = forschung + checkForschung(forschung_trigger, 'eisenhaertung', 4);
+    forschung = forschung + checkForschung(forschung_trigger, 'armbrust', 5);
+    forschung = forschung + checkForschung(forschung_trigger, 'giftpfeile', 6);
+    forschung = forschung + checkForschung(forschung_trigger, 'pferdezucht', 6);
+    forschung = forschung + checkForschung(forschung_trigger, 'waffenherstellung', 7);
+    forschung = forschung + checkForschung(forschung_trigger, 'pferdepanzerung', 7);
+    forschung = forschung + checkForschung(forschung_trigger, 'schubkarren', 8);
+    forschung = forschung + checkForschung(forschung_trigger, 'brandpfeile', 8);
+    forschung = forschung + checkForschung(forschung_trigger, 'hufschmied', 9);
+    forschung = forschung + checkForschung(forschung_trigger, 'umgebungskarte', 10);
+    forschung = forschung + checkForschung(forschung_trigger, 'zisterne', 10);
     
-    population = bauernhof[ix_bauernhof] 
-    			 - bergfried[ix_bergfried] 
-    			 - zeughaus[ix_zeughaus] 
-    			 - taverne[ix_taverne]
-			     - bibliothek[ix_bibliothek]
-			     - wehranlage[ix_wehranlage]
-			     - markt[ix_markt]
-			     - holzfaeller[ix_holzfaeller]
-			     - holzlager[ix_holzlager]
-			     - steinbruch[ix_steinbruch]
-			     - steinlager[ix_steinlager]
-			     - erzmine[ix_erzmine]
-			     - erzlager[ix_erzlager]
-    			 - forschung;
-    alert(forschung);
-    document.getElementById('maxpopulation').value = population;
+    var population = bauernhof[ix_bauernhof] 
+    			   - bergfried[ix_bergfried] 
+    			   - zeughaus[ix_zeughaus] 
+    			   - taverne[ix_taverne]
+			       - bibliothek[ix_bibliothek]
+			       - wehranlage[ix_wehranlage]
+			       - markt[ix_markt]
+			       - holzfaeller[ix_holzfaeller]
+			       - steinbruch[ix_steinbruch]
+			       - erzmine[ix_erzmine]
+    			   - forschung;
+//    alert(population);
+    document.getElementById('maxpopulation1').value = population;
+    document.getElementById('maxpopulation2').value = population;
+    
+    calcFreePopulation();
 }
-    
-function checkForschung(forschung, update) 
+
+function checkForschung(forschung_trigger, forschung, update) 
 {
 	var tmp = document.getElementById(forschung + '-chk');
-	var hasClass = tmp.classList.contains('ui-checkbox-on');
+	var hasClassOn = tmp.classList.contains('ui-checkbox-on');
+	var hasClassOff = tmp.classList.contains('ui-checkbox-off');
   
-	if(hasClass == true) {
-		return update;
+	if(forschung_trigger == forschung) {
+//		Es wurde auf eine Forschung geklickt, aber das System hat die Klasse noch nicht geändert.
+		if(hasClassOn == true) {
+			return 0;			
+		}
+		else {
+			return update;			
+		}
 	}
-	return 0;
+	else
+	{
+//		Allgemeine Kalkulation, ohne das eine Forschung angeklickt, also geändert wurde.
+		if(hasClassOn == true) 
+		{
+			return update;			
+		}
+		else if(hasClassOff == true) 
+		{
+			return 0;
+		}
+		else if(document.getElementById(forschung).value == 1)
+//		Beim pageinit sind die Klassen noch nicht gesetzt. Dann wird der Wert vom Server ausgewertet.
+		{
+			return update;
+		}
+		else
+		{
+			return 0;			
+		}
+	}
 }
-  
-  
-//  value = parseInt(value) + parseInt(update);
-//  if(value < 1) {
-//  	value = 1;    	
-//  } else if (value > max) {
-//  	value = max;
-//  }
-//  document.getElementById(building).value = value;
-//  
-//  var population = calcPopulation();
-//  document.getElementById('maxpopulation').value = population;
-//  alert(population);
-//}
 
+function calcFreePopulation() 
+{
+//	alert('calcFreePopulation');
+	var maxpopulation = document.getElementById('maxpopulation1').value;
+	
+	var total_st_val   = document.getElementById('total-st').value;
+    var total_sk_val   = document.getElementById('total-sk').value;
+    var total_bs_val   = document.getElementById('total-bs').value;
+    var total_as_val   = document.getElementById('total-as').value;
+    var total_pr_val   = document.getElementById('total-pr').value * 2;
+    var total_lr_val   = document.getElementById('total-lr').value * 2;
+    var total_hk_val   = document.getElementById('total-hk').value;
+    var total_ok_val   = document.getElementById('total-ok').value * 3;
+    var mission_st_val = document.getElementById('mission-st').value;
+    var mission_sk_val = document.getElementById('mission-sk').value;
+    var mission_bs_val = document.getElementById('mission-bs').value;
+    var mission_as_val = document.getElementById('mission-as').value;
+    var mission_pr_val = document.getElementById('mission-pr').value * 2;
+    var mission_lr_val = document.getElementById('mission-lr').value * 2;
 
-/* Funktioniert. Öffnet aber immer
-$(document).on('pagebeforeshow', '#totaldefense-page', function(){       
-	$( "#menue-panel" ).panel( "open"); });
-*/
+    var freePopulation = maxpopulation
+    				   - total_st_val - total_sk_val - total_bs_val - total_as_val - total_pr_val - total_lr_val - total_hk_val - total_ok_val
+    				   - mission_st_val - mission_sk_val - mission_bs_val - mission_as_val - mission_pr_val - mission_lr_val;
+    
+    document.getElementById('freepopulation').value = freePopulation;
+}
+
+function moveDataToPage1() 
+{
+	document.getElementById('type1').value = document.getElementById('type2').value;
+    document.getElementById('name1').value = document.getElementById('name2').value;
+}
+
+function moveDataToPage2() 
+{
+	document.getElementById('type2').value = document.getElementById('type1').value;
+    document.getElementById('name2').value = document.getElementById('name1').value;
+}

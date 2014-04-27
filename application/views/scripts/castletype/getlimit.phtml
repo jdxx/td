@@ -1,23 +1,23 @@
 <form method="post" action="">
 	<div class="ui-grid-b">
 		<div class="ui-block-a td-block-a">
-			<div class="ui-field-contain td-field-contain">
-				<label for="name">Name</label>
-				<input type="text" name="Name" id="name" value="<?php echo $this->castleType->getName(); ?>">
-			</div>
-		
-			<div class="ui-field-contain td-field-contain">
+			<div class="ui-field-contain td-field-contain-troops">
 			    <label for="type">Typ:</label>
 			    <select name="Type" id="type">
 			        <option value="Off">Off</option>
 			        <option value="Def">Def</option>
 			        <option value="Mix">Mix</option>
 			    </select>
-			</div>
-			
+			</div>			
 			<div class="ui-field-contain td-field-contain">
-				<label for="maxpopulation">Bev&ouml;lkerung</label>
-				<input type="text" name="MaxPopulation" id="maxpopulation" value="4300">
+				<label for="name">Name</label>
+				<input type="text" name="Name" id="name" value="<?php echo $this->castleType->getName(); ?>">
+			</div>
+		
+			<h3 class="ui-bar ui-bar-a td-link-margin-top">Bev&ouml;lkerung</h3>
+			<div class="ui-field-contain td-field-contain-troops">
+				<label for="maxpopulation">Maximal</label>
+				<input type="text" name="MaxPopulation" id="maxpopulation" data-wrapper-class="number-4d" value="<?php echo $this->castleType->getMaxPopulation(); ?>">
 			</div>
 	 	</div>
 	
@@ -90,9 +90,9 @@
 		    <div class="ui-field-contain td-field-contain-buildings">
 		         <label for="holzlager">Holzlager</label>
 		         <div data-role="controlgroup" class="td-controlgroup" data-type="horizontal">
-			         <input data-icon="minus" data-iconpos="notext" value="-1" type="button" onclick="updatePopulation('holzlager', -1)">
+			         <input data-icon="minus" data-iconpos="notext" value="-1" type="button">
 			         <input name="Holzlager" id="holzlager" value="<?php echo $this->castleType->getHolzlager(); ?>" data-wrapper-class="number-2d controlgroup-textinput ui-btn" type="number">
-			         <input data-icon="plus" data-iconpos="notext" value="+1" type="button" onclick="updatePopulation('holzlager', 1)">
+			         <input data-icon="plus" data-iconpos="notext" value="+1" type="button">
 		         </div>
 		    </div>
 		    <div class="ui-field-contain td-field-contain-buildings">
@@ -106,9 +106,9 @@
 		    <div class="ui-field-contain td-field-contain-buildings">
 		         <label for="steinlager">Steinlager</label>
 		         <div data-role="controlgroup" class="td-controlgroup" data-type="horizontal">
-			         <input data-icon="minus" data-iconpos="notext" value="-1" type="button" onclick="updatePopulation('steinlager', -1)">
+			         <input data-icon="minus" data-iconpos="notext" value="-1" type="button">
 			         <input name="Steinlager" id="steinlager" value="<?php echo $this->castleType->getSteinlager(); ?>" data-wrapper-class="number-2d controlgroup-textinput ui-btn" type="number">
-			         <input data-icon="plus" data-iconpos="notext" value="+1" type="button" onclick="updatePopulation('steinlager', 1)">
+			         <input data-icon="plus" data-iconpos="notext" value="+1" type="button">
 		         </div>
 		    </div>
 		    <div class="ui-field-contain td-field-contain-buildings">
@@ -122,9 +122,9 @@
 		    <div class="ui-field-contain td-field-contain-buildings">
 		         <label for="erzlager">Erzlager</label>
 		         <div data-role="controlgroup" class="td-controlgroup" data-type="horizontal">
-			         <input data-icon="minus" data-iconpos="notext" value="-1" type="button" onclick="updatePopulation('erzlager', -1)">
+			         <input data-icon="minus" data-iconpos="notext" value="-1" type="button">
 			         <input name="Erzlager" id="erzlager" value="<?php echo $this->castleType->getErzlager(); ?>" data-wrapper-class="number-2d controlgroup-textinput ui-btn" type="number">
-			         <input data-icon="plus" data-iconpos="notext" value="+1" type="button" onclick="updatePopulation('erzlager', 1)">
+			         <input data-icon="plus" data-iconpos="notext" value="+1" type="button">
 		         </div>
 		    </div>  
         </div>
@@ -132,45 +132,45 @@
     	<div class="ui-block-c td-block-c">
 			<h3 class="ui-bar ui-bar-a">Forschung Bibliothek</h3>
 			<fieldset data-role="controlgroup">
-		        <input name="Langbogen" id="langbogen" value="1" <?php if($this->castleType->getLangbogen()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <input name="Langbogen" id="langbogen" value="1" <?php if($this->castleType->getLangbogen()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation('langbogen')">
 		        <label id='langbogen-chk' for="langbogen">Langbogen</label>
-		        <input name="Dreifelderwirtschaft" id="dreifelderwirtschaft" value="1" <?php if($this->castleType->getDreifelderwirtschaft()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <input name="Dreifelderwirtschaft" id="dreifelderwirtschaft" value="1" <?php if($this->castleType->getDreifelderwirtschaft()): echo "checked"; endif; ?> type="checkbox">
 		        <label id='dreifelderwirtschaft-chk' for="dreifelderwirtschaft">Dreifelderwirtschaft</label>
-		        <input name="Kummet" id="kummet" value="1" <?php if($this->castleType->getKummet()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <input name="Kummet" id="kummet" value="1" <?php if($this->castleType->getKummet()): echo "checked"; endif; ?> type="checkbox">
 		        <label id='kummet-chk' for="kummet">Kummet</label>
-		        <input name="Vorratskeller" id="vorratskeller" value="1" <?php if($this->castleType->getVorratskeller()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <input name="Vorratskeller" id="vorratskeller" value="1" <?php if($this->castleType->getVorratskeller()): echo "checked"; endif; ?> type="checkbox">
 		        <label id='vorratskeller-chk' for="vorratskeller">Vorratskeller</label>
-		        <input name="Steigbuegel" id="steigbuegel" value="1" <?php if($this->castleType->getSteigbuegel()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <input name="Steigbuegel" id="steigbuegel" value="1" <?php if($this->castleType->getSteigbuegel()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation('steigbuegel')">
 		        <label id='steigbuegel-chk' for="steigbuegel">Steigb&uuml;gel</label>
-		        <input name="Waffenschmied" id="waffenschmied" value="1" <?php if($this->castleType->getWaffenschmied()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <input name="Waffenschmied" id="waffenschmied" value="1" <?php if($this->castleType->getWaffenschmied()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation('waffenschmied')">
 		        <label id='waffenschmied-chk' for="waffenschmied">Waffenschmied</label>
-		        <input name="Ruestungsschmied" id="ruestungsschmied" value="1" <?php if($this->castleType->getRuestungsschmied()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <input name="Ruestungsschmied" id="ruestungsschmied" value="1" <?php if($this->castleType->getRuestungsschmied()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation('ruestungsschmied')">
 		        <label id='ruestungsschmied-chk' for="ruestungsschmied">R&uuml;stungsschmied</label>
-		        <input name="Bierpruefer" id="bierpruefer" value="1" <?php if($this->castleType->getBierpruefer()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <input name="Bierpruefer" id="bierpruefer" value="1" <?php if($this->castleType->getBierpruefer()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation('bierpruefer')">
 		        <label id='bierpruefer-chk' for="bierpruefer">Bierpr&uuml;fer</label>
-		        <input name="Schwertschmied" id="schwertschmied" value="1" <?php if($this->castleType->getSchwertschmied()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <input name="Schwertschmied" id="schwertschmied" value="1" <?php if($this->castleType->getSchwertschmied()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation('schwertschmied')">
 		        <label id='schwertschmied-chk' for="schwertschmied">Schwertschmied</label>
-		        <input name="Eisenhaertung" id="eisenhaertung" value="1" <?php if($this->castleType->getEisenhaertung()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <input name="Eisenhaertung" id="eisenhaertung" value="1" <?php if($this->castleType->getEisenhaertung()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation('eisenhaertung')">
 		        <label id='eisenhaertung-chk' for="eisenhaertung">Eisenh&auml;ertung</label>
-		        <input name="Armbrust" id="armbrust" value="1" <?php if($this->castleType->getArmbrust()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <input name="Armbrust" id="armbrust" value="1" <?php if($this->castleType->getArmbrust()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation('armbrust')">
 		        <label id='armbrust-chk' for="armbrust">Armbrust</label>
-		        <input name="Giftpfeile" id="giftpfeile" value="1" <?php if($this->castleType->getGiftpfeile()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <input name="Giftpfeile" id="giftpfeile" value="1" <?php if($this->castleType->getGiftpfeile()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation('giftpfeile')">
 		        <label id='giftpfeile-chk' for="giftpfeile">Giftpfeile</label>
-		        <input name="Pferdezucht" id="pferdezucht" value="1" <?php if($this->castleType->getPferdezucht()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <input name="Pferdezucht" id="pferdezucht" value="1" <?php if($this->castleType->getPferdezucht()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation('pferdezucht')">
 		        <label id='pferdezucht-chk' for="pferdezucht">Pferdezucht</label>
-		        <input name="Waffenherstellung" id="waffenherstellung" value="1" <?php if($this->castleType->getWaffenherstellung()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <input name="Waffenherstellung" id="waffenherstellung" value="1" <?php if($this->castleType->getWaffenherstellung()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation('waffenherstellung')">
 		        <label id='waffenherstellung-chk' for="waffenherstellung">Waffenherstellung</label>
-		        <input name="Pferdepanzerung" id="pferdepanzerung" value="1" <?php if($this->castleType->getPferdepanzerung()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <input name="Pferdepanzerung" id="pferdepanzerung" value="1" <?php if($this->castleType->getPferdepanzerung()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation('pferdepanzerung')">
 		        <label id='pferdepanzerung-chk' for="pferdepanzerung">Pferdepanzerung</label>
-		        <input name="Schubkarren" id="schubkarren" value="1" <?php if($this->castleType->getSchubkarren()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <input name="Schubkarren" id="schubkarren" value="1" <?php if($this->castleType->getSchubkarren()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation('schubkarren')">
 		        <label id='schubkarren-chk' for="schubkarren">Schubkarren</label>
-		        <input name="Brandpfeile" id="brandpfeile" value="1" <?php if($this->castleType->getBrandpfeile()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <input name="Brandpfeile" id="brandpfeile" value="1" <?php if($this->castleType->getBrandpfeile()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation('brandpfeile')">
 		        <label id='brandpfeile-chk' for="brandpfeile">Brandpfeile</label>
-		        <input name="Hufschmied" id="hufschmied" value="1" <?php if($this->castleType->getHufschmied()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <input name="Hufschmied" id="hufschmied" value="1" <?php if($this->castleType->getHufschmied()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation('hufschmied')">
 		        <label id='hufschmied-chk' for="hufschmied">Hufschmied</label>
-		        <input name="Umgebungskarte" id="umgebungskarte" value="1" <?php if($this->castleType->getUmgebungskarte()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <input name="Umgebungskarte" id="umgebungskarte" value="1" <?php if($this->castleType->getUmgebungskarte()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation('umgebungskarte')">
 		        <label id='umgebungskarte-chk' for="umgebungskarte">Umgebungskarte</label>
-		        <input name="Zisterne" id="zisterne" value="1" <?php if($this->castleType->getZisterne()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation()">
+		        <input name="Zisterne" id="zisterne" value="1" <?php if($this->castleType->getZisterne()): echo "checked"; endif; ?> type="checkbox" onclick="calcPopulation('zisterne')">
 		        <label id='zisterne-chk' for="zisterne">Zisterne</label>
 		    </fieldset>
 		    

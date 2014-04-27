@@ -45,7 +45,7 @@ class Castle extends BaseCastle
 		$this->setAutodefX(0);
 		$this->setAutodefY(0);
 		$this->setPoints(0);
-		$this->setOpenPopulation(0);
+		$this->setFreePopulation(4066);
 	}
 	
 }

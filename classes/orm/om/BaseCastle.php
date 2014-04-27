@@ -222,10 +222,10 @@ abstract class BaseCastle extends BaseObject implements Persistent
     protected $points;
 
     /**
-     * The value for the open_population field.
+     * The value for the free_population field.
      * @var        int
      */
-    protected $open_population;
+    protected $free_population;
 
     /**
      * The value for the last_import field.
@@ -651,14 +651,14 @@ abstract class BaseCastle extends BaseObject implements Persistent
     }
 
     /**
-     * Get the [open_population] column value.
+     * Get the [free_population] column value.
      *
      * @return int
      */
-    public function getOpenPopulation()
+    public function getFreePopulation()
     {
 
-        return $this->open_population;
+        return $this->free_population;
     }
 
     /**
@@ -1494,25 +1494,25 @@ abstract class BaseCastle extends BaseObject implements Persistent
     } // setPoints()
 
     /**
-     * Set the value of [open_population] column.
+     * Set the value of [free_population] column.
      *
      * @param  int $v new value
      * @return Castle The current object (for fluent API support)
      */
-    public function setOpenPopulation($v)
+    public function setFreePopulation($v)
     {
         if ($v !== null && is_numeric($v)) {
             $v = (int) $v;
         }
 
-        if ($this->open_population !== $v) {
-            $this->open_population = $v;
-            $this->modifiedColumns[] = CastlePeer::OPEN_POPULATION;
+        if ($this->free_population !== $v) {
+            $this->free_population = $v;
+            $this->modifiedColumns[] = CastlePeer::FREE_POPULATION;
         }
 
 
         return $this;
-    } // setOpenPopulation()
+    } // setFreePopulation()
 
     /**
      * Sets the value of [last_import] column to a normalized version of the date/time value specified.
@@ -1647,7 +1647,7 @@ abstract class BaseCastle extends BaseObject implements Persistent
             $this->autodef_x = ($row[$startcol + 29] !== null) ? (int) $row[$startcol + 29] : null;
             $this->autodef_y = ($row[$startcol + 30] !== null) ? (int) $row[$startcol + 30] : null;
             $this->points = ($row[$startcol + 31] !== null) ? (int) $row[$startcol + 31] : null;
-            $this->open_population = ($row[$startcol + 32] !== null) ? (int) $row[$startcol + 32] : null;
+            $this->free_population = ($row[$startcol + 32] !== null) ? (int) $row[$startcol + 32] : null;
             $this->last_import = ($row[$startcol + 33] !== null) ? (string) $row[$startcol + 33] : null;
             $this->created_at = ($row[$startcol + 34] !== null) ? (string) $row[$startcol + 34] : null;
             $this->updated_at = ($row[$startcol + 35] !== null) ? (string) $row[$startcol + 35] : null;
@@ -2052,8 +2052,8 @@ abstract class BaseCastle extends BaseObject implements Persistent
         if ($this->isColumnModified(CastlePeer::POINTS)) {
             $modifiedColumns[':p' . $index++]  = '`points`';
         }
-        if ($this->isColumnModified(CastlePeer::OPEN_POPULATION)) {
-            $modifiedColumns[':p' . $index++]  = '`open_population`';
+        if ($this->isColumnModified(CastlePeer::FREE_POPULATION)) {
+            $modifiedColumns[':p' . $index++]  = '`free_population`';
         }
         if ($this->isColumnModified(CastlePeer::LAST_IMPORT)) {
             $modifiedColumns[':p' . $index++]  = '`last_import`';
@@ -2171,8 +2171,8 @@ abstract class BaseCastle extends BaseObject implements Persistent
                     case '`points`':
                         $stmt->bindValue($identifier, $this->points, PDO::PARAM_INT);
                         break;
-                    case '`open_population`':
-                        $stmt->bindValue($identifier, $this->open_population, PDO::PARAM_INT);
+                    case '`free_population`':
+                        $stmt->bindValue($identifier, $this->free_population, PDO::PARAM_INT);
                         break;
                     case '`last_import`':
                         $stmt->bindValue($identifier, $this->last_import, PDO::PARAM_STR);
@@ -2440,7 +2440,7 @@ abstract class BaseCastle extends BaseObject implements Persistent
                 return $this->getPoints();
                 break;
             case 32:
-                return $this->getOpenPopulation();
+                return $this->getFreePopulation();
                 break;
             case 33:
                 return $this->getLastImport();
@@ -2512,7 +2512,7 @@ abstract class BaseCastle extends BaseObject implements Persistent
             $keys[29] => $this->getAutodefX(),
             $keys[30] => $this->getAutodefY(),
             $keys[31] => $this->getPoints(),
-            $keys[32] => $this->getOpenPopulation(),
+            $keys[32] => $this->getFreePopulation(),
             $keys[33] => $this->getLastImport(),
             $keys[34] => $this->getCreatedAt(),
             $keys[35] => $this->getUpdatedAt(),
@@ -2663,7 +2663,7 @@ abstract class BaseCastle extends BaseObject implements Persistent
                 $this->setPoints($value);
                 break;
             case 32:
-                $this->setOpenPopulation($value);
+                $this->setFreePopulation($value);
                 break;
             case 33:
                 $this->setLastImport($value);
@@ -2730,7 +2730,7 @@ abstract class BaseCastle extends BaseObject implements Persistent
         if (array_key_exists($keys[29], $arr)) $this->setAutodefX($arr[$keys[29]]);
         if (array_key_exists($keys[30], $arr)) $this->setAutodefY($arr[$keys[30]]);
         if (array_key_exists($keys[31], $arr)) $this->setPoints($arr[$keys[31]]);
-        if (array_key_exists($keys[32], $arr)) $this->setOpenPopulation($arr[$keys[32]]);
+        if (array_key_exists($keys[32], $arr)) $this->setFreePopulation($arr[$keys[32]]);
         if (array_key_exists($keys[33], $arr)) $this->setLastImport($arr[$keys[33]]);
         if (array_key_exists($keys[34], $arr)) $this->setCreatedAt($arr[$keys[34]]);
         if (array_key_exists($keys[35], $arr)) $this->setUpdatedAt($arr[$keys[35]]);
@@ -2777,7 +2777,7 @@ abstract class BaseCastle extends BaseObject implements Persistent
         if ($this->isColumnModified(CastlePeer::AUTODEF_X)) $criteria->add(CastlePeer::AUTODEF_X, $this->autodef_x);
         if ($this->isColumnModified(CastlePeer::AUTODEF_Y)) $criteria->add(CastlePeer::AUTODEF_Y, $this->autodef_y);
         if ($this->isColumnModified(CastlePeer::POINTS)) $criteria->add(CastlePeer::POINTS, $this->points);
-        if ($this->isColumnModified(CastlePeer::OPEN_POPULATION)) $criteria->add(CastlePeer::OPEN_POPULATION, $this->open_population);
+        if ($this->isColumnModified(CastlePeer::FREE_POPULATION)) $criteria->add(CastlePeer::FREE_POPULATION, $this->free_population);
         if ($this->isColumnModified(CastlePeer::LAST_IMPORT)) $criteria->add(CastlePeer::LAST_IMPORT, $this->last_import);
         if ($this->isColumnModified(CastlePeer::CREATED_AT)) $criteria->add(CastlePeer::CREATED_AT, $this->created_at);
         if ($this->isColumnModified(CastlePeer::UPDATED_AT)) $criteria->add(CastlePeer::UPDATED_AT, $this->updated_at);
@@ -2875,7 +2875,7 @@ abstract class BaseCastle extends BaseObject implements Persistent
         $copyObj->setAutodefX($this->getAutodefX());
         $copyObj->setAutodefY($this->getAutodefY());
         $copyObj->setPoints($this->getPoints());
-        $copyObj->setOpenPopulation($this->getOpenPopulation());
+        $copyObj->setFreePopulation($this->getFreePopulation());
         $copyObj->setLastImport($this->getLastImport());
         $copyObj->setCreatedAt($this->getCreatedAt());
         $copyObj->setUpdatedAt($this->getUpdatedAt());
@@ -3540,7 +3540,7 @@ abstract class BaseCastle extends BaseObject implements Persistent
         $this->autodef_x = null;
         $this->autodef_y = null;
         $this->points = null;
-        $this->open_population = null;
+        $this->free_population = null;
         $this->last_import = null;
         $this->created_at = null;
         $this->updated_at = null;

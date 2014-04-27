@@ -17,86 +17,84 @@ class CastleType extends BaseCastleType
 {
 	public function __construct() 
 	{
-		
-	}
-	
-	public function init()
-	{
 		$this->setTotalSt(0);
 		$this->setTotalSk(0);
-		$this->total_bs = 0;
-		$this->total_as = 0;
-		$this->total_pr = 0;
-		$this->total_lr = 0;
-		$this->total_hk = 0;
-		$this->total_ok = 0;
+		$this->setTotalBs(0);
+		$this->setTotalAs(0);
+		$this->setTotalPr(0);
+		$this->setTotalLr(0);
+		$this->setTotalHk(0);
+		$this->setTotalOk(0);
 		
-		$this->mission_st = 0;
-		$this->mission_sk = 0;
-		$this->mission_bs = 0;
-		$this->mission_as = 0;
-		$this->mission_pr = 0;
-		$this->mission_lr = 0;
+		$this->setMissionSt(0);
+		$this->setMissionSk(0);
+		$this->setMissionBs(0);
+		$this->setMissionAs(0);
+		$this->setMissionPr(0);
+		$this->setMissionLr(0);
 		
-		$this->bergfried   = 10;
-		$this->zeughaus    = 30;
-		$this->taverne 	   = 10;
-		$this->bibliothek  = 10;
-		$this->wehranlage  = 20;
-		$this->markt 	   =  8;
-		$this->bauernhof   = 30;
-		$this->holzfaeller = 30;
-		$this->holzlager   = 20;
-		$this->steinbruch  = 30;
-		$this->steinlager  = 20;
-		$this->erzmine     = 30;
-		$this->erzlager    = 20;
-	
-		$this->langbogen			= true;
-		$this->dreifelderwirtschaft = true;
-		$this->kummet 				= true;
-		$this->vorratskeller 		= true;
-		$this->steigbuegel 			= true;
-		$this->waffenschmied 		= true;
-		$this->ruestungsschmied 	= true;
-		$this->bierpruefer 			= true;
-		$this->schwertschmied 		= true;
-		$this->eisenhaertung 		= true;
-		$this->armbrust 			= true;
-		$this->giftpfeile 			= true;
-		$this->pferdezucht 			= true;
-		$this->waffenherstellung 	= true;
-		$this->pferdepanzerung 		= true;
-		$this->schubkarren 			= true;
-		$this->brandpfeile 			= true;
-		$this->hufschmied 			= true;
-		$this->umgebungskarte 		= true;
-		$this->zisterne 			= true;
-	
+		$this->setBergfried(10);
+		$this->setZeughaus(30);
+		$this->setTaverne(10);
+		$this->setBibliothek(10);
+		$this->setWehranlage(20);
+		$this->setMarkt(8);
+		$this->setBauernhof(30);
+		$this->setHolzfaeller(30);
+		$this->setHolzlager(20);
+		$this->setSteinbruch(30);
+		$this->setSteinlager(20);
+		$this->setErzmine(30);
+		$this->setErzlager(20);
+		
+		$this->setLangbogen(true);
+		$this->setDreifelderwirtschaft(true);
+		$this->setKummet(true);
+		$this->setVorratskeller(true);
+		$this->setSteigbuegel(true);
+		$this->setWaffenschmied(true);
+		$this->setRuestungsschmied(true);
+		$this->setBierpruefer(true);
+		$this->setSchwertschmied(true);
+		$this->setEisenhaertung(true);
+		$this->setArmbrust(true);
+		$this->setGiftpfeile(true);
+		$this->setPferdezucht(true);
+		$this->setWaffenherstellung(true);
+		$this->setPferdepanzerung(true);
+		$this->setSchubkarren(true);
+		$this->setBrandpfeile(true);
+		$this->setHufschmied(true);
+		$this->setUmgebungskarte(true);
+		$this->setZisterne(true);
+		
+		$this->setMaxPopulation(4066);
+		$this->setFreePopulation(4066);
 	}
 	
-	public function initBoolean()
+	public function setBoolean($postData)
 	{
-		$this->setLangbogen(false);
-		$this->setDreifelderwirtschaft(false);
-		$this->setKummet(false);
-		$this->setVorratskeller(false);
-		$this->setSteigbuegel 			(false);
-		$this->setWaffenschmied 		(false);
-		$this->setRuestungsschmied 	(false);
-		$this->setBierpruefer 			(false);
-		$this->setSchwertschmied 		(false);
-		$this->setEisenhaertung 		(false);
-		$this->setArmbrust 			(false);
-		$this->setGiftpfeile 			(false);
-		$this->setPferdezucht 			(false);
-		$this->setWaffenherstellung 	(false);
-		$this->setPferdepanzerung 		(false);
-		$this->setSchubkarren 			(false);
-		$this->setBrandpfeile 			(false);
-		$this->setHufschmied 			(false);
-		$this->setUmgebungskarte 		(false);
-		$this->setZisterne 			(false);
-	
+		if(!isset($postData['Langbogen'])) { 			$this->setLangbogen(false); }
+		if(!isset($postData['Dreifelderwirtschaft'])) { $this->setDreifelderwirtschaft(false); }
+		if(!isset($postData['Kummet'])) { 				$this->setKummet(false); }
+		if(!isset($postData['Vorratskeller'])) { 		$this->setVorratskeller(false); }
+		if(!isset($postData['Steigbuegel'])) { 			$this->setSteigbuegel(false); }
+		if(!isset($postData['Waffenschmied'])) { 		$this->setWaffenschmied(false); }
+		if(!isset($postData['Ruestungsschmied'])) { 	$this->setRuestungsschmied(false); }
+		if(!isset($postData['Bierpruefer'])) { 			$this->setBierpruefer(false); }
+		if(!isset($postData['Schwertschmied'])) {	 	$this->setSchwertschmied(false); }
+		if(!isset($postData['Eisenhaertung'])) { 		$this->setEisenhaertung(false); }
+		if(!isset($postData['Armbrust'])) { 			$this->setArmbrust(false); }
+		if(!isset($postData['Giftpfeile'])) { 			$this->setGiftpfeile(false); }
+		if(!isset($postData['Pferdezucht'])) { 			$this->setPferdezucht(false); }
+		if(!isset($postData['Waffenherstellung'])) { 	$this->setWaffenherstellung(false); }
+		if(!isset($postData['Pferdepanzerung'])) { 		$this->setPferdepanzerung(false); }
+		if(!isset($postData['Schubkarren'])) { 			$this->setSchubkarren(false); }
+		if(!isset($postData['Brandpfeile'])) { 			$this->setBrandpfeile(false); }
+		if(!isset($postData['Hufschmied'])) { 			$this->setHufschmied(false); }
+		if(!isset($postData['Umgebungskarte'])) { 		$this->setUmgebungskarte(false); }
+		if(!isset($postData['Zisterne'])) { 			$this->setZisterne(false); }
+		
 	}
+	
 }
