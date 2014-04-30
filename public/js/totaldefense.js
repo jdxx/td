@@ -14,8 +14,10 @@ $(document).on('pagebeforeshow', '#totaldefense-page', function(){
 	$( "#menue-panel" ).panel( "open"); });
 */
 
-//$(document).on("pagecreate", "#td-page-1", function( event ) {
+//$(document).on("pageinit", "#td-page-1", function( event ) {
+//	alert('swipeDelete START');
 //	$('#swipeDelete li').swipeDelete({
+//		alert('swipeDelete');
 //		btnTheme: 'e',
 //		btnLabel: 'Delete',
 //		btnClass: 'aSwipeButton',
@@ -50,6 +52,45 @@ $(document).on('pagebeforeshow', '#totaldefense-page', function(){
 
 $(document).on('pageinit', '#td-castletype-update-1', function( event ) {
     calcPopulation();
+    
+    $("input[name='Type']").bind( "change", function(event, ui) {
+    	$('#type2a').prop('checked', false);
+		$('#type2b').prop('checked', false);
+		$('#type2c').prop('checked', false);
+    	switch($(this).val())
+        {
+	        case 'Off': $('#type2a').prop('checked', true); break;
+	        case 'Def': $('#type2b').prop('checked', true); break;
+	        case 'Mix': $('#type2c').prop('checked', true); break;
+        }
+    	$('#type2a').checkboxradio().checkboxradio('refresh');
+		$('#type2b').checkboxradio().checkboxradio('refresh');
+		$('#type2c').checkboxradio().checkboxradio('refresh');
+    });
+    
+    $("input[name='Type2']").bind( "change", function(event, ui) {
+    	$('#type1a').prop('checked', false);
+		$('#type1b').prop('checked', false);
+		$('#type1c').prop('checked', false);
+    	switch($(this).val())
+        {
+	        case 'Off': $('#type1a').prop('checked', true); break;
+	        case 'Def': $('#type1b').prop('checked', true); break;
+	        case 'Mix': $('#type1c').prop('checked', true); break;
+        }
+    	$('#type1a').checkboxradio().checkboxradio('refresh');
+		$('#type1b').checkboxradio().checkboxradio('refresh');
+		$('#type1c').checkboxradio().checkboxradio('refresh');
+    });
+    
+    $('#name1').bind( "change", function(event, ui) {
+    	$('#name2').val( $(this).val() );
+    });
+    
+    $('#name2').bind( "change", function(event, ui) {
+    	$('#name1').val( $(this).val() );
+    });
+    
 });
 
 function updatePopulation(building, update) {
@@ -428,16 +469,4 @@ function calcFreePopulation()
     				   - mission_st_val - mission_sk_val - mission_bs_val - mission_as_val - mission_pr_val - mission_lr_val;
     
     document.getElementById('freepopulation').value = freePopulation;
-}
-
-function moveDataToPage1() 
-{
-	document.getElementById('type1').value = document.getElementById('type2').value;
-    document.getElementById('name1').value = document.getElementById('name2').value;
-}
-
-function moveDataToPage2() 
-{
-	document.getElementById('type2').value = document.getElementById('type1').value;
-    document.getElementById('name2').value = document.getElementById('name1').value;
 }
