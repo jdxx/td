@@ -1,9 +1,13 @@
 <form method="post" action="">
-	<ul data-role="listview">
-		<?php 
-		foreach($this->castleLocations as $castleLocation): ?>
-			<li><a href="/castlelocation/update/<?php echo $castleLocation->getId(); ?>"><?php echo $castleLocation->getName(); ?></a></li>
-			<?php 
-		endforeach; ?>
-	</ul>
+	<div class="ui-grid-0">
+		<div class="ui-block-a">
+			<ul data-role="listview">
+				<?php 
+				foreach($this->castleLocations as $castleLocation): ?>
+					<li><a href="/castlelocation/update/<?php echo $castleLocation->getId(); ?>"><?php echo $castleLocation->getName(); ?></a></li>
+					<?php 
+				endforeach; ?>
+			</ul>
+		</div>
+	</div>
 </form>

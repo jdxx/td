@@ -39,7 +39,7 @@ class TargetTableMap extends TableMap
         $this->setUseIdGenerator(true);
         // columns
         $this->addPrimaryKey('id', 'Id', 'INTEGER', true, null, null);
-        $this->addColumn('user', 'User', 'INTEGER', false, 6, null);
+        $this->addForeignKey('user_id', 'UserId', 'INTEGER', 'user', 'id', false, null, null);
         $this->addColumn('name', 'Name', 'VARCHAR', false, 50, null);
         $this->addColumn('coordinates', 'Coordinates', 'CHAR', false, 12, null);
         $this->addColumn('attack_time', 'AttackTime', 'TIMESTAMP', false, null, null);
@@ -53,6 +53,7 @@ class TargetTableMap extends TableMap
      */
     public function buildRelations()
     {
+        $this->addRelation('User', 'User', RelationMap::MANY_TO_ONE, array('user_id' => 'id', ), null, null);
     } // buildRelations()
 
     /**

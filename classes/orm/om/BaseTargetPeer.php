@@ -35,8 +35,8 @@ abstract class BaseTargetPeer
     /** the column name for the id field */
     const ID = 'target.id';
 
-    /** the column name for the user field */
-    const USER = 'target.user';
+    /** the column name for the user_id field */
+    const USER_ID = 'target.user_id';
 
     /** the column name for the name field */
     const NAME = 'target.name';
@@ -72,11 +72,11 @@ abstract class BaseTargetPeer
      * e.g. TargetPeer::$fieldNames[TargetPeer::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('Id', 'User', 'Name', 'Coordinates', 'AttackTime', 'CreatedAt', 'UpdatedAt', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'user', 'name', 'coordinates', 'attackTime', 'createdAt', 'updatedAt', ),
-        BasePeer::TYPE_COLNAME => array (TargetPeer::ID, TargetPeer::USER, TargetPeer::NAME, TargetPeer::COORDINATES, TargetPeer::ATTACK_TIME, TargetPeer::CREATED_AT, TargetPeer::UPDATED_AT, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID', 'USER', 'NAME', 'COORDINATES', 'ATTACK_TIME', 'CREATED_AT', 'UPDATED_AT', ),
-        BasePeer::TYPE_FIELDNAME => array ('id', 'user', 'name', 'coordinates', 'attack_time', 'created_at', 'updated_at', ),
+        BasePeer::TYPE_PHPNAME => array ('Id', 'UserId', 'Name', 'Coordinates', 'AttackTime', 'CreatedAt', 'UpdatedAt', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'userId', 'name', 'coordinates', 'attackTime', 'createdAt', 'updatedAt', ),
+        BasePeer::TYPE_COLNAME => array (TargetPeer::ID, TargetPeer::USER_ID, TargetPeer::NAME, TargetPeer::COORDINATES, TargetPeer::ATTACK_TIME, TargetPeer::CREATED_AT, TargetPeer::UPDATED_AT, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID', 'USER_ID', 'NAME', 'COORDINATES', 'ATTACK_TIME', 'CREATED_AT', 'UPDATED_AT', ),
+        BasePeer::TYPE_FIELDNAME => array ('id', 'user_id', 'name', 'coordinates', 'attack_time', 'created_at', 'updated_at', ),
         BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
     );
 
@@ -87,11 +87,11 @@ abstract class BaseTargetPeer
      * e.g. TargetPeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'User' => 1, 'Name' => 2, 'Coordinates' => 3, 'AttackTime' => 4, 'CreatedAt' => 5, 'UpdatedAt' => 6, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'user' => 1, 'name' => 2, 'coordinates' => 3, 'attackTime' => 4, 'createdAt' => 5, 'updatedAt' => 6, ),
-        BasePeer::TYPE_COLNAME => array (TargetPeer::ID => 0, TargetPeer::USER => 1, TargetPeer::NAME => 2, TargetPeer::COORDINATES => 3, TargetPeer::ATTACK_TIME => 4, TargetPeer::CREATED_AT => 5, TargetPeer::UPDATED_AT => 6, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID' => 0, 'USER' => 1, 'NAME' => 2, 'COORDINATES' => 3, 'ATTACK_TIME' => 4, 'CREATED_AT' => 5, 'UPDATED_AT' => 6, ),
-        BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'user' => 1, 'name' => 2, 'coordinates' => 3, 'attack_time' => 4, 'created_at' => 5, 'updated_at' => 6, ),
+        BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'UserId' => 1, 'Name' => 2, 'Coordinates' => 3, 'AttackTime' => 4, 'CreatedAt' => 5, 'UpdatedAt' => 6, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'userId' => 1, 'name' => 2, 'coordinates' => 3, 'attackTime' => 4, 'createdAt' => 5, 'updatedAt' => 6, ),
+        BasePeer::TYPE_COLNAME => array (TargetPeer::ID => 0, TargetPeer::USER_ID => 1, TargetPeer::NAME => 2, TargetPeer::COORDINATES => 3, TargetPeer::ATTACK_TIME => 4, TargetPeer::CREATED_AT => 5, TargetPeer::UPDATED_AT => 6, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID' => 0, 'USER_ID' => 1, 'NAME' => 2, 'COORDINATES' => 3, 'ATTACK_TIME' => 4, 'CREATED_AT' => 5, 'UPDATED_AT' => 6, ),
+        BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'user_id' => 1, 'name' => 2, 'coordinates' => 3, 'attack_time' => 4, 'created_at' => 5, 'updated_at' => 6, ),
         BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
     );
 
@@ -167,7 +167,7 @@ abstract class BaseTargetPeer
     {
         if (null === $alias) {
             $criteria->addSelectColumn(TargetPeer::ID);
-            $criteria->addSelectColumn(TargetPeer::USER);
+            $criteria->addSelectColumn(TargetPeer::USER_ID);
             $criteria->addSelectColumn(TargetPeer::NAME);
             $criteria->addSelectColumn(TargetPeer::COORDINATES);
             $criteria->addSelectColumn(TargetPeer::ATTACK_TIME);
@@ -175,7 +175,7 @@ abstract class BaseTargetPeer
             $criteria->addSelectColumn(TargetPeer::UPDATED_AT);
         } else {
             $criteria->addSelectColumn($alias . '.id');
-            $criteria->addSelectColumn($alias . '.user');
+            $criteria->addSelectColumn($alias . '.user_id');
             $criteria->addSelectColumn($alias . '.name');
             $criteria->addSelectColumn($alias . '.coordinates');
             $criteria->addSelectColumn($alias . '.attack_time');
@@ -479,6 +479,244 @@ abstract class BaseTargetPeer
         }
 
         return array($obj, $col);
+    }
+
+
+    /**
+     * Returns the number of rows matching criteria, joining the related User table
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return int Number of matching rows.
+     */
+    public static function doCountJoinUser(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        // we're going to modify criteria, so copy it first
+        $criteria = clone $criteria;
+
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(TargetPeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
+        }
+
+        if (!$criteria->hasSelectClause()) {
+            TargetPeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
+
+        // Set the correct dbName
+        $criteria->setDbName(TargetPeer::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(TargetPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+
+        $criteria->addJoin(TargetPeer::USER_ID, UserPeer::ID, $join_behavior);
+
+        $stmt = BasePeer::doCount($criteria, $con);
+
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
+        }
+        $stmt->closeCursor();
+
+        return $count;
+    }
+
+
+    /**
+     * Selects a collection of Target objects pre-filled with their User objects.
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of Target objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinUser(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(TargetPeer::DATABASE_NAME);
+        }
+
+        TargetPeer::addSelectColumns($criteria);
+        $startcol = TargetPeer::NUM_HYDRATE_COLUMNS;
+        UserPeer::addSelectColumns($criteria);
+
+        $criteria->addJoin(TargetPeer::USER_ID, UserPeer::ID, $join_behavior);
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = TargetPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = TargetPeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+
+                $cls = TargetPeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                TargetPeer::addInstanceToPool($obj1, $key1);
+            } // if $obj1 already loaded
+
+            $key2 = UserPeer::getPrimaryKeyHashFromRow($row, $startcol);
+            if ($key2 !== null) {
+                $obj2 = UserPeer::getInstanceFromPool($key2);
+                if (!$obj2) {
+
+                    $cls = UserPeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol);
+                    UserPeer::addInstanceToPool($obj2, $key2);
+                } // if obj2 already loaded
+
+                // Add the $obj1 (Target) to $obj2 (User)
+                $obj2->addTarget($obj1);
+
+            } // if joined row was not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
+    }
+
+
+    /**
+     * Returns the number of rows matching criteria, joining all related tables
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return int Number of matching rows.
+     */
+    public static function doCountJoinAll(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        // we're going to modify criteria, so copy it first
+        $criteria = clone $criteria;
+
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(TargetPeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
+        }
+
+        if (!$criteria->hasSelectClause()) {
+            TargetPeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
+
+        // Set the correct dbName
+        $criteria->setDbName(TargetPeer::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(TargetPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+
+        $criteria->addJoin(TargetPeer::USER_ID, UserPeer::ID, $join_behavior);
+
+        $stmt = BasePeer::doCount($criteria, $con);
+
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
+        }
+        $stmt->closeCursor();
+
+        return $count;
+    }
+
+    /**
+     * Selects a collection of Target objects pre-filled with all related objects.
+     *
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of Target objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinAll(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(TargetPeer::DATABASE_NAME);
+        }
+
+        TargetPeer::addSelectColumns($criteria);
+        $startcol2 = TargetPeer::NUM_HYDRATE_COLUMNS;
+
+        UserPeer::addSelectColumns($criteria);
+        $startcol3 = $startcol2 + UserPeer::NUM_HYDRATE_COLUMNS;
+
+        $criteria->addJoin(TargetPeer::USER_ID, UserPeer::ID, $join_behavior);
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = TargetPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = TargetPeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+                $cls = TargetPeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                TargetPeer::addInstanceToPool($obj1, $key1);
+            } // if obj1 already loaded
+
+            // Add objects for joined User rows
+
+            $key2 = UserPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+            if ($key2 !== null) {
+                $obj2 = UserPeer::getInstanceFromPool($key2);
+                if (!$obj2) {
+
+                    $cls = UserPeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol2);
+                    UserPeer::addInstanceToPool($obj2, $key2);
+                } // if obj2 loaded
+
+                // Add the $obj1 (Target) to the collection in $obj2 (User)
+                $obj2->addTarget($obj1);
+            } // if joined row not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
     }
 
     /**

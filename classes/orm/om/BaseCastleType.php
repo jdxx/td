@@ -36,10 +36,10 @@ abstract class BaseCastleType extends BaseObject implements Persistent
     protected $id;
 
     /**
-     * The value for the user field.
+     * The value for the user_id field.
      * @var        int
      */
-    protected $user;
+    protected $user_id;
 
     /**
      * The value for the type field.
@@ -360,6 +360,11 @@ abstract class BaseCastleType extends BaseObject implements Persistent
     protected $updated_at;
 
     /**
+     * @var        User
+     */
+    protected $aUser;
+
+    /**
      * @var        PropelObjectCollection|Castle[] Collection to store aggregation of Castle objects.
      */
     protected $collCastles;
@@ -403,14 +408,14 @@ abstract class BaseCastleType extends BaseObject implements Persistent
     }
 
     /**
-     * Get the [user] column value.
+     * Get the [user_id] column value.
      *
      * @return int
      */
-    public function getUser()
+    public function getUserId()
     {
 
-        return $this->user;
+        return $this->user_id;
     }
 
     /**
@@ -1076,25 +1081,29 @@ abstract class BaseCastleType extends BaseObject implements Persistent
     } // setId()
 
     /**
-     * Set the value of [user] column.
+     * Set the value of [user_id] column.
      *
      * @param  int $v new value
      * @return CastleType The current object (for fluent API support)
      */
-    public function setUser($v)
+    public function setUserId($v)
     {
         if ($v !== null && is_numeric($v)) {
             $v = (int) $v;
         }
 
-        if ($this->user !== $v) {
-            $this->user = $v;
-            $this->modifiedColumns[] = CastleTypePeer::USER;
+        if ($this->user_id !== $v) {
+            $this->user_id = $v;
+            $this->modifiedColumns[] = CastleTypePeer::USER_ID;
+        }
+
+        if ($this->aUser !== null && $this->aUser->getId() !== $v) {
+            $this->aUser = null;
         }
 
 
         return $this;
-    } // setUser()
+    } // setUserId()
 
     /**
      * Set the value of [type] column.
@@ -2406,7 +2415,7 @@ abstract class BaseCastleType extends BaseObject implements Persistent
         try {
 
             $this->id = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
-            $this->user = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
+            $this->user_id = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
             $this->type = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
             $this->name = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
             $this->total_st = ($row[$startcol + 4] !== null) ? (int) $row[$startcol + 4] : null;
@@ -2492,6 +2501,9 @@ abstract class BaseCastleType extends BaseObject implements Persistent
     public function ensureConsistency()
     {
 
+        if ($this->aUser !== null && $this->user_id !== $this->aUser->getId()) {
+            $this->aUser = null;
+        }
     } // ensureConsistency
 
     /**
@@ -2531,6 +2543,7 @@ abstract class BaseCastleType extends BaseObject implements Persistent
 
         if ($deep) {  // also de-associate any related objects?
 
+            $this->aUser = null;
             $this->collCastles = null;
 
         } // if (deep)
@@ -2657,6 +2670,18 @@ abstract class BaseCastleType extends BaseObject implements Persistent
         if (!$this->alreadyInSave) {
             $this->alreadyInSave = true;
 
+            // We call the save method on the following object(s) if they
+            // were passed to this object by their corresponding set
+            // method.  This object relates to these object(s) by a
+            // foreign key reference.
+
+            if ($this->aUser !== null) {
+                if ($this->aUser->isModified() || $this->aUser->isNew()) {
+                    $affectedRows += $this->aUser->save($con);
+                }
+                $this->setUser($this->aUser);
+            }
+
             if ($this->isNew() || $this->isModified()) {
                 // persist changes
                 if ($this->isNew()) {
@@ -2715,8 +2740,8 @@ abstract class BaseCastleType extends BaseObject implements Persistent
         if ($this->isColumnModified(CastleTypePeer::ID)) {
             $modifiedColumns[':p' . $index++]  = '`id`';
         }
-        if ($this->isColumnModified(CastleTypePeer::USER)) {
-            $modifiedColumns[':p' . $index++]  = '`user`';
+        if ($this->isColumnModified(CastleTypePeer::USER_ID)) {
+            $modifiedColumns[':p' . $index++]  = '`user_id`';
         }
         if ($this->isColumnModified(CastleTypePeer::TYPE)) {
             $modifiedColumns[':p' . $index++]  = '`type`';
@@ -2891,8 +2916,8 @@ abstract class BaseCastleType extends BaseObject implements Persistent
                     case '`id`':
                         $stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
                         break;
-                    case '`user`':
-                        $stmt->bindValue($identifier, $this->user, PDO::PARAM_INT);
+                    case '`user_id`':
+                        $stmt->bindValue($identifier, $this->user_id, PDO::PARAM_INT);
                         break;
                     case '`type`':
                         $stmt->bindValue($identifier, $this->type, PDO::PARAM_STR);
@@ -3147,6 +3172,18 @@ abstract class BaseCastleType extends BaseObject implements Persistent
             $failureMap = array();
 
 
+            // We call the validate method on the following object(s) if they
+            // were passed to this object by their corresponding set
+            // method.  This object relates to these object(s) by a
+            // foreign key reference.
+
+            if ($this->aUser !== null) {
+                if (!$this->aUser->validate($columns)) {
+                    $failureMap = array_merge($failureMap, $this->aUser->getValidationFailures());
+                }
+            }
+
+
             if (($retval = CastleTypePeer::doValidate($this, $columns)) !== true) {
                 $failureMap = array_merge($failureMap, $retval);
             }
@@ -3199,7 +3236,7 @@ abstract class BaseCastleType extends BaseObject implements Persistent
                 return $this->getId();
                 break;
             case 1:
-                return $this->getUser();
+                return $this->getUserId();
                 break;
             case 2:
                 return $this->getType();
@@ -3390,7 +3427,7 @@ abstract class BaseCastleType extends BaseObject implements Persistent
         $keys = CastleTypePeer::getFieldNames($keyType);
         $result = array(
             $keys[0] => $this->getId(),
-            $keys[1] => $this->getUser(),
+            $keys[1] => $this->getUserId(),
             $keys[2] => $this->getType(),
             $keys[3] => $this->getName(),
             $keys[4] => $this->getTotalSt(),
@@ -3451,6 +3488,9 @@ abstract class BaseCastleType extends BaseObject implements Persistent
         }
 
         if ($includeForeignObjects) {
+            if (null !== $this->aUser) {
+                $result['User'] = $this->aUser->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+            }
             if (null !== $this->collCastles) {
                 $result['Castles'] = $this->collCastles->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
@@ -3492,7 +3532,7 @@ abstract class BaseCastleType extends BaseObject implements Persistent
                 $this->setId($value);
                 break;
             case 1:
-                $this->setUser($value);
+                $this->setUserId($value);
                 break;
             case 2:
                 $this->setType($value);
@@ -3678,7 +3718,7 @@ abstract class BaseCastleType extends BaseObject implements Persistent
         $keys = CastleTypePeer::getFieldNames($keyType);
 
         if (array_key_exists($keys[0], $arr)) $this->setId($arr[$keys[0]]);
-        if (array_key_exists($keys[1], $arr)) $this->setUser($arr[$keys[1]]);
+        if (array_key_exists($keys[1], $arr)) $this->setUserId($arr[$keys[1]]);
         if (array_key_exists($keys[2], $arr)) $this->setType($arr[$keys[2]]);
         if (array_key_exists($keys[3], $arr)) $this->setName($arr[$keys[3]]);
         if (array_key_exists($keys[4], $arr)) $this->setTotalSt($arr[$keys[4]]);
@@ -3744,7 +3784,7 @@ abstract class BaseCastleType extends BaseObject implements Persistent
         $criteria = new Criteria(CastleTypePeer::DATABASE_NAME);
 
         if ($this->isColumnModified(CastleTypePeer::ID)) $criteria->add(CastleTypePeer::ID, $this->id);
-        if ($this->isColumnModified(CastleTypePeer::USER)) $criteria->add(CastleTypePeer::USER, $this->user);
+        if ($this->isColumnModified(CastleTypePeer::USER_ID)) $criteria->add(CastleTypePeer::USER_ID, $this->user_id);
         if ($this->isColumnModified(CastleTypePeer::TYPE)) $criteria->add(CastleTypePeer::TYPE, $this->type);
         if ($this->isColumnModified(CastleTypePeer::NAME)) $criteria->add(CastleTypePeer::NAME, $this->name);
         if ($this->isColumnModified(CastleTypePeer::TOTAL_ST)) $criteria->add(CastleTypePeer::TOTAL_ST, $this->total_st);
@@ -3861,7 +3901,7 @@ abstract class BaseCastleType extends BaseObject implements Persistent
      */
     public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
     {
-        $copyObj->setUser($this->getUser());
+        $copyObj->setUserId($this->getUserId());
         $copyObj->setType($this->getType());
         $copyObj->setName($this->getName());
         $copyObj->setTotalSt($this->getTotalSt());
@@ -3977,6 +4017,58 @@ abstract class BaseCastleType extends BaseObject implements Persistent
         }
 
         return self::$peer;
+    }
+
+    /**
+     * Declares an association between this object and a User object.
+     *
+     * @param                  User $v
+     * @return CastleType The current object (for fluent API support)
+     * @throws PropelException
+     */
+    public function setUser(User $v = null)
+    {
+        if ($v === null) {
+            $this->setUserId(NULL);
+        } else {
+            $this->setUserId($v->getId());
+        }
+
+        $this->aUser = $v;
+
+        // Add binding for other direction of this n:n relationship.
+        // If this object has already been added to the User object, it will not be re-added.
+        if ($v !== null) {
+            $v->addCastleType($this);
+        }
+
+
+        return $this;
+    }
+
+
+    /**
+     * Get the associated User object
+     *
+     * @param PropelPDO $con Optional Connection object.
+     * @param $doQuery Executes a query to get the object if required
+     * @return User The associated User object.
+     * @throws PropelException
+     */
+    public function getUser(PropelPDO $con = null, $doQuery = true)
+    {
+        if ($this->aUser === null && ($this->user_id !== null) && $doQuery) {
+            $this->aUser = UserQuery::create()->findPk($this->user_id, $con);
+            /* The following can be used additionally to
+                guarantee the related object contains a reference
+                to this object.  This level of coupling may, however, be
+                undesirable since it could result in an only partially populated collection
+                in the referenced object.
+                $this->aUser->addCastleTypes($this);
+             */
+        }
+
+        return $this->aUser;
     }
 
 
@@ -4245,13 +4337,38 @@ abstract class BaseCastleType extends BaseObject implements Persistent
         return $this->getCastles($query, $con);
     }
 
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this CastleType is new, it will return
+     * an empty collection; or if this CastleType has previously
+     * been saved, it will retrieve related Castles from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in CastleType.
+     *
+     * @param Criteria $criteria optional Criteria object to narrow the query
+     * @param PropelPDO $con optional connection object
+     * @param string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|Castle[] List of Castle objects
+     */
+    public function getCastlesJoinUser($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = CastleQuery::create(null, $criteria);
+        $query->joinWith('User', $join_behavior);
+
+        return $this->getCastles($query, $con);
+    }
+
     /**
      * Clears the current object and sets all attributes to their default values
      */
     public function clear()
     {
         $this->id = null;
-        $this->user = null;
+        $this->user_id = null;
         $this->type = null;
         $this->name = null;
         $this->total_st = null;
@@ -4332,6 +4449,9 @@ abstract class BaseCastleType extends BaseObject implements Persistent
                     $o->clearAllReferences($deep);
                 }
             }
+            if ($this->aUser instanceof Persistent) {
+              $this->aUser->clearAllReferences($deep);
+            }
 
             $this->alreadyInClearAllReferencesDeep = false;
         } // if ($deep)
@@ -4340,6 +4460,7 @@ abstract class BaseCastleType extends BaseObject implements Persistent
             $this->collCastles->clearIterator();
         }
         $this->collCastles = null;
+        $this->aUser = null;
     }
 
     /**

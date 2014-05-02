@@ -2,7 +2,7 @@
 <database name="TotalDefense">
   <table name="castle">
     <column name="id" type="Integer" size="10" autoIncrement="true" primaryKey="true"/>
-    <column name="user" type="Integer" size="4"/>
+    <column name="user_id" type="Integer"/>
     <column name="name" type="Varchar" size="50"/>
     <column name="castle_type_id" type="Integer" size="6"/>
     <column name="castle_location_id" type="Integer" size="6"/>
@@ -41,11 +41,14 @@
     <foreign-key foreignTable="castle_location">
       <reference foreign="id" local="castle_location_id"/>
     </foreign-key>
+    <foreign-key foreignTable="user">
+      <reference foreign="id" local="user_id"/>
+    </foreign-key>
     <behavior name="timestampable"/>
   </table>
   <table name="castle_type">
     <column name="id" type="Integer" size="6" autoIncrement="true" primaryKey="true"/>
-    <column name="user" type="Integer" size="4"/>
+    <column name="user_id" type="Integer"/>
     <column name="type" description="Off, Def, Mix" type="Char" size="3"/>
     <column name="name" type="Varchar" size="50"/>
     <column name="total_st" type="Integer" size="4"/>
@@ -98,10 +101,12 @@
     <column name="max_population" type="Integer" size="5"/>
     <column name="free_population" type="Integer" size="5"/>
     <unique name="alternate_1">
-      <unique-column name="user"/>
       <unique-column name="name"/>
       <unique-column name="type"/>
     </unique>
+    <foreign-key foreignTable="user">
+      <reference foreign="id" local="user_id"/>
+    </foreign-key>
     <behavior name="timestampable"/>
   </table>
   <table name="attack">
@@ -135,28 +140,37 @@
   </table>
   <table name="castle_location">
     <column name="id" type="Integer" size="6" autoIncrement="true" primaryKey="true"/>
-    <column name="user" type="Integer" size="6"/>
+    <column name="user_id" type="Integer"/>
     <column name="name" type="Varchar" size="50"/>
     <column name="parent_id" type="Integer" size="6"/>
+    <foreign-key foreignTable="user">
+      <reference foreign="id" local="user_id"/>
+    </foreign-key>
     <behavior name="timestampable"/>
-    <behavior name="nested_set"/>
+    <behavior name="nested_set">
+      <parameter name="scope_column" value="user_id"/>
+      <parameter name="use_scope" value="true"/>
+    </behavior>
   </table>
   <table name="target">
     <column name="id" type="Integer" autoIncrement="true" primaryKey="true"/>
-    <column name="user" type="Integer" size="6"/>
+    <column name="user_id" type="Integer"/>
     <column name="name" type="Varchar" size="50"/>
     <column name="coordinates" type="Char" size="12"/>
     <column name="attack_time" type="Timestamp"/>
+    <foreign-key foreignTable="user">
+      <reference foreign="id" local="user_id"/>
+    </foreign-key>
     <behavior name="timestampable"/>
   </table>
-  <table name="castle_2_attack" isCrossRef="true">
-    <column name="castle_id" type="Integer" size="10" required="true" primaryKey="true"/>
+  <table name="attack2castle" isCrossRef="true">
     <column name="attack_id" type="Integer" size="6" required="true" primaryKey="true"/>
-    <foreign-key foreignTable="attack">
-      <reference local="attack_id" foreign="id"/>
-    </foreign-key>
+    <column name="castle_id" type="Integer" size="10" required="true" primaryKey="true"/>
     <foreign-key foreignTable="castle">
       <reference local="castle_id" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="attack">
+      <reference local="attack_id" foreign="id"/>
     </foreign-key>
   </table>
 </database>

@@ -24,9 +24,9 @@
  * @method AttackQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
  * @method AttackQuery innerJoin($relation) Adds a INNER JOIN clause to the query
  *
- * @method AttackQuery leftJoinCastle2Attack($relationAlias = null) Adds a LEFT JOIN clause to the query using the Castle2Attack relation
- * @method AttackQuery rightJoinCastle2Attack($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Castle2Attack relation
- * @method AttackQuery innerJoinCastle2Attack($relationAlias = null) Adds a INNER JOIN clause to the query using the Castle2Attack relation
+ * @method AttackQuery leftJoinAttack2castle($relationAlias = null) Adds a LEFT JOIN clause to the query using the Attack2castle relation
+ * @method AttackQuery rightJoinAttack2castle($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Attack2castle relation
+ * @method AttackQuery innerJoinAttack2castle($relationAlias = null) Adds a INNER JOIN clause to the query using the Attack2castle relation
  *
  * @method Attack findOne(PropelPDO $con = null) Return the first Attack matching the query
  * @method Attack findOneOrCreate(PropelPDO $con = null) Return the first Attack matching the query, or a new Attack object populated from the query conditions when no match is found
@@ -495,41 +495,41 @@ abstract class BaseAttackQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query by a related Castle2Attack object
+     * Filter the query by a related Attack2castle object
      *
-     * @param   Castle2Attack|PropelObjectCollection $castle2Attack  the related object to use as filter
+     * @param   Attack2castle|PropelObjectCollection $attack2castle  the related object to use as filter
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return                 AttackQuery The current query, for fluid interface
      * @throws PropelException - if the provided filter is invalid.
      */
-    public function filterByCastle2Attack($castle2Attack, $comparison = null)
+    public function filterByAttack2castle($attack2castle, $comparison = null)
     {
-        if ($castle2Attack instanceof Castle2Attack) {
+        if ($attack2castle instanceof Attack2castle) {
             return $this
-                ->addUsingAlias(AttackPeer::ID, $castle2Attack->getAttackId(), $comparison);
-        } elseif ($castle2Attack instanceof PropelObjectCollection) {
+                ->addUsingAlias(AttackPeer::ID, $attack2castle->getAttackId(), $comparison);
+        } elseif ($attack2castle instanceof PropelObjectCollection) {
             return $this
-                ->useCastle2AttackQuery()
-                ->filterByPrimaryKeys($castle2Attack->getPrimaryKeys())
+                ->useAttack2castleQuery()
+                ->filterByPrimaryKeys($attack2castle->getPrimaryKeys())
                 ->endUse();
         } else {
-            throw new PropelException('filterByCastle2Attack() only accepts arguments of type Castle2Attack or PropelCollection');
+            throw new PropelException('filterByAttack2castle() only accepts arguments of type Attack2castle or PropelCollection');
         }
     }
 
     /**
-     * Adds a JOIN clause to the query using the Castle2Attack relation
+     * Adds a JOIN clause to the query using the Attack2castle relation
      *
      * @param     string $relationAlias optional alias for the relation
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
      * @return AttackQuery The current query, for fluid interface
      */
-    public function joinCastle2Attack($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function joinAttack2castle($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         $tableMap = $this->getTableMap();
-        $relationMap = $tableMap->getRelation('Castle2Attack');
+        $relationMap = $tableMap->getRelation('Attack2castle');
 
         // create a ModelJoin object for this join
         $join = new ModelJoin();
@@ -544,14 +544,14 @@ abstract class BaseAttackQuery extends ModelCriteria
             $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
             $this->addJoinObject($join, $relationAlias);
         } else {
-            $this->addJoinObject($join, 'Castle2Attack');
+            $this->addJoinObject($join, 'Attack2castle');
         }
 
         return $this;
     }
 
     /**
-     * Use the Castle2Attack relation Castle2Attack object
+     * Use the Attack2castle relation Attack2castle object
      *
      * @see       useQuery()
      *
@@ -559,18 +559,18 @@ abstract class BaseAttackQuery extends ModelCriteria
      *                                   to be used as main alias in the secondary query
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
-     * @return   Castle2AttackQuery A secondary query class using the current class as primary query
+     * @return   Attack2castleQuery A secondary query class using the current class as primary query
      */
-    public function useCastle2AttackQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function useAttack2castleQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         return $this
-            ->joinCastle2Attack($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'Castle2Attack', 'Castle2AttackQuery');
+            ->joinAttack2castle($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'Attack2castle', 'Attack2castleQuery');
     }
 
     /**
      * Filter the query by a related Castle object
-     * using the castle_2_attack table as cross reference
+     * using the attack2castle table as cross reference
      *
      * @param   Castle $castle the related object to use as filter
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
@@ -580,7 +580,7 @@ abstract class BaseAttackQuery extends ModelCriteria
     public function filterByCastle($castle, $comparison = Criteria::EQUAL)
     {
         return $this
-            ->useCastle2AttackQuery()
+            ->useAttack2castleQuery()
             ->filterByCastle($castle, $comparison)
             ->endUse();
     }

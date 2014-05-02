@@ -7,7 +7,7 @@
  *
  *
  * @method CastleTypeQuery orderById($order = Criteria::ASC) Order by the id column
- * @method CastleTypeQuery orderByUser($order = Criteria::ASC) Order by the user column
+ * @method CastleTypeQuery orderByUserId($order = Criteria::ASC) Order by the user_id column
  * @method CastleTypeQuery orderByType($order = Criteria::ASC) Order by the type column
  * @method CastleTypeQuery orderByName($order = Criteria::ASC) Order by the name column
  * @method CastleTypeQuery orderByTotalSt($order = Criteria::ASC) Order by the total_st column
@@ -63,7 +63,7 @@
  * @method CastleTypeQuery orderByUpdatedAt($order = Criteria::ASC) Order by the updated_at column
  *
  * @method CastleTypeQuery groupById() Group by the id column
- * @method CastleTypeQuery groupByUser() Group by the user column
+ * @method CastleTypeQuery groupByUserId() Group by the user_id column
  * @method CastleTypeQuery groupByType() Group by the type column
  * @method CastleTypeQuery groupByName() Group by the name column
  * @method CastleTypeQuery groupByTotalSt() Group by the total_st column
@@ -122,6 +122,10 @@
  * @method CastleTypeQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
  * @method CastleTypeQuery innerJoin($relation) Adds a INNER JOIN clause to the query
  *
+ * @method CastleTypeQuery leftJoinUser($relationAlias = null) Adds a LEFT JOIN clause to the query using the User relation
+ * @method CastleTypeQuery rightJoinUser($relationAlias = null) Adds a RIGHT JOIN clause to the query using the User relation
+ * @method CastleTypeQuery innerJoinUser($relationAlias = null) Adds a INNER JOIN clause to the query using the User relation
+ *
  * @method CastleTypeQuery leftJoinCastle($relationAlias = null) Adds a LEFT JOIN clause to the query using the Castle relation
  * @method CastleTypeQuery rightJoinCastle($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Castle relation
  * @method CastleTypeQuery innerJoinCastle($relationAlias = null) Adds a INNER JOIN clause to the query using the Castle relation
@@ -129,7 +133,7 @@
  * @method CastleType findOne(PropelPDO $con = null) Return the first CastleType matching the query
  * @method CastleType findOneOrCreate(PropelPDO $con = null) Return the first CastleType matching the query, or a new CastleType object populated from the query conditions when no match is found
  *
- * @method CastleType findOneByUser(int $user) Return the first CastleType filtered by the user column
+ * @method CastleType findOneByUserId(int $user_id) Return the first CastleType filtered by the user_id column
  * @method CastleType findOneByType(string $type) Return the first CastleType filtered by the type column
  * @method CastleType findOneByName(string $name) Return the first CastleType filtered by the name column
  * @method CastleType findOneByTotalSt(int $total_st) Return the first CastleType filtered by the total_st column
@@ -185,7 +189,7 @@
  * @method CastleType findOneByUpdatedAt(string $updated_at) Return the first CastleType filtered by the updated_at column
  *
  * @method array findById(int $id) Return CastleType objects filtered by the id column
- * @method array findByUser(int $user) Return CastleType objects filtered by the user column
+ * @method array findByUserId(int $user_id) Return CastleType objects filtered by the user_id column
  * @method array findByType(string $type) Return CastleType objects filtered by the type column
  * @method array findByName(string $name) Return CastleType objects filtered by the name column
  * @method array findByTotalSt(int $total_st) Return CastleType objects filtered by the total_st column
@@ -346,7 +350,7 @@ abstract class BaseCastleTypeQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `id`, `user`, `type`, `name`, `total_st`, `total_as`, `total_pr`, `total_sk`, `total_bs`, `total_lr`, `total_hk`, `total_ok`, `mission_st`, `mission_as`, `mission_pr`, `mission_sk`, `mission_bs`, `mission_lr`, `bergfried`, `zeughaus`, `taverne`, `bibliothek`, `wehranlage`, `markt`, `bauernhof`, `holzfaeller`, `holzlager`, `steinbruch`, `steinlager`, `erzmine`, `erzlager`, `langbogen`, `dreifelderwirtschaft`, `kummet`, `vorratskeller`, `steigbuegel`, `waffenschmied`, `ruestungsschmied`, `bierpruefer`, `schwertschmied`, `eisenhaertung`, `armbrust`, `giftpfeile`, `pferdezucht`, `waffenherstellung`, `pferdepanzerung`, `schubkarren`, `brandpfeile`, `hufschmied`, `umgebungskarte`, `zisterne`, `max_population`, `free_population`, `created_at`, `updated_at` FROM `castle_type` WHERE `id` = :p0';
+        $sql = 'SELECT `id`, `user_id`, `type`, `name`, `total_st`, `total_as`, `total_pr`, `total_sk`, `total_bs`, `total_lr`, `total_hk`, `total_ok`, `mission_st`, `mission_as`, `mission_pr`, `mission_sk`, `mission_bs`, `mission_lr`, `bergfried`, `zeughaus`, `taverne`, `bibliothek`, `wehranlage`, `markt`, `bauernhof`, `holzfaeller`, `holzlager`, `steinbruch`, `steinlager`, `erzmine`, `erzlager`, `langbogen`, `dreifelderwirtschaft`, `kummet`, `vorratskeller`, `steigbuegel`, `waffenschmied`, `ruestungsschmied`, `bierpruefer`, `schwertschmied`, `eisenhaertung`, `armbrust`, `giftpfeile`, `pferdezucht`, `waffenherstellung`, `pferdepanzerung`, `schubkarren`, `brandpfeile`, `hufschmied`, `umgebungskarte`, `zisterne`, `max_population`, `free_population`, `created_at`, `updated_at` FROM `castle_type` WHERE `id` = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -478,17 +482,19 @@ abstract class BaseCastleTypeQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the user column
+     * Filter the query on the user_id column
      *
      * Example usage:
      * <code>
-     * $query->filterByUser(1234); // WHERE user = 1234
-     * $query->filterByUser(array(12, 34)); // WHERE user IN (12, 34)
-     * $query->filterByUser(array('min' => 12)); // WHERE user >= 12
-     * $query->filterByUser(array('max' => 12)); // WHERE user <= 12
+     * $query->filterByUserId(1234); // WHERE user_id = 1234
+     * $query->filterByUserId(array(12, 34)); // WHERE user_id IN (12, 34)
+     * $query->filterByUserId(array('min' => 12)); // WHERE user_id >= 12
+     * $query->filterByUserId(array('max' => 12)); // WHERE user_id <= 12
      * </code>
      *
-     * @param     mixed $user The value to use as filter.
+     * @see       filterByUser()
+     *
+     * @param     mixed $userId The value to use as filter.
      *              Use scalar values for equality.
      *              Use array values for in_array() equivalent.
      *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
@@ -496,16 +502,16 @@ abstract class BaseCastleTypeQuery extends ModelCriteria
      *
      * @return CastleTypeQuery The current query, for fluid interface
      */
-    public function filterByUser($user = null, $comparison = null)
+    public function filterByUserId($userId = null, $comparison = null)
     {
-        if (is_array($user)) {
+        if (is_array($userId)) {
             $useMinMax = false;
-            if (isset($user['min'])) {
-                $this->addUsingAlias(CastleTypePeer::USER, $user['min'], Criteria::GREATER_EQUAL);
+            if (isset($userId['min'])) {
+                $this->addUsingAlias(CastleTypePeer::USER_ID, $userId['min'], Criteria::GREATER_EQUAL);
                 $useMinMax = true;
             }
-            if (isset($user['max'])) {
-                $this->addUsingAlias(CastleTypePeer::USER, $user['max'], Criteria::LESS_EQUAL);
+            if (isset($userId['max'])) {
+                $this->addUsingAlias(CastleTypePeer::USER_ID, $userId['max'], Criteria::LESS_EQUAL);
                 $useMinMax = true;
             }
             if ($useMinMax) {
@@ -516,7 +522,7 @@ abstract class BaseCastleTypeQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(CastleTypePeer::USER, $user, $comparison);
+        return $this->addUsingAlias(CastleTypePeer::USER_ID, $userId, $comparison);
     }
 
     /**
@@ -2419,6 +2425,82 @@ abstract class BaseCastleTypeQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(CastleTypePeer::UPDATED_AT, $updatedAt, $comparison);
+    }
+
+    /**
+     * Filter the query by a related User object
+     *
+     * @param   User|PropelObjectCollection $user The related object(s) to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return                 CastleTypeQuery The current query, for fluid interface
+     * @throws PropelException - if the provided filter is invalid.
+     */
+    public function filterByUser($user, $comparison = null)
+    {
+        if ($user instanceof User) {
+            return $this
+                ->addUsingAlias(CastleTypePeer::USER_ID, $user->getId(), $comparison);
+        } elseif ($user instanceof PropelObjectCollection) {
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+
+            return $this
+                ->addUsingAlias(CastleTypePeer::USER_ID, $user->toKeyValue('PrimaryKey', 'Id'), $comparison);
+        } else {
+            throw new PropelException('filterByUser() only accepts arguments of type User or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the User relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return CastleTypeQuery The current query, for fluid interface
+     */
+    public function joinUser($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('User');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'User');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the User relation User object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   UserQuery A secondary query class using the current class as primary query
+     */
+    public function useUserQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        return $this
+            ->joinUser($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'User', 'UserQuery');
     }
 
     /**

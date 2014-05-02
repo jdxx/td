@@ -52,7 +52,7 @@ class AttackTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('Castle2Attack', 'Castle2Attack', RelationMap::ONE_TO_MANY, array('id' => 'attack_id', ), null, null, 'Castle2Attacks');
+        $this->addRelation('Attack2castle', 'Attack2castle', RelationMap::ONE_TO_MANY, array('id' => 'attack_id', ), null, null, 'Attack2castles');
         $this->addRelation('Castle', 'Castle', RelationMap::MANY_TO_MANY, array(), null, null, 'Castles');
     } // buildRelations()
 

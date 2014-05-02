@@ -36,10 +36,10 @@ abstract class BaseTarget extends BaseObject implements Persistent
     protected $id;
 
     /**
-     * The value for the user field.
+     * The value for the user_id field.
      * @var        int
      */
-    protected $user;
+    protected $user_id;
 
     /**
      * The value for the name field.
@@ -70,6 +70,11 @@ abstract class BaseTarget extends BaseObject implements Persistent
      * @var        string
      */
     protected $updated_at;
+
+    /**
+     * @var        User
+     */
+    protected $aUser;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -103,14 +108,14 @@ abstract class BaseTarget extends BaseObject implements Persistent
     }
 
     /**
-     * Get the [user] column value.
+     * Get the [user_id] column value.
      *
      * @return int
      */
-    public function getUser()
+    public function getUserId()
     {
 
-        return $this->user;
+        return $this->user_id;
     }
 
     /**
@@ -277,25 +282,29 @@ abstract class BaseTarget extends BaseObject implements Persistent
     } // setId()
 
     /**
-     * Set the value of [user] column.
+     * Set the value of [user_id] column.
      *
      * @param  int $v new value
      * @return Target The current object (for fluent API support)
      */
-    public function setUser($v)
+    public function setUserId($v)
     {
         if ($v !== null && is_numeric($v)) {
             $v = (int) $v;
         }
 
-        if ($this->user !== $v) {
-            $this->user = $v;
-            $this->modifiedColumns[] = TargetPeer::USER;
+        if ($this->user_id !== $v) {
+            $this->user_id = $v;
+            $this->modifiedColumns[] = TargetPeer::USER_ID;
+        }
+
+        if ($this->aUser !== null && $this->aUser->getId() !== $v) {
+            $this->aUser = null;
         }
 
 
         return $this;
-    } // setUser()
+    } // setUserId()
 
     /**
      * Set the value of [name] column.
@@ -441,7 +450,7 @@ abstract class BaseTarget extends BaseObject implements Persistent
         try {
 
             $this->id = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
-            $this->user = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
+            $this->user_id = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
             $this->name = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
             $this->coordinates = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
             $this->attack_time = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
@@ -479,6 +488,9 @@ abstract class BaseTarget extends BaseObject implements Persistent
     public function ensureConsistency()
     {
 
+        if ($this->aUser !== null && $this->user_id !== $this->aUser->getId()) {
+            $this->aUser = null;
+        }
     } // ensureConsistency
 
     /**
@@ -518,6 +530,7 @@ abstract class BaseTarget extends BaseObject implements Persistent
 
         if ($deep) {  // also de-associate any related objects?
 
+            $this->aUser = null;
         } // if (deep)
     }
 
@@ -642,6 +655,18 @@ abstract class BaseTarget extends BaseObject implements Persistent
         if (!$this->alreadyInSave) {
             $this->alreadyInSave = true;
 
+            // We call the save method on the following object(s) if they
+            // were passed to this object by their corresponding set
+            // method.  This object relates to these object(s) by a
+            // foreign key reference.
+
+            if ($this->aUser !== null) {
+                if ($this->aUser->isModified() || $this->aUser->isNew()) {
+                    $affectedRows += $this->aUser->save($con);
+                }
+                $this->setUser($this->aUser);
+            }
+
             if ($this->isNew() || $this->isModified()) {
                 // persist changes
                 if ($this->isNew()) {
@@ -682,8 +707,8 @@ abstract class BaseTarget extends BaseObject implements Persistent
         if ($this->isColumnModified(TargetPeer::ID)) {
             $modifiedColumns[':p' . $index++]  = '`id`';
         }
-        if ($this->isColumnModified(TargetPeer::USER)) {
-            $modifiedColumns[':p' . $index++]  = '`user`';
+        if ($this->isColumnModified(TargetPeer::USER_ID)) {
+            $modifiedColumns[':p' . $index++]  = '`user_id`';
         }
         if ($this->isColumnModified(TargetPeer::NAME)) {
             $modifiedColumns[':p' . $index++]  = '`name`';
@@ -714,8 +739,8 @@ abstract class BaseTarget extends BaseObject implements Persistent
                     case '`id`':
                         $stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
                         break;
-                    case '`user`':
-                        $stmt->bindValue($identifier, $this->user, PDO::PARAM_INT);
+                    case '`user_id`':
+                        $stmt->bindValue($identifier, $this->user_id, PDO::PARAM_INT);
                         break;
                     case '`name`':
                         $stmt->bindValue($identifier, $this->name, PDO::PARAM_STR);
@@ -826,6 +851,18 @@ abstract class BaseTarget extends BaseObject implements Persistent
             $failureMap = array();
 
 
+            // We call the validate method on the following object(s) if they
+            // were passed to this object by their corresponding set
+            // method.  This object relates to these object(s) by a
+            // foreign key reference.
+
+            if ($this->aUser !== null) {
+                if (!$this->aUser->validate($columns)) {
+                    $failureMap = array_merge($failureMap, $this->aUser->getValidationFailures());
+                }
+            }
+
+
             if (($retval = TargetPeer::doValidate($this, $columns)) !== true) {
                 $failureMap = array_merge($failureMap, $retval);
             }
@@ -870,7 +907,7 @@ abstract class BaseTarget extends BaseObject implements Persistent
                 return $this->getId();
                 break;
             case 1:
-                return $this->getUser();
+                return $this->getUserId();
                 break;
             case 2:
                 return $this->getName();
@@ -904,10 +941,11 @@ abstract class BaseTarget extends BaseObject implements Persistent
      *                    Defaults to BasePeer::TYPE_PHPNAME.
      * @param     boolean $includeLazyLoadColumns (optional) Whether to include lazy loaded columns. Defaults to true.
      * @param     array $alreadyDumpedObjects List of objects to skip to avoid recursion
+     * @param     boolean $includeForeignObjects (optional) Whether to include hydrated related objects. Default to FALSE.
      *
      * @return array an associative array containing the field names (as keys) and field values
      */
-    public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array())
+    public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array(), $includeForeignObjects = false)
     {
         if (isset($alreadyDumpedObjects['Target'][$this->getPrimaryKey()])) {
             return '*RECURSION*';
@@ -916,7 +954,7 @@ abstract class BaseTarget extends BaseObject implements Persistent
         $keys = TargetPeer::getFieldNames($keyType);
         $result = array(
             $keys[0] => $this->getId(),
-            $keys[1] => $this->getUser(),
+            $keys[1] => $this->getUserId(),
             $keys[2] => $this->getName(),
             $keys[3] => $this->getCoordinates(),
             $keys[4] => $this->getAttackTime(),
@@ -928,6 +966,11 @@ abstract class BaseTarget extends BaseObject implements Persistent
             $result[$key] = $virtualColumn;
         }
 
+        if ($includeForeignObjects) {
+            if (null !== $this->aUser) {
+                $result['User'] = $this->aUser->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+            }
+        }
 
         return $result;
     }
@@ -965,7 +1008,7 @@ abstract class BaseTarget extends BaseObject implements Persistent
                 $this->setId($value);
                 break;
             case 1:
-                $this->setUser($value);
+                $this->setUserId($value);
                 break;
             case 2:
                 $this->setName($value);
@@ -1007,7 +1050,7 @@ abstract class BaseTarget extends BaseObject implements Persistent
         $keys = TargetPeer::getFieldNames($keyType);
 
         if (array_key_exists($keys[0], $arr)) $this->setId($arr[$keys[0]]);
-        if (array_key_exists($keys[1], $arr)) $this->setUser($arr[$keys[1]]);
+        if (array_key_exists($keys[1], $arr)) $this->setUserId($arr[$keys[1]]);
         if (array_key_exists($keys[2], $arr)) $this->setName($arr[$keys[2]]);
         if (array_key_exists($keys[3], $arr)) $this->setCoordinates($arr[$keys[3]]);
         if (array_key_exists($keys[4], $arr)) $this->setAttackTime($arr[$keys[4]]);
@@ -1025,7 +1068,7 @@ abstract class BaseTarget extends BaseObject implements Persistent
         $criteria = new Criteria(TargetPeer::DATABASE_NAME);
 
         if ($this->isColumnModified(TargetPeer::ID)) $criteria->add(TargetPeer::ID, $this->id);
-        if ($this->isColumnModified(TargetPeer::USER)) $criteria->add(TargetPeer::USER, $this->user);
+        if ($this->isColumnModified(TargetPeer::USER_ID)) $criteria->add(TargetPeer::USER_ID, $this->user_id);
         if ($this->isColumnModified(TargetPeer::NAME)) $criteria->add(TargetPeer::NAME, $this->name);
         if ($this->isColumnModified(TargetPeer::COORDINATES)) $criteria->add(TargetPeer::COORDINATES, $this->coordinates);
         if ($this->isColumnModified(TargetPeer::ATTACK_TIME)) $criteria->add(TargetPeer::ATTACK_TIME, $this->attack_time);
@@ -1094,12 +1137,24 @@ abstract class BaseTarget extends BaseObject implements Persistent
      */
     public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
     {
-        $copyObj->setUser($this->getUser());
+        $copyObj->setUserId($this->getUserId());
         $copyObj->setName($this->getName());
         $copyObj->setCoordinates($this->getCoordinates());
         $copyObj->setAttackTime($this->getAttackTime());
         $copyObj->setCreatedAt($this->getCreatedAt());
         $copyObj->setUpdatedAt($this->getUpdatedAt());
+
+        if ($deepCopy && !$this->startCopy) {
+            // important: temporarily setNew(false) because this affects the behavior of
+            // the getter/setter methods for fkey referrer objects.
+            $copyObj->setNew(false);
+            // store object hash to prevent cycle
+            $this->startCopy = true;
+
+            //unflag object copy
+            $this->startCopy = false;
+        } // if ($deepCopy)
+
         if ($makeNew) {
             $copyObj->setNew(true);
             $copyObj->setId(NULL); // this is a auto-increment column, so set to default value
@@ -1147,12 +1202,64 @@ abstract class BaseTarget extends BaseObject implements Persistent
     }
 
     /**
+     * Declares an association between this object and a User object.
+     *
+     * @param                  User $v
+     * @return Target The current object (for fluent API support)
+     * @throws PropelException
+     */
+    public function setUser(User $v = null)
+    {
+        if ($v === null) {
+            $this->setUserId(NULL);
+        } else {
+            $this->setUserId($v->getId());
+        }
+
+        $this->aUser = $v;
+
+        // Add binding for other direction of this n:n relationship.
+        // If this object has already been added to the User object, it will not be re-added.
+        if ($v !== null) {
+            $v->addTarget($this);
+        }
+
+
+        return $this;
+    }
+
+
+    /**
+     * Get the associated User object
+     *
+     * @param PropelPDO $con Optional Connection object.
+     * @param $doQuery Executes a query to get the object if required
+     * @return User The associated User object.
+     * @throws PropelException
+     */
+    public function getUser(PropelPDO $con = null, $doQuery = true)
+    {
+        if ($this->aUser === null && ($this->user_id !== null) && $doQuery) {
+            $this->aUser = UserQuery::create()->findPk($this->user_id, $con);
+            /* The following can be used additionally to
+                guarantee the related object contains a reference
+                to this object.  This level of coupling may, however, be
+                undesirable since it could result in an only partially populated collection
+                in the referenced object.
+                $this->aUser->addTargets($this);
+             */
+        }
+
+        return $this->aUser;
+    }
+
+    /**
      * Clears the current object and sets all attributes to their default values
      */
     public function clear()
     {
         $this->id = null;
-        $this->user = null;
+        $this->user_id = null;
         $this->name = null;
         $this->coordinates = null;
         $this->attack_time = null;
@@ -1180,10 +1287,14 @@ abstract class BaseTarget extends BaseObject implements Persistent
     {
         if ($deep && !$this->alreadyInClearAllReferencesDeep) {
             $this->alreadyInClearAllReferencesDeep = true;
+            if ($this->aUser instanceof Persistent) {
+              $this->aUser->clearAllReferences($deep);
+            }
 
             $this->alreadyInClearAllReferencesDeep = false;
         } // if ($deep)
 
+        $this->aUser = null;
     }
 
     /**

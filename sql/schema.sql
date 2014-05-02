@@ -12,7 +12,7 @@ DROP TABLE IF EXISTS `castle`;
 CREATE TABLE `castle`
 (
     `id` INTEGER(10) NOT NULL AUTO_INCREMENT,
-    `user` INTEGER(4),
+    `user_id` INTEGER,
     `name` VARCHAR(50),
     `castle_type_id` INTEGER(6),
     `castle_location_id` INTEGER(6),
@@ -49,7 +49,8 @@ CREATE TABLE `castle`
     `updated_at` DATETIME,
     PRIMARY KEY (`id`),
     INDEX `castle_FI_1` (`castle_type_id`),
-    INDEX `castle_FI_2` (`castle_location_id`)
+    INDEX `castle_FI_2` (`castle_location_id`),
+    INDEX `castle_FI_3` (`user_id`)
 ) ENGINE=MyISAM;
 
 -- ---------------------------------------------------------------------
@@ -61,7 +62,7 @@ DROP TABLE IF EXISTS `castle_type`;
 CREATE TABLE `castle_type`
 (
     `id` INTEGER(6) NOT NULL AUTO_INCREMENT,
-    `user` INTEGER(4),
+    `user_id` INTEGER,
     `type` CHAR(3) COMMENT 'Off, Def, Mix',
     `name` VARCHAR(50),
     `total_st` INTEGER(4),
@@ -116,7 +117,8 @@ CREATE TABLE `castle_type`
     `created_at` DATETIME,
     `updated_at` DATETIME,
     PRIMARY KEY (`id`),
-    UNIQUE INDEX `alternate_1` (`user`, `name`, `type`)
+    UNIQUE INDEX `alternate_1` (`name`, `type`),
+    INDEX `castle_type_FI_1` (`user_id`)
 ) ENGINE=MyISAM;
 
 -- ---------------------------------------------------------------------
@@ -183,7 +185,7 @@ DROP TABLE IF EXISTS `castle_location`;
 CREATE TABLE `castle_location`
 (
     `id` INTEGER(6) NOT NULL AUTO_INCREMENT,
-    `user` INTEGER(6),
+    `user_id` INTEGER,
     `name` VARCHAR(50),
     `parent_id` INTEGER(6),
     `created_at` DATETIME,
@@ -191,7 +193,8 @@ CREATE TABLE `castle_location`
     `tree_left` INTEGER,
     `tree_right` INTEGER,
     `tree_level` INTEGER,
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    INDEX `castle_location_FI_1` (`user_id`)
 ) ENGINE=MyISAM;
 
 -- ---------------------------------------------------------------------
@@ -203,27 +206,28 @@ DROP TABLE IF EXISTS `target`;
 CREATE TABLE `target`
 (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `user` INTEGER(6),
+    `user_id` INTEGER,
     `name` VARCHAR(50),
     `coordinates` CHAR(12),
     `attack_time` DATETIME,
     `created_at` DATETIME,
     `updated_at` DATETIME,
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    INDEX `target_FI_1` (`user_id`)
 ) ENGINE=MyISAM;
 
 -- ---------------------------------------------------------------------
--- castle_2_attack
+-- attack2castle
 -- ---------------------------------------------------------------------
 
-DROP TABLE IF EXISTS `castle_2_attack`;
+DROP TABLE IF EXISTS `attack2castle`;
 
-CREATE TABLE `castle_2_attack`
+CREATE TABLE `attack2castle`
 (
-    `castle_id` INTEGER(10) NOT NULL,
     `attack_id` INTEGER(6) NOT NULL,
-    PRIMARY KEY (`castle_id`,`attack_id`),
-    INDEX `castle_2_attack_FI_1` (`attack_id`)
+    `castle_id` INTEGER(10) NOT NULL,
+    PRIMARY KEY (`attack_id`,`castle_id`),
+    INDEX `attack2castle_FI_1` (`castle_id`)
 ) ENGINE=MyISAM;
 
 # This restores the fkey checks, after having unset them earlier

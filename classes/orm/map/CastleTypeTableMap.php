@@ -39,7 +39,7 @@ class CastleTypeTableMap extends TableMap
         $this->setUseIdGenerator(true);
         // columns
         $this->addPrimaryKey('id', 'Id', 'INTEGER', true, 6, null);
-        $this->addColumn('user', 'User', 'INTEGER', false, 4, null);
+        $this->addForeignKey('user_id', 'UserId', 'INTEGER', 'user', 'id', false, null, null);
         $this->addColumn('type', 'Type', 'CHAR', false, 3, null);
         $this->addColumn('name', 'Name', 'VARCHAR', false, 50, null);
         $this->addColumn('total_st', 'TotalSt', 'INTEGER', false, 4, null);
@@ -101,6 +101,7 @@ class CastleTypeTableMap extends TableMap
      */
     public function buildRelations()
     {
+        $this->addRelation('User', 'User', RelationMap::MANY_TO_ONE, array('user_id' => 'id', ), null, null);
         $this->addRelation('Castle', 'Castle', RelationMap::ONE_TO_MANY, array('id' => 'castle_type_id', ), null, null, 'Castles');
     } // buildRelations()
 

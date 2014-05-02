@@ -7,7 +7,7 @@
  *
  *
  * @method CastleQuery orderById($order = Criteria::ASC) Order by the id column
- * @method CastleQuery orderByUser($order = Criteria::ASC) Order by the user column
+ * @method CastleQuery orderByUserId($order = Criteria::ASC) Order by the user_id column
  * @method CastleQuery orderByName($order = Criteria::ASC) Order by the name column
  * @method CastleQuery orderByCastleTypeId($order = Criteria::ASC) Order by the castle_type_id column
  * @method CastleQuery orderByCastleLocationId($order = Criteria::ASC) Order by the castle_location_id column
@@ -44,7 +44,7 @@
  * @method CastleQuery orderByUpdatedAt($order = Criteria::ASC) Order by the updated_at column
  *
  * @method CastleQuery groupById() Group by the id column
- * @method CastleQuery groupByUser() Group by the user column
+ * @method CastleQuery groupByUserId() Group by the user_id column
  * @method CastleQuery groupByName() Group by the name column
  * @method CastleQuery groupByCastleTypeId() Group by the castle_type_id column
  * @method CastleQuery groupByCastleLocationId() Group by the castle_location_id column
@@ -92,14 +92,18 @@
  * @method CastleQuery rightJoinCastleLocation($relationAlias = null) Adds a RIGHT JOIN clause to the query using the CastleLocation relation
  * @method CastleQuery innerJoinCastleLocation($relationAlias = null) Adds a INNER JOIN clause to the query using the CastleLocation relation
  *
- * @method CastleQuery leftJoinCastle2Attack($relationAlias = null) Adds a LEFT JOIN clause to the query using the Castle2Attack relation
- * @method CastleQuery rightJoinCastle2Attack($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Castle2Attack relation
- * @method CastleQuery innerJoinCastle2Attack($relationAlias = null) Adds a INNER JOIN clause to the query using the Castle2Attack relation
+ * @method CastleQuery leftJoinUser($relationAlias = null) Adds a LEFT JOIN clause to the query using the User relation
+ * @method CastleQuery rightJoinUser($relationAlias = null) Adds a RIGHT JOIN clause to the query using the User relation
+ * @method CastleQuery innerJoinUser($relationAlias = null) Adds a INNER JOIN clause to the query using the User relation
+ *
+ * @method CastleQuery leftJoinAttack2castle($relationAlias = null) Adds a LEFT JOIN clause to the query using the Attack2castle relation
+ * @method CastleQuery rightJoinAttack2castle($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Attack2castle relation
+ * @method CastleQuery innerJoinAttack2castle($relationAlias = null) Adds a INNER JOIN clause to the query using the Attack2castle relation
  *
  * @method Castle findOne(PropelPDO $con = null) Return the first Castle matching the query
  * @method Castle findOneOrCreate(PropelPDO $con = null) Return the first Castle matching the query, or a new Castle object populated from the query conditions when no match is found
  *
- * @method Castle findOneByUser(int $user) Return the first Castle filtered by the user column
+ * @method Castle findOneByUserId(int $user_id) Return the first Castle filtered by the user_id column
  * @method Castle findOneByName(string $name) Return the first Castle filtered by the name column
  * @method Castle findOneByCastleTypeId(int $castle_type_id) Return the first Castle filtered by the castle_type_id column
  * @method Castle findOneByCastleLocationId(int $castle_location_id) Return the first Castle filtered by the castle_location_id column
@@ -136,7 +140,7 @@
  * @method Castle findOneByUpdatedAt(string $updated_at) Return the first Castle filtered by the updated_at column
  *
  * @method array findById(int $id) Return Castle objects filtered by the id column
- * @method array findByUser(int $user) Return Castle objects filtered by the user column
+ * @method array findByUserId(int $user_id) Return Castle objects filtered by the user_id column
  * @method array findByName(string $name) Return Castle objects filtered by the name column
  * @method array findByCastleTypeId(int $castle_type_id) Return Castle objects filtered by the castle_type_id column
  * @method array findByCastleLocationId(int $castle_location_id) Return Castle objects filtered by the castle_location_id column
@@ -278,7 +282,7 @@ abstract class BaseCastleQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `id`, `user`, `name`, `castle_type_id`, `castle_location_id`, `coordinates`, `X`, `Y`, `silver`, `copper`, `current_st`, `current_as`, `current_pr`, `current_sk`, `current_bs`, `current_lr`, `current_hk`, `current_ok`, `mission_st`, `mission_as`, `mission_pr`, `mission_sk`, `mission_bs`, `mission_lr`, `usage_off`, `usage_def`, `mission_priority`, `environment_card`, `autodef_coordinates`, `autodef_X`, `autodef_Y`, `points`, `free_population`, `last_import`, `created_at`, `updated_at` FROM `castle` WHERE `id` = :p0';
+        $sql = 'SELECT `id`, `user_id`, `name`, `castle_type_id`, `castle_location_id`, `coordinates`, `X`, `Y`, `silver`, `copper`, `current_st`, `current_as`, `current_pr`, `current_sk`, `current_bs`, `current_lr`, `current_hk`, `current_ok`, `mission_st`, `mission_as`, `mission_pr`, `mission_sk`, `mission_bs`, `mission_lr`, `usage_off`, `usage_def`, `mission_priority`, `environment_card`, `autodef_coordinates`, `autodef_X`, `autodef_Y`, `points`, `free_population`, `last_import`, `created_at`, `updated_at` FROM `castle` WHERE `id` = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -410,17 +414,19 @@ abstract class BaseCastleQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the user column
+     * Filter the query on the user_id column
      *
      * Example usage:
      * <code>
-     * $query->filterByUser(1234); // WHERE user = 1234
-     * $query->filterByUser(array(12, 34)); // WHERE user IN (12, 34)
-     * $query->filterByUser(array('min' => 12)); // WHERE user >= 12
-     * $query->filterByUser(array('max' => 12)); // WHERE user <= 12
+     * $query->filterByUserId(1234); // WHERE user_id = 1234
+     * $query->filterByUserId(array(12, 34)); // WHERE user_id IN (12, 34)
+     * $query->filterByUserId(array('min' => 12)); // WHERE user_id >= 12
+     * $query->filterByUserId(array('max' => 12)); // WHERE user_id <= 12
      * </code>
      *
-     * @param     mixed $user The value to use as filter.
+     * @see       filterByUser()
+     *
+     * @param     mixed $userId The value to use as filter.
      *              Use scalar values for equality.
      *              Use array values for in_array() equivalent.
      *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
@@ -428,16 +434,16 @@ abstract class BaseCastleQuery extends ModelCriteria
      *
      * @return CastleQuery The current query, for fluid interface
      */
-    public function filterByUser($user = null, $comparison = null)
+    public function filterByUserId($userId = null, $comparison = null)
     {
-        if (is_array($user)) {
+        if (is_array($userId)) {
             $useMinMax = false;
-            if (isset($user['min'])) {
-                $this->addUsingAlias(CastlePeer::USER, $user['min'], Criteria::GREATER_EQUAL);
+            if (isset($userId['min'])) {
+                $this->addUsingAlias(CastlePeer::USER_ID, $userId['min'], Criteria::GREATER_EQUAL);
                 $useMinMax = true;
             }
-            if (isset($user['max'])) {
-                $this->addUsingAlias(CastlePeer::USER, $user['max'], Criteria::LESS_EQUAL);
+            if (isset($userId['max'])) {
+                $this->addUsingAlias(CastlePeer::USER_ID, $userId['max'], Criteria::LESS_EQUAL);
                 $useMinMax = true;
             }
             if ($useMinMax) {
@@ -448,7 +454,7 @@ abstract class BaseCastleQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(CastlePeer::USER, $user, $comparison);
+        return $this->addUsingAlias(CastlePeer::USER_ID, $userId, $comparison);
     }
 
     /**
@@ -1940,41 +1946,43 @@ abstract class BaseCastleQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query by a related Castle2Attack object
+     * Filter the query by a related User object
      *
-     * @param   Castle2Attack|PropelObjectCollection $castle2Attack  the related object to use as filter
+     * @param   User|PropelObjectCollection $user The related object(s) to use as filter
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return                 CastleQuery The current query, for fluid interface
      * @throws PropelException - if the provided filter is invalid.
      */
-    public function filterByCastle2Attack($castle2Attack, $comparison = null)
+    public function filterByUser($user, $comparison = null)
     {
-        if ($castle2Attack instanceof Castle2Attack) {
+        if ($user instanceof User) {
             return $this
-                ->addUsingAlias(CastlePeer::ID, $castle2Attack->getCastleId(), $comparison);
-        } elseif ($castle2Attack instanceof PropelObjectCollection) {
+                ->addUsingAlias(CastlePeer::USER_ID, $user->getId(), $comparison);
+        } elseif ($user instanceof PropelObjectCollection) {
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+
             return $this
-                ->useCastle2AttackQuery()
-                ->filterByPrimaryKeys($castle2Attack->getPrimaryKeys())
-                ->endUse();
+                ->addUsingAlias(CastlePeer::USER_ID, $user->toKeyValue('PrimaryKey', 'Id'), $comparison);
         } else {
-            throw new PropelException('filterByCastle2Attack() only accepts arguments of type Castle2Attack or PropelCollection');
+            throw new PropelException('filterByUser() only accepts arguments of type User or PropelCollection');
         }
     }
 
     /**
-     * Adds a JOIN clause to the query using the Castle2Attack relation
+     * Adds a JOIN clause to the query using the User relation
      *
      * @param     string $relationAlias optional alias for the relation
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
      * @return CastleQuery The current query, for fluid interface
      */
-    public function joinCastle2Attack($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function joinUser($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         $tableMap = $this->getTableMap();
-        $relationMap = $tableMap->getRelation('Castle2Attack');
+        $relationMap = $tableMap->getRelation('User');
 
         // create a ModelJoin object for this join
         $join = new ModelJoin();
@@ -1989,14 +1997,14 @@ abstract class BaseCastleQuery extends ModelCriteria
             $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
             $this->addJoinObject($join, $relationAlias);
         } else {
-            $this->addJoinObject($join, 'Castle2Attack');
+            $this->addJoinObject($join, 'User');
         }
 
         return $this;
     }
 
     /**
-     * Use the Castle2Attack relation Castle2Attack object
+     * Use the User relation User object
      *
      * @see       useQuery()
      *
@@ -2004,18 +2012,92 @@ abstract class BaseCastleQuery extends ModelCriteria
      *                                   to be used as main alias in the secondary query
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
-     * @return   Castle2AttackQuery A secondary query class using the current class as primary query
+     * @return   UserQuery A secondary query class using the current class as primary query
      */
-    public function useCastle2AttackQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function useUserQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         return $this
-            ->joinCastle2Attack($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'Castle2Attack', 'Castle2AttackQuery');
+            ->joinUser($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'User', 'UserQuery');
+    }
+
+    /**
+     * Filter the query by a related Attack2castle object
+     *
+     * @param   Attack2castle|PropelObjectCollection $attack2castle  the related object to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return                 CastleQuery The current query, for fluid interface
+     * @throws PropelException - if the provided filter is invalid.
+     */
+    public function filterByAttack2castle($attack2castle, $comparison = null)
+    {
+        if ($attack2castle instanceof Attack2castle) {
+            return $this
+                ->addUsingAlias(CastlePeer::ID, $attack2castle->getCastleId(), $comparison);
+        } elseif ($attack2castle instanceof PropelObjectCollection) {
+            return $this
+                ->useAttack2castleQuery()
+                ->filterByPrimaryKeys($attack2castle->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByAttack2castle() only accepts arguments of type Attack2castle or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the Attack2castle relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return CastleQuery The current query, for fluid interface
+     */
+    public function joinAttack2castle($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('Attack2castle');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'Attack2castle');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the Attack2castle relation Attack2castle object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   Attack2castleQuery A secondary query class using the current class as primary query
+     */
+    public function useAttack2castleQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        return $this
+            ->joinAttack2castle($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'Attack2castle', 'Attack2castleQuery');
     }
 
     /**
      * Filter the query by a related Attack object
-     * using the castle_2_attack table as cross reference
+     * using the attack2castle table as cross reference
      *
      * @param   Attack $attack the related object to use as filter
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
@@ -2025,7 +2107,7 @@ abstract class BaseCastleQuery extends ModelCriteria
     public function filterByAttack($attack, $comparison = Criteria::EQUAL)
     {
         return $this
-            ->useCastle2AttackQuery()
+            ->useAttack2castleQuery()
             ->filterByAttack($attack, $comparison)
             ->endUse();
     }

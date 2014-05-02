@@ -9,7 +9,7 @@ class CastleTypeController extends Zend_Controller_Action
 
     public function indexAction()
     {
-    	$this->view->layoutTitle = '†bersicht Burgtypen';
+    	$this->view->layoutTitle = '&Uuml;bersicht Burgtypen';
     	$this->view->layoutHelp  = '/castletype/help_index';    	
     	$this->view->layoutAdd   = '/castletype/update';
     	
@@ -63,7 +63,7 @@ class CastleTypeController extends Zend_Controller_Action
     		{
     			$postData = $this->_request->getPost();
 //    			$form->populate($postData);
-//     			echo "<xmp>"; var_dump($this->_request->getPost());
+//     			echo "<xmp>"; var_dump($this->_request->getPost()); exit;
 	    		$castleType->fromArray($postData);
 	    		$castleType->setBoolean($postData);
 //  	    		echo "<xmp>"; var_dump($castleType); exit;

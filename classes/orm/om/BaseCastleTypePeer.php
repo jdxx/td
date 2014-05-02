@@ -35,8 +35,8 @@ abstract class BaseCastleTypePeer
     /** the column name for the id field */
     const ID = 'castle_type.id';
 
-    /** the column name for the user field */
-    const USER = 'castle_type.user';
+    /** the column name for the user_id field */
+    const USER_ID = 'castle_type.user_id';
 
     /** the column name for the type field */
     const TYPE = 'castle_type.type';
@@ -216,11 +216,11 @@ abstract class BaseCastleTypePeer
      * e.g. CastleTypePeer::$fieldNames[CastleTypePeer::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('Id', 'User', 'Type', 'Name', 'TotalSt', 'TotalAs', 'TotalPr', 'TotalSk', 'TotalBs', 'TotalLr', 'TotalHk', 'TotalOk', 'MissionSt', 'MissionAs', 'MissionPr', 'MissionSk', 'MissionBs', 'MissionLr', 'Bergfried', 'Zeughaus', 'Taverne', 'Bibliothek', 'Wehranlage', 'Markt', 'Bauernhof', 'Holzfaeller', 'Holzlager', 'Steinbruch', 'Steinlager', 'Erzmine', 'Erzlager', 'Langbogen', 'Dreifelderwirtschaft', 'Kummet', 'Vorratskeller', 'Steigbuegel', 'Waffenschmied', 'Ruestungsschmied', 'Bierpruefer', 'Schwertschmied', 'Eisenhaertung', 'Armbrust', 'Giftpfeile', 'Pferdezucht', 'Waffenherstellung', 'Pferdepanzerung', 'Schubkarren', 'Brandpfeile', 'Hufschmied', 'Umgebungskarte', 'Zisterne', 'MaxPopulation', 'FreePopulation', 'CreatedAt', 'UpdatedAt', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'user', 'type', 'name', 'totalSt', 'totalAs', 'totalPr', 'totalSk', 'totalBs', 'totalLr', 'totalHk', 'totalOk', 'missionSt', 'missionAs', 'missionPr', 'missionSk', 'missionBs', 'missionLr', 'bergfried', 'zeughaus', 'taverne', 'bibliothek', 'wehranlage', 'markt', 'bauernhof', 'holzfaeller', 'holzlager', 'steinbruch', 'steinlager', 'erzmine', 'erzlager', 'langbogen', 'dreifelderwirtschaft', 'kummet', 'vorratskeller', 'steigbuegel', 'waffenschmied', 'ruestungsschmied', 'bierpruefer', 'schwertschmied', 'eisenhaertung', 'armbrust', 'giftpfeile', 'pferdezucht', 'waffenherstellung', 'pferdepanzerung', 'schubkarren', 'brandpfeile', 'hufschmied', 'umgebungskarte', 'zisterne', 'maxPopulation', 'freePopulation', 'createdAt', 'updatedAt', ),
-        BasePeer::TYPE_COLNAME => array (CastleTypePeer::ID, CastleTypePeer::USER, CastleTypePeer::TYPE, CastleTypePeer::NAME, CastleTypePeer::TOTAL_ST, CastleTypePeer::TOTAL_AS, CastleTypePeer::TOTAL_PR, CastleTypePeer::TOTAL_SK, CastleTypePeer::TOTAL_BS, CastleTypePeer::TOTAL_LR, CastleTypePeer::TOTAL_HK, CastleTypePeer::TOTAL_OK, CastleTypePeer::MISSION_ST, CastleTypePeer::MISSION_AS, CastleTypePeer::MISSION_PR, CastleTypePeer::MISSION_SK, CastleTypePeer::MISSION_BS, CastleTypePeer::MISSION_LR, CastleTypePeer::BERGFRIED, CastleTypePeer::ZEUGHAUS, CastleTypePeer::TAVERNE, CastleTypePeer::BIBLIOTHEK, CastleTypePeer::WEHRANLAGE, CastleTypePeer::MARKT, CastleTypePeer::BAUERNHOF, CastleTypePeer::HOLZFAELLER, CastleTypePeer::HOLZLAGER, CastleTypePeer::STEINBRUCH, CastleTypePeer::STEINLAGER, CastleTypePeer::ERZMINE, CastleTypePeer::ERZLAGER, CastleTypePeer::LANGBOGEN, CastleTypePeer::DREIFELDERWIRTSCHAFT, CastleTypePeer::KUMMET, CastleTypePeer::VORRATSKELLER, CastleTypePeer::STEIGBUEGEL, CastleTypePeer::WAFFENSCHMIED, CastleTypePeer::RUESTUNGSSCHMIED, CastleTypePeer::BIERPRUEFER, CastleTypePeer::SCHWERTSCHMIED, CastleTypePeer::EISENHAERTUNG, CastleTypePeer::ARMBRUST, CastleTypePeer::GIFTPFEILE, CastleTypePeer::PFERDEZUCHT, CastleTypePeer::WAFFENHERSTELLUNG, CastleTypePeer::PFERDEPANZERUNG, CastleTypePeer::SCHUBKARREN, CastleTypePeer::BRANDPFEILE, CastleTypePeer::HUFSCHMIED, CastleTypePeer::UMGEBUNGSKARTE, CastleTypePeer::ZISTERNE, CastleTypePeer::MAX_POPULATION, CastleTypePeer::FREE_POPULATION, CastleTypePeer::CREATED_AT, CastleTypePeer::UPDATED_AT, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID', 'USER', 'TYPE', 'NAME', 'TOTAL_ST', 'TOTAL_AS', 'TOTAL_PR', 'TOTAL_SK', 'TOTAL_BS', 'TOTAL_LR', 'TOTAL_HK', 'TOTAL_OK', 'MISSION_ST', 'MISSION_AS', 'MISSION_PR', 'MISSION_SK', 'MISSION_BS', 'MISSION_LR', 'BERGFRIED', 'ZEUGHAUS', 'TAVERNE', 'BIBLIOTHEK', 'WEHRANLAGE', 'MARKT', 'BAUERNHOF', 'HOLZFAELLER', 'HOLZLAGER', 'STEINBRUCH', 'STEINLAGER', 'ERZMINE', 'ERZLAGER', 'LANGBOGEN', 'DREIFELDERWIRTSCHAFT', 'KUMMET', 'VORRATSKELLER', 'STEIGBUEGEL', 'WAFFENSCHMIED', 'RUESTUNGSSCHMIED', 'BIERPRUEFER', 'SCHWERTSCHMIED', 'EISENHAERTUNG', 'ARMBRUST', 'GIFTPFEILE', 'PFERDEZUCHT', 'WAFFENHERSTELLUNG', 'PFERDEPANZERUNG', 'SCHUBKARREN', 'BRANDPFEILE', 'HUFSCHMIED', 'UMGEBUNGSKARTE', 'ZISTERNE', 'MAX_POPULATION', 'FREE_POPULATION', 'CREATED_AT', 'UPDATED_AT', ),
-        BasePeer::TYPE_FIELDNAME => array ('id', 'user', 'type', 'name', 'total_st', 'total_as', 'total_pr', 'total_sk', 'total_bs', 'total_lr', 'total_hk', 'total_ok', 'mission_st', 'mission_as', 'mission_pr', 'mission_sk', 'mission_bs', 'mission_lr', 'bergfried', 'zeughaus', 'taverne', 'bibliothek', 'wehranlage', 'markt', 'bauernhof', 'holzfaeller', 'holzlager', 'steinbruch', 'steinlager', 'erzmine', 'erzlager', 'langbogen', 'dreifelderwirtschaft', 'kummet', 'vorratskeller', 'steigbuegel', 'waffenschmied', 'ruestungsschmied', 'bierpruefer', 'schwertschmied', 'eisenhaertung', 'armbrust', 'giftpfeile', 'pferdezucht', 'waffenherstellung', 'pferdepanzerung', 'schubkarren', 'brandpfeile', 'hufschmied', 'umgebungskarte', 'zisterne', 'max_population', 'free_population', 'created_at', 'updated_at', ),
+        BasePeer::TYPE_PHPNAME => array ('Id', 'UserId', 'Type', 'Name', 'TotalSt', 'TotalAs', 'TotalPr', 'TotalSk', 'TotalBs', 'TotalLr', 'TotalHk', 'TotalOk', 'MissionSt', 'MissionAs', 'MissionPr', 'MissionSk', 'MissionBs', 'MissionLr', 'Bergfried', 'Zeughaus', 'Taverne', 'Bibliothek', 'Wehranlage', 'Markt', 'Bauernhof', 'Holzfaeller', 'Holzlager', 'Steinbruch', 'Steinlager', 'Erzmine', 'Erzlager', 'Langbogen', 'Dreifelderwirtschaft', 'Kummet', 'Vorratskeller', 'Steigbuegel', 'Waffenschmied', 'Ruestungsschmied', 'Bierpruefer', 'Schwertschmied', 'Eisenhaertung', 'Armbrust', 'Giftpfeile', 'Pferdezucht', 'Waffenherstellung', 'Pferdepanzerung', 'Schubkarren', 'Brandpfeile', 'Hufschmied', 'Umgebungskarte', 'Zisterne', 'MaxPopulation', 'FreePopulation', 'CreatedAt', 'UpdatedAt', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'userId', 'type', 'name', 'totalSt', 'totalAs', 'totalPr', 'totalSk', 'totalBs', 'totalLr', 'totalHk', 'totalOk', 'missionSt', 'missionAs', 'missionPr', 'missionSk', 'missionBs', 'missionLr', 'bergfried', 'zeughaus', 'taverne', 'bibliothek', 'wehranlage', 'markt', 'bauernhof', 'holzfaeller', 'holzlager', 'steinbruch', 'steinlager', 'erzmine', 'erzlager', 'langbogen', 'dreifelderwirtschaft', 'kummet', 'vorratskeller', 'steigbuegel', 'waffenschmied', 'ruestungsschmied', 'bierpruefer', 'schwertschmied', 'eisenhaertung', 'armbrust', 'giftpfeile', 'pferdezucht', 'waffenherstellung', 'pferdepanzerung', 'schubkarren', 'brandpfeile', 'hufschmied', 'umgebungskarte', 'zisterne', 'maxPopulation', 'freePopulation', 'createdAt', 'updatedAt', ),
+        BasePeer::TYPE_COLNAME => array (CastleTypePeer::ID, CastleTypePeer::USER_ID, CastleTypePeer::TYPE, CastleTypePeer::NAME, CastleTypePeer::TOTAL_ST, CastleTypePeer::TOTAL_AS, CastleTypePeer::TOTAL_PR, CastleTypePeer::TOTAL_SK, CastleTypePeer::TOTAL_BS, CastleTypePeer::TOTAL_LR, CastleTypePeer::TOTAL_HK, CastleTypePeer::TOTAL_OK, CastleTypePeer::MISSION_ST, CastleTypePeer::MISSION_AS, CastleTypePeer::MISSION_PR, CastleTypePeer::MISSION_SK, CastleTypePeer::MISSION_BS, CastleTypePeer::MISSION_LR, CastleTypePeer::BERGFRIED, CastleTypePeer::ZEUGHAUS, CastleTypePeer::TAVERNE, CastleTypePeer::BIBLIOTHEK, CastleTypePeer::WEHRANLAGE, CastleTypePeer::MARKT, CastleTypePeer::BAUERNHOF, CastleTypePeer::HOLZFAELLER, CastleTypePeer::HOLZLAGER, CastleTypePeer::STEINBRUCH, CastleTypePeer::STEINLAGER, CastleTypePeer::ERZMINE, CastleTypePeer::ERZLAGER, CastleTypePeer::LANGBOGEN, CastleTypePeer::DREIFELDERWIRTSCHAFT, CastleTypePeer::KUMMET, CastleTypePeer::VORRATSKELLER, CastleTypePeer::STEIGBUEGEL, CastleTypePeer::WAFFENSCHMIED, CastleTypePeer::RUESTUNGSSCHMIED, CastleTypePeer::BIERPRUEFER, CastleTypePeer::SCHWERTSCHMIED, CastleTypePeer::EISENHAERTUNG, CastleTypePeer::ARMBRUST, CastleTypePeer::GIFTPFEILE, CastleTypePeer::PFERDEZUCHT, CastleTypePeer::WAFFENHERSTELLUNG, CastleTypePeer::PFERDEPANZERUNG, CastleTypePeer::SCHUBKARREN, CastleTypePeer::BRANDPFEILE, CastleTypePeer::HUFSCHMIED, CastleTypePeer::UMGEBUNGSKARTE, CastleTypePeer::ZISTERNE, CastleTypePeer::MAX_POPULATION, CastleTypePeer::FREE_POPULATION, CastleTypePeer::CREATED_AT, CastleTypePeer::UPDATED_AT, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID', 'USER_ID', 'TYPE', 'NAME', 'TOTAL_ST', 'TOTAL_AS', 'TOTAL_PR', 'TOTAL_SK', 'TOTAL_BS', 'TOTAL_LR', 'TOTAL_HK', 'TOTAL_OK', 'MISSION_ST', 'MISSION_AS', 'MISSION_PR', 'MISSION_SK', 'MISSION_BS', 'MISSION_LR', 'BERGFRIED', 'ZEUGHAUS', 'TAVERNE', 'BIBLIOTHEK', 'WEHRANLAGE', 'MARKT', 'BAUERNHOF', 'HOLZFAELLER', 'HOLZLAGER', 'STEINBRUCH', 'STEINLAGER', 'ERZMINE', 'ERZLAGER', 'LANGBOGEN', 'DREIFELDERWIRTSCHAFT', 'KUMMET', 'VORRATSKELLER', 'STEIGBUEGEL', 'WAFFENSCHMIED', 'RUESTUNGSSCHMIED', 'BIERPRUEFER', 'SCHWERTSCHMIED', 'EISENHAERTUNG', 'ARMBRUST', 'GIFTPFEILE', 'PFERDEZUCHT', 'WAFFENHERSTELLUNG', 'PFERDEPANZERUNG', 'SCHUBKARREN', 'BRANDPFEILE', 'HUFSCHMIED', 'UMGEBUNGSKARTE', 'ZISTERNE', 'MAX_POPULATION', 'FREE_POPULATION', 'CREATED_AT', 'UPDATED_AT', ),
+        BasePeer::TYPE_FIELDNAME => array ('id', 'user_id', 'type', 'name', 'total_st', 'total_as', 'total_pr', 'total_sk', 'total_bs', 'total_lr', 'total_hk', 'total_ok', 'mission_st', 'mission_as', 'mission_pr', 'mission_sk', 'mission_bs', 'mission_lr', 'bergfried', 'zeughaus', 'taverne', 'bibliothek', 'wehranlage', 'markt', 'bauernhof', 'holzfaeller', 'holzlager', 'steinbruch', 'steinlager', 'erzmine', 'erzlager', 'langbogen', 'dreifelderwirtschaft', 'kummet', 'vorratskeller', 'steigbuegel', 'waffenschmied', 'ruestungsschmied', 'bierpruefer', 'schwertschmied', 'eisenhaertung', 'armbrust', 'giftpfeile', 'pferdezucht', 'waffenherstellung', 'pferdepanzerung', 'schubkarren', 'brandpfeile', 'hufschmied', 'umgebungskarte', 'zisterne', 'max_population', 'free_population', 'created_at', 'updated_at', ),
         BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, )
     );
 
@@ -231,11 +231,11 @@ abstract class BaseCastleTypePeer
      * e.g. CastleTypePeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'User' => 1, 'Type' => 2, 'Name' => 3, 'TotalSt' => 4, 'TotalAs' => 5, 'TotalPr' => 6, 'TotalSk' => 7, 'TotalBs' => 8, 'TotalLr' => 9, 'TotalHk' => 10, 'TotalOk' => 11, 'MissionSt' => 12, 'MissionAs' => 13, 'MissionPr' => 14, 'MissionSk' => 15, 'MissionBs' => 16, 'MissionLr' => 17, 'Bergfried' => 18, 'Zeughaus' => 19, 'Taverne' => 20, 'Bibliothek' => 21, 'Wehranlage' => 22, 'Markt' => 23, 'Bauernhof' => 24, 'Holzfaeller' => 25, 'Holzlager' => 26, 'Steinbruch' => 27, 'Steinlager' => 28, 'Erzmine' => 29, 'Erzlager' => 30, 'Langbogen' => 31, 'Dreifelderwirtschaft' => 32, 'Kummet' => 33, 'Vorratskeller' => 34, 'Steigbuegel' => 35, 'Waffenschmied' => 36, 'Ruestungsschmied' => 37, 'Bierpruefer' => 38, 'Schwertschmied' => 39, 'Eisenhaertung' => 40, 'Armbrust' => 41, 'Giftpfeile' => 42, 'Pferdezucht' => 43, 'Waffenherstellung' => 44, 'Pferdepanzerung' => 45, 'Schubkarren' => 46, 'Brandpfeile' => 47, 'Hufschmied' => 48, 'Umgebungskarte' => 49, 'Zisterne' => 50, 'MaxPopulation' => 51, 'FreePopulation' => 52, 'CreatedAt' => 53, 'UpdatedAt' => 54, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'user' => 1, 'type' => 2, 'name' => 3, 'totalSt' => 4, 'totalAs' => 5, 'totalPr' => 6, 'totalSk' => 7, 'totalBs' => 8, 'totalLr' => 9, 'totalHk' => 10, 'totalOk' => 11, 'missionSt' => 12, 'missionAs' => 13, 'missionPr' => 14, 'missionSk' => 15, 'missionBs' => 16, 'missionLr' => 17, 'bergfried' => 18, 'zeughaus' => 19, 'taverne' => 20, 'bibliothek' => 21, 'wehranlage' => 22, 'markt' => 23, 'bauernhof' => 24, 'holzfaeller' => 25, 'holzlager' => 26, 'steinbruch' => 27, 'steinlager' => 28, 'erzmine' => 29, 'erzlager' => 30, 'langbogen' => 31, 'dreifelderwirtschaft' => 32, 'kummet' => 33, 'vorratskeller' => 34, 'steigbuegel' => 35, 'waffenschmied' => 36, 'ruestungsschmied' => 37, 'bierpruefer' => 38, 'schwertschmied' => 39, 'eisenhaertung' => 40, 'armbrust' => 41, 'giftpfeile' => 42, 'pferdezucht' => 43, 'waffenherstellung' => 44, 'pferdepanzerung' => 45, 'schubkarren' => 46, 'brandpfeile' => 47, 'hufschmied' => 48, 'umgebungskarte' => 49, 'zisterne' => 50, 'maxPopulation' => 51, 'freePopulation' => 52, 'createdAt' => 53, 'updatedAt' => 54, ),
-        BasePeer::TYPE_COLNAME => array (CastleTypePeer::ID => 0, CastleTypePeer::USER => 1, CastleTypePeer::TYPE => 2, CastleTypePeer::NAME => 3, CastleTypePeer::TOTAL_ST => 4, CastleTypePeer::TOTAL_AS => 5, CastleTypePeer::TOTAL_PR => 6, CastleTypePeer::TOTAL_SK => 7, CastleTypePeer::TOTAL_BS => 8, CastleTypePeer::TOTAL_LR => 9, CastleTypePeer::TOTAL_HK => 10, CastleTypePeer::TOTAL_OK => 11, CastleTypePeer::MISSION_ST => 12, CastleTypePeer::MISSION_AS => 13, CastleTypePeer::MISSION_PR => 14, CastleTypePeer::MISSION_SK => 15, CastleTypePeer::MISSION_BS => 16, CastleTypePeer::MISSION_LR => 17, CastleTypePeer::BERGFRIED => 18, CastleTypePeer::ZEUGHAUS => 19, CastleTypePeer::TAVERNE => 20, CastleTypePeer::BIBLIOTHEK => 21, CastleTypePeer::WEHRANLAGE => 22, CastleTypePeer::MARKT => 23, CastleTypePeer::BAUERNHOF => 24, CastleTypePeer::HOLZFAELLER => 25, CastleTypePeer::HOLZLAGER => 26, CastleTypePeer::STEINBRUCH => 27, CastleTypePeer::STEINLAGER => 28, CastleTypePeer::ERZMINE => 29, CastleTypePeer::ERZLAGER => 30, CastleTypePeer::LANGBOGEN => 31, CastleTypePeer::DREIFELDERWIRTSCHAFT => 32, CastleTypePeer::KUMMET => 33, CastleTypePeer::VORRATSKELLER => 34, CastleTypePeer::STEIGBUEGEL => 35, CastleTypePeer::WAFFENSCHMIED => 36, CastleTypePeer::RUESTUNGSSCHMIED => 37, CastleTypePeer::BIERPRUEFER => 38, CastleTypePeer::SCHWERTSCHMIED => 39, CastleTypePeer::EISENHAERTUNG => 40, CastleTypePeer::ARMBRUST => 41, CastleTypePeer::GIFTPFEILE => 42, CastleTypePeer::PFERDEZUCHT => 43, CastleTypePeer::WAFFENHERSTELLUNG => 44, CastleTypePeer::PFERDEPANZERUNG => 45, CastleTypePeer::SCHUBKARREN => 46, CastleTypePeer::BRANDPFEILE => 47, CastleTypePeer::HUFSCHMIED => 48, CastleTypePeer::UMGEBUNGSKARTE => 49, CastleTypePeer::ZISTERNE => 50, CastleTypePeer::MAX_POPULATION => 51, CastleTypePeer::FREE_POPULATION => 52, CastleTypePeer::CREATED_AT => 53, CastleTypePeer::UPDATED_AT => 54, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID' => 0, 'USER' => 1, 'TYPE' => 2, 'NAME' => 3, 'TOTAL_ST' => 4, 'TOTAL_AS' => 5, 'TOTAL_PR' => 6, 'TOTAL_SK' => 7, 'TOTAL_BS' => 8, 'TOTAL_LR' => 9, 'TOTAL_HK' => 10, 'TOTAL_OK' => 11, 'MISSION_ST' => 12, 'MISSION_AS' => 13, 'MISSION_PR' => 14, 'MISSION_SK' => 15, 'MISSION_BS' => 16, 'MISSION_LR' => 17, 'BERGFRIED' => 18, 'ZEUGHAUS' => 19, 'TAVERNE' => 20, 'BIBLIOTHEK' => 21, 'WEHRANLAGE' => 22, 'MARKT' => 23, 'BAUERNHOF' => 24, 'HOLZFAELLER' => 25, 'HOLZLAGER' => 26, 'STEINBRUCH' => 27, 'STEINLAGER' => 28, 'ERZMINE' => 29, 'ERZLAGER' => 30, 'LANGBOGEN' => 31, 'DREIFELDERWIRTSCHAFT' => 32, 'KUMMET' => 33, 'VORRATSKELLER' => 34, 'STEIGBUEGEL' => 35, 'WAFFENSCHMIED' => 36, 'RUESTUNGSSCHMIED' => 37, 'BIERPRUEFER' => 38, 'SCHWERTSCHMIED' => 39, 'EISENHAERTUNG' => 40, 'ARMBRUST' => 41, 'GIFTPFEILE' => 42, 'PFERDEZUCHT' => 43, 'WAFFENHERSTELLUNG' => 44, 'PFERDEPANZERUNG' => 45, 'SCHUBKARREN' => 46, 'BRANDPFEILE' => 47, 'HUFSCHMIED' => 48, 'UMGEBUNGSKARTE' => 49, 'ZISTERNE' => 50, 'MAX_POPULATION' => 51, 'FREE_POPULATION' => 52, 'CREATED_AT' => 53, 'UPDATED_AT' => 54, ),
-        BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'user' => 1, 'type' => 2, 'name' => 3, 'total_st' => 4, 'total_as' => 5, 'total_pr' => 6, 'total_sk' => 7, 'total_bs' => 8, 'total_lr' => 9, 'total_hk' => 10, 'total_ok' => 11, 'mission_st' => 12, 'mission_as' => 13, 'mission_pr' => 14, 'mission_sk' => 15, 'mission_bs' => 16, 'mission_lr' => 17, 'bergfried' => 18, 'zeughaus' => 19, 'taverne' => 20, 'bibliothek' => 21, 'wehranlage' => 22, 'markt' => 23, 'bauernhof' => 24, 'holzfaeller' => 25, 'holzlager' => 26, 'steinbruch' => 27, 'steinlager' => 28, 'erzmine' => 29, 'erzlager' => 30, 'langbogen' => 31, 'dreifelderwirtschaft' => 32, 'kummet' => 33, 'vorratskeller' => 34, 'steigbuegel' => 35, 'waffenschmied' => 36, 'ruestungsschmied' => 37, 'bierpruefer' => 38, 'schwertschmied' => 39, 'eisenhaertung' => 40, 'armbrust' => 41, 'giftpfeile' => 42, 'pferdezucht' => 43, 'waffenherstellung' => 44, 'pferdepanzerung' => 45, 'schubkarren' => 46, 'brandpfeile' => 47, 'hufschmied' => 48, 'umgebungskarte' => 49, 'zisterne' => 50, 'max_population' => 51, 'free_population' => 52, 'created_at' => 53, 'updated_at' => 54, ),
+        BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'UserId' => 1, 'Type' => 2, 'Name' => 3, 'TotalSt' => 4, 'TotalAs' => 5, 'TotalPr' => 6, 'TotalSk' => 7, 'TotalBs' => 8, 'TotalLr' => 9, 'TotalHk' => 10, 'TotalOk' => 11, 'MissionSt' => 12, 'MissionAs' => 13, 'MissionPr' => 14, 'MissionSk' => 15, 'MissionBs' => 16, 'MissionLr' => 17, 'Bergfried' => 18, 'Zeughaus' => 19, 'Taverne' => 20, 'Bibliothek' => 21, 'Wehranlage' => 22, 'Markt' => 23, 'Bauernhof' => 24, 'Holzfaeller' => 25, 'Holzlager' => 26, 'Steinbruch' => 27, 'Steinlager' => 28, 'Erzmine' => 29, 'Erzlager' => 30, 'Langbogen' => 31, 'Dreifelderwirtschaft' => 32, 'Kummet' => 33, 'Vorratskeller' => 34, 'Steigbuegel' => 35, 'Waffenschmied' => 36, 'Ruestungsschmied' => 37, 'Bierpruefer' => 38, 'Schwertschmied' => 39, 'Eisenhaertung' => 40, 'Armbrust' => 41, 'Giftpfeile' => 42, 'Pferdezucht' => 43, 'Waffenherstellung' => 44, 'Pferdepanzerung' => 45, 'Schubkarren' => 46, 'Brandpfeile' => 47, 'Hufschmied' => 48, 'Umgebungskarte' => 49, 'Zisterne' => 50, 'MaxPopulation' => 51, 'FreePopulation' => 52, 'CreatedAt' => 53, 'UpdatedAt' => 54, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'userId' => 1, 'type' => 2, 'name' => 3, 'totalSt' => 4, 'totalAs' => 5, 'totalPr' => 6, 'totalSk' => 7, 'totalBs' => 8, 'totalLr' => 9, 'totalHk' => 10, 'totalOk' => 11, 'missionSt' => 12, 'missionAs' => 13, 'missionPr' => 14, 'missionSk' => 15, 'missionBs' => 16, 'missionLr' => 17, 'bergfried' => 18, 'zeughaus' => 19, 'taverne' => 20, 'bibliothek' => 21, 'wehranlage' => 22, 'markt' => 23, 'bauernhof' => 24, 'holzfaeller' => 25, 'holzlager' => 26, 'steinbruch' => 27, 'steinlager' => 28, 'erzmine' => 29, 'erzlager' => 30, 'langbogen' => 31, 'dreifelderwirtschaft' => 32, 'kummet' => 33, 'vorratskeller' => 34, 'steigbuegel' => 35, 'waffenschmied' => 36, 'ruestungsschmied' => 37, 'bierpruefer' => 38, 'schwertschmied' => 39, 'eisenhaertung' => 40, 'armbrust' => 41, 'giftpfeile' => 42, 'pferdezucht' => 43, 'waffenherstellung' => 44, 'pferdepanzerung' => 45, 'schubkarren' => 46, 'brandpfeile' => 47, 'hufschmied' => 48, 'umgebungskarte' => 49, 'zisterne' => 50, 'maxPopulation' => 51, 'freePopulation' => 52, 'createdAt' => 53, 'updatedAt' => 54, ),
+        BasePeer::TYPE_COLNAME => array (CastleTypePeer::ID => 0, CastleTypePeer::USER_ID => 1, CastleTypePeer::TYPE => 2, CastleTypePeer::NAME => 3, CastleTypePeer::TOTAL_ST => 4, CastleTypePeer::TOTAL_AS => 5, CastleTypePeer::TOTAL_PR => 6, CastleTypePeer::TOTAL_SK => 7, CastleTypePeer::TOTAL_BS => 8, CastleTypePeer::TOTAL_LR => 9, CastleTypePeer::TOTAL_HK => 10, CastleTypePeer::TOTAL_OK => 11, CastleTypePeer::MISSION_ST => 12, CastleTypePeer::MISSION_AS => 13, CastleTypePeer::MISSION_PR => 14, CastleTypePeer::MISSION_SK => 15, CastleTypePeer::MISSION_BS => 16, CastleTypePeer::MISSION_LR => 17, CastleTypePeer::BERGFRIED => 18, CastleTypePeer::ZEUGHAUS => 19, CastleTypePeer::TAVERNE => 20, CastleTypePeer::BIBLIOTHEK => 21, CastleTypePeer::WEHRANLAGE => 22, CastleTypePeer::MARKT => 23, CastleTypePeer::BAUERNHOF => 24, CastleTypePeer::HOLZFAELLER => 25, CastleTypePeer::HOLZLAGER => 26, CastleTypePeer::STEINBRUCH => 27, CastleTypePeer::STEINLAGER => 28, CastleTypePeer::ERZMINE => 29, CastleTypePeer::ERZLAGER => 30, CastleTypePeer::LANGBOGEN => 31, CastleTypePeer::DREIFELDERWIRTSCHAFT => 32, CastleTypePeer::KUMMET => 33, CastleTypePeer::VORRATSKELLER => 34, CastleTypePeer::STEIGBUEGEL => 35, CastleTypePeer::WAFFENSCHMIED => 36, CastleTypePeer::RUESTUNGSSCHMIED => 37, CastleTypePeer::BIERPRUEFER => 38, CastleTypePeer::SCHWERTSCHMIED => 39, CastleTypePeer::EISENHAERTUNG => 40, CastleTypePeer::ARMBRUST => 41, CastleTypePeer::GIFTPFEILE => 42, CastleTypePeer::PFERDEZUCHT => 43, CastleTypePeer::WAFFENHERSTELLUNG => 44, CastleTypePeer::PFERDEPANZERUNG => 45, CastleTypePeer::SCHUBKARREN => 46, CastleTypePeer::BRANDPFEILE => 47, CastleTypePeer::HUFSCHMIED => 48, CastleTypePeer::UMGEBUNGSKARTE => 49, CastleTypePeer::ZISTERNE => 50, CastleTypePeer::MAX_POPULATION => 51, CastleTypePeer::FREE_POPULATION => 52, CastleTypePeer::CREATED_AT => 53, CastleTypePeer::UPDATED_AT => 54, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID' => 0, 'USER_ID' => 1, 'TYPE' => 2, 'NAME' => 3, 'TOTAL_ST' => 4, 'TOTAL_AS' => 5, 'TOTAL_PR' => 6, 'TOTAL_SK' => 7, 'TOTAL_BS' => 8, 'TOTAL_LR' => 9, 'TOTAL_HK' => 10, 'TOTAL_OK' => 11, 'MISSION_ST' => 12, 'MISSION_AS' => 13, 'MISSION_PR' => 14, 'MISSION_SK' => 15, 'MISSION_BS' => 16, 'MISSION_LR' => 17, 'BERGFRIED' => 18, 'ZEUGHAUS' => 19, 'TAVERNE' => 20, 'BIBLIOTHEK' => 21, 'WEHRANLAGE' => 22, 'MARKT' => 23, 'BAUERNHOF' => 24, 'HOLZFAELLER' => 25, 'HOLZLAGER' => 26, 'STEINBRUCH' => 27, 'STEINLAGER' => 28, 'ERZMINE' => 29, 'ERZLAGER' => 30, 'LANGBOGEN' => 31, 'DREIFELDERWIRTSCHAFT' => 32, 'KUMMET' => 33, 'VORRATSKELLER' => 34, 'STEIGBUEGEL' => 35, 'WAFFENSCHMIED' => 36, 'RUESTUNGSSCHMIED' => 37, 'BIERPRUEFER' => 38, 'SCHWERTSCHMIED' => 39, 'EISENHAERTUNG' => 40, 'ARMBRUST' => 41, 'GIFTPFEILE' => 42, 'PFERDEZUCHT' => 43, 'WAFFENHERSTELLUNG' => 44, 'PFERDEPANZERUNG' => 45, 'SCHUBKARREN' => 46, 'BRANDPFEILE' => 47, 'HUFSCHMIED' => 48, 'UMGEBUNGSKARTE' => 49, 'ZISTERNE' => 50, 'MAX_POPULATION' => 51, 'FREE_POPULATION' => 52, 'CREATED_AT' => 53, 'UPDATED_AT' => 54, ),
+        BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'user_id' => 1, 'type' => 2, 'name' => 3, 'total_st' => 4, 'total_as' => 5, 'total_pr' => 6, 'total_sk' => 7, 'total_bs' => 8, 'total_lr' => 9, 'total_hk' => 10, 'total_ok' => 11, 'mission_st' => 12, 'mission_as' => 13, 'mission_pr' => 14, 'mission_sk' => 15, 'mission_bs' => 16, 'mission_lr' => 17, 'bergfried' => 18, 'zeughaus' => 19, 'taverne' => 20, 'bibliothek' => 21, 'wehranlage' => 22, 'markt' => 23, 'bauernhof' => 24, 'holzfaeller' => 25, 'holzlager' => 26, 'steinbruch' => 27, 'steinlager' => 28, 'erzmine' => 29, 'erzlager' => 30, 'langbogen' => 31, 'dreifelderwirtschaft' => 32, 'kummet' => 33, 'vorratskeller' => 34, 'steigbuegel' => 35, 'waffenschmied' => 36, 'ruestungsschmied' => 37, 'bierpruefer' => 38, 'schwertschmied' => 39, 'eisenhaertung' => 40, 'armbrust' => 41, 'giftpfeile' => 42, 'pferdezucht' => 43, 'waffenherstellung' => 44, 'pferdepanzerung' => 45, 'schubkarren' => 46, 'brandpfeile' => 47, 'hufschmied' => 48, 'umgebungskarte' => 49, 'zisterne' => 50, 'max_population' => 51, 'free_population' => 52, 'created_at' => 53, 'updated_at' => 54, ),
         BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, )
     );
 
@@ -311,7 +311,7 @@ abstract class BaseCastleTypePeer
     {
         if (null === $alias) {
             $criteria->addSelectColumn(CastleTypePeer::ID);
-            $criteria->addSelectColumn(CastleTypePeer::USER);
+            $criteria->addSelectColumn(CastleTypePeer::USER_ID);
             $criteria->addSelectColumn(CastleTypePeer::TYPE);
             $criteria->addSelectColumn(CastleTypePeer::NAME);
             $criteria->addSelectColumn(CastleTypePeer::TOTAL_ST);
@@ -367,7 +367,7 @@ abstract class BaseCastleTypePeer
             $criteria->addSelectColumn(CastleTypePeer::UPDATED_AT);
         } else {
             $criteria->addSelectColumn($alias . '.id');
-            $criteria->addSelectColumn($alias . '.user');
+            $criteria->addSelectColumn($alias . '.user_id');
             $criteria->addSelectColumn($alias . '.type');
             $criteria->addSelectColumn($alias . '.name');
             $criteria->addSelectColumn($alias . '.total_st');
@@ -719,6 +719,244 @@ abstract class BaseCastleTypePeer
         }
 
         return array($obj, $col);
+    }
+
+
+    /**
+     * Returns the number of rows matching criteria, joining the related User table
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return int Number of matching rows.
+     */
+    public static function doCountJoinUser(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        // we're going to modify criteria, so copy it first
+        $criteria = clone $criteria;
+
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(CastleTypePeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
+        }
+
+        if (!$criteria->hasSelectClause()) {
+            CastleTypePeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
+
+        // Set the correct dbName
+        $criteria->setDbName(CastleTypePeer::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(CastleTypePeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+
+        $criteria->addJoin(CastleTypePeer::USER_ID, UserPeer::ID, $join_behavior);
+
+        $stmt = BasePeer::doCount($criteria, $con);
+
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
+        }
+        $stmt->closeCursor();
+
+        return $count;
+    }
+
+
+    /**
+     * Selects a collection of CastleType objects pre-filled with their User objects.
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of CastleType objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinUser(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(CastleTypePeer::DATABASE_NAME);
+        }
+
+        CastleTypePeer::addSelectColumns($criteria);
+        $startcol = CastleTypePeer::NUM_HYDRATE_COLUMNS;
+        UserPeer::addSelectColumns($criteria);
+
+        $criteria->addJoin(CastleTypePeer::USER_ID, UserPeer::ID, $join_behavior);
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = CastleTypePeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = CastleTypePeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+
+                $cls = CastleTypePeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                CastleTypePeer::addInstanceToPool($obj1, $key1);
+            } // if $obj1 already loaded
+
+            $key2 = UserPeer::getPrimaryKeyHashFromRow($row, $startcol);
+            if ($key2 !== null) {
+                $obj2 = UserPeer::getInstanceFromPool($key2);
+                if (!$obj2) {
+
+                    $cls = UserPeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol);
+                    UserPeer::addInstanceToPool($obj2, $key2);
+                } // if obj2 already loaded
+
+                // Add the $obj1 (CastleType) to $obj2 (User)
+                $obj2->addCastleType($obj1);
+
+            } // if joined row was not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
+    }
+
+
+    /**
+     * Returns the number of rows matching criteria, joining all related tables
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return int Number of matching rows.
+     */
+    public static function doCountJoinAll(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        // we're going to modify criteria, so copy it first
+        $criteria = clone $criteria;
+
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(CastleTypePeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
+        }
+
+        if (!$criteria->hasSelectClause()) {
+            CastleTypePeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
+
+        // Set the correct dbName
+        $criteria->setDbName(CastleTypePeer::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(CastleTypePeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+
+        $criteria->addJoin(CastleTypePeer::USER_ID, UserPeer::ID, $join_behavior);
+
+        $stmt = BasePeer::doCount($criteria, $con);
+
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
+        }
+        $stmt->closeCursor();
+
+        return $count;
+    }
+
+    /**
+     * Selects a collection of CastleType objects pre-filled with all related objects.
+     *
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of CastleType objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinAll(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(CastleTypePeer::DATABASE_NAME);
+        }
+
+        CastleTypePeer::addSelectColumns($criteria);
+        $startcol2 = CastleTypePeer::NUM_HYDRATE_COLUMNS;
+
+        UserPeer::addSelectColumns($criteria);
+        $startcol3 = $startcol2 + UserPeer::NUM_HYDRATE_COLUMNS;
+
+        $criteria->addJoin(CastleTypePeer::USER_ID, UserPeer::ID, $join_behavior);
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = CastleTypePeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = CastleTypePeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+                $cls = CastleTypePeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                CastleTypePeer::addInstanceToPool($obj1, $key1);
+            } // if obj1 already loaded
+
+            // Add objects for joined User rows
+
+            $key2 = UserPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+            if ($key2 !== null) {
+                $obj2 = UserPeer::getInstanceFromPool($key2);
+                if (!$obj2) {
+
+                    $cls = UserPeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol2);
+                    UserPeer::addInstanceToPool($obj2, $key2);
+                } // if obj2 loaded
+
+                // Add the $obj1 (CastleType) to the collection in $obj2 (User)
+                $obj2->addCastleType($obj1);
+            } // if joined row not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
     }
 
     /**

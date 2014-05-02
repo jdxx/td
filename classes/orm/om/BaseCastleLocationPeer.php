@@ -35,8 +35,8 @@ abstract class BaseCastleLocationPeer
     /** the column name for the id field */
     const ID = 'castle_location.id';
 
-    /** the column name for the user field */
-    const USER = 'castle_location.user';
+    /** the column name for the user_id field */
+    const USER_ID = 'castle_location.user_id';
 
     /** the column name for the name field */
     const NAME = 'castle_location.name';
@@ -89,17 +89,22 @@ abstract class BaseCastleLocationPeer
     const LEVEL_COL = 'castle_location.tree_level';
 
     /**
+     * Scope column for the set
+     */
+    const SCOPE_COL = 'castle_location.user_id';
+
+    /**
      * holds an array of fieldnames
      *
      * first dimension keys are the type constants
      * e.g. CastleLocationPeer::$fieldNames[CastleLocationPeer::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('Id', 'User', 'Name', 'ParentId', 'CreatedAt', 'UpdatedAt', 'TreeLeft', 'TreeRight', 'TreeLevel', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'user', 'name', 'parentId', 'createdAt', 'updatedAt', 'treeLeft', 'treeRight', 'treeLevel', ),
-        BasePeer::TYPE_COLNAME => array (CastleLocationPeer::ID, CastleLocationPeer::USER, CastleLocationPeer::NAME, CastleLocationPeer::PARENT_ID, CastleLocationPeer::CREATED_AT, CastleLocationPeer::UPDATED_AT, CastleLocationPeer::TREE_LEFT, CastleLocationPeer::TREE_RIGHT, CastleLocationPeer::TREE_LEVEL, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID', 'USER', 'NAME', 'PARENT_ID', 'CREATED_AT', 'UPDATED_AT', 'TREE_LEFT', 'TREE_RIGHT', 'TREE_LEVEL', ),
-        BasePeer::TYPE_FIELDNAME => array ('id', 'user', 'name', 'parent_id', 'created_at', 'updated_at', 'tree_left', 'tree_right', 'tree_level', ),
+        BasePeer::TYPE_PHPNAME => array ('Id', 'UserId', 'Name', 'ParentId', 'CreatedAt', 'UpdatedAt', 'TreeLeft', 'TreeRight', 'TreeLevel', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'userId', 'name', 'parentId', 'createdAt', 'updatedAt', 'treeLeft', 'treeRight', 'treeLevel', ),
+        BasePeer::TYPE_COLNAME => array (CastleLocationPeer::ID, CastleLocationPeer::USER_ID, CastleLocationPeer::NAME, CastleLocationPeer::PARENT_ID, CastleLocationPeer::CREATED_AT, CastleLocationPeer::UPDATED_AT, CastleLocationPeer::TREE_LEFT, CastleLocationPeer::TREE_RIGHT, CastleLocationPeer::TREE_LEVEL, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID', 'USER_ID', 'NAME', 'PARENT_ID', 'CREATED_AT', 'UPDATED_AT', 'TREE_LEFT', 'TREE_RIGHT', 'TREE_LEVEL', ),
+        BasePeer::TYPE_FIELDNAME => array ('id', 'user_id', 'name', 'parent_id', 'created_at', 'updated_at', 'tree_left', 'tree_right', 'tree_level', ),
         BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
     );
 
@@ -110,11 +115,11 @@ abstract class BaseCastleLocationPeer
      * e.g. CastleLocationPeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'User' => 1, 'Name' => 2, 'ParentId' => 3, 'CreatedAt' => 4, 'UpdatedAt' => 5, 'TreeLeft' => 6, 'TreeRight' => 7, 'TreeLevel' => 8, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'user' => 1, 'name' => 2, 'parentId' => 3, 'createdAt' => 4, 'updatedAt' => 5, 'treeLeft' => 6, 'treeRight' => 7, 'treeLevel' => 8, ),
-        BasePeer::TYPE_COLNAME => array (CastleLocationPeer::ID => 0, CastleLocationPeer::USER => 1, CastleLocationPeer::NAME => 2, CastleLocationPeer::PARENT_ID => 3, CastleLocationPeer::CREATED_AT => 4, CastleLocationPeer::UPDATED_AT => 5, CastleLocationPeer::TREE_LEFT => 6, CastleLocationPeer::TREE_RIGHT => 7, CastleLocationPeer::TREE_LEVEL => 8, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID' => 0, 'USER' => 1, 'NAME' => 2, 'PARENT_ID' => 3, 'CREATED_AT' => 4, 'UPDATED_AT' => 5, 'TREE_LEFT' => 6, 'TREE_RIGHT' => 7, 'TREE_LEVEL' => 8, ),
-        BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'user' => 1, 'name' => 2, 'parent_id' => 3, 'created_at' => 4, 'updated_at' => 5, 'tree_left' => 6, 'tree_right' => 7, 'tree_level' => 8, ),
+        BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'UserId' => 1, 'Name' => 2, 'ParentId' => 3, 'CreatedAt' => 4, 'UpdatedAt' => 5, 'TreeLeft' => 6, 'TreeRight' => 7, 'TreeLevel' => 8, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'userId' => 1, 'name' => 2, 'parentId' => 3, 'createdAt' => 4, 'updatedAt' => 5, 'treeLeft' => 6, 'treeRight' => 7, 'treeLevel' => 8, ),
+        BasePeer::TYPE_COLNAME => array (CastleLocationPeer::ID => 0, CastleLocationPeer::USER_ID => 1, CastleLocationPeer::NAME => 2, CastleLocationPeer::PARENT_ID => 3, CastleLocationPeer::CREATED_AT => 4, CastleLocationPeer::UPDATED_AT => 5, CastleLocationPeer::TREE_LEFT => 6, CastleLocationPeer::TREE_RIGHT => 7, CastleLocationPeer::TREE_LEVEL => 8, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID' => 0, 'USER_ID' => 1, 'NAME' => 2, 'PARENT_ID' => 3, 'CREATED_AT' => 4, 'UPDATED_AT' => 5, 'TREE_LEFT' => 6, 'TREE_RIGHT' => 7, 'TREE_LEVEL' => 8, ),
+        BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'user_id' => 1, 'name' => 2, 'parent_id' => 3, 'created_at' => 4, 'updated_at' => 5, 'tree_left' => 6, 'tree_right' => 7, 'tree_level' => 8, ),
         BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
     );
 
@@ -190,7 +195,7 @@ abstract class BaseCastleLocationPeer
     {
         if (null === $alias) {
             $criteria->addSelectColumn(CastleLocationPeer::ID);
-            $criteria->addSelectColumn(CastleLocationPeer::USER);
+            $criteria->addSelectColumn(CastleLocationPeer::USER_ID);
             $criteria->addSelectColumn(CastleLocationPeer::NAME);
             $criteria->addSelectColumn(CastleLocationPeer::PARENT_ID);
             $criteria->addSelectColumn(CastleLocationPeer::CREATED_AT);
@@ -200,7 +205,7 @@ abstract class BaseCastleLocationPeer
             $criteria->addSelectColumn(CastleLocationPeer::TREE_LEVEL);
         } else {
             $criteria->addSelectColumn($alias . '.id');
-            $criteria->addSelectColumn($alias . '.user');
+            $criteria->addSelectColumn($alias . '.user_id');
             $criteria->addSelectColumn($alias . '.name');
             $criteria->addSelectColumn($alias . '.parent_id');
             $criteria->addSelectColumn($alias . '.created_at');
@@ -508,6 +513,244 @@ abstract class BaseCastleLocationPeer
         return array($obj, $col);
     }
 
+
+    /**
+     * Returns the number of rows matching criteria, joining the related User table
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return int Number of matching rows.
+     */
+    public static function doCountJoinUser(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        // we're going to modify criteria, so copy it first
+        $criteria = clone $criteria;
+
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(CastleLocationPeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
+        }
+
+        if (!$criteria->hasSelectClause()) {
+            CastleLocationPeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
+
+        // Set the correct dbName
+        $criteria->setDbName(CastleLocationPeer::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(CastleLocationPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+
+        $criteria->addJoin(CastleLocationPeer::USER_ID, UserPeer::ID, $join_behavior);
+
+        $stmt = BasePeer::doCount($criteria, $con);
+
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
+        }
+        $stmt->closeCursor();
+
+        return $count;
+    }
+
+
+    /**
+     * Selects a collection of CastleLocation objects pre-filled with their User objects.
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of CastleLocation objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinUser(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(CastleLocationPeer::DATABASE_NAME);
+        }
+
+        CastleLocationPeer::addSelectColumns($criteria);
+        $startcol = CastleLocationPeer::NUM_HYDRATE_COLUMNS;
+        UserPeer::addSelectColumns($criteria);
+
+        $criteria->addJoin(CastleLocationPeer::USER_ID, UserPeer::ID, $join_behavior);
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = CastleLocationPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = CastleLocationPeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+
+                $cls = CastleLocationPeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                CastleLocationPeer::addInstanceToPool($obj1, $key1);
+            } // if $obj1 already loaded
+
+            $key2 = UserPeer::getPrimaryKeyHashFromRow($row, $startcol);
+            if ($key2 !== null) {
+                $obj2 = UserPeer::getInstanceFromPool($key2);
+                if (!$obj2) {
+
+                    $cls = UserPeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol);
+                    UserPeer::addInstanceToPool($obj2, $key2);
+                } // if obj2 already loaded
+
+                // Add the $obj1 (CastleLocation) to $obj2 (User)
+                $obj2->addCastleLocation($obj1);
+
+            } // if joined row was not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
+    }
+
+
+    /**
+     * Returns the number of rows matching criteria, joining all related tables
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return int Number of matching rows.
+     */
+    public static function doCountJoinAll(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        // we're going to modify criteria, so copy it first
+        $criteria = clone $criteria;
+
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(CastleLocationPeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
+        }
+
+        if (!$criteria->hasSelectClause()) {
+            CastleLocationPeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
+
+        // Set the correct dbName
+        $criteria->setDbName(CastleLocationPeer::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(CastleLocationPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+
+        $criteria->addJoin(CastleLocationPeer::USER_ID, UserPeer::ID, $join_behavior);
+
+        $stmt = BasePeer::doCount($criteria, $con);
+
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
+        }
+        $stmt->closeCursor();
+
+        return $count;
+    }
+
+    /**
+     * Selects a collection of CastleLocation objects pre-filled with all related objects.
+     *
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of CastleLocation objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinAll(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(CastleLocationPeer::DATABASE_NAME);
+        }
+
+        CastleLocationPeer::addSelectColumns($criteria);
+        $startcol2 = CastleLocationPeer::NUM_HYDRATE_COLUMNS;
+
+        UserPeer::addSelectColumns($criteria);
+        $startcol3 = $startcol2 + UserPeer::NUM_HYDRATE_COLUMNS;
+
+        $criteria->addJoin(CastleLocationPeer::USER_ID, UserPeer::ID, $join_behavior);
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = CastleLocationPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = CastleLocationPeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+                $cls = CastleLocationPeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                CastleLocationPeer::addInstanceToPool($obj1, $key1);
+            } // if obj1 already loaded
+
+            // Add objects for joined User rows
+
+            $key2 = UserPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+            if ($key2 !== null) {
+                $obj2 = UserPeer::getInstanceFromPool($key2);
+                if (!$obj2) {
+
+                    $cls = UserPeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol2);
+                    UserPeer::addInstanceToPool($obj2, $key2);
+                } // if obj2 loaded
+
+                // Add the $obj1 (CastleLocation) to the collection in $obj2 (User)
+                $obj2->addCastleLocation($obj1);
+            } // if joined row not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
+    }
+
     /**
      * Returns the TableMap related to this peer.
      * This method is not needed for general use but a specific application could have a need.
@@ -808,15 +1051,33 @@ abstract class BaseCastleLocationPeer
     // nested_set behavior
 
     /**
-     * Returns the root node for a given scope
+     * Returns the root nodes for the tree
      *
      * @param      PropelPDO $con	Connection to use.
      * @return     CastleLocation			Propel object for root node
      */
-    public static function retrieveRoot(PropelPDO $con = null)
+    public static function retrieveRoots(Criteria $criteria = null, PropelPDO $con = null)
+    {
+        if ($criteria === null) {
+            $criteria = new Criteria(CastleLocationPeer::DATABASE_NAME);
+        }
+        $criteria->add(CastleLocationPeer::LEFT_COL, 1, Criteria::EQUAL);
+
+        return CastleLocationPeer::doSelect($criteria, $con);
+    }
+
+    /**
+     * Returns the root node for a given scope
+     *
+     * @param      int $scope		Scope to determine which root node to return
+     * @param      PropelPDO $con	Connection to use.
+     * @return     CastleLocation			Propel object for root node
+     */
+    public static function retrieveRoot($scope = null, PropelPDO $con = null)
     {
         $c = new Criteria(CastleLocationPeer::DATABASE_NAME);
         $c->add(CastleLocationPeer::LEFT_COL, 1, Criteria::EQUAL);
+        $c->add(CastleLocationPeer::SCOPE_COL, $scope, Criteria::EQUAL);
 
         return CastleLocationPeer::doSelectOne($c, $con);
     }
@@ -824,16 +1085,18 @@ abstract class BaseCastleLocationPeer
     /**
      * Returns the whole tree node for a given scope
      *
+     * @param      int $scope		Scope to determine which root node to return
      * @param      Criteria $criteria	Optional Criteria to filter the query
      * @param      PropelPDO $con	Connection to use.
      * @return     CastleLocation			Propel object for root node
      */
-    public static function retrieveTree(Criteria $criteria = null, PropelPDO $con = null)
+    public static function retrieveTree($scope = null, Criteria $criteria = null, PropelPDO $con = null)
     {
         if ($criteria === null) {
             $criteria = new Criteria(CastleLocationPeer::DATABASE_NAME);
         }
         $criteria->addAscendingOrderByColumn(CastleLocationPeer::LEFT_COL);
+        $criteria->add(CastleLocationPeer::SCOPE_COL, $scope, Criteria::EQUAL);
 
         return CastleLocationPeer::doSelect($criteria, $con);
     }
@@ -856,14 +1119,17 @@ abstract class BaseCastleLocationPeer
     /**
      * Delete an entire tree
      *
+     * @param      int $scope		Scope to determine which tree to delete
      * @param      PropelPDO $con	Connection to use.
      *
      * @return     int  The number of deleted nodes
      */
-    public static function deleteTree(PropelPDO $con = null)
+    public static function deleteTree($scope = null, PropelPDO $con = null)
     {
+        $c = new Criteria(CastleLocationPeer::DATABASE_NAME);
+        $c->add(CastleLocationPeer::SCOPE_COL, $scope, Criteria::EQUAL);
 
-        return CastleLocationPeer::doDeleteAll($con);
+        return CastleLocationPeer::doDelete($c, $con);
     }
 
     /**
@@ -873,9 +1139,10 @@ abstract class BaseCastleLocationPeer
      * @param      int $delta		Value to be shifted by, can be negative
      * @param      int $first		First node to be shifted
      * @param      int $last			Last node to be shifted (optional)
+     * @param      int $scope		Scope to use for the shift
      * @param      PropelPDO $con		Connection to use.
      */
-    public static function shiftRLValues($delta, $first, $last = null, PropelPDO $con = null)
+    public static function shiftRLValues($delta, $first, $last = null, $scope = null, PropelPDO $con = null)
     {
         if ($con === null) {
             $con = Propel::getConnection(CastleLocationPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
@@ -888,6 +1155,7 @@ abstract class BaseCastleLocationPeer
             $criterion->addAnd($whereCriteria->getNewCriterion(CastleLocationPeer::LEFT_COL, $last, Criteria::LESS_EQUAL));
         }
         $whereCriteria->add($criterion);
+        $whereCriteria->add(CastleLocationPeer::SCOPE_COL, $scope, Criteria::EQUAL);
 
         $valuesCriteria = new Criteria(CastleLocationPeer::DATABASE_NAME);
         $valuesCriteria->add(CastleLocationPeer::LEFT_COL, array('raw' => CastleLocationPeer::LEFT_COL . ' + ?', 'value' => $delta), Criteria::CUSTOM_EQUAL);
@@ -901,6 +1169,7 @@ abstract class BaseCastleLocationPeer
             $criterion->addAnd($whereCriteria->getNewCriterion(CastleLocationPeer::RIGHT_COL, $last, Criteria::LESS_EQUAL));
         }
         $whereCriteria->add($criterion);
+        $whereCriteria->add(CastleLocationPeer::SCOPE_COL, $scope, Criteria::EQUAL);
 
         $valuesCriteria = new Criteria(CastleLocationPeer::DATABASE_NAME);
         $valuesCriteria->add(CastleLocationPeer::RIGHT_COL, array('raw' => CastleLocationPeer::RIGHT_COL . ' + ?', 'value' => $delta), Criteria::CUSTOM_EQUAL);
@@ -915,9 +1184,10 @@ abstract class BaseCastleLocationPeer
      * @param      int $delta		Value to be shifted by, can be negative
      * @param      int $first		First node to be shifted
      * @param      int $last			Last node to be shifted
+     * @param      int $scope		Scope to use for the shift
      * @param      PropelPDO $con		Connection to use.
      */
-    public static function shiftLevel($delta, $first, $last, PropelPDO $con = null)
+    public static function shiftLevel($delta, $first, $last, $scope = null, PropelPDO $con = null)
     {
         if ($con === null) {
             $con = Propel::getConnection(CastleLocationPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
@@ -926,6 +1196,7 @@ abstract class BaseCastleLocationPeer
         $whereCriteria = new Criteria(CastleLocationPeer::DATABASE_NAME);
         $whereCriteria->add(CastleLocationPeer::LEFT_COL, $first, Criteria::GREATER_EQUAL);
         $whereCriteria->add(CastleLocationPeer::RIGHT_COL, $last, Criteria::LESS_EQUAL);
+        $whereCriteria->add(CastleLocationPeer::SCOPE_COL, $scope, Criteria::EQUAL);
 
         $valuesCriteria = new Criteria(CastleLocationPeer::DATABASE_NAME);
         $valuesCriteria->add(CastleLocationPeer::LEVEL_COL, array('raw' => CastleLocationPeer::LEVEL_COL . ' + ?', 'value' => $delta), Criteria::CUSTOM_EQUAL);
@@ -958,6 +1229,7 @@ abstract class BaseCastleLocationPeer
                 while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
                     $key = CastleLocationPeer::getPrimaryKeyHashFromRow($row, 0);
                     if (null !== ($object = CastleLocationPeer::getInstanceFromPool($key))) {
+                        $object->setScopeValue($row[1]);
                         $object->setLeftValue($row[6]);
                         $object->setRightValue($row[7]);
                         $object->setLevel($row[8]);
@@ -973,13 +1245,14 @@ abstract class BaseCastleLocationPeer
      * Update the tree to allow insertion of a leaf at the specified position
      *
      * @param      int $left	left column value
+     * @param      integer $scope	scope column value
      * @param      mixed $prune	Object to prune from the shift
      * @param      PropelPDO $con	Connection to use.
      */
-    public static function makeRoomForLeaf($left, $prune = null, PropelPDO $con = null)
+    public static function makeRoomForLeaf($left, $scope, $prune = null, PropelPDO $con = null)
     {
         // Update database nodes
-        CastleLocationPeer::shiftRLValues(2, $left, null, $con);
+        CastleLocationPeer::shiftRLValues(2, $left, null, $scope, $con);
 
         // Update all loaded nodes
         CastleLocationPeer::updateLoadedNodes($prune, $con);
@@ -988,11 +1261,13 @@ abstract class BaseCastleLocationPeer
     /**
      * Update the tree to allow insertion of a leaf at the specified position
      *
+     * @param      integer $scope	scope column value
      * @param      PropelPDO $con	Connection to use.
      */
-    public static function fixLevels(PropelPDO $con = null)
+    public static function fixLevels($scope, PropelPDO $con = null)
     {
         $c = new Criteria();
+        $c->add(CastleLocationPeer::SCOPE_COL, $scope, Criteria::EQUAL);
         $c->addAscendingOrderByColumn(CastleLocationPeer::LEFT_COL);
         $stmt = CastleLocationPeer::doSelectStmt($c, $con);
 

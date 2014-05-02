@@ -30,6 +30,12 @@ abstract class BaseCastle2Attack extends BaseObject implements Persistent
     protected $startCopy = false;
 
     /**
+     * The value for the id field.
+     * @var        int
+     */
+    protected $id;
+
+    /**
      * The value for the castle_id field.
      * @var        int
      */
@@ -40,6 +46,17 @@ abstract class BaseCastle2Attack extends BaseObject implements Persistent
      * @var        int
      */
     protected $attack_id;
+
+    /**
+     * The value for the user_id field.
+     * @var        int
+     */
+    protected $user_id;
+
+    /**
+     * @var        User
+     */
+    protected $aUser;
 
     /**
      * @var        Attack
@@ -72,6 +89,17 @@ abstract class BaseCastle2Attack extends BaseObject implements Persistent
     protected $alreadyInClearAllReferencesDeep = false;
 
     /**
+     * Get the [id] column value.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+
+        return $this->id;
+    }
+
+    /**
      * Get the [castle_id] column value.
      *
      * @return int
@@ -92,6 +120,38 @@ abstract class BaseCastle2Attack extends BaseObject implements Persistent
 
         return $this->attack_id;
     }
+
+    /**
+     * Get the [user_id] column value.
+     *
+     * @return int
+     */
+    public function getUserId()
+    {
+
+        return $this->user_id;
+    }
+
+    /**
+     * Set the value of [id] column.
+     *
+     * @param  int $v new value
+     * @return Castle2Attack The current object (for fluent API support)
+     */
+    public function setId($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (int) $v;
+        }
+
+        if ($this->id !== $v) {
+            $this->id = $v;
+            $this->modifiedColumns[] = Castle2AttackPeer::ID;
+        }
+
+
+        return $this;
+    } // setId()
 
     /**
      * Set the value of [castle_id] column.
@@ -144,6 +204,31 @@ abstract class BaseCastle2Attack extends BaseObject implements Persistent
     } // setAttackId()
 
     /**
+     * Set the value of [user_id] column.
+     *
+     * @param  int $v new value
+     * @return Castle2Attack The current object (for fluent API support)
+     */
+    public function setUserId($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (int) $v;
+        }
+
+        if ($this->user_id !== $v) {
+            $this->user_id = $v;
+            $this->modifiedColumns[] = Castle2AttackPeer::USER_ID;
+        }
+
+        if ($this->aUser !== null && $this->aUser->getId() !== $v) {
+            $this->aUser = null;
+        }
+
+
+        return $this;
+    } // setUserId()
+
+    /**
      * Indicates whether the columns in this object are only set to default values.
      *
      * This method can be used in conjunction with isModified() to indicate whether an object is both
@@ -175,8 +260,10 @@ abstract class BaseCastle2Attack extends BaseObject implements Persistent
     {
         try {
 
-            $this->castle_id = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
-            $this->attack_id = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
+            $this->id = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
+            $this->castle_id = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
+            $this->attack_id = ($row[$startcol + 2] !== null) ? (int) $row[$startcol + 2] : null;
+            $this->user_id = ($row[$startcol + 3] !== null) ? (int) $row[$startcol + 3] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -186,7 +273,7 @@ abstract class BaseCastle2Attack extends BaseObject implements Persistent
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 2; // 2 = Castle2AttackPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 4; // 4 = Castle2AttackPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating Castle2Attack object", $e);
@@ -214,6 +301,9 @@ abstract class BaseCastle2Attack extends BaseObject implements Persistent
         }
         if ($this->aAttack !== null && $this->attack_id !== $this->aAttack->getId()) {
             $this->aAttack = null;
+        }
+        if ($this->aUser !== null && $this->user_id !== $this->aUser->getId()) {
+            $this->aUser = null;
         }
     } // ensureConsistency
 
@@ -254,6 +344,7 @@ abstract class BaseCastle2Attack extends BaseObject implements Persistent
 
         if ($deep) {  // also de-associate any related objects?
 
+            $this->aUser = null;
             $this->aAttack = null;
             $this->aCastle = null;
         } // if (deep)
@@ -374,6 +465,13 @@ abstract class BaseCastle2Attack extends BaseObject implements Persistent
             // method.  This object relates to these object(s) by a
             // foreign key reference.
 
+            if ($this->aUser !== null) {
+                if ($this->aUser->isModified() || $this->aUser->isNew()) {
+                    $affectedRows += $this->aUser->save($con);
+                }
+                $this->setUser($this->aUser);
+            }
+
             if ($this->aAttack !== null) {
                 if ($this->aAttack->isModified() || $this->aAttack->isNew()) {
                     $affectedRows += $this->aAttack->save($con);
@@ -419,13 +517,23 @@ abstract class BaseCastle2Attack extends BaseObject implements Persistent
         $modifiedColumns = array();
         $index = 0;
 
+        $this->modifiedColumns[] = Castle2AttackPeer::ID;
+        if (null !== $this->id) {
+            throw new PropelException('Cannot insert a value for auto-increment primary key (' . Castle2AttackPeer::ID . ')');
+        }
 
          // check the columns in natural order for more readable SQL queries
+        if ($this->isColumnModified(Castle2AttackPeer::ID)) {
+            $modifiedColumns[':p' . $index++]  = '`id`';
+        }
         if ($this->isColumnModified(Castle2AttackPeer::CASTLE_ID)) {
             $modifiedColumns[':p' . $index++]  = '`castle_id`';
         }
         if ($this->isColumnModified(Castle2AttackPeer::ATTACK_ID)) {
             $modifiedColumns[':p' . $index++]  = '`attack_id`';
+        }
+        if ($this->isColumnModified(Castle2AttackPeer::USER_ID)) {
+            $modifiedColumns[':p' . $index++]  = '`user_id`';
         }
 
         $sql = sprintf(
@@ -438,11 +546,17 @@ abstract class BaseCastle2Attack extends BaseObject implements Persistent
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
+                    case '`id`':
+                        $stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
+                        break;
                     case '`castle_id`':
                         $stmt->bindValue($identifier, $this->castle_id, PDO::PARAM_INT);
                         break;
                     case '`attack_id`':
                         $stmt->bindValue($identifier, $this->attack_id, PDO::PARAM_INT);
+                        break;
+                    case '`user_id`':
+                        $stmt->bindValue($identifier, $this->user_id, PDO::PARAM_INT);
                         break;
                 }
             }
@@ -451,6 +565,13 @@ abstract class BaseCastle2Attack extends BaseObject implements Persistent
             Propel::log($e->getMessage(), Propel::LOG_ERR);
             throw new PropelException(sprintf('Unable to execute INSERT statement [%s]', $sql), $e);
         }
+
+        try {
+            $pk = $con->lastInsertId();
+        } catch (Exception $e) {
+            throw new PropelException('Unable to get autoincrement id.', $e);
+        }
+        $this->setId($pk);
 
         $this->setNew(false);
     }
@@ -536,6 +657,12 @@ abstract class BaseCastle2Attack extends BaseObject implements Persistent
             // method.  This object relates to these object(s) by a
             // foreign key reference.
 
+            if ($this->aUser !== null) {
+                if (!$this->aUser->validate($columns)) {
+                    $failureMap = array_merge($failureMap, $this->aUser->getValidationFailures());
+                }
+            }
+
             if ($this->aAttack !== null) {
                 if (!$this->aAttack->validate($columns)) {
                     $failureMap = array_merge($failureMap, $this->aAttack->getValidationFailures());
@@ -590,10 +717,16 @@ abstract class BaseCastle2Attack extends BaseObject implements Persistent
     {
         switch ($pos) {
             case 0:
-                return $this->getCastleId();
+                return $this->getId();
                 break;
             case 1:
+                return $this->getCastleId();
+                break;
+            case 2:
                 return $this->getAttackId();
+                break;
+            case 3:
+                return $this->getUserId();
                 break;
             default:
                 return null;
@@ -618,14 +751,16 @@ abstract class BaseCastle2Attack extends BaseObject implements Persistent
      */
     public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array(), $includeForeignObjects = false)
     {
-        if (isset($alreadyDumpedObjects['Castle2Attack'][serialize($this->getPrimaryKey())])) {
+        if (isset($alreadyDumpedObjects['Castle2Attack'][$this->getPrimaryKey()])) {
             return '*RECURSION*';
         }
-        $alreadyDumpedObjects['Castle2Attack'][serialize($this->getPrimaryKey())] = true;
+        $alreadyDumpedObjects['Castle2Attack'][$this->getPrimaryKey()] = true;
         $keys = Castle2AttackPeer::getFieldNames($keyType);
         $result = array(
-            $keys[0] => $this->getCastleId(),
-            $keys[1] => $this->getAttackId(),
+            $keys[0] => $this->getId(),
+            $keys[1] => $this->getCastleId(),
+            $keys[2] => $this->getAttackId(),
+            $keys[3] => $this->getUserId(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -633,6 +768,9 @@ abstract class BaseCastle2Attack extends BaseObject implements Persistent
         }
 
         if ($includeForeignObjects) {
+            if (null !== $this->aUser) {
+                $result['User'] = $this->aUser->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+            }
             if (null !== $this->aAttack) {
                 $result['Attack'] = $this->aAttack->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
@@ -674,10 +812,16 @@ abstract class BaseCastle2Attack extends BaseObject implements Persistent
     {
         switch ($pos) {
             case 0:
-                $this->setCastleId($value);
+                $this->setId($value);
                 break;
             case 1:
+                $this->setCastleId($value);
+                break;
+            case 2:
                 $this->setAttackId($value);
+                break;
+            case 3:
+                $this->setUserId($value);
                 break;
         } // switch()
     }
@@ -703,8 +847,10 @@ abstract class BaseCastle2Attack extends BaseObject implements Persistent
     {
         $keys = Castle2AttackPeer::getFieldNames($keyType);
 
-        if (array_key_exists($keys[0], $arr)) $this->setCastleId($arr[$keys[0]]);
-        if (array_key_exists($keys[1], $arr)) $this->setAttackId($arr[$keys[1]]);
+        if (array_key_exists($keys[0], $arr)) $this->setId($arr[$keys[0]]);
+        if (array_key_exists($keys[1], $arr)) $this->setCastleId($arr[$keys[1]]);
+        if (array_key_exists($keys[2], $arr)) $this->setAttackId($arr[$keys[2]]);
+        if (array_key_exists($keys[3], $arr)) $this->setUserId($arr[$keys[3]]);
     }
 
     /**
@@ -716,8 +862,10 @@ abstract class BaseCastle2Attack extends BaseObject implements Persistent
     {
         $criteria = new Criteria(Castle2AttackPeer::DATABASE_NAME);
 
+        if ($this->isColumnModified(Castle2AttackPeer::ID)) $criteria->add(Castle2AttackPeer::ID, $this->id);
         if ($this->isColumnModified(Castle2AttackPeer::CASTLE_ID)) $criteria->add(Castle2AttackPeer::CASTLE_ID, $this->castle_id);
         if ($this->isColumnModified(Castle2AttackPeer::ATTACK_ID)) $criteria->add(Castle2AttackPeer::ATTACK_ID, $this->attack_id);
+        if ($this->isColumnModified(Castle2AttackPeer::USER_ID)) $criteria->add(Castle2AttackPeer::USER_ID, $this->user_id);
 
         return $criteria;
     }
@@ -733,36 +881,29 @@ abstract class BaseCastle2Attack extends BaseObject implements Persistent
     public function buildPkeyCriteria()
     {
         $criteria = new Criteria(Castle2AttackPeer::DATABASE_NAME);
-        $criteria->add(Castle2AttackPeer::CASTLE_ID, $this->castle_id);
-        $criteria->add(Castle2AttackPeer::ATTACK_ID, $this->attack_id);
+        $criteria->add(Castle2AttackPeer::ID, $this->id);
 
         return $criteria;
     }
 
     /**
-     * Returns the composite primary key for this object.
-     * The array elements will be in same order as specified in XML.
-     * @return array
+     * Returns the primary key for this object (row).
+     * @return int
      */
     public function getPrimaryKey()
     {
-        $pks = array();
-        $pks[0] = $this->getCastleId();
-        $pks[1] = $this->getAttackId();
-
-        return $pks;
+        return $this->getId();
     }
 
     /**
-     * Set the [composite] primary key.
+     * Generic method to set the primary key (id column).
      *
-     * @param array $keys The elements of the composite key (order must match the order in XML file).
+     * @param  int $key Primary key.
      * @return void
      */
-    public function setPrimaryKey($keys)
+    public function setPrimaryKey($key)
     {
-        $this->setCastleId($keys[0]);
-        $this->setAttackId($keys[1]);
+        $this->setId($key);
     }
 
     /**
@@ -772,7 +913,7 @@ abstract class BaseCastle2Attack extends BaseObject implements Persistent
     public function isPrimaryKeyNull()
     {
 
-        return (null === $this->getCastleId()) && (null === $this->getAttackId());
+        return null === $this->getId();
     }
 
     /**
@@ -790,6 +931,7 @@ abstract class BaseCastle2Attack extends BaseObject implements Persistent
     {
         $copyObj->setCastleId($this->getCastleId());
         $copyObj->setAttackId($this->getAttackId());
+        $copyObj->setUserId($this->getUserId());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -804,6 +946,7 @@ abstract class BaseCastle2Attack extends BaseObject implements Persistent
 
         if ($makeNew) {
             $copyObj->setNew(true);
+            $copyObj->setId(NULL); // this is a auto-increment column, so set to default value
         }
     }
 
@@ -845,6 +988,58 @@ abstract class BaseCastle2Attack extends BaseObject implements Persistent
         }
 
         return self::$peer;
+    }
+
+    /**
+     * Declares an association between this object and a User object.
+     *
+     * @param                  User $v
+     * @return Castle2Attack The current object (for fluent API support)
+     * @throws PropelException
+     */
+    public function setUser(User $v = null)
+    {
+        if ($v === null) {
+            $this->setUserId(NULL);
+        } else {
+            $this->setUserId($v->getId());
+        }
+
+        $this->aUser = $v;
+
+        // Add binding for other direction of this n:n relationship.
+        // If this object has already been added to the User object, it will not be re-added.
+        if ($v !== null) {
+            $v->addCastle2Attack($this);
+        }
+
+
+        return $this;
+    }
+
+
+    /**
+     * Get the associated User object
+     *
+     * @param PropelPDO $con Optional Connection object.
+     * @param $doQuery Executes a query to get the object if required
+     * @return User The associated User object.
+     * @throws PropelException
+     */
+    public function getUser(PropelPDO $con = null, $doQuery = true)
+    {
+        if ($this->aUser === null && ($this->user_id !== null) && $doQuery) {
+            $this->aUser = UserQuery::create()->findPk($this->user_id, $con);
+            /* The following can be used additionally to
+                guarantee the related object contains a reference
+                to this object.  This level of coupling may, however, be
+                undesirable since it could result in an only partially populated collection
+                in the referenced object.
+                $this->aUser->addCastle2Attacks($this);
+             */
+        }
+
+        return $this->aUser;
     }
 
     /**
@@ -956,8 +1151,10 @@ abstract class BaseCastle2Attack extends BaseObject implements Persistent
      */
     public function clear()
     {
+        $this->id = null;
         $this->castle_id = null;
         $this->attack_id = null;
+        $this->user_id = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->alreadyInClearAllReferencesDeep = false;
@@ -980,6 +1177,9 @@ abstract class BaseCastle2Attack extends BaseObject implements Persistent
     {
         if ($deep && !$this->alreadyInClearAllReferencesDeep) {
             $this->alreadyInClearAllReferencesDeep = true;
+            if ($this->aUser instanceof Persistent) {
+              $this->aUser->clearAllReferences($deep);
+            }
             if ($this->aAttack instanceof Persistent) {
               $this->aAttack->clearAllReferences($deep);
             }
@@ -990,6 +1190,7 @@ abstract class BaseCastle2Attack extends BaseObject implements Persistent
             $this->alreadyInClearAllReferencesDeep = false;
         } // if ($deep)
 
+        $this->aUser = null;
         $this->aAttack = null;
         $this->aCastle = null;
     }

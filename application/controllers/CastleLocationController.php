@@ -6,16 +6,17 @@ class CastleLocationController extends Zend_Controller_Action
     public function init()
     {
         /* Initialize action controller here */
+    	define('USERID', 1);
+    	define('USERNAME', 'jdx');
     }
 
     public function indexAction()
     {
-        $this->view->layoutTitle  = 'Standortliste';
-    	$this->view->layoutCreate = '/castlelocation/create';
-    	$this->view->layoutHelp = '/castlelocation/help_index';
+  		$this->view->layoutTitle = '&Uuml;bersicht Standorte';
+    	$this->view->layoutHelp  = '/castlelocation/help_index';    	
+    	$this->view->layoutAdd   = '/castlelocation/create';
     	
-        $castleLocation = new CastleLocationQuery();
-        $this->view->castleLocations = $castleLocation->find();
+        $this->view->castleLocations = CastleLocationQuery::create()->orderByName()->find();
     }
 
     public function deleteAction()
@@ -25,59 +26,79 @@ class CastleLocationController extends Zend_Controller_Action
 
     public function updateAction()
     {
-    	$this->view->layoutTitle  = 'Standort bearbeiten';
-    	$this->view->layoutDelete = '/castlelocation/delete';
-    	$this->view->layoutHelp = '/castlelocation/help_update';
-    	
-        $id = $this->_request->getParam('id');
- 
-    	if(is_null($id)) 
-    	{
-    		$castleLocation = new CastleLocation();   		
-    	}
-    	else 
-    	{
-	    	$castleLocationX = new CastleLocationQuery();
-	    	$castleLocation = $castleLocationX->findPk($id);
-    	}
+    	$this->view->layoutTitle = 'Standort bearbeiten';
     	
     	$parentLocation = new CastleLocationQuery();
     	$this->view->parentLocations = $parentLocation->find();
     	
+    	$id = $this->_request->getParam('id');
+ 
+	    $castleLocationX = new CastleLocationQuery();
+	    $castleLocation = $castleLocationX->findPk($id);
+
     	if ($this->_request->isPost()) 
-    	{   		
-    		if(isset($_POST["save"]))
-    		{
-//     			echo "<xmp>"; var_dump($this->_request->getPost());
-	    		$castleLocation->fromArray($this->_request->getPost());
-//  	    		echo "<xmp>"; var_dump($castleLocation); exit;
-	    		$castleLocation->save();
+    	{
+    		if(isset($_POST["cancel"])) 
+    		{ 
+    			$this->_helper->redirector("index", "castlelocation", "default");
     		}
-    		$this->_redirect('/castlelocation/index');
+    		elseif(isset($_POST["save"]))
+    		{
+    			$postData = $this->_request->getPost();
+	    		$castleLocation->fromArray($postData);
+	    		
+				if($castleLocation->getParentId() == 0) 
+	    		{
+	    			
+	    		}
+	    		
+	    		$castleLocation->save();
+	    		$this->_helper->redirector("index", "castlelocation", "default");
+    		}
     	}
     	
     	$this->view->castleLocation = $castleLocation;
+    	$this->view->parent_id_old = $castleLocation->getParentId();
     }
 
     public function createAction()
     {
-    	$this->view->layoutTitle  = 'Standort anlegen';
-    	$this->view->footerHelp = '/castlelocation/help_create';
+    	$this->view->layoutTitle = 'Standort anlegen';
     	
-        $castleLocation = new CastleLocation();
-        
-        $parentLocation = new CastleLocationQuery();
-        $this->view->parentLocations = $parentLocation->find();
-        
-        if ($this->_request->isPost()) {
-        	$castleLocation->fromArray($this->_request->getPost());
-        	$castleLocation->save();
-        }
-        
-        $this->view->castleLocation = $castleLocation;
+    	$parentRoot = CastleLocationQuery::create()->findRoot(USERID);
+    	$this->view->parentLocations = $parentRoot->getBranch();
+
+    	$castleLocation = new CastleLocation();   		
+
+    	if ($this->_request->isPost()) 
+    	{
+    		if(isset($_POST["cancel"])) 
+    		{ 
+    			$this->_helper->redirector("index", "castlelocation", "default");
+    		}
+    		elseif(isset($_POST["save"]))
+    		{
+    			$postData = $this->_request->getPost();
+	    		$castleLocation->fromArray($postData);
+	    		
+	    		if($castleLocation->getName() == USERNAME) {
+	    			$castleLocation->setUserId(USERID);
+	    			$castleLocation->makeRoot();
+	    		}
+	    		elseif($castleLocation->getParentId() != 0) 
+	    		{
+	    			$castleLocationParent = CastleLocationQuery::create()->findPk($castleLocation->getParentId());
+	    			$castleLocation->insertAsLastChildOf($castleLocationParent);
+	    		}
+	    		
+	    		$castleLocation->save();
+	    		$this->_helper->redirector("index", "castlelocation", "default");
+    		}
+    	}
+    	
+    	$this->view->castleLocation = $castleLocation;
+    	$this->view->parent_id_old = $castleLocation->getParentId();
        
-//        $this->_helper->viewRenderer('update');
+        $this->_helper->viewRenderer('update');
     }
-
-
 }

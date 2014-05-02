@@ -2,11 +2,46 @@ $(document).on( "mobileinit", function() {
 	$.mobile.ajaxEnabled = false;
 });
 
-//$(document).on("pagecreate", "#td-page-1", function( event ) {
+//$( document ).on( "mobileinit", function() {
+//	$.extend( $.mobile , {
+//		ajaxEnabled: false
+//	});
+//});
+
+
+//Funktioniert. …ffnet aber immer
+//$(document).on('pagebeforeshow', '#totaldefense-page', function() {       
+//	$( "#menue-panel" ).panel( "open"); });
+
+//$(document).on('pageinit', '#td-page-1', function( event ) {
+////	alert('swipeDelete START');
+//	
+//	 $('#swipeDelete li').on("swipeleft", function( event ) {
+//		 // create button
+//		var $swipeBtn = $('<a>Delete</a>').attr({
+//												'data-role': 'button',
+//												'data-mini': true,
+//												'data-inline': 'true',
+//												'class': 'aSwipeBtn',
+//												'data-theme': 'b',
+//												'href': $li.data('swipeurl'
+//											})
+//											.on('click tap', function(e){
+//												e.preventDefault();
+//												$(this).parents('li').slideUp();
+//											})
+//							);
+//	 					})
+//
+//		// slide insert button into list item
+//		$swipeBtn.prependTo($li).button();
+//		$li.find('.ui-btn').hide().animate({ width: 'toggle' }, 200);
+//	 });
+//		
 //	$('#swipeDelete li').swipeDelete({
 //		btnTheme: 'e',
 //		btnLabel: 'Delete',
-//		btnClass: 'aSwipeButton',
+//		btnClass: 'aSwipeBtn',
 //		click: function(e){
 //			e.preventDefault();
 //			var url = $(e.target).attr('href');
@@ -18,8 +53,26 @@ $(document).on( "mobileinit", function() {
 //	});
 //});
 
+//$(document).on( "pagecreate", "#td-page-1", function() {
+//    $(document).on( "swipeleft swiperight", "#totaldefense-page", function( e ) {
+//    	if ( e.type === "swiperight" ) {
+//            $( "#menue-panel" ).panel( "open" );
+//    	} else if ( e.type === "swipeleft" ) {
+//            $( "#menue-panel" ).panel( "close" );
+//        }
+//    });
+
+//	$(document).on('#show-popup', function() {
+//		var value = ($this).attr('value');
+//		if(value > 0) {		
+//			$("#import").popup("open");
+//		}
+//	});
+//
+//});
+
 $(document).on('pageinit', '#td-castletype-update-1', function( event ) {
-    calcPopulation();
+	calcPopulation();
     
     $("input[name='Type']").bind( "change", function(event, ui) {
     	$('#type2a').prop('checked', false);
@@ -60,7 +113,6 @@ $(document).on('pageinit', '#td-castletype-update-1', function( event ) {
     });
     
 });
-
 
 function updatePopulation(building, update) {
 //	alert('udatePopulation');
@@ -327,6 +379,8 @@ function calcPopulation(forschung_trigger) {
 	erzmine[29] = 112;
 	erzmine[30] = 120;
 
+//    var ix_bergfried   = $('bergfried').val();
+//    alert(ix_bergfried);
     var ix_bergfried   = document.getElementById('bergfried').value;
     var ix_zeughaus    = document.getElementById('zeughaus').value;
     var ix_taverne     = document.getElementById('taverne').value;

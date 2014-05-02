@@ -10,12 +10,11 @@ class CastleController extends Zend_Controller_Action
 
     public function indexAction()
     {
-    	$this->view->layoutTitle = 'Burg bearbeiten';
-    	$this->view->layoutHelp  = '/castle/help_index';
+    	$this->view->layoutTitle = 'Burgen bearbeiten';
+    	$this->view->layoutHelp  = '/castle/help_index';    	
     	$this->view->layoutAdd   = '/castle/create';
     	
-        $castle = new CastleQuery();
-        $this->view->castles = $castle->orderById()->find();
+        $this->view->castles = CastleQuery::create()->orderByName()->find();
     }
 
     public function listAction()
@@ -30,7 +29,32 @@ class CastleController extends Zend_Controller_Action
     
     public function createAction()
     {
-        // action body
+        $this->view->layoutTitle = 'Burg bearbeiten';
+    	
+    	$this->view->castleLocations = CastleLocationQuery::create()->orderByName()->find();
+    	$this->view->castleTypes	 = CastleTypeQuery::create()->orderByName()->find();
+    	
+	    $castle = new Castle();
+
+    	if ($this->_request->isPost()) 
+    	{
+    		if(isset($_POST["cancel"])) 
+    		
+    		{ 
+    			$this->_helper->redirector("index", "castle", "default");
+    		}
+    		elseif(isset($_POST["save"]))
+    		{
+    			$postData = $this->_request->getPost();
+	    		$castle->fromArray($postData);
+	    		$castle->save();
+	    		$this->_helper->redirector("index", "castle", "default");
+    		}
+    	}
+    	
+    	$this->view->castle = $castle;
+    	
+    	$this->_helper->viewRenderer('update');
     }
 
     public function updateAction()

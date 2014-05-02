@@ -1,0 +1,52 @@
+<form method="post" action="">
+
+	<div data-role="main" class="ui-content">
+		<div class="ui-grid-b">
+			<div class="ui-block-a td-block-a">
+				<div class="ui-field-contain td-field-contain">
+					<label for="name">Name</label>
+					<input type="text" name="Name" id="name" value="<?php echo (!is_null($this->user->getId())) ? $this->user->getName() : ''; ?>">
+				</div>
+				 
+				<div class="ui-field-contain td-field-contain">
+					<label for="password">Passwort</label>
+					<input type="text" name="Password" id="password" value="<?php echo $this->user->getPassword(); ?>">
+				</div>
+				
+				<div class="ui-field-contain td-field-contain">
+					<label for="playerid">Player-ID</label>
+					<input type="text" name="Playerid" id="playerid" value="<?php echo $this->user->getPlayerid(); ?>">
+				</div>
+				
+				<div class="ui-field-contain td-field-contain">
+					<label for="phone">Telefon</label>
+					<input type="text" name="Phone" id="phone" value="<?php echo $this->user->getPhone(); ?>">
+				</div>
+				
+				<div class="ui-field-contain td-field-contain">
+					<label for="email">E-Mail</label>
+					<input type="text" name="Email" id="email" value="<?php echo $this->user->getEmail(); ?>">
+				</div>
+			</div>
+			
+			<div class="ui-block-b td-block-b">
+				<h3 class="ui-bar ui-bar-a">Import</h3>
+				
+				<div class="ui-field-contain td-field-contain">
+					<label for="importstatus">Status</label>
+					<input type="number" name="ImportStatus" id="importstatus" value="<?php echo $this->user->getImportStatus(); ?>">
+				</div>
+				
+				<div class="ui-field-contain td-field-contain">
+					<label for="importdate">Datum</label>
+					<input type="text" name="ImportDate" id="importdate" value="<?php echo $this->user->getImportDate(); ?>">
+				</div>
+				
+				<div class="td-right">
+				    <input data-wrapper-class="td-right" data-theme="b" data-inline="true" name="save" value="Sichern" type="submit">
+				    <input data-wrapper-class="td-right" data-theme="b" data-inline="true" name="cancel" value="Verwerfen" type="submit">
+			    </div>
+		    </div>
+	    </div>
+    </div>
+</form>

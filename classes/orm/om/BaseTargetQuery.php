@@ -7,7 +7,7 @@
  *
  *
  * @method TargetQuery orderById($order = Criteria::ASC) Order by the id column
- * @method TargetQuery orderByUser($order = Criteria::ASC) Order by the user column
+ * @method TargetQuery orderByUserId($order = Criteria::ASC) Order by the user_id column
  * @method TargetQuery orderByName($order = Criteria::ASC) Order by the name column
  * @method TargetQuery orderByCoordinates($order = Criteria::ASC) Order by the coordinates column
  * @method TargetQuery orderByAttackTime($order = Criteria::ASC) Order by the attack_time column
@@ -15,7 +15,7 @@
  * @method TargetQuery orderByUpdatedAt($order = Criteria::ASC) Order by the updated_at column
  *
  * @method TargetQuery groupById() Group by the id column
- * @method TargetQuery groupByUser() Group by the user column
+ * @method TargetQuery groupByUserId() Group by the user_id column
  * @method TargetQuery groupByName() Group by the name column
  * @method TargetQuery groupByCoordinates() Group by the coordinates column
  * @method TargetQuery groupByAttackTime() Group by the attack_time column
@@ -26,10 +26,14 @@
  * @method TargetQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
  * @method TargetQuery innerJoin($relation) Adds a INNER JOIN clause to the query
  *
+ * @method TargetQuery leftJoinUser($relationAlias = null) Adds a LEFT JOIN clause to the query using the User relation
+ * @method TargetQuery rightJoinUser($relationAlias = null) Adds a RIGHT JOIN clause to the query using the User relation
+ * @method TargetQuery innerJoinUser($relationAlias = null) Adds a INNER JOIN clause to the query using the User relation
+ *
  * @method Target findOne(PropelPDO $con = null) Return the first Target matching the query
  * @method Target findOneOrCreate(PropelPDO $con = null) Return the first Target matching the query, or a new Target object populated from the query conditions when no match is found
  *
- * @method Target findOneByUser(int $user) Return the first Target filtered by the user column
+ * @method Target findOneByUserId(int $user_id) Return the first Target filtered by the user_id column
  * @method Target findOneByName(string $name) Return the first Target filtered by the name column
  * @method Target findOneByCoordinates(string $coordinates) Return the first Target filtered by the coordinates column
  * @method Target findOneByAttackTime(string $attack_time) Return the first Target filtered by the attack_time column
@@ -37,7 +41,7 @@
  * @method Target findOneByUpdatedAt(string $updated_at) Return the first Target filtered by the updated_at column
  *
  * @method array findById(int $id) Return Target objects filtered by the id column
- * @method array findByUser(int $user) Return Target objects filtered by the user column
+ * @method array findByUserId(int $user_id) Return Target objects filtered by the user_id column
  * @method array findByName(string $name) Return Target objects filtered by the name column
  * @method array findByCoordinates(string $coordinates) Return Target objects filtered by the coordinates column
  * @method array findByAttackTime(string $attack_time) Return Target objects filtered by the attack_time column
@@ -150,7 +154,7 @@ abstract class BaseTargetQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `id`, `user`, `name`, `coordinates`, `attack_time`, `created_at`, `updated_at` FROM `target` WHERE `id` = :p0';
+        $sql = 'SELECT `id`, `user_id`, `name`, `coordinates`, `attack_time`, `created_at`, `updated_at` FROM `target` WHERE `id` = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -282,17 +286,19 @@ abstract class BaseTargetQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the user column
+     * Filter the query on the user_id column
      *
      * Example usage:
      * <code>
-     * $query->filterByUser(1234); // WHERE user = 1234
-     * $query->filterByUser(array(12, 34)); // WHERE user IN (12, 34)
-     * $query->filterByUser(array('min' => 12)); // WHERE user >= 12
-     * $query->filterByUser(array('max' => 12)); // WHERE user <= 12
+     * $query->filterByUserId(1234); // WHERE user_id = 1234
+     * $query->filterByUserId(array(12, 34)); // WHERE user_id IN (12, 34)
+     * $query->filterByUserId(array('min' => 12)); // WHERE user_id >= 12
+     * $query->filterByUserId(array('max' => 12)); // WHERE user_id <= 12
      * </code>
      *
-     * @param     mixed $user The value to use as filter.
+     * @see       filterByUser()
+     *
+     * @param     mixed $userId The value to use as filter.
      *              Use scalar values for equality.
      *              Use array values for in_array() equivalent.
      *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
@@ -300,16 +306,16 @@ abstract class BaseTargetQuery extends ModelCriteria
      *
      * @return TargetQuery The current query, for fluid interface
      */
-    public function filterByUser($user = null, $comparison = null)
+    public function filterByUserId($userId = null, $comparison = null)
     {
-        if (is_array($user)) {
+        if (is_array($userId)) {
             $useMinMax = false;
-            if (isset($user['min'])) {
-                $this->addUsingAlias(TargetPeer::USER, $user['min'], Criteria::GREATER_EQUAL);
+            if (isset($userId['min'])) {
+                $this->addUsingAlias(TargetPeer::USER_ID, $userId['min'], Criteria::GREATER_EQUAL);
                 $useMinMax = true;
             }
-            if (isset($user['max'])) {
-                $this->addUsingAlias(TargetPeer::USER, $user['max'], Criteria::LESS_EQUAL);
+            if (isset($userId['max'])) {
+                $this->addUsingAlias(TargetPeer::USER_ID, $userId['max'], Criteria::LESS_EQUAL);
                 $useMinMax = true;
             }
             if ($useMinMax) {
@@ -320,7 +326,7 @@ abstract class BaseTargetQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(TargetPeer::USER, $user, $comparison);
+        return $this->addUsingAlias(TargetPeer::USER_ID, $userId, $comparison);
     }
 
     /**
@@ -508,6 +514,82 @@ abstract class BaseTargetQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(TargetPeer::UPDATED_AT, $updatedAt, $comparison);
+    }
+
+    /**
+     * Filter the query by a related User object
+     *
+     * @param   User|PropelObjectCollection $user The related object(s) to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return                 TargetQuery The current query, for fluid interface
+     * @throws PropelException - if the provided filter is invalid.
+     */
+    public function filterByUser($user, $comparison = null)
+    {
+        if ($user instanceof User) {
+            return $this
+                ->addUsingAlias(TargetPeer::USER_ID, $user->getId(), $comparison);
+        } elseif ($user instanceof PropelObjectCollection) {
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+
+            return $this
+                ->addUsingAlias(TargetPeer::USER_ID, $user->toKeyValue('PrimaryKey', 'Id'), $comparison);
+        } else {
+            throw new PropelException('filterByUser() only accepts arguments of type User or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the User relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return TargetQuery The current query, for fluid interface
+     */
+    public function joinUser($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('User');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'User');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the User relation User object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   UserQuery A secondary query class using the current class as primary query
+     */
+    public function useUserQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        return $this
+            ->joinUser($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'User', 'UserQuery');
     }
 
     /**

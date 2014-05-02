@@ -36,10 +36,10 @@ abstract class BaseCastle extends BaseObject implements Persistent
     protected $id;
 
     /**
-     * The value for the user field.
+     * The value for the user_id field.
      * @var        int
      */
-    protected $user;
+    protected $user_id;
 
     /**
      * The value for the name field.
@@ -256,10 +256,15 @@ abstract class BaseCastle extends BaseObject implements Persistent
     protected $aCastleLocation;
 
     /**
-     * @var        PropelObjectCollection|Castle2Attack[] Collection to store aggregation of Castle2Attack objects.
+     * @var        User
      */
-    protected $collCastle2Attacks;
-    protected $collCastle2AttacksPartial;
+    protected $aUser;
+
+    /**
+     * @var        PropelObjectCollection|Attack2castle[] Collection to store aggregation of Attack2castle objects.
+     */
+    protected $collAttack2castles;
+    protected $collAttack2castlesPartial;
 
     /**
      * @var        PropelObjectCollection|Attack[] Collection to store aggregation of Attack objects.
@@ -296,7 +301,7 @@ abstract class BaseCastle extends BaseObject implements Persistent
      * An array of objects scheduled for deletion.
      * @var		PropelObjectCollection
      */
-    protected $castle2AttacksScheduledForDeletion = null;
+    protected $attack2castlesScheduledForDeletion = null;
 
     /**
      * Get the [id] column value.
@@ -310,14 +315,14 @@ abstract class BaseCastle extends BaseObject implements Persistent
     }
 
     /**
-     * Get the [user] column value.
+     * Get the [user_id] column value.
      *
      * @return int
      */
-    public function getUser()
+    public function getUserId()
     {
 
-        return $this->user;
+        return $this->user_id;
     }
 
     /**
@@ -803,25 +808,29 @@ abstract class BaseCastle extends BaseObject implements Persistent
     } // setId()
 
     /**
-     * Set the value of [user] column.
+     * Set the value of [user_id] column.
      *
      * @param  int $v new value
      * @return Castle The current object (for fluent API support)
      */
-    public function setUser($v)
+    public function setUserId($v)
     {
         if ($v !== null && is_numeric($v)) {
             $v = (int) $v;
         }
 
-        if ($this->user !== $v) {
-            $this->user = $v;
-            $this->modifiedColumns[] = CastlePeer::USER;
+        if ($this->user_id !== $v) {
+            $this->user_id = $v;
+            $this->modifiedColumns[] = CastlePeer::USER_ID;
+        }
+
+        if ($this->aUser !== null && $this->aUser->getId() !== $v) {
+            $this->aUser = null;
         }
 
 
         return $this;
-    } // setUser()
+    } // setUserId()
 
     /**
      * Set the value of [name] column.
@@ -1616,7 +1625,7 @@ abstract class BaseCastle extends BaseObject implements Persistent
         try {
 
             $this->id = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
-            $this->user = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
+            $this->user_id = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
             $this->name = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
             $this->castle_type_id = ($row[$startcol + 3] !== null) ? (int) $row[$startcol + 3] : null;
             $this->castle_location_id = ($row[$startcol + 4] !== null) ? (int) $row[$startcol + 4] : null;
@@ -1683,6 +1692,9 @@ abstract class BaseCastle extends BaseObject implements Persistent
     public function ensureConsistency()
     {
 
+        if ($this->aUser !== null && $this->user_id !== $this->aUser->getId()) {
+            $this->aUser = null;
+        }
         if ($this->aCastleType !== null && $this->castle_type_id !== $this->aCastleType->getId()) {
             $this->aCastleType = null;
         }
@@ -1730,7 +1742,8 @@ abstract class BaseCastle extends BaseObject implements Persistent
 
             $this->aCastleType = null;
             $this->aCastleLocation = null;
-            $this->collCastle2Attacks = null;
+            $this->aUser = null;
+            $this->collAttack2castles = null;
 
             $this->collAttacks = null;
         } // if (deep)
@@ -1876,6 +1889,13 @@ abstract class BaseCastle extends BaseObject implements Persistent
                 $this->setCastleLocation($this->aCastleLocation);
             }
 
+            if ($this->aUser !== null) {
+                if ($this->aUser->isModified() || $this->aUser->isNew()) {
+                    $affectedRows += $this->aUser->save($con);
+                }
+                $this->setUser($this->aUser);
+            }
+
             if ($this->isNew() || $this->isModified()) {
                 // persist changes
                 if ($this->isNew()) {
@@ -1892,9 +1912,9 @@ abstract class BaseCastle extends BaseObject implements Persistent
                     $pks = array();
                     $pk = $this->getPrimaryKey();
                     foreach ($this->attacksScheduledForDeletion->getPrimaryKeys(false) as $remotePk) {
-                        $pks[] = array($remotePk, $pk);
+                        $pks[] = array($pk, $remotePk);
                     }
-                    Castle2AttackQuery::create()
+                    Attack2castleQuery::create()
                         ->filterByPrimaryKeys($pks)
                         ->delete($con);
                     $this->attacksScheduledForDeletion = null;
@@ -1913,17 +1933,17 @@ abstract class BaseCastle extends BaseObject implements Persistent
                 }
             }
 
-            if ($this->castle2AttacksScheduledForDeletion !== null) {
-                if (!$this->castle2AttacksScheduledForDeletion->isEmpty()) {
-                    Castle2AttackQuery::create()
-                        ->filterByPrimaryKeys($this->castle2AttacksScheduledForDeletion->getPrimaryKeys(false))
+            if ($this->attack2castlesScheduledForDeletion !== null) {
+                if (!$this->attack2castlesScheduledForDeletion->isEmpty()) {
+                    Attack2castleQuery::create()
+                        ->filterByPrimaryKeys($this->attack2castlesScheduledForDeletion->getPrimaryKeys(false))
                         ->delete($con);
-                    $this->castle2AttacksScheduledForDeletion = null;
+                    $this->attack2castlesScheduledForDeletion = null;
                 }
             }
 
-            if ($this->collCastle2Attacks !== null) {
-                foreach ($this->collCastle2Attacks as $referrerFK) {
+            if ($this->collAttack2castles !== null) {
+                foreach ($this->collAttack2castles as $referrerFK) {
                     if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
                         $affectedRows += $referrerFK->save($con);
                     }
@@ -1959,8 +1979,8 @@ abstract class BaseCastle extends BaseObject implements Persistent
         if ($this->isColumnModified(CastlePeer::ID)) {
             $modifiedColumns[':p' . $index++]  = '`id`';
         }
-        if ($this->isColumnModified(CastlePeer::USER)) {
-            $modifiedColumns[':p' . $index++]  = '`user`';
+        if ($this->isColumnModified(CastlePeer::USER_ID)) {
+            $modifiedColumns[':p' . $index++]  = '`user_id`';
         }
         if ($this->isColumnModified(CastlePeer::NAME)) {
             $modifiedColumns[':p' . $index++]  = '`name`';
@@ -2078,8 +2098,8 @@ abstract class BaseCastle extends BaseObject implements Persistent
                     case '`id`':
                         $stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
                         break;
-                    case '`user`':
-                        $stmt->bindValue($identifier, $this->user, PDO::PARAM_INT);
+                    case '`user_id`':
+                        $stmt->bindValue($identifier, $this->user_id, PDO::PARAM_INT);
                         break;
                     case '`name`':
                         $stmt->bindValue($identifier, $this->name, PDO::PARAM_STR);
@@ -2294,14 +2314,20 @@ abstract class BaseCastle extends BaseObject implements Persistent
                 }
             }
 
+            if ($this->aUser !== null) {
+                if (!$this->aUser->validate($columns)) {
+                    $failureMap = array_merge($failureMap, $this->aUser->getValidationFailures());
+                }
+            }
+
 
             if (($retval = CastlePeer::doValidate($this, $columns)) !== true) {
                 $failureMap = array_merge($failureMap, $retval);
             }
 
 
-                if ($this->collCastle2Attacks !== null) {
-                    foreach ($this->collCastle2Attacks as $referrerFK) {
+                if ($this->collAttack2castles !== null) {
+                    foreach ($this->collAttack2castles as $referrerFK) {
                         if (!$referrerFK->validate($columns)) {
                             $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
                         }
@@ -2347,7 +2373,7 @@ abstract class BaseCastle extends BaseObject implements Persistent
                 return $this->getId();
                 break;
             case 1:
-                return $this->getUser();
+                return $this->getUserId();
                 break;
             case 2:
                 return $this->getName();
@@ -2481,7 +2507,7 @@ abstract class BaseCastle extends BaseObject implements Persistent
         $keys = CastlePeer::getFieldNames($keyType);
         $result = array(
             $keys[0] => $this->getId(),
-            $keys[1] => $this->getUser(),
+            $keys[1] => $this->getUserId(),
             $keys[2] => $this->getName(),
             $keys[3] => $this->getCastleTypeId(),
             $keys[4] => $this->getCastleLocationId(),
@@ -2529,8 +2555,11 @@ abstract class BaseCastle extends BaseObject implements Persistent
             if (null !== $this->aCastleLocation) {
                 $result['CastleLocation'] = $this->aCastleLocation->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
-            if (null !== $this->collCastle2Attacks) {
-                $result['Castle2Attacks'] = $this->collCastle2Attacks->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            if (null !== $this->aUser) {
+                $result['User'] = $this->aUser->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+            }
+            if (null !== $this->collAttack2castles) {
+                $result['Attack2castles'] = $this->collAttack2castles->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
         }
 
@@ -2570,7 +2599,7 @@ abstract class BaseCastle extends BaseObject implements Persistent
                 $this->setId($value);
                 break;
             case 1:
-                $this->setUser($value);
+                $this->setUserId($value);
                 break;
             case 2:
                 $this->setName($value);
@@ -2699,7 +2728,7 @@ abstract class BaseCastle extends BaseObject implements Persistent
         $keys = CastlePeer::getFieldNames($keyType);
 
         if (array_key_exists($keys[0], $arr)) $this->setId($arr[$keys[0]]);
-        if (array_key_exists($keys[1], $arr)) $this->setUser($arr[$keys[1]]);
+        if (array_key_exists($keys[1], $arr)) $this->setUserId($arr[$keys[1]]);
         if (array_key_exists($keys[2], $arr)) $this->setName($arr[$keys[2]]);
         if (array_key_exists($keys[3], $arr)) $this->setCastleTypeId($arr[$keys[3]]);
         if (array_key_exists($keys[4], $arr)) $this->setCastleLocationId($arr[$keys[4]]);
@@ -2746,7 +2775,7 @@ abstract class BaseCastle extends BaseObject implements Persistent
         $criteria = new Criteria(CastlePeer::DATABASE_NAME);
 
         if ($this->isColumnModified(CastlePeer::ID)) $criteria->add(CastlePeer::ID, $this->id);
-        if ($this->isColumnModified(CastlePeer::USER)) $criteria->add(CastlePeer::USER, $this->user);
+        if ($this->isColumnModified(CastlePeer::USER_ID)) $criteria->add(CastlePeer::USER_ID, $this->user_id);
         if ($this->isColumnModified(CastlePeer::NAME)) $criteria->add(CastlePeer::NAME, $this->name);
         if ($this->isColumnModified(CastlePeer::CASTLE_TYPE_ID)) $criteria->add(CastlePeer::CASTLE_TYPE_ID, $this->castle_type_id);
         if ($this->isColumnModified(CastlePeer::CASTLE_LOCATION_ID)) $criteria->add(CastlePeer::CASTLE_LOCATION_ID, $this->castle_location_id);
@@ -2844,7 +2873,7 @@ abstract class BaseCastle extends BaseObject implements Persistent
      */
     public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
     {
-        $copyObj->setUser($this->getUser());
+        $copyObj->setUserId($this->getUserId());
         $copyObj->setName($this->getName());
         $copyObj->setCastleTypeId($this->getCastleTypeId());
         $copyObj->setCastleLocationId($this->getCastleLocationId());
@@ -2887,9 +2916,9 @@ abstract class BaseCastle extends BaseObject implements Persistent
             // store object hash to prevent cycle
             $this->startCopy = true;
 
-            foreach ($this->getCastle2Attacks() as $relObj) {
+            foreach ($this->getAttack2castles() as $relObj) {
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
-                    $copyObj->addCastle2Attack($relObj->copy($deepCopy));
+                    $copyObj->addAttack2castle($relObj->copy($deepCopy));
                 }
             }
 
@@ -3047,6 +3076,58 @@ abstract class BaseCastle extends BaseObject implements Persistent
         return $this->aCastleLocation;
     }
 
+    /**
+     * Declares an association between this object and a User object.
+     *
+     * @param                  User $v
+     * @return Castle The current object (for fluent API support)
+     * @throws PropelException
+     */
+    public function setUser(User $v = null)
+    {
+        if ($v === null) {
+            $this->setUserId(NULL);
+        } else {
+            $this->setUserId($v->getId());
+        }
+
+        $this->aUser = $v;
+
+        // Add binding for other direction of this n:n relationship.
+        // If this object has already been added to the User object, it will not be re-added.
+        if ($v !== null) {
+            $v->addCastle($this);
+        }
+
+
+        return $this;
+    }
+
+
+    /**
+     * Get the associated User object
+     *
+     * @param PropelPDO $con Optional Connection object.
+     * @param $doQuery Executes a query to get the object if required
+     * @return User The associated User object.
+     * @throws PropelException
+     */
+    public function getUser(PropelPDO $con = null, $doQuery = true)
+    {
+        if ($this->aUser === null && ($this->user_id !== null) && $doQuery) {
+            $this->aUser = UserQuery::create()->findPk($this->user_id, $con);
+            /* The following can be used additionally to
+                guarantee the related object contains a reference
+                to this object.  This level of coupling may, however, be
+                undesirable since it could result in an only partially populated collection
+                in the referenced object.
+                $this->aUser->addCastles($this);
+             */
+        }
+
+        return $this->aUser;
+    }
+
 
     /**
      * Initializes a collection based on the name of a relation.
@@ -3058,42 +3139,42 @@ abstract class BaseCastle extends BaseObject implements Persistent
      */
     public function initRelation($relationName)
     {
-        if ('Castle2Attack' == $relationName) {
-            $this->initCastle2Attacks();
+        if ('Attack2castle' == $relationName) {
+            $this->initAttack2castles();
         }
     }
 
     /**
-     * Clears out the collCastle2Attacks collection
+     * Clears out the collAttack2castles collection
      *
      * This does not modify the database; however, it will remove any associated objects, causing
      * them to be refetched by subsequent calls to accessor method.
      *
      * @return Castle The current object (for fluent API support)
-     * @see        addCastle2Attacks()
+     * @see        addAttack2castles()
      */
-    public function clearCastle2Attacks()
+    public function clearAttack2castles()
     {
-        $this->collCastle2Attacks = null; // important to set this to null since that means it is uninitialized
-        $this->collCastle2AttacksPartial = null;
+        $this->collAttack2castles = null; // important to set this to null since that means it is uninitialized
+        $this->collAttack2castlesPartial = null;
 
         return $this;
     }
 
     /**
-     * reset is the collCastle2Attacks collection loaded partially
+     * reset is the collAttack2castles collection loaded partially
      *
      * @return void
      */
-    public function resetPartialCastle2Attacks($v = true)
+    public function resetPartialAttack2castles($v = true)
     {
-        $this->collCastle2AttacksPartial = $v;
+        $this->collAttack2castlesPartial = $v;
     }
 
     /**
-     * Initializes the collCastle2Attacks collection.
+     * Initializes the collAttack2castles collection.
      *
-     * By default this just sets the collCastle2Attacks collection to an empty array (like clearcollCastle2Attacks());
+     * By default this just sets the collAttack2castles collection to an empty array (like clearcollAttack2castles());
      * however, you may wish to override this method in your stub class to provide setting appropriate
      * to your application -- for example, setting the initial array to the values stored in database.
      *
@@ -3102,17 +3183,17 @@ abstract class BaseCastle extends BaseObject implements Persistent
      *
      * @return void
      */
-    public function initCastle2Attacks($overrideExisting = true)
+    public function initAttack2castles($overrideExisting = true)
     {
-        if (null !== $this->collCastle2Attacks && !$overrideExisting) {
+        if (null !== $this->collAttack2castles && !$overrideExisting) {
             return;
         }
-        $this->collCastle2Attacks = new PropelObjectCollection();
-        $this->collCastle2Attacks->setModel('Castle2Attack');
+        $this->collAttack2castles = new PropelObjectCollection();
+        $this->collAttack2castles->setModel('Attack2castle');
     }
 
     /**
-     * Gets an array of Castle2Attack objects which contain a foreign key that references this object.
+     * Gets an array of Attack2castle objects which contain a foreign key that references this object.
      *
      * If the $criteria is not null, it is used to always fetch the results from the database.
      * Otherwise the results are fetched from the database the first time, then cached.
@@ -3122,110 +3203,110 @@ abstract class BaseCastle extends BaseObject implements Persistent
      *
      * @param Criteria $criteria optional Criteria object to narrow the query
      * @param PropelPDO $con optional connection object
-     * @return PropelObjectCollection|Castle2Attack[] List of Castle2Attack objects
+     * @return PropelObjectCollection|Attack2castle[] List of Attack2castle objects
      * @throws PropelException
      */
-    public function getCastle2Attacks($criteria = null, PropelPDO $con = null)
+    public function getAttack2castles($criteria = null, PropelPDO $con = null)
     {
-        $partial = $this->collCastle2AttacksPartial && !$this->isNew();
-        if (null === $this->collCastle2Attacks || null !== $criteria  || $partial) {
-            if ($this->isNew() && null === $this->collCastle2Attacks) {
+        $partial = $this->collAttack2castlesPartial && !$this->isNew();
+        if (null === $this->collAttack2castles || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collAttack2castles) {
                 // return empty collection
-                $this->initCastle2Attacks();
+                $this->initAttack2castles();
             } else {
-                $collCastle2Attacks = Castle2AttackQuery::create(null, $criteria)
+                $collAttack2castles = Attack2castleQuery::create(null, $criteria)
                     ->filterByCastle($this)
                     ->find($con);
                 if (null !== $criteria) {
-                    if (false !== $this->collCastle2AttacksPartial && count($collCastle2Attacks)) {
-                      $this->initCastle2Attacks(false);
+                    if (false !== $this->collAttack2castlesPartial && count($collAttack2castles)) {
+                      $this->initAttack2castles(false);
 
-                      foreach ($collCastle2Attacks as $obj) {
-                        if (false == $this->collCastle2Attacks->contains($obj)) {
-                          $this->collCastle2Attacks->append($obj);
+                      foreach ($collAttack2castles as $obj) {
+                        if (false == $this->collAttack2castles->contains($obj)) {
+                          $this->collAttack2castles->append($obj);
                         }
                       }
 
-                      $this->collCastle2AttacksPartial = true;
+                      $this->collAttack2castlesPartial = true;
                     }
 
-                    $collCastle2Attacks->getInternalIterator()->rewind();
+                    $collAttack2castles->getInternalIterator()->rewind();
 
-                    return $collCastle2Attacks;
+                    return $collAttack2castles;
                 }
 
-                if ($partial && $this->collCastle2Attacks) {
-                    foreach ($this->collCastle2Attacks as $obj) {
+                if ($partial && $this->collAttack2castles) {
+                    foreach ($this->collAttack2castles as $obj) {
                         if ($obj->isNew()) {
-                            $collCastle2Attacks[] = $obj;
+                            $collAttack2castles[] = $obj;
                         }
                     }
                 }
 
-                $this->collCastle2Attacks = $collCastle2Attacks;
-                $this->collCastle2AttacksPartial = false;
+                $this->collAttack2castles = $collAttack2castles;
+                $this->collAttack2castlesPartial = false;
             }
         }
 
-        return $this->collCastle2Attacks;
+        return $this->collAttack2castles;
     }
 
     /**
-     * Sets a collection of Castle2Attack objects related by a one-to-many relationship
+     * Sets a collection of Attack2castle objects related by a one-to-many relationship
      * to the current object.
      * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
      * and new objects from the given Propel collection.
      *
-     * @param PropelCollection $castle2Attacks A Propel collection.
+     * @param PropelCollection $attack2castles A Propel collection.
      * @param PropelPDO $con Optional connection object
      * @return Castle The current object (for fluent API support)
      */
-    public function setCastle2Attacks(PropelCollection $castle2Attacks, PropelPDO $con = null)
+    public function setAttack2castles(PropelCollection $attack2castles, PropelPDO $con = null)
     {
-        $castle2AttacksToDelete = $this->getCastle2Attacks(new Criteria(), $con)->diff($castle2Attacks);
+        $attack2castlesToDelete = $this->getAttack2castles(new Criteria(), $con)->diff($attack2castles);
 
 
         //since at least one column in the foreign key is at the same time a PK
         //we can not just set a PK to NULL in the lines below. We have to store
         //a backup of all values, so we are able to manipulate these items based on the onDelete value later.
-        $this->castle2AttacksScheduledForDeletion = clone $castle2AttacksToDelete;
+        $this->attack2castlesScheduledForDeletion = clone $attack2castlesToDelete;
 
-        foreach ($castle2AttacksToDelete as $castle2AttackRemoved) {
-            $castle2AttackRemoved->setCastle(null);
+        foreach ($attack2castlesToDelete as $attack2castleRemoved) {
+            $attack2castleRemoved->setCastle(null);
         }
 
-        $this->collCastle2Attacks = null;
-        foreach ($castle2Attacks as $castle2Attack) {
-            $this->addCastle2Attack($castle2Attack);
+        $this->collAttack2castles = null;
+        foreach ($attack2castles as $attack2castle) {
+            $this->addAttack2castle($attack2castle);
         }
 
-        $this->collCastle2Attacks = $castle2Attacks;
-        $this->collCastle2AttacksPartial = false;
+        $this->collAttack2castles = $attack2castles;
+        $this->collAttack2castlesPartial = false;
 
         return $this;
     }
 
     /**
-     * Returns the number of related Castle2Attack objects.
+     * Returns the number of related Attack2castle objects.
      *
      * @param Criteria $criteria
      * @param boolean $distinct
      * @param PropelPDO $con
-     * @return int             Count of related Castle2Attack objects.
+     * @return int             Count of related Attack2castle objects.
      * @throws PropelException
      */
-    public function countCastle2Attacks(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    public function countAttack2castles(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
     {
-        $partial = $this->collCastle2AttacksPartial && !$this->isNew();
-        if (null === $this->collCastle2Attacks || null !== $criteria || $partial) {
-            if ($this->isNew() && null === $this->collCastle2Attacks) {
+        $partial = $this->collAttack2castlesPartial && !$this->isNew();
+        if (null === $this->collAttack2castles || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collAttack2castles) {
                 return 0;
             }
 
             if ($partial && !$criteria) {
-                return count($this->getCastle2Attacks());
+                return count($this->getAttack2castles());
             }
-            $query = Castle2AttackQuery::create(null, $criteria);
+            $query = Attack2castleQuery::create(null, $criteria);
             if ($distinct) {
                 $query->distinct();
             }
@@ -3235,28 +3316,28 @@ abstract class BaseCastle extends BaseObject implements Persistent
                 ->count($con);
         }
 
-        return count($this->collCastle2Attacks);
+        return count($this->collAttack2castles);
     }
 
     /**
-     * Method called to associate a Castle2Attack object to this object
-     * through the Castle2Attack foreign key attribute.
+     * Method called to associate a Attack2castle object to this object
+     * through the Attack2castle foreign key attribute.
      *
-     * @param    Castle2Attack $l Castle2Attack
+     * @param    Attack2castle $l Attack2castle
      * @return Castle The current object (for fluent API support)
      */
-    public function addCastle2Attack(Castle2Attack $l)
+    public function addAttack2castle(Attack2castle $l)
     {
-        if ($this->collCastle2Attacks === null) {
-            $this->initCastle2Attacks();
-            $this->collCastle2AttacksPartial = true;
+        if ($this->collAttack2castles === null) {
+            $this->initAttack2castles();
+            $this->collAttack2castlesPartial = true;
         }
 
-        if (!in_array($l, $this->collCastle2Attacks->getArrayCopy(), true)) { // only add it if the **same** object is not already associated
-            $this->doAddCastle2Attack($l);
+        if (!in_array($l, $this->collAttack2castles->getArrayCopy(), true)) { // only add it if the **same** object is not already associated
+            $this->doAddAttack2castle($l);
 
-            if ($this->castle2AttacksScheduledForDeletion and $this->castle2AttacksScheduledForDeletion->contains($l)) {
-                $this->castle2AttacksScheduledForDeletion->remove($this->castle2AttacksScheduledForDeletion->search($l));
+            if ($this->attack2castlesScheduledForDeletion and $this->attack2castlesScheduledForDeletion->contains($l)) {
+                $this->attack2castlesScheduledForDeletion->remove($this->attack2castlesScheduledForDeletion->search($l));
             }
         }
 
@@ -3264,28 +3345,28 @@ abstract class BaseCastle extends BaseObject implements Persistent
     }
 
     /**
-     * @param	Castle2Attack $castle2Attack The castle2Attack object to add.
+     * @param	Attack2castle $attack2castle The attack2castle object to add.
      */
-    protected function doAddCastle2Attack($castle2Attack)
+    protected function doAddAttack2castle($attack2castle)
     {
-        $this->collCastle2Attacks[]= $castle2Attack;
-        $castle2Attack->setCastle($this);
+        $this->collAttack2castles[]= $attack2castle;
+        $attack2castle->setCastle($this);
     }
 
     /**
-     * @param	Castle2Attack $castle2Attack The castle2Attack object to remove.
+     * @param	Attack2castle $attack2castle The attack2castle object to remove.
      * @return Castle The current object (for fluent API support)
      */
-    public function removeCastle2Attack($castle2Attack)
+    public function removeAttack2castle($attack2castle)
     {
-        if ($this->getCastle2Attacks()->contains($castle2Attack)) {
-            $this->collCastle2Attacks->remove($this->collCastle2Attacks->search($castle2Attack));
-            if (null === $this->castle2AttacksScheduledForDeletion) {
-                $this->castle2AttacksScheduledForDeletion = clone $this->collCastle2Attacks;
-                $this->castle2AttacksScheduledForDeletion->clear();
+        if ($this->getAttack2castles()->contains($attack2castle)) {
+            $this->collAttack2castles->remove($this->collAttack2castles->search($attack2castle));
+            if (null === $this->attack2castlesScheduledForDeletion) {
+                $this->attack2castlesScheduledForDeletion = clone $this->collAttack2castles;
+                $this->attack2castlesScheduledForDeletion->clear();
             }
-            $this->castle2AttacksScheduledForDeletion[]= clone $castle2Attack;
-            $castle2Attack->setCastle(null);
+            $this->attack2castlesScheduledForDeletion[]= clone $attack2castle;
+            $attack2castle->setCastle(null);
         }
 
         return $this;
@@ -3297,7 +3378,7 @@ abstract class BaseCastle extends BaseObject implements Persistent
      * an identical criteria, it returns the collection.
      * Otherwise if this Castle is new, it will return
      * an empty collection; or if this Castle has previously
-     * been saved, it will retrieve related Castle2Attacks from storage.
+     * been saved, it will retrieve related Attack2castles from storage.
      *
      * This method is protected by default in order to keep the public
      * api reasonable.  You can provide public methods for those you
@@ -3306,14 +3387,14 @@ abstract class BaseCastle extends BaseObject implements Persistent
      * @param Criteria $criteria optional Criteria object to narrow the query
      * @param PropelPDO $con optional connection object
      * @param string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
-     * @return PropelObjectCollection|Castle2Attack[] List of Castle2Attack objects
+     * @return PropelObjectCollection|Attack2castle[] List of Attack2castle objects
      */
-    public function getCastle2AttacksJoinAttack($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public function getAttack2castlesJoinAttack($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
-        $query = Castle2AttackQuery::create(null, $criteria);
+        $query = Attack2castleQuery::create(null, $criteria);
         $query->joinWith('Attack', $join_behavior);
 
-        return $this->getCastle2Attacks($query, $con);
+        return $this->getAttack2castles($query, $con);
     }
 
     /**
@@ -3350,7 +3431,7 @@ abstract class BaseCastle extends BaseObject implements Persistent
 
     /**
      * Gets a collection of Attack objects related by a many-to-many relationship
-     * to the current object by way of the castle_2_attack cross-reference table.
+     * to the current object by way of the attack2castle cross-reference table.
      *
      * If the $criteria is not null, it is used to always fetch the results from the database.
      * Otherwise the results are fetched from the database the first time, then cached.
@@ -3385,7 +3466,7 @@ abstract class BaseCastle extends BaseObject implements Persistent
 
     /**
      * Sets a collection of Attack objects related by a many-to-many relationship
-     * to the current object by way of the castle_2_attack cross-reference table.
+     * to the current object by way of the attack2castle cross-reference table.
      * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
      * and new objects from the given Propel collection.
      *
@@ -3413,7 +3494,7 @@ abstract class BaseCastle extends BaseObject implements Persistent
 
     /**
      * Gets the number of Attack objects related by a many-to-many relationship
-     * to the current object by way of the castle_2_attack cross-reference table.
+     * to the current object by way of the attack2castle cross-reference table.
      *
      * @param Criteria $criteria Optional query object to filter the query
      * @param boolean $distinct Set to true to force count distinct
@@ -3443,9 +3524,9 @@ abstract class BaseCastle extends BaseObject implements Persistent
 
     /**
      * Associate a Attack object to this object
-     * through the castle_2_attack cross reference table.
+     * through the attack2castle cross reference table.
      *
-     * @param  Attack $attack The Castle2Attack object to relate
+     * @param  Attack $attack The Attack2castle object to relate
      * @return Castle The current object (for fluent API support)
      */
     public function addAttack(Attack $attack)
@@ -3473,9 +3554,9 @@ abstract class BaseCastle extends BaseObject implements Persistent
     {
         // set the back reference to this object directly as using provided method either results
         // in endless loop or in multiple relations
-        if (!$attack->getCastles()->contains($this)) { $castle2Attack = new Castle2Attack();
-            $castle2Attack->setAttack($attack);
-            $this->addCastle2Attack($castle2Attack);
+        if (!$attack->getCastles()->contains($this)) { $attack2castle = new Attack2castle();
+            $attack2castle->setAttack($attack);
+            $this->addAttack2castle($attack2castle);
 
             $foreignCollection = $attack->getCastles();
             $foreignCollection[] = $this;
@@ -3484,9 +3565,9 @@ abstract class BaseCastle extends BaseObject implements Persistent
 
     /**
      * Remove a Attack object to this object
-     * through the castle_2_attack cross reference table.
+     * through the attack2castle cross reference table.
      *
-     * @param Attack $attack The Castle2Attack object to relate
+     * @param Attack $attack The Attack2castle object to relate
      * @return Castle The current object (for fluent API support)
      */
     public function removeAttack(Attack $attack)
@@ -3509,7 +3590,7 @@ abstract class BaseCastle extends BaseObject implements Persistent
     public function clear()
     {
         $this->id = null;
-        $this->user = null;
+        $this->user_id = null;
         $this->name = null;
         $this->castle_type_id = null;
         $this->castle_location_id = null;
@@ -3566,8 +3647,8 @@ abstract class BaseCastle extends BaseObject implements Persistent
     {
         if ($deep && !$this->alreadyInClearAllReferencesDeep) {
             $this->alreadyInClearAllReferencesDeep = true;
-            if ($this->collCastle2Attacks) {
-                foreach ($this->collCastle2Attacks as $o) {
+            if ($this->collAttack2castles) {
+                foreach ($this->collAttack2castles as $o) {
                     $o->clearAllReferences($deep);
                 }
             }
@@ -3582,20 +3663,24 @@ abstract class BaseCastle extends BaseObject implements Persistent
             if ($this->aCastleLocation instanceof Persistent) {
               $this->aCastleLocation->clearAllReferences($deep);
             }
+            if ($this->aUser instanceof Persistent) {
+              $this->aUser->clearAllReferences($deep);
+            }
 
             $this->alreadyInClearAllReferencesDeep = false;
         } // if ($deep)
 
-        if ($this->collCastle2Attacks instanceof PropelCollection) {
-            $this->collCastle2Attacks->clearIterator();
+        if ($this->collAttack2castles instanceof PropelCollection) {
+            $this->collAttack2castles->clearIterator();
         }
-        $this->collCastle2Attacks = null;
+        $this->collAttack2castles = null;
         if ($this->collAttacks instanceof PropelCollection) {
             $this->collAttacks->clearIterator();
         }
         $this->collAttacks = null;
         $this->aCastleType = null;
         $this->aCastleLocation = null;
+        $this->aUser = null;
     }
 
     /**

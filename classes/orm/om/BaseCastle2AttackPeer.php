@@ -24,19 +24,25 @@ abstract class BaseCastle2AttackPeer
     const TM_CLASS = 'Castle2AttackTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 2;
+    const NUM_COLUMNS = 4;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 2;
+    const NUM_HYDRATE_COLUMNS = 4;
+
+    /** the column name for the id field */
+    const ID = 'castle_2_attack.id';
 
     /** the column name for the castle_id field */
     const CASTLE_ID = 'castle_2_attack.castle_id';
 
     /** the column name for the attack_id field */
     const ATTACK_ID = 'castle_2_attack.attack_id';
+
+    /** the column name for the user_id field */
+    const USER_ID = 'castle_2_attack.user_id';
 
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
@@ -57,12 +63,12 @@ abstract class BaseCastle2AttackPeer
      * e.g. Castle2AttackPeer::$fieldNames[Castle2AttackPeer::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('CastleId', 'AttackId', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('castleId', 'attackId', ),
-        BasePeer::TYPE_COLNAME => array (Castle2AttackPeer::CASTLE_ID, Castle2AttackPeer::ATTACK_ID, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('CASTLE_ID', 'ATTACK_ID', ),
-        BasePeer::TYPE_FIELDNAME => array ('castle_id', 'attack_id', ),
-        BasePeer::TYPE_NUM => array (0, 1, )
+        BasePeer::TYPE_PHPNAME => array ('Id', 'CastleId', 'AttackId', 'UserId', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'castleId', 'attackId', 'userId', ),
+        BasePeer::TYPE_COLNAME => array (Castle2AttackPeer::ID, Castle2AttackPeer::CASTLE_ID, Castle2AttackPeer::ATTACK_ID, Castle2AttackPeer::USER_ID, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID', 'CASTLE_ID', 'ATTACK_ID', 'USER_ID', ),
+        BasePeer::TYPE_FIELDNAME => array ('id', 'castle_id', 'attack_id', 'user_id', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
     );
 
     /**
@@ -72,12 +78,12 @@ abstract class BaseCastle2AttackPeer
      * e.g. Castle2AttackPeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('CastleId' => 0, 'AttackId' => 1, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('castleId' => 0, 'attackId' => 1, ),
-        BasePeer::TYPE_COLNAME => array (Castle2AttackPeer::CASTLE_ID => 0, Castle2AttackPeer::ATTACK_ID => 1, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('CASTLE_ID' => 0, 'ATTACK_ID' => 1, ),
-        BasePeer::TYPE_FIELDNAME => array ('castle_id' => 0, 'attack_id' => 1, ),
-        BasePeer::TYPE_NUM => array (0, 1, )
+        BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'CastleId' => 1, 'AttackId' => 2, 'UserId' => 3, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'castleId' => 1, 'attackId' => 2, 'userId' => 3, ),
+        BasePeer::TYPE_COLNAME => array (Castle2AttackPeer::ID => 0, Castle2AttackPeer::CASTLE_ID => 1, Castle2AttackPeer::ATTACK_ID => 2, Castle2AttackPeer::USER_ID => 3, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID' => 0, 'CASTLE_ID' => 1, 'ATTACK_ID' => 2, 'USER_ID' => 3, ),
+        BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'castle_id' => 1, 'attack_id' => 2, 'user_id' => 3, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
     );
 
     /**
@@ -151,11 +157,15 @@ abstract class BaseCastle2AttackPeer
     public static function addSelectColumns(Criteria $criteria, $alias = null)
     {
         if (null === $alias) {
+            $criteria->addSelectColumn(Castle2AttackPeer::ID);
             $criteria->addSelectColumn(Castle2AttackPeer::CASTLE_ID);
             $criteria->addSelectColumn(Castle2AttackPeer::ATTACK_ID);
+            $criteria->addSelectColumn(Castle2AttackPeer::USER_ID);
         } else {
+            $criteria->addSelectColumn($alias . '.id');
             $criteria->addSelectColumn($alias . '.castle_id');
             $criteria->addSelectColumn($alias . '.attack_id');
+            $criteria->addSelectColumn($alias . '.user_id');
         }
     }
 
@@ -282,7 +292,7 @@ abstract class BaseCastle2AttackPeer
     {
         if (Propel::isInstancePoolingEnabled()) {
             if ($key === null) {
-                $key = serialize(array((string) $obj->getCastleId(), (string) $obj->getAttackId()));
+                $key = (string) $obj->getId();
             } // if key === null
             Castle2AttackPeer::$instances[$key] = $obj;
         }
@@ -305,10 +315,10 @@ abstract class BaseCastle2AttackPeer
     {
         if (Propel::isInstancePoolingEnabled() && $value !== null) {
             if (is_object($value) && $value instanceof Castle2Attack) {
-                $key = serialize(array((string) $value->getCastleId(), (string) $value->getAttackId()));
-            } elseif (is_array($value) && count($value) === 2) {
+                $key = (string) $value->getId();
+            } elseif (is_scalar($value)) {
                 // assume we've been passed a primary key
-                $key = serialize(array((string) $value[0], (string) $value[1]));
+                $key = (string) $value;
             } else {
                 $e = new PropelException("Invalid value passed to removeInstanceFromPool().  Expected primary key or Castle2Attack object; got " . (is_object($value) ? get_class($value) . ' object.' : var_export($value,true)));
                 throw $e;
@@ -375,11 +385,11 @@ abstract class BaseCastle2AttackPeer
     public static function getPrimaryKeyHashFromRow($row, $startcol = 0)
     {
         // If the PK cannot be derived from the row, return null.
-        if ($row[$startcol] === null && $row[$startcol + 1] === null) {
+        if ($row[$startcol] === null) {
             return null;
         }
 
-        return serialize(array((string) $row[$startcol], (string) $row[$startcol + 1]));
+        return (string) $row[$startcol];
     }
 
     /**
@@ -394,7 +404,7 @@ abstract class BaseCastle2AttackPeer
     public static function getPrimaryKeyFromRow($row, $startcol = 0)
     {
 
-        return array((int) $row[$startcol], (int) $row[$startcol + 1]);
+        return (int) $row[$startcol];
     }
 
     /**
@@ -454,6 +464,57 @@ abstract class BaseCastle2AttackPeer
         }
 
         return array($obj, $col);
+    }
+
+
+    /**
+     * Returns the number of rows matching criteria, joining the related User table
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return int Number of matching rows.
+     */
+    public static function doCountJoinUser(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        // we're going to modify criteria, so copy it first
+        $criteria = clone $criteria;
+
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(Castle2AttackPeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
+        }
+
+        if (!$criteria->hasSelectClause()) {
+            Castle2AttackPeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
+
+        // Set the correct dbName
+        $criteria->setDbName(Castle2AttackPeer::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(Castle2AttackPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+
+        $criteria->addJoin(Castle2AttackPeer::USER_ID, UserPeer::ID, $join_behavior);
+
+        $stmt = BasePeer::doCount($criteria, $con);
+
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
+        }
+        $stmt->closeCursor();
+
+        return $count;
     }
 
 
@@ -556,6 +617,73 @@ abstract class BaseCastle2AttackPeer
         $stmt->closeCursor();
 
         return $count;
+    }
+
+
+    /**
+     * Selects a collection of Castle2Attack objects pre-filled with their User objects.
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of Castle2Attack objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinUser(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(Castle2AttackPeer::DATABASE_NAME);
+        }
+
+        Castle2AttackPeer::addSelectColumns($criteria);
+        $startcol = Castle2AttackPeer::NUM_HYDRATE_COLUMNS;
+        UserPeer::addSelectColumns($criteria);
+
+        $criteria->addJoin(Castle2AttackPeer::USER_ID, UserPeer::ID, $join_behavior);
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = Castle2AttackPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = Castle2AttackPeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+
+                $cls = Castle2AttackPeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                Castle2AttackPeer::addInstanceToPool($obj1, $key1);
+            } // if $obj1 already loaded
+
+            $key2 = UserPeer::getPrimaryKeyHashFromRow($row, $startcol);
+            if ($key2 !== null) {
+                $obj2 = UserPeer::getInstanceFromPool($key2);
+                if (!$obj2) {
+
+                    $cls = UserPeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol);
+                    UserPeer::addInstanceToPool($obj2, $key2);
+                } // if obj2 already loaded
+
+                // Add the $obj1 (Castle2Attack) to $obj2 (User)
+                $obj2->addCastle2Attack($obj1);
+
+            } // if joined row was not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
     }
 
 
@@ -729,6 +857,8 @@ abstract class BaseCastle2AttackPeer
             $con = Propel::getConnection(Castle2AttackPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
+        $criteria->addJoin(Castle2AttackPeer::USER_ID, UserPeer::ID, $join_behavior);
+
         $criteria->addJoin(Castle2AttackPeer::ATTACK_ID, AttackPeer::ID, $join_behavior);
 
         $criteria->addJoin(Castle2AttackPeer::CASTLE_ID, CastlePeer::ID, $join_behavior);
@@ -767,11 +897,16 @@ abstract class BaseCastle2AttackPeer
         Castle2AttackPeer::addSelectColumns($criteria);
         $startcol2 = Castle2AttackPeer::NUM_HYDRATE_COLUMNS;
 
+        UserPeer::addSelectColumns($criteria);
+        $startcol3 = $startcol2 + UserPeer::NUM_HYDRATE_COLUMNS;
+
         AttackPeer::addSelectColumns($criteria);
-        $startcol3 = $startcol2 + AttackPeer::NUM_HYDRATE_COLUMNS;
+        $startcol4 = $startcol3 + AttackPeer::NUM_HYDRATE_COLUMNS;
 
         CastlePeer::addSelectColumns($criteria);
-        $startcol4 = $startcol3 + CastlePeer::NUM_HYDRATE_COLUMNS;
+        $startcol5 = $startcol4 + CastlePeer::NUM_HYDRATE_COLUMNS;
+
+        $criteria->addJoin(Castle2AttackPeer::USER_ID, UserPeer::ID, $join_behavior);
 
         $criteria->addJoin(Castle2AttackPeer::ATTACK_ID, AttackPeer::ID, $join_behavior);
 
@@ -794,40 +929,58 @@ abstract class BaseCastle2AttackPeer
                 Castle2AttackPeer::addInstanceToPool($obj1, $key1);
             } // if obj1 already loaded
 
-            // Add objects for joined Attack rows
+            // Add objects for joined User rows
 
-            $key2 = AttackPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+            $key2 = UserPeer::getPrimaryKeyHashFromRow($row, $startcol2);
             if ($key2 !== null) {
-                $obj2 = AttackPeer::getInstanceFromPool($key2);
+                $obj2 = UserPeer::getInstanceFromPool($key2);
                 if (!$obj2) {
 
-                    $cls = AttackPeer::getOMClass();
+                    $cls = UserPeer::getOMClass();
 
                     $obj2 = new $cls();
                     $obj2->hydrate($row, $startcol2);
-                    AttackPeer::addInstanceToPool($obj2, $key2);
+                    UserPeer::addInstanceToPool($obj2, $key2);
                 } // if obj2 loaded
 
-                // Add the $obj1 (Castle2Attack) to the collection in $obj2 (Attack)
+                // Add the $obj1 (Castle2Attack) to the collection in $obj2 (User)
                 $obj2->addCastle2Attack($obj1);
+            } // if joined row not null
+
+            // Add objects for joined Attack rows
+
+            $key3 = AttackPeer::getPrimaryKeyHashFromRow($row, $startcol3);
+            if ($key3 !== null) {
+                $obj3 = AttackPeer::getInstanceFromPool($key3);
+                if (!$obj3) {
+
+                    $cls = AttackPeer::getOMClass();
+
+                    $obj3 = new $cls();
+                    $obj3->hydrate($row, $startcol3);
+                    AttackPeer::addInstanceToPool($obj3, $key3);
+                } // if obj3 loaded
+
+                // Add the $obj1 (Castle2Attack) to the collection in $obj3 (Attack)
+                $obj3->addCastle2Attack($obj1);
             } // if joined row not null
 
             // Add objects for joined Castle rows
 
-            $key3 = CastlePeer::getPrimaryKeyHashFromRow($row, $startcol3);
-            if ($key3 !== null) {
-                $obj3 = CastlePeer::getInstanceFromPool($key3);
-                if (!$obj3) {
+            $key4 = CastlePeer::getPrimaryKeyHashFromRow($row, $startcol4);
+            if ($key4 !== null) {
+                $obj4 = CastlePeer::getInstanceFromPool($key4);
+                if (!$obj4) {
 
                     $cls = CastlePeer::getOMClass();
 
-                    $obj3 = new $cls();
-                    $obj3->hydrate($row, $startcol3);
-                    CastlePeer::addInstanceToPool($obj3, $key3);
-                } // if obj3 loaded
+                    $obj4 = new $cls();
+                    $obj4->hydrate($row, $startcol4);
+                    CastlePeer::addInstanceToPool($obj4, $key4);
+                } // if obj4 loaded
 
-                // Add the $obj1 (Castle2Attack) to the collection in $obj3 (Castle)
-                $obj3->addCastle2Attack($obj1);
+                // Add the $obj1 (Castle2Attack) to the collection in $obj4 (Castle)
+                $obj4->addCastle2Attack($obj1);
             } // if joined row not null
 
             $results[] = $obj1;
@@ -835,6 +988,59 @@ abstract class BaseCastle2AttackPeer
         $stmt->closeCursor();
 
         return $results;
+    }
+
+
+    /**
+     * Returns the number of rows matching criteria, joining the related User table
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return int Number of matching rows.
+     */
+    public static function doCountJoinAllExceptUser(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        // we're going to modify criteria, so copy it first
+        $criteria = clone $criteria;
+
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(Castle2AttackPeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
+        }
+
+        if (!$criteria->hasSelectClause()) {
+            Castle2AttackPeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY should not affect count
+
+        // Set the correct dbName
+        $criteria->setDbName(Castle2AttackPeer::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(Castle2AttackPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+
+        $criteria->addJoin(Castle2AttackPeer::ATTACK_ID, AttackPeer::ID, $join_behavior);
+
+        $criteria->addJoin(Castle2AttackPeer::CASTLE_ID, CastlePeer::ID, $join_behavior);
+
+        $stmt = BasePeer::doCount($criteria, $con);
+
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
+        }
+        $stmt->closeCursor();
+
+        return $count;
     }
 
 
@@ -873,6 +1079,8 @@ abstract class BaseCastle2AttackPeer
         if ($con === null) {
             $con = Propel::getConnection(Castle2AttackPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
+
+        $criteria->addJoin(Castle2AttackPeer::USER_ID, UserPeer::ID, $join_behavior);
 
         $criteria->addJoin(Castle2AttackPeer::CASTLE_ID, CastlePeer::ID, $join_behavior);
 
@@ -925,6 +1133,8 @@ abstract class BaseCastle2AttackPeer
             $con = Propel::getConnection(Castle2AttackPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
+        $criteria->addJoin(Castle2AttackPeer::USER_ID, UserPeer::ID, $join_behavior);
+
         $criteria->addJoin(Castle2AttackPeer::ATTACK_ID, AttackPeer::ID, $join_behavior);
 
         $stmt = BasePeer::doCount($criteria, $con);
@@ -941,7 +1151,7 @@ abstract class BaseCastle2AttackPeer
 
 
     /**
-     * Selects a collection of Castle2Attack objects pre-filled with all related objects except Attack.
+     * Selects a collection of Castle2Attack objects pre-filled with all related objects except User.
      *
      * @param      Criteria  $criteria
      * @param      PropelPDO $con
@@ -950,81 +1160,7 @@ abstract class BaseCastle2AttackPeer
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
-    public static function doSelectJoinAllExceptAttack(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
-    {
-        $criteria = clone $criteria;
-
-        // Set the correct dbName if it has not been overridden
-        // $criteria->getDbName() will return the same object if not set to another value
-        // so == check is okay and faster
-        if ($criteria->getDbName() == Propel::getDefaultDB()) {
-            $criteria->setDbName(Castle2AttackPeer::DATABASE_NAME);
-        }
-
-        Castle2AttackPeer::addSelectColumns($criteria);
-        $startcol2 = Castle2AttackPeer::NUM_HYDRATE_COLUMNS;
-
-        CastlePeer::addSelectColumns($criteria);
-        $startcol3 = $startcol2 + CastlePeer::NUM_HYDRATE_COLUMNS;
-
-        $criteria->addJoin(Castle2AttackPeer::CASTLE_ID, CastlePeer::ID, $join_behavior);
-
-
-        $stmt = BasePeer::doSelect($criteria, $con);
-        $results = array();
-
-        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-            $key1 = Castle2AttackPeer::getPrimaryKeyHashFromRow($row, 0);
-            if (null !== ($obj1 = Castle2AttackPeer::getInstanceFromPool($key1))) {
-                // We no longer rehydrate the object, since this can cause data loss.
-                // See http://www.propelorm.org/ticket/509
-                // $obj1->hydrate($row, 0, true); // rehydrate
-            } else {
-                $cls = Castle2AttackPeer::getOMClass();
-
-                $obj1 = new $cls();
-                $obj1->hydrate($row);
-                Castle2AttackPeer::addInstanceToPool($obj1, $key1);
-            } // if obj1 already loaded
-
-                // Add objects for joined Castle rows
-
-                $key2 = CastlePeer::getPrimaryKeyHashFromRow($row, $startcol2);
-                if ($key2 !== null) {
-                    $obj2 = CastlePeer::getInstanceFromPool($key2);
-                    if (!$obj2) {
-
-                        $cls = CastlePeer::getOMClass();
-
-                    $obj2 = new $cls();
-                    $obj2->hydrate($row, $startcol2);
-                    CastlePeer::addInstanceToPool($obj2, $key2);
-                } // if $obj2 already loaded
-
-                // Add the $obj1 (Castle2Attack) to the collection in $obj2 (Castle)
-                $obj2->addCastle2Attack($obj1);
-
-            } // if joined row is not null
-
-            $results[] = $obj1;
-        }
-        $stmt->closeCursor();
-
-        return $results;
-    }
-
-
-    /**
-     * Selects a collection of Castle2Attack objects pre-filled with all related objects except Castle.
-     *
-     * @param      Criteria  $criteria
-     * @param      PropelPDO $con
-     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-     * @return array           Array of Castle2Attack objects.
-     * @throws PropelException Any exceptions caught during processing will be
-     *		 rethrown wrapped into a PropelException.
-     */
-    public static function doSelectJoinAllExceptCastle(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public static function doSelectJoinAllExceptUser(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         $criteria = clone $criteria;
 
@@ -1041,7 +1177,12 @@ abstract class BaseCastle2AttackPeer
         AttackPeer::addSelectColumns($criteria);
         $startcol3 = $startcol2 + AttackPeer::NUM_HYDRATE_COLUMNS;
 
+        CastlePeer::addSelectColumns($criteria);
+        $startcol4 = $startcol3 + CastlePeer::NUM_HYDRATE_COLUMNS;
+
         $criteria->addJoin(Castle2AttackPeer::ATTACK_ID, AttackPeer::ID, $join_behavior);
+
+        $criteria->addJoin(Castle2AttackPeer::CASTLE_ID, CastlePeer::ID, $join_behavior);
 
 
         $stmt = BasePeer::doSelect($criteria, $con);
@@ -1077,6 +1218,221 @@ abstract class BaseCastle2AttackPeer
 
                 // Add the $obj1 (Castle2Attack) to the collection in $obj2 (Attack)
                 $obj2->addCastle2Attack($obj1);
+
+            } // if joined row is not null
+
+                // Add objects for joined Castle rows
+
+                $key3 = CastlePeer::getPrimaryKeyHashFromRow($row, $startcol3);
+                if ($key3 !== null) {
+                    $obj3 = CastlePeer::getInstanceFromPool($key3);
+                    if (!$obj3) {
+
+                        $cls = CastlePeer::getOMClass();
+
+                    $obj3 = new $cls();
+                    $obj3->hydrate($row, $startcol3);
+                    CastlePeer::addInstanceToPool($obj3, $key3);
+                } // if $obj3 already loaded
+
+                // Add the $obj1 (Castle2Attack) to the collection in $obj3 (Castle)
+                $obj3->addCastle2Attack($obj1);
+
+            } // if joined row is not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
+    }
+
+
+    /**
+     * Selects a collection of Castle2Attack objects pre-filled with all related objects except Attack.
+     *
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of Castle2Attack objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinAllExceptAttack(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        // $criteria->getDbName() will return the same object if not set to another value
+        // so == check is okay and faster
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(Castle2AttackPeer::DATABASE_NAME);
+        }
+
+        Castle2AttackPeer::addSelectColumns($criteria);
+        $startcol2 = Castle2AttackPeer::NUM_HYDRATE_COLUMNS;
+
+        UserPeer::addSelectColumns($criteria);
+        $startcol3 = $startcol2 + UserPeer::NUM_HYDRATE_COLUMNS;
+
+        CastlePeer::addSelectColumns($criteria);
+        $startcol4 = $startcol3 + CastlePeer::NUM_HYDRATE_COLUMNS;
+
+        $criteria->addJoin(Castle2AttackPeer::USER_ID, UserPeer::ID, $join_behavior);
+
+        $criteria->addJoin(Castle2AttackPeer::CASTLE_ID, CastlePeer::ID, $join_behavior);
+
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = Castle2AttackPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = Castle2AttackPeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+                $cls = Castle2AttackPeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                Castle2AttackPeer::addInstanceToPool($obj1, $key1);
+            } // if obj1 already loaded
+
+                // Add objects for joined User rows
+
+                $key2 = UserPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+                if ($key2 !== null) {
+                    $obj2 = UserPeer::getInstanceFromPool($key2);
+                    if (!$obj2) {
+
+                        $cls = UserPeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol2);
+                    UserPeer::addInstanceToPool($obj2, $key2);
+                } // if $obj2 already loaded
+
+                // Add the $obj1 (Castle2Attack) to the collection in $obj2 (User)
+                $obj2->addCastle2Attack($obj1);
+
+            } // if joined row is not null
+
+                // Add objects for joined Castle rows
+
+                $key3 = CastlePeer::getPrimaryKeyHashFromRow($row, $startcol3);
+                if ($key3 !== null) {
+                    $obj3 = CastlePeer::getInstanceFromPool($key3);
+                    if (!$obj3) {
+
+                        $cls = CastlePeer::getOMClass();
+
+                    $obj3 = new $cls();
+                    $obj3->hydrate($row, $startcol3);
+                    CastlePeer::addInstanceToPool($obj3, $key3);
+                } // if $obj3 already loaded
+
+                // Add the $obj1 (Castle2Attack) to the collection in $obj3 (Castle)
+                $obj3->addCastle2Attack($obj1);
+
+            } // if joined row is not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
+    }
+
+
+    /**
+     * Selects a collection of Castle2Attack objects pre-filled with all related objects except Castle.
+     *
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of Castle2Attack objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinAllExceptCastle(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        // $criteria->getDbName() will return the same object if not set to another value
+        // so == check is okay and faster
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(Castle2AttackPeer::DATABASE_NAME);
+        }
+
+        Castle2AttackPeer::addSelectColumns($criteria);
+        $startcol2 = Castle2AttackPeer::NUM_HYDRATE_COLUMNS;
+
+        UserPeer::addSelectColumns($criteria);
+        $startcol3 = $startcol2 + UserPeer::NUM_HYDRATE_COLUMNS;
+
+        AttackPeer::addSelectColumns($criteria);
+        $startcol4 = $startcol3 + AttackPeer::NUM_HYDRATE_COLUMNS;
+
+        $criteria->addJoin(Castle2AttackPeer::USER_ID, UserPeer::ID, $join_behavior);
+
+        $criteria->addJoin(Castle2AttackPeer::ATTACK_ID, AttackPeer::ID, $join_behavior);
+
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = Castle2AttackPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = Castle2AttackPeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+                $cls = Castle2AttackPeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                Castle2AttackPeer::addInstanceToPool($obj1, $key1);
+            } // if obj1 already loaded
+
+                // Add objects for joined User rows
+
+                $key2 = UserPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+                if ($key2 !== null) {
+                    $obj2 = UserPeer::getInstanceFromPool($key2);
+                    if (!$obj2) {
+
+                        $cls = UserPeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol2);
+                    UserPeer::addInstanceToPool($obj2, $key2);
+                } // if $obj2 already loaded
+
+                // Add the $obj1 (Castle2Attack) to the collection in $obj2 (User)
+                $obj2->addCastle2Attack($obj1);
+
+            } // if joined row is not null
+
+                // Add objects for joined Attack rows
+
+                $key3 = AttackPeer::getPrimaryKeyHashFromRow($row, $startcol3);
+                if ($key3 !== null) {
+                    $obj3 = AttackPeer::getInstanceFromPool($key3);
+                    if (!$obj3) {
+
+                        $cls = AttackPeer::getOMClass();
+
+                    $obj3 = new $cls();
+                    $obj3->hydrate($row, $startcol3);
+                    AttackPeer::addInstanceToPool($obj3, $key3);
+                } // if $obj3 already loaded
+
+                // Add the $obj1 (Castle2Attack) to the collection in $obj3 (Attack)
+                $obj3->addCastle2Attack($obj1);
 
             } // if joined row is not null
 
@@ -1142,6 +1498,10 @@ abstract class BaseCastle2AttackPeer
             $criteria = $values->buildCriteria(); // build Criteria from Castle2Attack object
         }
 
+        if ($criteria->containsKey(Castle2AttackPeer::ID) && $criteria->keyContainsValue(Castle2AttackPeer::ID) ) {
+            throw new PropelException('Cannot insert a value for auto-increment primary key ('.Castle2AttackPeer::ID.')');
+        }
+
 
         // Set the correct dbName
         $criteria->setDbName(Castle2AttackPeer::DATABASE_NAME);
@@ -1180,18 +1540,10 @@ abstract class BaseCastle2AttackPeer
         if ($values instanceof Criteria) {
             $criteria = clone $values; // rename for clarity
 
-            $comparison = $criteria->getComparison(Castle2AttackPeer::CASTLE_ID);
-            $value = $criteria->remove(Castle2AttackPeer::CASTLE_ID);
+            $comparison = $criteria->getComparison(Castle2AttackPeer::ID);
+            $value = $criteria->remove(Castle2AttackPeer::ID);
             if ($value) {
-                $selectCriteria->add(Castle2AttackPeer::CASTLE_ID, $value, $comparison);
-            } else {
-                $selectCriteria->setPrimaryTableName(Castle2AttackPeer::TABLE_NAME);
-            }
-
-            $comparison = $criteria->getComparison(Castle2AttackPeer::ATTACK_ID);
-            $value = $criteria->remove(Castle2AttackPeer::ATTACK_ID);
-            if ($value) {
-                $selectCriteria->add(Castle2AttackPeer::ATTACK_ID, $value, $comparison);
+                $selectCriteria->add(Castle2AttackPeer::ID, $value, $comparison);
             } else {
                 $selectCriteria->setPrimaryTableName(Castle2AttackPeer::TABLE_NAME);
             }
@@ -1270,18 +1622,10 @@ abstract class BaseCastle2AttackPeer
             $criteria = $values->buildPkeyCriteria();
         } else { // it's a primary key, or an array of pks
             $criteria = new Criteria(Castle2AttackPeer::DATABASE_NAME);
-            // primary key is composite; we therefore, expect
-            // the primary key passed to be an array of pkey values
-            if (count($values) == count($values, COUNT_RECURSIVE)) {
-                // array is not multi-dimensional
-                $values = array($values);
-            }
-            foreach ($values as $value) {
-                $criterion = $criteria->getNewCriterion(Castle2AttackPeer::CASTLE_ID, $value[0]);
-                $criterion->addAnd($criteria->getNewCriterion(Castle2AttackPeer::ATTACK_ID, $value[1]));
-                $criteria->addOr($criterion);
-                // we can invalidate the cache for this single PK
-                Castle2AttackPeer::removeInstanceFromPool($value);
+            $criteria->add(Castle2AttackPeer::ID, (array) $values, Criteria::IN);
+            // invalidate the cache for this object(s)
+            foreach ((array) $values as $singleval) {
+                Castle2AttackPeer::removeInstanceFromPool($singleval);
             }
         }
 
@@ -1344,28 +1688,58 @@ abstract class BaseCastle2AttackPeer
     }
 
     /**
-     * Retrieve object using using composite pkey values.
-     * @param   int $castle_id
-     * @param   int $attack_id
-     * @param      PropelPDO $con
+     * Retrieve a single object by pkey.
+     *
+     * @param int $pk the primary key.
+     * @param      PropelPDO $con the connection to use
      * @return Castle2Attack
      */
-    public static function retrieveByPK($castle_id, $attack_id, PropelPDO $con = null) {
-        $_instancePoolKey = serialize(array((string) $castle_id, (string) $attack_id));
-         if (null !== ($obj = Castle2AttackPeer::getInstanceFromPool($_instancePoolKey))) {
-             return $obj;
+    public static function retrieveByPK($pk, PropelPDO $con = null)
+    {
+
+        if (null !== ($obj = Castle2AttackPeer::getInstanceFromPool((string) $pk))) {
+            return $obj;
         }
 
         if ($con === null) {
             $con = Propel::getConnection(Castle2AttackPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
+
         $criteria = new Criteria(Castle2AttackPeer::DATABASE_NAME);
-        $criteria->add(Castle2AttackPeer::CASTLE_ID, $castle_id);
-        $criteria->add(Castle2AttackPeer::ATTACK_ID, $attack_id);
+        $criteria->add(Castle2AttackPeer::ID, $pk);
+
         $v = Castle2AttackPeer::doSelect($criteria, $con);
 
-        return !empty($v) ? $v[0] : null;
+        return !empty($v) > 0 ? $v[0] : null;
     }
+
+    /**
+     * Retrieve multiple objects by pkey.
+     *
+     * @param      array $pks List of primary keys
+     * @param      PropelPDO $con the connection to use
+     * @return Castle2Attack[]
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function retrieveByPKs($pks, PropelPDO $con = null)
+    {
+        if ($con === null) {
+            $con = Propel::getConnection(Castle2AttackPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+
+        $objs = null;
+        if (empty($pks)) {
+            $objs = array();
+        } else {
+            $criteria = new Criteria(Castle2AttackPeer::DATABASE_NAME);
+            $criteria->add(Castle2AttackPeer::ID, $pks, Criteria::IN);
+            $objs = Castle2AttackPeer::doSelect($criteria, $con);
+        }
+
+        return $objs;
+    }
+
 } // BaseCastle2AttackPeer
 
 // This is the static code needed to register the TableMap for this table with the main Propel class.

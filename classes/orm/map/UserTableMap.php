@@ -56,7 +56,11 @@ class UserTableMap extends TableMap
      */
     public function buildRelations()
     {
+        $this->addRelation('Castle', 'Castle', RelationMap::ONE_TO_MANY, array('id' => 'user_id', ), null, null, 'Castles');
+        $this->addRelation('CastleType', 'CastleType', RelationMap::ONE_TO_MANY, array('id' => 'user_id', ), null, null, 'CastleTypes');
         $this->addRelation('TimeTable', 'TimeTable', RelationMap::ONE_TO_MANY, array('id' => 'user_id', ), null, null, 'TimeTables');
+        $this->addRelation('CastleLocation', 'CastleLocation', RelationMap::ONE_TO_MANY, array('id' => 'user_id', ), null, null, 'CastleLocations');
+        $this->addRelation('Target', 'Target', RelationMap::ONE_TO_MANY, array('id' => 'user_id', ), null, null, 'Targets');
     } // buildRelations()
 
 } // UserTableMap

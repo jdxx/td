@@ -36,11 +36,13 @@ class Castle2AttackTableMap extends TableMap
         $this->setPhpName('Castle2Attack');
         $this->setClassname('Castle2Attack');
         $this->setPackage('orm');
-        $this->setUseIdGenerator(false);
+        $this->setUseIdGenerator(true);
         $this->setIsCrossRef(true);
         // columns
-        $this->addForeignPrimaryKey('castle_id', 'CastleId', 'INTEGER' , 'castle', 'id', true, 10, null);
-        $this->addForeignPrimaryKey('attack_id', 'AttackId', 'INTEGER' , 'attack', 'id', true, 6, null);
+        $this->addPrimaryKey('id', 'Id', 'INTEGER', true, 6, null);
+        $this->addForeignKey('castle_id', 'CastleId', 'INTEGER', 'castle', 'id', false, 10, null);
+        $this->addForeignKey('attack_id', 'AttackId', 'INTEGER', 'attack', 'id', false, 6, null);
+        $this->addForeignKey('user_id', 'UserId', 'INTEGER', 'user', 'id', false, null, null);
         // validators
     } // initialize()
 
@@ -49,6 +51,7 @@ class Castle2AttackTableMap extends TableMap
      */
     public function buildRelations()
     {
+        $this->addRelation('User', 'User', RelationMap::MANY_TO_ONE, array('user_id' => 'id', ), null, null);
         $this->addRelation('Attack', 'Attack', RelationMap::MANY_TO_ONE, array('attack_id' => 'id', ), null, null);
         $this->addRelation('Castle', 'Castle', RelationMap::MANY_TO_ONE, array('castle_id' => 'id', ), null, null);
     } // buildRelations()

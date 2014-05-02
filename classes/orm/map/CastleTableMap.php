@@ -39,7 +39,7 @@ class CastleTableMap extends TableMap
         $this->setUseIdGenerator(true);
         // columns
         $this->addPrimaryKey('id', 'Id', 'INTEGER', true, 10, null);
-        $this->addColumn('user', 'User', 'INTEGER', false, 4, null);
+        $this->addForeignKey('user_id', 'UserId', 'INTEGER', 'user', 'id', false, null, null);
         $this->addColumn('name', 'Name', 'VARCHAR', false, 50, null);
         $this->addForeignKey('castle_type_id', 'CastleTypeId', 'INTEGER', 'castle_type', 'id', false, 6, null);
         $this->addForeignKey('castle_location_id', 'CastleLocationId', 'INTEGER', 'castle_location', 'id', false, 6, null);
@@ -84,7 +84,8 @@ class CastleTableMap extends TableMap
     {
         $this->addRelation('CastleType', 'CastleType', RelationMap::MANY_TO_ONE, array('castle_type_id' => 'id', ), null, null);
         $this->addRelation('CastleLocation', 'CastleLocation', RelationMap::MANY_TO_ONE, array('castle_location_id' => 'id', ), null, null);
-        $this->addRelation('Castle2Attack', 'Castle2Attack', RelationMap::ONE_TO_MANY, array('id' => 'castle_id', ), null, null, 'Castle2Attacks');
+        $this->addRelation('User', 'User', RelationMap::MANY_TO_ONE, array('user_id' => 'id', ), null, null);
+        $this->addRelation('Attack2castle', 'Attack2castle', RelationMap::ONE_TO_MANY, array('id' => 'castle_id', ), null, null, 'Attack2castles');
         $this->addRelation('Attack', 'Attack', RelationMap::MANY_TO_MANY, array(), null, null, 'Attacks');
     } // buildRelations()
 

@@ -32,9 +32,25 @@
  * @method UserQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
  * @method UserQuery innerJoin($relation) Adds a INNER JOIN clause to the query
  *
+ * @method UserQuery leftJoinCastle($relationAlias = null) Adds a LEFT JOIN clause to the query using the Castle relation
+ * @method UserQuery rightJoinCastle($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Castle relation
+ * @method UserQuery innerJoinCastle($relationAlias = null) Adds a INNER JOIN clause to the query using the Castle relation
+ *
+ * @method UserQuery leftJoinCastleType($relationAlias = null) Adds a LEFT JOIN clause to the query using the CastleType relation
+ * @method UserQuery rightJoinCastleType($relationAlias = null) Adds a RIGHT JOIN clause to the query using the CastleType relation
+ * @method UserQuery innerJoinCastleType($relationAlias = null) Adds a INNER JOIN clause to the query using the CastleType relation
+ *
  * @method UserQuery leftJoinTimeTable($relationAlias = null) Adds a LEFT JOIN clause to the query using the TimeTable relation
  * @method UserQuery rightJoinTimeTable($relationAlias = null) Adds a RIGHT JOIN clause to the query using the TimeTable relation
  * @method UserQuery innerJoinTimeTable($relationAlias = null) Adds a INNER JOIN clause to the query using the TimeTable relation
+ *
+ * @method UserQuery leftJoinCastleLocation($relationAlias = null) Adds a LEFT JOIN clause to the query using the CastleLocation relation
+ * @method UserQuery rightJoinCastleLocation($relationAlias = null) Adds a RIGHT JOIN clause to the query using the CastleLocation relation
+ * @method UserQuery innerJoinCastleLocation($relationAlias = null) Adds a INNER JOIN clause to the query using the CastleLocation relation
+ *
+ * @method UserQuery leftJoinTarget($relationAlias = null) Adds a LEFT JOIN clause to the query using the Target relation
+ * @method UserQuery rightJoinTarget($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Target relation
+ * @method UserQuery innerJoinTarget($relationAlias = null) Adds a INNER JOIN clause to the query using the Target relation
  *
  * @method User findOne(PropelPDO $con = null) Return the first User matching the query
  * @method User findOneOrCreate(PropelPDO $con = null) Return the first User matching the query, or a new User object populated from the query conditions when no match is found
@@ -584,6 +600,154 @@ abstract class BaseUserQuery extends ModelCriteria
     }
 
     /**
+     * Filter the query by a related Castle object
+     *
+     * @param   Castle|PropelObjectCollection $castle  the related object to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return                 UserQuery The current query, for fluid interface
+     * @throws PropelException - if the provided filter is invalid.
+     */
+    public function filterByCastle($castle, $comparison = null)
+    {
+        if ($castle instanceof Castle) {
+            return $this
+                ->addUsingAlias(UserPeer::ID, $castle->getUserId(), $comparison);
+        } elseif ($castle instanceof PropelObjectCollection) {
+            return $this
+                ->useCastleQuery()
+                ->filterByPrimaryKeys($castle->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByCastle() only accepts arguments of type Castle or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the Castle relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return UserQuery The current query, for fluid interface
+     */
+    public function joinCastle($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('Castle');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'Castle');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the Castle relation Castle object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   CastleQuery A secondary query class using the current class as primary query
+     */
+    public function useCastleQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        return $this
+            ->joinCastle($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'Castle', 'CastleQuery');
+    }
+
+    /**
+     * Filter the query by a related CastleType object
+     *
+     * @param   CastleType|PropelObjectCollection $castleType  the related object to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return                 UserQuery The current query, for fluid interface
+     * @throws PropelException - if the provided filter is invalid.
+     */
+    public function filterByCastleType($castleType, $comparison = null)
+    {
+        if ($castleType instanceof CastleType) {
+            return $this
+                ->addUsingAlias(UserPeer::ID, $castleType->getUserId(), $comparison);
+        } elseif ($castleType instanceof PropelObjectCollection) {
+            return $this
+                ->useCastleTypeQuery()
+                ->filterByPrimaryKeys($castleType->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByCastleType() only accepts arguments of type CastleType or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the CastleType relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return UserQuery The current query, for fluid interface
+     */
+    public function joinCastleType($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('CastleType');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'CastleType');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the CastleType relation CastleType object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   CastleTypeQuery A secondary query class using the current class as primary query
+     */
+    public function useCastleTypeQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        return $this
+            ->joinCastleType($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'CastleType', 'CastleTypeQuery');
+    }
+
+    /**
      * Filter the query by a related TimeTable object
      *
      * @param   TimeTable|PropelObjectCollection $timeTable  the related object to use as filter
@@ -655,6 +819,154 @@ abstract class BaseUserQuery extends ModelCriteria
         return $this
             ->joinTimeTable($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'TimeTable', 'TimeTableQuery');
+    }
+
+    /**
+     * Filter the query by a related CastleLocation object
+     *
+     * @param   CastleLocation|PropelObjectCollection $castleLocation  the related object to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return                 UserQuery The current query, for fluid interface
+     * @throws PropelException - if the provided filter is invalid.
+     */
+    public function filterByCastleLocation($castleLocation, $comparison = null)
+    {
+        if ($castleLocation instanceof CastleLocation) {
+            return $this
+                ->addUsingAlias(UserPeer::ID, $castleLocation->getUserId(), $comparison);
+        } elseif ($castleLocation instanceof PropelObjectCollection) {
+            return $this
+                ->useCastleLocationQuery()
+                ->filterByPrimaryKeys($castleLocation->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByCastleLocation() only accepts arguments of type CastleLocation or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the CastleLocation relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return UserQuery The current query, for fluid interface
+     */
+    public function joinCastleLocation($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('CastleLocation');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'CastleLocation');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the CastleLocation relation CastleLocation object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   CastleLocationQuery A secondary query class using the current class as primary query
+     */
+    public function useCastleLocationQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        return $this
+            ->joinCastleLocation($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'CastleLocation', 'CastleLocationQuery');
+    }
+
+    /**
+     * Filter the query by a related Target object
+     *
+     * @param   Target|PropelObjectCollection $target  the related object to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return                 UserQuery The current query, for fluid interface
+     * @throws PropelException - if the provided filter is invalid.
+     */
+    public function filterByTarget($target, $comparison = null)
+    {
+        if ($target instanceof Target) {
+            return $this
+                ->addUsingAlias(UserPeer::ID, $target->getUserId(), $comparison);
+        } elseif ($target instanceof PropelObjectCollection) {
+            return $this
+                ->useTargetQuery()
+                ->filterByPrimaryKeys($target->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByTarget() only accepts arguments of type Target or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the Target relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return UserQuery The current query, for fluid interface
+     */
+    public function joinTarget($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('Target');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'Target');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the Target relation Target object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   TargetQuery A secondary query class using the current class as primary query
+     */
+    public function useTargetQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        return $this
+            ->joinTarget($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'Target', 'TargetQuery');
     }
 
     /**

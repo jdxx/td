@@ -1,0 +1,13 @@
+<form method="post" action="">
+	<div class="ui-grid-0">
+		<div class="ui-block-a">
+			<ul data-role="listview">
+				<?php 
+				foreach($this->users as $user): ?>
+					<li><a href="/user/update/<?php echo $user->getId(); ?>"><?php echo $user->getName(); ?></a></li>
+					<?php 
+				endforeach; ?>
+			</ul>
+		</div>
+	</div>
+</form>

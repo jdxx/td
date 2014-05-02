@@ -1,22 +1,24 @@
-		<form method="post" action="">
-<div data-role="page" class="jqm-demos ui-responsive-panel" id="td-castletype-update-1" data-title="<?php echo APP_TITLE; ?>">
-	<?php echo $this->render('header.phtml'); ?>
-	
-	<div data-role="main" class="ui-content">
-<!-- 		<form method="post" action="">	 -->
+<form method="post" action="">
+	<div data-role="page" class="jqm-demos ui-responsive-panel" id="td-castletype-update-1" data-title="<?php echo APP_TITLE; ?>">
+		<?php echo $this->render('header.phtml'); ?>
+		
+		<div data-role="main" class="ui-content">
 			<div class="ui-grid-b">
 				<div class="ui-block-a td-block-a">
-					<div class="ui-field-contain td-field-contain-troops">
-					    <label for="type1">Typ:</label>
-					    <select name="Type" id="type1" onchange="moveDataToPage2();">
-					        <option value="Off">Off</option>
-					        <option value="Def">Def</option>
-					        <option value="Mix">Mix</option>
-					    </select>
-					</div>
+			
+					<fieldset data-role="controlgroup" data-type="horizontal">
+				        <legend>Typ:</legend>
+				        <input name="Type" id="type1a" value="Off" <?php echo ($this->castleType->getType() == 'Off') ? 'checked="checked"' : '';?> type="radio">
+				        <label for="type1a">Off</label>
+				        <input name="Type" id="type1b" value="Def" <?php echo ($this->castleType->getType() == 'Def') ? 'checked="checked"' : '';?> type="radio">
+				        <label for="type1b">Def</label>
+				        <input name="Type" id="type1c" value="Mix" <?php echo ($this->castleType->getType() == 'Mix') ? 'checked="checked"' : '';?> type="radio">
+				        <label for="type1c">Mixed</label>
+				    </fieldset>					
+					
 					<div class="ui-field-contain td-field-contain">
 						<label for="name1">Name</label>
-						<input type="text" name="Name" id="name1" value="<?php echo $this->castleType->getName(); ?>" onchange="moveDataToPage2();">
+						<input type="text" name="Name" id="name1" value="<?php echo $this->castleType->getName(); ?>">
 					</div>			
 					
 					<h3 class="ui-bar ui-bar-a td-link-margin-top">Bev&ouml;lkerung</h3>
@@ -102,30 +104,31 @@
 				</div>		    
 				    
 			</div>
-<!-- 		</form> -->
-
+		</div>
+		<?php echo $this->render('footer.phtml'); ?>
 	</div>
-	<?php echo $this->render('footer.phtml'); ?>
-</div>
-
-<div data-role="page" class="jqm-demos ui-responsive-panel" id="td-castletype-update-2" data-title="<?php echo APP_TITLE; ?>">
-	<?php echo $this->render('header.phtml'); ?>
 	
-	<div data-role="main" class="ui-content">
-<!-- 		<form method="post" action=""> -->
+	<div data-role="page" class="jqm-demos ui-responsive-panel" id="td-castletype-update-2" data-title="<?php echo APP_TITLE; ?>">
+		<?php echo $this->render('header.phtml'); ?>
+		
+		<div data-role="main" class="ui-content">
 			<div class="ui-grid-b">
 				<div class="ui-block-a td-block-a">
-					<div class="ui-field-contain td-field-contain-troops">
-					    <label for="type2">Typ:</label>
-					    <select name="Type" id="type2" onchange="moveDataToPage1();">
-					        <option value="Off">Off</option>
-					        <option value="Def">Def</option>
-					        <option value="Mix">Mix</option>
-					    </select>
-					</div>			
+
+					<fieldset data-role="controlgroup" data-type="horizontal">
+				        <legend>Typ:</legend>
+				        <input name="Type2" id="type2a" value="Off" <?php echo ($this->castleType->getType() == 'Off') ? 'checked="checked"' : '';?> type="radio">
+				        <label for="type2a">Off</label>
+				        <input name="Type2" id="type2b" value="Def" <?php echo ($this->castleType->getType() == 'Def') ? 'checked="checked"' : '';?> type="radio">
+				        <label for="type2b">Def</label>
+				        <input name="Type2" id="type2c" value="Mix" <?php echo ($this->castleType->getType() == 'Mix') ? 'checked="checked"' : '';?> type="radio">
+				        <label for="type2c">Mixed</label>
+				    </fieldset>
+					
+							
 					<div class="ui-field-contain td-field-contain">
 						<label for="name2">Name</label>
-						<input type="text" name="Name" id="name2" value="<?php echo $this->castleType->getName(); ?>" onchange="moveDataToPage1();">
+						<input type="text" name="Name" id="name2" value="<?php echo $this->castleType->getName(); ?>">
 					</div>
 				
 					<h3 class="ui-bar ui-bar-a td-link-margin-top">Bev&ouml;lkerung</h3>
@@ -222,7 +225,7 @@
 				         <div data-role="controlgroup" class="td-controlgroup" data-type="horizontal">
 					         <input data-icon="minus" data-iconpos="notext" value="-1" type="button" onclick="updatePopulation('steinlager', -1)">
 					         <input name="Steinlager" id="steinlager" value="<?php echo $this->castleType->getSteinlager(); ?>" data-wrapper-class="number-2d controlgroup-textinput ui-btn" type="number" onchange="updatePopulation('steinlager', 0)">
-					         <input data-icon="plus" data-iconpos="notext" value="+1" type="button" onclick="updatePopulation('holzlager', 1)">
+					         <input data-icon="plus" data-iconpos="notext" value="+1" type="button" onclick="updatePopulation('steinlager', 1)">
 				         </div>
 				    </div>
 				    <div class="ui-field-contain td-field-contain-buildings">
@@ -238,7 +241,7 @@
 				         <div data-role="controlgroup" class="td-controlgroup" data-type="horizontal">
 					         <input data-icon="minus" data-iconpos="notext" value="-1" type="button" onclick="updatePopulation('erzlager', -1)">
 					         <input name="Erzlager" id="erzlager" value="<?php echo $this->castleType->getErzlager(); ?>" data-wrapper-class="number-2d controlgroup-textinput ui-btn" type="number" onchange="updatePopulation('erzlager', 0)">
-					         <input data-icon="plus" data-iconpos="notext" value="+1" type="button" onclick="updatePopulation('holzlager', 1)">
+					         <input data-icon="plus" data-iconpos="notext" value="+1" type="button" onclick="updatePopulation('erzlager', 1)">
 				         </div>
 				    </div>  
 		        </div>
@@ -293,9 +296,7 @@
 				    </div>
 				</div>
 			</div>
-<!-- 		</form> -->
-
+		</div>
+		<?php echo $this->render('footer.phtml'); ?>
 	</div>
-	<?php echo $this->render('footer.phtml'); ?>
-</div>
 </form>

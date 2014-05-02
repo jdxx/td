@@ -90,10 +90,34 @@ abstract class BaseUser extends BaseObject implements Persistent
     protected $import_date;
 
     /**
+     * @var        PropelObjectCollection|Castle[] Collection to store aggregation of Castle objects.
+     */
+    protected $collCastles;
+    protected $collCastlesPartial;
+
+    /**
+     * @var        PropelObjectCollection|CastleType[] Collection to store aggregation of CastleType objects.
+     */
+    protected $collCastleTypes;
+    protected $collCastleTypesPartial;
+
+    /**
      * @var        PropelObjectCollection|TimeTable[] Collection to store aggregation of TimeTable objects.
      */
     protected $collTimeTables;
     protected $collTimeTablesPartial;
+
+    /**
+     * @var        PropelObjectCollection|CastleLocation[] Collection to store aggregation of CastleLocation objects.
+     */
+    protected $collCastleLocations;
+    protected $collCastleLocationsPartial;
+
+    /**
+     * @var        PropelObjectCollection|Target[] Collection to store aggregation of Target objects.
+     */
+    protected $collTargets;
+    protected $collTargetsPartial;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -119,7 +143,31 @@ abstract class BaseUser extends BaseObject implements Persistent
      * An array of objects scheduled for deletion.
      * @var		PropelObjectCollection
      */
+    protected $castlesScheduledForDeletion = null;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var		PropelObjectCollection
+     */
+    protected $castleTypesScheduledForDeletion = null;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var		PropelObjectCollection
+     */
     protected $timeTablesScheduledForDeletion = null;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var		PropelObjectCollection
+     */
+    protected $castleLocationsScheduledForDeletion = null;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var		PropelObjectCollection
+     */
+    protected $targetsScheduledForDeletion = null;
 
     /**
      * Get the [id] column value.
@@ -593,7 +641,15 @@ abstract class BaseUser extends BaseObject implements Persistent
 
         if ($deep) {  // also de-associate any related objects?
 
+            $this->collCastles = null;
+
+            $this->collCastleTypes = null;
+
             $this->collTimeTables = null;
+
+            $this->collCastleLocations = null;
+
+            $this->collTargets = null;
 
         } // if (deep)
     }
@@ -719,6 +775,42 @@ abstract class BaseUser extends BaseObject implements Persistent
                 $this->resetModified();
             }
 
+            if ($this->castlesScheduledForDeletion !== null) {
+                if (!$this->castlesScheduledForDeletion->isEmpty()) {
+                    foreach ($this->castlesScheduledForDeletion as $castle) {
+                        // need to save related object because we set the relation to null
+                        $castle->save($con);
+                    }
+                    $this->castlesScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collCastles !== null) {
+                foreach ($this->collCastles as $referrerFK) {
+                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
+            if ($this->castleTypesScheduledForDeletion !== null) {
+                if (!$this->castleTypesScheduledForDeletion->isEmpty()) {
+                    foreach ($this->castleTypesScheduledForDeletion as $castleType) {
+                        // need to save related object because we set the relation to null
+                        $castleType->save($con);
+                    }
+                    $this->castleTypesScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collCastleTypes !== null) {
+                foreach ($this->collCastleTypes as $referrerFK) {
+                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
             if ($this->timeTablesScheduledForDeletion !== null) {
                 if (!$this->timeTablesScheduledForDeletion->isEmpty()) {
                     foreach ($this->timeTablesScheduledForDeletion as $timeTable) {
@@ -731,6 +823,42 @@ abstract class BaseUser extends BaseObject implements Persistent
 
             if ($this->collTimeTables !== null) {
                 foreach ($this->collTimeTables as $referrerFK) {
+                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
+            if ($this->castleLocationsScheduledForDeletion !== null) {
+                if (!$this->castleLocationsScheduledForDeletion->isEmpty()) {
+                    foreach ($this->castleLocationsScheduledForDeletion as $castleLocation) {
+                        // need to save related object because we set the relation to null
+                        $castleLocation->save($con);
+                    }
+                    $this->castleLocationsScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collCastleLocations !== null) {
+                foreach ($this->collCastleLocations as $referrerFK) {
+                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
+            if ($this->targetsScheduledForDeletion !== null) {
+                if (!$this->targetsScheduledForDeletion->isEmpty()) {
+                    foreach ($this->targetsScheduledForDeletion as $target) {
+                        // need to save related object because we set the relation to null
+                        $target->save($con);
+                    }
+                    $this->targetsScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collTargets !== null) {
+                foreach ($this->collTargets as $referrerFK) {
                     if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
                         $affectedRows += $referrerFK->save($con);
                     }
@@ -933,8 +1061,40 @@ abstract class BaseUser extends BaseObject implements Persistent
             }
 
 
+                if ($this->collCastles !== null) {
+                    foreach ($this->collCastles as $referrerFK) {
+                        if (!$referrerFK->validate($columns)) {
+                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+                        }
+                    }
+                }
+
+                if ($this->collCastleTypes !== null) {
+                    foreach ($this->collCastleTypes as $referrerFK) {
+                        if (!$referrerFK->validate($columns)) {
+                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+                        }
+                    }
+                }
+
                 if ($this->collTimeTables !== null) {
                     foreach ($this->collTimeTables as $referrerFK) {
+                        if (!$referrerFK->validate($columns)) {
+                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+                        }
+                    }
+                }
+
+                if ($this->collCastleLocations !== null) {
+                    foreach ($this->collCastleLocations as $referrerFK) {
+                        if (!$referrerFK->validate($columns)) {
+                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+                        }
+                    }
+                }
+
+                if ($this->collTargets !== null) {
+                    foreach ($this->collTargets as $referrerFK) {
                         if (!$referrerFK->validate($columns)) {
                             $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
                         }
@@ -1052,8 +1212,20 @@ abstract class BaseUser extends BaseObject implements Persistent
         }
 
         if ($includeForeignObjects) {
+            if (null !== $this->collCastles) {
+                $result['Castles'] = $this->collCastles->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collCastleTypes) {
+                $result['CastleTypes'] = $this->collCastleTypes->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
             if (null !== $this->collTimeTables) {
                 $result['TimeTables'] = $this->collTimeTables->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collCastleLocations) {
+                $result['CastleLocations'] = $this->collCastleLocations->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collTargets) {
+                $result['Targets'] = $this->collTargets->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
         }
 
@@ -1254,9 +1426,33 @@ abstract class BaseUser extends BaseObject implements Persistent
             // store object hash to prevent cycle
             $this->startCopy = true;
 
+            foreach ($this->getCastles() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addCastle($relObj->copy($deepCopy));
+                }
+            }
+
+            foreach ($this->getCastleTypes() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addCastleType($relObj->copy($deepCopy));
+                }
+            }
+
             foreach ($this->getTimeTables() as $relObj) {
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
                     $copyObj->addTimeTable($relObj->copy($deepCopy));
+                }
+            }
+
+            foreach ($this->getCastleLocations() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addCastleLocation($relObj->copy($deepCopy));
+                }
+            }
+
+            foreach ($this->getTargets() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addTarget($relObj->copy($deepCopy));
                 }
             }
 
@@ -1321,9 +1517,521 @@ abstract class BaseUser extends BaseObject implements Persistent
      */
     public function initRelation($relationName)
     {
+        if ('Castle' == $relationName) {
+            $this->initCastles();
+        }
+        if ('CastleType' == $relationName) {
+            $this->initCastleTypes();
+        }
         if ('TimeTable' == $relationName) {
             $this->initTimeTables();
         }
+        if ('CastleLocation' == $relationName) {
+            $this->initCastleLocations();
+        }
+        if ('Target' == $relationName) {
+            $this->initTargets();
+        }
+    }
+
+    /**
+     * Clears out the collCastles collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return User The current object (for fluent API support)
+     * @see        addCastles()
+     */
+    public function clearCastles()
+    {
+        $this->collCastles = null; // important to set this to null since that means it is uninitialized
+        $this->collCastlesPartial = null;
+
+        return $this;
+    }
+
+    /**
+     * reset is the collCastles collection loaded partially
+     *
+     * @return void
+     */
+    public function resetPartialCastles($v = true)
+    {
+        $this->collCastlesPartial = $v;
+    }
+
+    /**
+     * Initializes the collCastles collection.
+     *
+     * By default this just sets the collCastles collection to an empty array (like clearcollCastles());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initCastles($overrideExisting = true)
+    {
+        if (null !== $this->collCastles && !$overrideExisting) {
+            return;
+        }
+        $this->collCastles = new PropelObjectCollection();
+        $this->collCastles->setModel('Castle');
+    }
+
+    /**
+     * Gets an array of Castle objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this User is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param Criteria $criteria optional Criteria object to narrow the query
+     * @param PropelPDO $con optional connection object
+     * @return PropelObjectCollection|Castle[] List of Castle objects
+     * @throws PropelException
+     */
+    public function getCastles($criteria = null, PropelPDO $con = null)
+    {
+        $partial = $this->collCastlesPartial && !$this->isNew();
+        if (null === $this->collCastles || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collCastles) {
+                // return empty collection
+                $this->initCastles();
+            } else {
+                $collCastles = CastleQuery::create(null, $criteria)
+                    ->filterByUser($this)
+                    ->find($con);
+                if (null !== $criteria) {
+                    if (false !== $this->collCastlesPartial && count($collCastles)) {
+                      $this->initCastles(false);
+
+                      foreach ($collCastles as $obj) {
+                        if (false == $this->collCastles->contains($obj)) {
+                          $this->collCastles->append($obj);
+                        }
+                      }
+
+                      $this->collCastlesPartial = true;
+                    }
+
+                    $collCastles->getInternalIterator()->rewind();
+
+                    return $collCastles;
+                }
+
+                if ($partial && $this->collCastles) {
+                    foreach ($this->collCastles as $obj) {
+                        if ($obj->isNew()) {
+                            $collCastles[] = $obj;
+                        }
+                    }
+                }
+
+                $this->collCastles = $collCastles;
+                $this->collCastlesPartial = false;
+            }
+        }
+
+        return $this->collCastles;
+    }
+
+    /**
+     * Sets a collection of Castle objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param PropelCollection $castles A Propel collection.
+     * @param PropelPDO $con Optional connection object
+     * @return User The current object (for fluent API support)
+     */
+    public function setCastles(PropelCollection $castles, PropelPDO $con = null)
+    {
+        $castlesToDelete = $this->getCastles(new Criteria(), $con)->diff($castles);
+
+
+        $this->castlesScheduledForDeletion = $castlesToDelete;
+
+        foreach ($castlesToDelete as $castleRemoved) {
+            $castleRemoved->setUser(null);
+        }
+
+        $this->collCastles = null;
+        foreach ($castles as $castle) {
+            $this->addCastle($castle);
+        }
+
+        $this->collCastles = $castles;
+        $this->collCastlesPartial = false;
+
+        return $this;
+    }
+
+    /**
+     * Returns the number of related Castle objects.
+     *
+     * @param Criteria $criteria
+     * @param boolean $distinct
+     * @param PropelPDO $con
+     * @return int             Count of related Castle objects.
+     * @throws PropelException
+     */
+    public function countCastles(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    {
+        $partial = $this->collCastlesPartial && !$this->isNew();
+        if (null === $this->collCastles || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collCastles) {
+                return 0;
+            }
+
+            if ($partial && !$criteria) {
+                return count($this->getCastles());
+            }
+            $query = CastleQuery::create(null, $criteria);
+            if ($distinct) {
+                $query->distinct();
+            }
+
+            return $query
+                ->filterByUser($this)
+                ->count($con);
+        }
+
+        return count($this->collCastles);
+    }
+
+    /**
+     * Method called to associate a Castle object to this object
+     * through the Castle foreign key attribute.
+     *
+     * @param    Castle $l Castle
+     * @return User The current object (for fluent API support)
+     */
+    public function addCastle(Castle $l)
+    {
+        if ($this->collCastles === null) {
+            $this->initCastles();
+            $this->collCastlesPartial = true;
+        }
+
+        if (!in_array($l, $this->collCastles->getArrayCopy(), true)) { // only add it if the **same** object is not already associated
+            $this->doAddCastle($l);
+
+            if ($this->castlesScheduledForDeletion and $this->castlesScheduledForDeletion->contains($l)) {
+                $this->castlesScheduledForDeletion->remove($this->castlesScheduledForDeletion->search($l));
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param	Castle $castle The castle object to add.
+     */
+    protected function doAddCastle($castle)
+    {
+        $this->collCastles[]= $castle;
+        $castle->setUser($this);
+    }
+
+    /**
+     * @param	Castle $castle The castle object to remove.
+     * @return User The current object (for fluent API support)
+     */
+    public function removeCastle($castle)
+    {
+        if ($this->getCastles()->contains($castle)) {
+            $this->collCastles->remove($this->collCastles->search($castle));
+            if (null === $this->castlesScheduledForDeletion) {
+                $this->castlesScheduledForDeletion = clone $this->collCastles;
+                $this->castlesScheduledForDeletion->clear();
+            }
+            $this->castlesScheduledForDeletion[]= $castle;
+            $castle->setUser(null);
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this User is new, it will return
+     * an empty collection; or if this User has previously
+     * been saved, it will retrieve related Castles from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in User.
+     *
+     * @param Criteria $criteria optional Criteria object to narrow the query
+     * @param PropelPDO $con optional connection object
+     * @param string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|Castle[] List of Castle objects
+     */
+    public function getCastlesJoinCastleType($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = CastleQuery::create(null, $criteria);
+        $query->joinWith('CastleType', $join_behavior);
+
+        return $this->getCastles($query, $con);
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this User is new, it will return
+     * an empty collection; or if this User has previously
+     * been saved, it will retrieve related Castles from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in User.
+     *
+     * @param Criteria $criteria optional Criteria object to narrow the query
+     * @param PropelPDO $con optional connection object
+     * @param string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|Castle[] List of Castle objects
+     */
+    public function getCastlesJoinCastleLocation($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = CastleQuery::create(null, $criteria);
+        $query->joinWith('CastleLocation', $join_behavior);
+
+        return $this->getCastles($query, $con);
+    }
+
+    /**
+     * Clears out the collCastleTypes collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return User The current object (for fluent API support)
+     * @see        addCastleTypes()
+     */
+    public function clearCastleTypes()
+    {
+        $this->collCastleTypes = null; // important to set this to null since that means it is uninitialized
+        $this->collCastleTypesPartial = null;
+
+        return $this;
+    }
+
+    /**
+     * reset is the collCastleTypes collection loaded partially
+     *
+     * @return void
+     */
+    public function resetPartialCastleTypes($v = true)
+    {
+        $this->collCastleTypesPartial = $v;
+    }
+
+    /**
+     * Initializes the collCastleTypes collection.
+     *
+     * By default this just sets the collCastleTypes collection to an empty array (like clearcollCastleTypes());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initCastleTypes($overrideExisting = true)
+    {
+        if (null !== $this->collCastleTypes && !$overrideExisting) {
+            return;
+        }
+        $this->collCastleTypes = new PropelObjectCollection();
+        $this->collCastleTypes->setModel('CastleType');
+    }
+
+    /**
+     * Gets an array of CastleType objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this User is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param Criteria $criteria optional Criteria object to narrow the query
+     * @param PropelPDO $con optional connection object
+     * @return PropelObjectCollection|CastleType[] List of CastleType objects
+     * @throws PropelException
+     */
+    public function getCastleTypes($criteria = null, PropelPDO $con = null)
+    {
+        $partial = $this->collCastleTypesPartial && !$this->isNew();
+        if (null === $this->collCastleTypes || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collCastleTypes) {
+                // return empty collection
+                $this->initCastleTypes();
+            } else {
+                $collCastleTypes = CastleTypeQuery::create(null, $criteria)
+                    ->filterByUser($this)
+                    ->find($con);
+                if (null !== $criteria) {
+                    if (false !== $this->collCastleTypesPartial && count($collCastleTypes)) {
+                      $this->initCastleTypes(false);
+
+                      foreach ($collCastleTypes as $obj) {
+                        if (false == $this->collCastleTypes->contains($obj)) {
+                          $this->collCastleTypes->append($obj);
+                        }
+                      }
+
+                      $this->collCastleTypesPartial = true;
+                    }
+
+                    $collCastleTypes->getInternalIterator()->rewind();
+
+                    return $collCastleTypes;
+                }
+
+                if ($partial && $this->collCastleTypes) {
+                    foreach ($this->collCastleTypes as $obj) {
+                        if ($obj->isNew()) {
+                            $collCastleTypes[] = $obj;
+                        }
+                    }
+                }
+
+                $this->collCastleTypes = $collCastleTypes;
+                $this->collCastleTypesPartial = false;
+            }
+        }
+
+        return $this->collCastleTypes;
+    }
+
+    /**
+     * Sets a collection of CastleType objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param PropelCollection $castleTypes A Propel collection.
+     * @param PropelPDO $con Optional connection object
+     * @return User The current object (for fluent API support)
+     */
+    public function setCastleTypes(PropelCollection $castleTypes, PropelPDO $con = null)
+    {
+        $castleTypesToDelete = $this->getCastleTypes(new Criteria(), $con)->diff($castleTypes);
+
+
+        $this->castleTypesScheduledForDeletion = $castleTypesToDelete;
+
+        foreach ($castleTypesToDelete as $castleTypeRemoved) {
+            $castleTypeRemoved->setUser(null);
+        }
+
+        $this->collCastleTypes = null;
+        foreach ($castleTypes as $castleType) {
+            $this->addCastleType($castleType);
+        }
+
+        $this->collCastleTypes = $castleTypes;
+        $this->collCastleTypesPartial = false;
+
+        return $this;
+    }
+
+    /**
+     * Returns the number of related CastleType objects.
+     *
+     * @param Criteria $criteria
+     * @param boolean $distinct
+     * @param PropelPDO $con
+     * @return int             Count of related CastleType objects.
+     * @throws PropelException
+     */
+    public function countCastleTypes(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    {
+        $partial = $this->collCastleTypesPartial && !$this->isNew();
+        if (null === $this->collCastleTypes || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collCastleTypes) {
+                return 0;
+            }
+
+            if ($partial && !$criteria) {
+                return count($this->getCastleTypes());
+            }
+            $query = CastleTypeQuery::create(null, $criteria);
+            if ($distinct) {
+                $query->distinct();
+            }
+
+            return $query
+                ->filterByUser($this)
+                ->count($con);
+        }
+
+        return count($this->collCastleTypes);
+    }
+
+    /**
+     * Method called to associate a CastleType object to this object
+     * through the CastleType foreign key attribute.
+     *
+     * @param    CastleType $l CastleType
+     * @return User The current object (for fluent API support)
+     */
+    public function addCastleType(CastleType $l)
+    {
+        if ($this->collCastleTypes === null) {
+            $this->initCastleTypes();
+            $this->collCastleTypesPartial = true;
+        }
+
+        if (!in_array($l, $this->collCastleTypes->getArrayCopy(), true)) { // only add it if the **same** object is not already associated
+            $this->doAddCastleType($l);
+
+            if ($this->castleTypesScheduledForDeletion and $this->castleTypesScheduledForDeletion->contains($l)) {
+                $this->castleTypesScheduledForDeletion->remove($this->castleTypesScheduledForDeletion->search($l));
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param	CastleType $castleType The castleType object to add.
+     */
+    protected function doAddCastleType($castleType)
+    {
+        $this->collCastleTypes[]= $castleType;
+        $castleType->setUser($this);
+    }
+
+    /**
+     * @param	CastleType $castleType The castleType object to remove.
+     * @return User The current object (for fluent API support)
+     */
+    public function removeCastleType($castleType)
+    {
+        if ($this->getCastleTypes()->contains($castleType)) {
+            $this->collCastleTypes->remove($this->collCastleTypes->search($castleType));
+            if (null === $this->castleTypesScheduledForDeletion) {
+                $this->castleTypesScheduledForDeletion = clone $this->collCastleTypes;
+                $this->castleTypesScheduledForDeletion->clear();
+            }
+            $this->castleTypesScheduledForDeletion[]= $castleType;
+            $castleType->setUser(null);
+        }
+
+        return $this;
     }
 
     /**
@@ -1552,6 +2260,456 @@ abstract class BaseUser extends BaseObject implements Persistent
     }
 
     /**
+     * Clears out the collCastleLocations collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return User The current object (for fluent API support)
+     * @see        addCastleLocations()
+     */
+    public function clearCastleLocations()
+    {
+        $this->collCastleLocations = null; // important to set this to null since that means it is uninitialized
+        $this->collCastleLocationsPartial = null;
+
+        return $this;
+    }
+
+    /**
+     * reset is the collCastleLocations collection loaded partially
+     *
+     * @return void
+     */
+    public function resetPartialCastleLocations($v = true)
+    {
+        $this->collCastleLocationsPartial = $v;
+    }
+
+    /**
+     * Initializes the collCastleLocations collection.
+     *
+     * By default this just sets the collCastleLocations collection to an empty array (like clearcollCastleLocations());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initCastleLocations($overrideExisting = true)
+    {
+        if (null !== $this->collCastleLocations && !$overrideExisting) {
+            return;
+        }
+        $this->collCastleLocations = new PropelObjectCollection();
+        $this->collCastleLocations->setModel('CastleLocation');
+    }
+
+    /**
+     * Gets an array of CastleLocation objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this User is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param Criteria $criteria optional Criteria object to narrow the query
+     * @param PropelPDO $con optional connection object
+     * @return PropelObjectCollection|CastleLocation[] List of CastleLocation objects
+     * @throws PropelException
+     */
+    public function getCastleLocations($criteria = null, PropelPDO $con = null)
+    {
+        $partial = $this->collCastleLocationsPartial && !$this->isNew();
+        if (null === $this->collCastleLocations || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collCastleLocations) {
+                // return empty collection
+                $this->initCastleLocations();
+            } else {
+                $collCastleLocations = CastleLocationQuery::create(null, $criteria)
+                    ->filterByUser($this)
+                    ->find($con);
+                if (null !== $criteria) {
+                    if (false !== $this->collCastleLocationsPartial && count($collCastleLocations)) {
+                      $this->initCastleLocations(false);
+
+                      foreach ($collCastleLocations as $obj) {
+                        if (false == $this->collCastleLocations->contains($obj)) {
+                          $this->collCastleLocations->append($obj);
+                        }
+                      }
+
+                      $this->collCastleLocationsPartial = true;
+                    }
+
+                    $collCastleLocations->getInternalIterator()->rewind();
+
+                    return $collCastleLocations;
+                }
+
+                if ($partial && $this->collCastleLocations) {
+                    foreach ($this->collCastleLocations as $obj) {
+                        if ($obj->isNew()) {
+                            $collCastleLocations[] = $obj;
+                        }
+                    }
+                }
+
+                $this->collCastleLocations = $collCastleLocations;
+                $this->collCastleLocationsPartial = false;
+            }
+        }
+
+        return $this->collCastleLocations;
+    }
+
+    /**
+     * Sets a collection of CastleLocation objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param PropelCollection $castleLocations A Propel collection.
+     * @param PropelPDO $con Optional connection object
+     * @return User The current object (for fluent API support)
+     */
+    public function setCastleLocations(PropelCollection $castleLocations, PropelPDO $con = null)
+    {
+        $castleLocationsToDelete = $this->getCastleLocations(new Criteria(), $con)->diff($castleLocations);
+
+
+        $this->castleLocationsScheduledForDeletion = $castleLocationsToDelete;
+
+        foreach ($castleLocationsToDelete as $castleLocationRemoved) {
+            $castleLocationRemoved->setUser(null);
+        }
+
+        $this->collCastleLocations = null;
+        foreach ($castleLocations as $castleLocation) {
+            $this->addCastleLocation($castleLocation);
+        }
+
+        $this->collCastleLocations = $castleLocations;
+        $this->collCastleLocationsPartial = false;
+
+        return $this;
+    }
+
+    /**
+     * Returns the number of related CastleLocation objects.
+     *
+     * @param Criteria $criteria
+     * @param boolean $distinct
+     * @param PropelPDO $con
+     * @return int             Count of related CastleLocation objects.
+     * @throws PropelException
+     */
+    public function countCastleLocations(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    {
+        $partial = $this->collCastleLocationsPartial && !$this->isNew();
+        if (null === $this->collCastleLocations || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collCastleLocations) {
+                return 0;
+            }
+
+            if ($partial && !$criteria) {
+                return count($this->getCastleLocations());
+            }
+            $query = CastleLocationQuery::create(null, $criteria);
+            if ($distinct) {
+                $query->distinct();
+            }
+
+            return $query
+                ->filterByUser($this)
+                ->count($con);
+        }
+
+        return count($this->collCastleLocations);
+    }
+
+    /**
+     * Method called to associate a CastleLocation object to this object
+     * through the CastleLocation foreign key attribute.
+     *
+     * @param    CastleLocation $l CastleLocation
+     * @return User The current object (for fluent API support)
+     */
+    public function addCastleLocation(CastleLocation $l)
+    {
+        if ($this->collCastleLocations === null) {
+            $this->initCastleLocations();
+            $this->collCastleLocationsPartial = true;
+        }
+
+        if (!in_array($l, $this->collCastleLocations->getArrayCopy(), true)) { // only add it if the **same** object is not already associated
+            $this->doAddCastleLocation($l);
+
+            if ($this->castleLocationsScheduledForDeletion and $this->castleLocationsScheduledForDeletion->contains($l)) {
+                $this->castleLocationsScheduledForDeletion->remove($this->castleLocationsScheduledForDeletion->search($l));
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param	CastleLocation $castleLocation The castleLocation object to add.
+     */
+    protected function doAddCastleLocation($castleLocation)
+    {
+        $this->collCastleLocations[]= $castleLocation;
+        $castleLocation->setUser($this);
+    }
+
+    /**
+     * @param	CastleLocation $castleLocation The castleLocation object to remove.
+     * @return User The current object (for fluent API support)
+     */
+    public function removeCastleLocation($castleLocation)
+    {
+        if ($this->getCastleLocations()->contains($castleLocation)) {
+            $this->collCastleLocations->remove($this->collCastleLocations->search($castleLocation));
+            if (null === $this->castleLocationsScheduledForDeletion) {
+                $this->castleLocationsScheduledForDeletion = clone $this->collCastleLocations;
+                $this->castleLocationsScheduledForDeletion->clear();
+            }
+            $this->castleLocationsScheduledForDeletion[]= $castleLocation;
+            $castleLocation->setUser(null);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Clears out the collTargets collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return User The current object (for fluent API support)
+     * @see        addTargets()
+     */
+    public function clearTargets()
+    {
+        $this->collTargets = null; // important to set this to null since that means it is uninitialized
+        $this->collTargetsPartial = null;
+
+        return $this;
+    }
+
+    /**
+     * reset is the collTargets collection loaded partially
+     *
+     * @return void
+     */
+    public function resetPartialTargets($v = true)
+    {
+        $this->collTargetsPartial = $v;
+    }
+
+    /**
+     * Initializes the collTargets collection.
+     *
+     * By default this just sets the collTargets collection to an empty array (like clearcollTargets());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initTargets($overrideExisting = true)
+    {
+        if (null !== $this->collTargets && !$overrideExisting) {
+            return;
+        }
+        $this->collTargets = new PropelObjectCollection();
+        $this->collTargets->setModel('Target');
+    }
+
+    /**
+     * Gets an array of Target objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this User is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param Criteria $criteria optional Criteria object to narrow the query
+     * @param PropelPDO $con optional connection object
+     * @return PropelObjectCollection|Target[] List of Target objects
+     * @throws PropelException
+     */
+    public function getTargets($criteria = null, PropelPDO $con = null)
+    {
+        $partial = $this->collTargetsPartial && !$this->isNew();
+        if (null === $this->collTargets || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collTargets) {
+                // return empty collection
+                $this->initTargets();
+            } else {
+                $collTargets = TargetQuery::create(null, $criteria)
+                    ->filterByUser($this)
+                    ->find($con);
+                if (null !== $criteria) {
+                    if (false !== $this->collTargetsPartial && count($collTargets)) {
+                      $this->initTargets(false);
+
+                      foreach ($collTargets as $obj) {
+                        if (false == $this->collTargets->contains($obj)) {
+                          $this->collTargets->append($obj);
+                        }
+                      }
+
+                      $this->collTargetsPartial = true;
+                    }
+
+                    $collTargets->getInternalIterator()->rewind();
+
+                    return $collTargets;
+                }
+
+                if ($partial && $this->collTargets) {
+                    foreach ($this->collTargets as $obj) {
+                        if ($obj->isNew()) {
+                            $collTargets[] = $obj;
+                        }
+                    }
+                }
+
+                $this->collTargets = $collTargets;
+                $this->collTargetsPartial = false;
+            }
+        }
+
+        return $this->collTargets;
+    }
+
+    /**
+     * Sets a collection of Target objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param PropelCollection $targets A Propel collection.
+     * @param PropelPDO $con Optional connection object
+     * @return User The current object (for fluent API support)
+     */
+    public function setTargets(PropelCollection $targets, PropelPDO $con = null)
+    {
+        $targetsToDelete = $this->getTargets(new Criteria(), $con)->diff($targets);
+
+
+        $this->targetsScheduledForDeletion = $targetsToDelete;
+
+        foreach ($targetsToDelete as $targetRemoved) {
+            $targetRemoved->setUser(null);
+        }
+
+        $this->collTargets = null;
+        foreach ($targets as $target) {
+            $this->addTarget($target);
+        }
+
+        $this->collTargets = $targets;
+        $this->collTargetsPartial = false;
+
+        return $this;
+    }
+
+    /**
+     * Returns the number of related Target objects.
+     *
+     * @param Criteria $criteria
+     * @param boolean $distinct
+     * @param PropelPDO $con
+     * @return int             Count of related Target objects.
+     * @throws PropelException
+     */
+    public function countTargets(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    {
+        $partial = $this->collTargetsPartial && !$this->isNew();
+        if (null === $this->collTargets || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collTargets) {
+                return 0;
+            }
+
+            if ($partial && !$criteria) {
+                return count($this->getTargets());
+            }
+            $query = TargetQuery::create(null, $criteria);
+            if ($distinct) {
+                $query->distinct();
+            }
+
+            return $query
+                ->filterByUser($this)
+                ->count($con);
+        }
+
+        return count($this->collTargets);
+    }
+
+    /**
+     * Method called to associate a Target object to this object
+     * through the Target foreign key attribute.
+     *
+     * @param    Target $l Target
+     * @return User The current object (for fluent API support)
+     */
+    public function addTarget(Target $l)
+    {
+        if ($this->collTargets === null) {
+            $this->initTargets();
+            $this->collTargetsPartial = true;
+        }
+
+        if (!in_array($l, $this->collTargets->getArrayCopy(), true)) { // only add it if the **same** object is not already associated
+            $this->doAddTarget($l);
+
+            if ($this->targetsScheduledForDeletion and $this->targetsScheduledForDeletion->contains($l)) {
+                $this->targetsScheduledForDeletion->remove($this->targetsScheduledForDeletion->search($l));
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param	Target $target The target object to add.
+     */
+    protected function doAddTarget($target)
+    {
+        $this->collTargets[]= $target;
+        $target->setUser($this);
+    }
+
+    /**
+     * @param	Target $target The target object to remove.
+     * @return User The current object (for fluent API support)
+     */
+    public function removeTarget($target)
+    {
+        if ($this->getTargets()->contains($target)) {
+            $this->collTargets->remove($this->collTargets->search($target));
+            if (null === $this->targetsScheduledForDeletion) {
+                $this->targetsScheduledForDeletion = clone $this->collTargets;
+                $this->targetsScheduledForDeletion->clear();
+            }
+            $this->targetsScheduledForDeletion[]= $target;
+            $target->setUser(null);
+        }
+
+        return $this;
+    }
+
+    /**
      * Clears the current object and sets all attributes to their default values
      */
     public function clear()
@@ -1588,8 +2746,28 @@ abstract class BaseUser extends BaseObject implements Persistent
     {
         if ($deep && !$this->alreadyInClearAllReferencesDeep) {
             $this->alreadyInClearAllReferencesDeep = true;
+            if ($this->collCastles) {
+                foreach ($this->collCastles as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
+            if ($this->collCastleTypes) {
+                foreach ($this->collCastleTypes as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
             if ($this->collTimeTables) {
                 foreach ($this->collTimeTables as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
+            if ($this->collCastleLocations) {
+                foreach ($this->collCastleLocations as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
+            if ($this->collTargets) {
+                foreach ($this->collTargets as $o) {
                     $o->clearAllReferences($deep);
                 }
             }
@@ -1597,10 +2775,26 @@ abstract class BaseUser extends BaseObject implements Persistent
             $this->alreadyInClearAllReferencesDeep = false;
         } // if ($deep)
 
+        if ($this->collCastles instanceof PropelCollection) {
+            $this->collCastles->clearIterator();
+        }
+        $this->collCastles = null;
+        if ($this->collCastleTypes instanceof PropelCollection) {
+            $this->collCastleTypes->clearIterator();
+        }
+        $this->collCastleTypes = null;
         if ($this->collTimeTables instanceof PropelCollection) {
             $this->collTimeTables->clearIterator();
         }
         $this->collTimeTables = null;
+        if ($this->collCastleLocations instanceof PropelCollection) {
+            $this->collCastleLocations->clearIterator();
+        }
+        $this->collCastleLocations = null;
+        if ($this->collTargets instanceof PropelCollection) {
+            $this->collTargets->clearIterator();
+        }
+        $this->collTargets = null;
     }
 
     /**

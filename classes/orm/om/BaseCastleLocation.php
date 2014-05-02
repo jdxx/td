@@ -36,10 +36,10 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
     protected $id;
 
     /**
-     * The value for the user field.
+     * The value for the user_id field.
      * @var        int
      */
-    protected $user;
+    protected $user_id;
 
     /**
      * The value for the name field.
@@ -82,6 +82,11 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
      * @var        int
      */
     protected $tree_level;
+
+    /**
+     * @var        User
+     */
+    protected $aUser;
 
     /**
      * @var        PropelObjectCollection|Castle[] Collection to store aggregation of Castle objects.
@@ -148,14 +153,14 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
     }
 
     /**
-     * Get the [user] column value.
+     * Get the [user_id] column value.
      *
      * @return int
      */
-    public function getUser()
+    public function getUserId()
     {
 
-        return $this->user;
+        return $this->user_id;
     }
 
     /**
@@ -315,25 +320,29 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
     } // setId()
 
     /**
-     * Set the value of [user] column.
+     * Set the value of [user_id] column.
      *
      * @param  int $v new value
      * @return CastleLocation The current object (for fluent API support)
      */
-    public function setUser($v)
+    public function setUserId($v)
     {
         if ($v !== null && is_numeric($v)) {
             $v = (int) $v;
         }
 
-        if ($this->user !== $v) {
-            $this->user = $v;
-            $this->modifiedColumns[] = CastleLocationPeer::USER;
+        if ($this->user_id !== $v) {
+            $this->user_id = $v;
+            $this->modifiedColumns[] = CastleLocationPeer::USER_ID;
+        }
+
+        if ($this->aUser !== null && $this->aUser->getId() !== $v) {
+            $this->aUser = null;
         }
 
 
         return $this;
-    } // setUser()
+    } // setUserId()
 
     /**
      * Set the value of [name] column.
@@ -519,7 +528,7 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
         try {
 
             $this->id = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
-            $this->user = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
+            $this->user_id = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
             $this->name = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
             $this->parent_id = ($row[$startcol + 3] !== null) ? (int) $row[$startcol + 3] : null;
             $this->created_at = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
@@ -559,6 +568,9 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
     public function ensureConsistency()
     {
 
+        if ($this->aUser !== null && $this->user_id !== $this->aUser->getId()) {
+            $this->aUser = null;
+        }
     } // ensureConsistency
 
     /**
@@ -598,6 +610,7 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
 
         if ($deep) {  // also de-associate any related objects?
 
+            $this->aUser = null;
             $this->collCastles = null;
 
         } // if (deep)
@@ -630,7 +643,7 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
             $ret = $this->preDelete($con);
             // nested_set behavior
             if ($this->isRoot()) {
-                throw new PropelException('Deletion of a root node is disabled for nested sets. Use CastleLocationPeer::deleteTree() instead to delete an entire tree');
+                throw new PropelException('Deletion of a root node is disabled for nested sets. Use CastleLocationPeer::deleteTree($scope) instead to delete an entire tree');
             }
 
             if ($this->isInTree()) {
@@ -643,7 +656,7 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
                 // nested_set behavior
                 if ($this->isInTree()) {
                     // fill up the room that was used by the node
-                    CastleLocationPeer::shiftRLValues(-2, $this->getRightValue() + 1, null, $con);
+                    CastleLocationPeer::shiftRLValues(-2, $this->getRightValue() + 1, null, $this->getScopeValue(), $con);
                 }
 
                 $con->commit();
@@ -690,9 +703,10 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
                 // check if no other root exist in, the tree
                 $nbRoots = CastleLocationQuery::create()
                     ->addUsingAlias(CastleLocationPeer::LEFT_COL, 1, Criteria::EQUAL)
+                    ->addUsingAlias(CastleLocationPeer::SCOPE_COL, $this->getScopeValue(), Criteria::EQUAL)
                     ->count($con);
                 if ($nbRoots > 0) {
-                        throw new PropelException('A root node already exists in this tree. To allow multiple root nodes, add the `use_scope` parameter in the nested_set behavior tag.');
+                        throw new PropelException(sprintf('A root node already exists in this tree with scope "%s".', $this->getScopeValue()));
                 }
             }
             $this->processNestedSetQueries($con);
@@ -749,6 +763,18 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
         $affectedRows = 0; // initialize var to track total num of affected rows
         if (!$this->alreadyInSave) {
             $this->alreadyInSave = true;
+
+            // We call the save method on the following object(s) if they
+            // were passed to this object by their corresponding set
+            // method.  This object relates to these object(s) by a
+            // foreign key reference.
+
+            if ($this->aUser !== null) {
+                if ($this->aUser->isModified() || $this->aUser->isNew()) {
+                    $affectedRows += $this->aUser->save($con);
+                }
+                $this->setUser($this->aUser);
+            }
 
             if ($this->isNew() || $this->isModified()) {
                 // persist changes
@@ -808,8 +834,8 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
         if ($this->isColumnModified(CastleLocationPeer::ID)) {
             $modifiedColumns[':p' . $index++]  = '`id`';
         }
-        if ($this->isColumnModified(CastleLocationPeer::USER)) {
-            $modifiedColumns[':p' . $index++]  = '`user`';
+        if ($this->isColumnModified(CastleLocationPeer::USER_ID)) {
+            $modifiedColumns[':p' . $index++]  = '`user_id`';
         }
         if ($this->isColumnModified(CastleLocationPeer::NAME)) {
             $modifiedColumns[':p' . $index++]  = '`name`';
@@ -846,8 +872,8 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
                     case '`id`':
                         $stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
                         break;
-                    case '`user`':
-                        $stmt->bindValue($identifier, $this->user, PDO::PARAM_INT);
+                    case '`user_id`':
+                        $stmt->bindValue($identifier, $this->user_id, PDO::PARAM_INT);
                         break;
                     case '`name`':
                         $stmt->bindValue($identifier, $this->name, PDO::PARAM_STR);
@@ -964,6 +990,18 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
             $failureMap = array();
 
 
+            // We call the validate method on the following object(s) if they
+            // were passed to this object by their corresponding set
+            // method.  This object relates to these object(s) by a
+            // foreign key reference.
+
+            if ($this->aUser !== null) {
+                if (!$this->aUser->validate($columns)) {
+                    $failureMap = array_merge($failureMap, $this->aUser->getValidationFailures());
+                }
+            }
+
+
             if (($retval = CastleLocationPeer::doValidate($this, $columns)) !== true) {
                 $failureMap = array_merge($failureMap, $retval);
             }
@@ -1016,7 +1054,7 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
                 return $this->getId();
                 break;
             case 1:
-                return $this->getUser();
+                return $this->getUserId();
                 break;
             case 2:
                 return $this->getName();
@@ -1069,7 +1107,7 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
         $keys = CastleLocationPeer::getFieldNames($keyType);
         $result = array(
             $keys[0] => $this->getId(),
-            $keys[1] => $this->getUser(),
+            $keys[1] => $this->getUserId(),
             $keys[2] => $this->getName(),
             $keys[3] => $this->getParentId(),
             $keys[4] => $this->getCreatedAt(),
@@ -1084,6 +1122,9 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
         }
 
         if ($includeForeignObjects) {
+            if (null !== $this->aUser) {
+                $result['User'] = $this->aUser->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+            }
             if (null !== $this->collCastles) {
                 $result['Castles'] = $this->collCastles->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
@@ -1125,7 +1166,7 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
                 $this->setId($value);
                 break;
             case 1:
-                $this->setUser($value);
+                $this->setUserId($value);
                 break;
             case 2:
                 $this->setName($value);
@@ -1173,7 +1214,7 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
         $keys = CastleLocationPeer::getFieldNames($keyType);
 
         if (array_key_exists($keys[0], $arr)) $this->setId($arr[$keys[0]]);
-        if (array_key_exists($keys[1], $arr)) $this->setUser($arr[$keys[1]]);
+        if (array_key_exists($keys[1], $arr)) $this->setUserId($arr[$keys[1]]);
         if (array_key_exists($keys[2], $arr)) $this->setName($arr[$keys[2]]);
         if (array_key_exists($keys[3], $arr)) $this->setParentId($arr[$keys[3]]);
         if (array_key_exists($keys[4], $arr)) $this->setCreatedAt($arr[$keys[4]]);
@@ -1193,7 +1234,7 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
         $criteria = new Criteria(CastleLocationPeer::DATABASE_NAME);
 
         if ($this->isColumnModified(CastleLocationPeer::ID)) $criteria->add(CastleLocationPeer::ID, $this->id);
-        if ($this->isColumnModified(CastleLocationPeer::USER)) $criteria->add(CastleLocationPeer::USER, $this->user);
+        if ($this->isColumnModified(CastleLocationPeer::USER_ID)) $criteria->add(CastleLocationPeer::USER_ID, $this->user_id);
         if ($this->isColumnModified(CastleLocationPeer::NAME)) $criteria->add(CastleLocationPeer::NAME, $this->name);
         if ($this->isColumnModified(CastleLocationPeer::PARENT_ID)) $criteria->add(CastleLocationPeer::PARENT_ID, $this->parent_id);
         if ($this->isColumnModified(CastleLocationPeer::CREATED_AT)) $criteria->add(CastleLocationPeer::CREATED_AT, $this->created_at);
@@ -1264,7 +1305,7 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
      */
     public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
     {
-        $copyObj->setUser($this->getUser());
+        $copyObj->setUserId($this->getUserId());
         $copyObj->setName($this->getName());
         $copyObj->setParentId($this->getParentId());
         $copyObj->setCreatedAt($this->getCreatedAt());
@@ -1334,6 +1375,58 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
         }
 
         return self::$peer;
+    }
+
+    /**
+     * Declares an association between this object and a User object.
+     *
+     * @param                  User $v
+     * @return CastleLocation The current object (for fluent API support)
+     * @throws PropelException
+     */
+    public function setUser(User $v = null)
+    {
+        if ($v === null) {
+            $this->setUserId(NULL);
+        } else {
+            $this->setUserId($v->getId());
+        }
+
+        $this->aUser = $v;
+
+        // Add binding for other direction of this n:n relationship.
+        // If this object has already been added to the User object, it will not be re-added.
+        if ($v !== null) {
+            $v->addCastleLocation($this);
+        }
+
+
+        return $this;
+    }
+
+
+    /**
+     * Get the associated User object
+     *
+     * @param PropelPDO $con Optional Connection object.
+     * @param $doQuery Executes a query to get the object if required
+     * @return User The associated User object.
+     * @throws PropelException
+     */
+    public function getUser(PropelPDO $con = null, $doQuery = true)
+    {
+        if ($this->aUser === null && ($this->user_id !== null) && $doQuery) {
+            $this->aUser = UserQuery::create()->findPk($this->user_id, $con);
+            /* The following can be used additionally to
+                guarantee the related object contains a reference
+                to this object.  This level of coupling may, however, be
+                undesirable since it could result in an only partially populated collection
+                in the referenced object.
+                $this->aUser->addCastleLocations($this);
+             */
+        }
+
+        return $this->aUser;
     }
 
 
@@ -1602,13 +1695,38 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
         return $this->getCastles($query, $con);
     }
 
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this CastleLocation is new, it will return
+     * an empty collection; or if this CastleLocation has previously
+     * been saved, it will retrieve related Castles from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in CastleLocation.
+     *
+     * @param Criteria $criteria optional Criteria object to narrow the query
+     * @param PropelPDO $con optional connection object
+     * @param string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|Castle[] List of Castle objects
+     */
+    public function getCastlesJoinUser($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = CastleQuery::create(null, $criteria);
+        $query->joinWith('User', $join_behavior);
+
+        return $this->getCastles($query, $con);
+    }
+
     /**
      * Clears the current object and sets all attributes to their default values
      */
     public function clear()
     {
         $this->id = null;
-        $this->user = null;
+        $this->user_id = null;
         $this->name = null;
         $this->parent_id = null;
         $this->created_at = null;
@@ -1643,6 +1761,9 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
                     $o->clearAllReferences($deep);
                 }
             }
+            if ($this->aUser instanceof Persistent) {
+              $this->aUser->clearAllReferences($deep);
+            }
 
             $this->alreadyInClearAllReferencesDeep = false;
         } // if ($deep)
@@ -1654,6 +1775,7 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
             $this->collCastles->clearIterator();
         }
         $this->collCastles = null;
+        $this->aUser = null;
     }
 
     /**
@@ -1738,6 +1860,17 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
     }
 
     /**
+     * Proxy getter method for the scope value of the nested set model.
+     * It provides a generic way to get the value, whatever the actual column name is.
+     *
+     * @return     int The nested set scope value
+     */
+    public function getScopeValue()
+    {
+        return $this->user_id;
+    }
+
+    /**
      * Proxy setter method for the left value of the nested set model.
      * It provides a generic way to set the value, whatever the actual column name is.
      *
@@ -1771,6 +1904,18 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
     public function setLevel($v)
     {
         return $this->setTreeLevel($v);
+    }
+
+    /**
+     * Proxy setter method for the scope value of the nested set model.
+     * It provides a generic way to set the value, whatever the actual column name is.
+     *
+     * @param      int $v The nested set scope value
+     * @return     CastleLocation The current object (for fluent API support)
+     */
+    public function setScopeValue($v)
+    {
+        return $this->setUserId($v);
     }
 
     /**
@@ -1830,6 +1975,9 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
      */
     public function isDescendantOf($parent)
     {
+        if ($this->getScopeValue() !== $parent->getScopeValue()) {
+            return false; //since the `this` and $parent are in different scopes, there's no way that `this` is be a descendant of $parent.
+        }
 
         return $this->isInTree() && $this->getLeftValue() > $parent->getLeftValue() && $this->getRightValue() < $parent->getRightValue();
     }
@@ -1904,6 +2052,7 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
 
         return CastleLocationQuery::create()
             ->filterByTreeRight($this->getLeftValue() - 1)
+            ->inTree($this->getScopeValue())
             ->count($con) > 0;
     }
 
@@ -1917,6 +2066,7 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
     {
         return CastleLocationQuery::create()
             ->filterByTreeRight($this->getLeftValue() - 1)
+            ->inTree($this->getScopeValue())
             ->findOne($con);
     }
 
@@ -1934,6 +2084,7 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
 
         return CastleLocationQuery::create()
             ->filterByTreeLeft($this->getRightValue() + 1)
+            ->inTree($this->getScopeValue())
             ->count($con) > 0;
     }
 
@@ -1947,6 +2098,7 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
     {
         return CastleLocationQuery::create()
             ->filterByTreeLeft($this->getRightValue() + 1)
+            ->inTree($this->getScopeValue())
             ->findOne($con);
     }
 
@@ -2229,13 +2381,15 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
         $this->setLeftValue($left);
         $this->setRightValue($left + 1);
         $this->setLevel($parent->getLevel() + 1);
+        $scope = $parent->getScopeValue();
+        $this->setScopeValue($scope);
         // update the children collection of the parent
         $parent->addNestedSetChild($this);
 
         // Keep the tree modification query for the save() transaction
         $this->nestedSetQueries []= array(
             'callable'  => array('CastleLocationPeer', 'makeRoomForLeaf'),
-            'arguments' => array($left, $this->isNew() ? null : $this)
+            'arguments' => array($left, $scope, $this->isNew() ? null : $this)
         );
 
         return $this;
@@ -2260,13 +2414,15 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
         $this->setLeftValue($left);
         $this->setRightValue($left + 1);
         $this->setLevel($parent->getLevel() + 1);
+        $scope = $parent->getScopeValue();
+        $this->setScopeValue($scope);
         // update the children collection of the parent
         $parent->addNestedSetChild($this);
 
         // Keep the tree modification query for the save() transaction
         $this->nestedSetQueries []= array(
             'callable'  => array('CastleLocationPeer', 'makeRoomForLeaf'),
-            'arguments' => array($left, $this->isNew() ? null : $this)
+            'arguments' => array($left, $scope, $this->isNew() ? null : $this)
         );
 
         return $this;
@@ -2291,10 +2447,12 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
         $this->setLeftValue($left);
         $this->setRightValue($left + 1);
         $this->setLevel($sibling->getLevel());
+        $scope = $sibling->getScopeValue();
+        $this->setScopeValue($scope);
         // Keep the tree modification query for the save() transaction
         $this->nestedSetQueries []= array(
             'callable'  => array('CastleLocationPeer', 'makeRoomForLeaf'),
-            'arguments' => array($left, $this->isNew() ? null : $this)
+            'arguments' => array($left, $scope, $this->isNew() ? null : $this)
         );
 
         return $this;
@@ -2319,10 +2477,12 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
         $this->setLeftValue($left);
         $this->setRightValue($left + 1);
         $this->setLevel($sibling->getLevel());
+        $scope = $sibling->getScopeValue();
+        $this->setScopeValue($scope);
         // Keep the tree modification query for the save() transaction
         $this->nestedSetQueries []= array(
             'callable'  => array('CastleLocationPeer', 'makeRoomForLeaf'),
-            'arguments' => array($left, $this->isNew() ? null : $this)
+            'arguments' => array($left, $scope, $this->isNew() ? null : $this)
         );
 
         return $this;
@@ -2346,7 +2506,7 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
             throw new PropelException('Cannot move a node as child of one of its subtree nodes.');
         }
 
-        $this->moveSubtreeTo($parent->getLeftValue() + 1, $parent->getLevel() - $this->getLevel() + 1, $con);
+        $this->moveSubtreeTo($parent->getLeftValue() + 1, $parent->getLevel() - $this->getLevel() + 1, $parent->getScopeValue(), $con);
 
         return $this;
     }
@@ -2369,7 +2529,7 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
             throw new PropelException('Cannot move a node as child of one of its subtree nodes.');
         }
 
-        $this->moveSubtreeTo($parent->getRightValue(), $parent->getLevel() - $this->getLevel() + 1, $con);
+        $this->moveSubtreeTo($parent->getRightValue(), $parent->getLevel() - $this->getLevel() + 1, $parent->getScopeValue(), $con);
 
         return $this;
     }
@@ -2395,7 +2555,7 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
             throw new PropelException('Cannot move a node as sibling of one of its subtree nodes.');
         }
 
-        $this->moveSubtreeTo($sibling->getLeftValue(), $sibling->getLevel() - $this->getLevel(), $con);
+        $this->moveSubtreeTo($sibling->getLeftValue(), $sibling->getLevel() - $this->getLevel(), $sibling->getScopeValue(), $con);
 
         return $this;
     }
@@ -2421,7 +2581,7 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
             throw new PropelException('Cannot move a node as sibling of one of its subtree nodes.');
         }
 
-        $this->moveSubtreeTo($sibling->getRightValue() + 1, $sibling->getLevel() - $this->getLevel(), $con);
+        $this->moveSubtreeTo($sibling->getRightValue() + 1, $sibling->getLevel() - $this->getLevel(), $sibling->getScopeValue(), $con);
 
         return $this;
     }
@@ -2433,11 +2593,16 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
      * @param      int	$levelDelta Delta to add to the levels
      * @param      PropelPDO $con		Connection to use.
      */
-    protected function moveSubtreeTo($destLeft, $levelDelta, PropelPDO $con = null)
+    protected function moveSubtreeTo($destLeft, $levelDelta, $targetScope = null, PropelPDO $con = null)
     {
         $preventDefault = false;
         $left  = $this->getLeftValue();
         $right = $this->getRightValue();
+        $scope = $this->getScopeValue();
+
+        if ($targetScope === null) {
+            $targetScope = $scope;
+        }
 
 
         $treeSize = $right - $left +1;
@@ -2450,8 +2615,27 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
         try {
 
             // make room next to the target for the subtree
-            CastleLocationPeer::shiftRLValues($treeSize, $destLeft, null, $con);
+            CastleLocationPeer::shiftRLValues($treeSize, $destLeft, null, $targetScope, $con);
 
+
+
+            if ($targetScope != $scope) {
+
+                //move subtree to < 0, so the items are out of scope.
+                CastleLocationPeer::shiftRLValues(-$right, $left, $right, $scope, $con);
+
+                //update scopes
+                CastleLocationPeer::setNegativeScope($targetScope, $con);
+
+                //update levels
+                CastleLocationPeer::shiftLevel($levelDelta, $left - $right, 0, $targetScope, $con);
+
+                //move the subtree to the target
+                CastleLocationPeer::shiftRLValues(($right - $left) + $destLeft, $left - $right, 0, $targetScope, $con);
+
+
+                $preventDefault = true;
+            }
 
 
             if (!$preventDefault) {
@@ -2464,15 +2648,15 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
 
                 if ($levelDelta) {
                     // update the levels of the subtree
-                    CastleLocationPeer::shiftLevel($levelDelta, $left, $right, $con);
+                    CastleLocationPeer::shiftLevel($levelDelta, $left, $right, $scope, $con);
                 }
 
                 // move the subtree to the target
-                CastleLocationPeer::shiftRLValues($destLeft - $left, $left, $right, $con);
+                CastleLocationPeer::shiftRLValues($destLeft - $left, $left, $right, $scope, $con);
             }
 
             // remove the empty room at the previous location of the subtree
-            CastleLocationPeer::shiftRLValues(-$treeSize, $right + 1, null, $con);
+            CastleLocationPeer::shiftRLValues(-$treeSize, $right + 1, null, $scope, $con);
 
             // update all loaded nodes
             CastleLocationPeer::updateLoadedNodes(null, $con);
@@ -2504,6 +2688,7 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
         }
         $left = $this->getLeftValue();
         $right = $this->getRightValue();
+        $scope = $this->getScopeValue();
         $con->beginTransaction();
         try {
             // delete descendant nodes (will empty the instance pool)
@@ -2512,7 +2697,7 @@ abstract class BaseCastleLocation extends BaseObject implements Persistent
                 ->delete($con);
 
             // fill up the room that was used by descendants
-            CastleLocationPeer::shiftRLValues($left - $right + 1, $right, null, $con);
+            CastleLocationPeer::shiftRLValues($left - $right + 1, $right, null, $scope, $con);
 
             // fix the right value for the current node, which is now a leaf
             $this->setRightValue($left + 1);
