@@ -14,8 +14,33 @@
     padding-bottom:.22em;
 }
 
+h3.td-h3 {
+	float: left;
+	margin-left: 1em;	
+}
+
+.resource-color-1 {	background-color: #F6E3CE   !important;	}
+.resource-color-2 {	background-color: #F5D0A9   !important;	}
+.resource-color-3 {	background-color: #F7BE81   !important;	}
+.resource-color-4 {	background-color: #FAAC58   !important;	}
+.resource-color-5 {	background-color: #FE9A2E   !important;	}
+.resource-color-6 {	background-color: #FF8000   !important;	}
+.resource-color-7 {	background-color: #DF7401   !important;	}
+
 .number-2d {
     width: 2em;
+}
+
+.number-4d {
+    width: 4em   !important;
+}
+
+.number-10d {
+    width: 10em   !important;
+}
+
+.ui-checkbox.td-margin0 {
+	margin: 0;
 }
 
 .td-field-contain-troops > .ui-select {
@@ -44,10 +69,6 @@
 
 .ui-field-contain {
     border-bottom: 0px;
-}
-
-.number-4d {
-    width: 4em   !important;
 }
 
 .td-popup-padding {

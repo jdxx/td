@@ -38,7 +38,7 @@ class AttackTableMap extends TableMap
         $this->setPackage('orm');
         $this->setUseIdGenerator(true);
         // columns
-        $this->addPrimaryKey('id', 'Id', 'INTEGER', true, 6, null);
+        $this->addPrimaryKey('id', 'Id', 'INTEGER', true, null, null);
         $this->addColumn('user', 'User', 'INTEGER', false, 6, null);
         $this->addColumn('attack_time', 'AttackTime', 'TIMESTAMP', false, null, null);
         $this->addColumn('duration', 'Duration', 'INTEGER', false, 4, null);

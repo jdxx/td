@@ -10,7 +10,29 @@
  * @method TargetQuery orderByUserId($order = Criteria::ASC) Order by the user_id column
  * @method TargetQuery orderByName($order = Criteria::ASC) Order by the name column
  * @method TargetQuery orderByCoordinates($order = Criteria::ASC) Order by the coordinates column
- * @method TargetQuery orderByAttackTime($order = Criteria::ASC) Order by the attack_time column
+ * @method TargetQuery orderByDate($order = Criteria::ASC) Order by the date column
+ * @method TargetQuery orderByTime($order = Criteria::ASC) Order by the time column
+ * @method TargetQuery orderByStartTime($order = Criteria::ASC) Order by the start_time column
+ * @method TargetQuery orderByUseMissionTroops($order = Criteria::ASC) Order by the use_mission_troops column
+ * @method TargetQuery orderByFilterCastlesOff($order = Criteria::ASC) Order by the filter_Castles_Off column
+ * @method TargetQuery orderByFilterCastlesDef($order = Criteria::ASC) Order by the filter_Castles_Def column
+ * @method TargetQuery orderByFilterCastlesMix($order = Criteria::ASC) Order by the filter_Castles_Mix column
+ * @method TargetQuery orderByFilterTroopsMarker($order = Criteria::ASC) Order by the filter_Troops_Marker column
+ * @method TargetQuery orderByFilterTroopsOff($order = Criteria::ASC) Order by the filter_Troops_Off column
+ * @method TargetQuery orderByFilterTroopsDef($order = Criteria::ASC) Order by the filter_Troops_Def column
+ * @method TargetQuery orderBySort($order = Criteria::ASC) Order by the sort column
+ * @method TargetQuery orderByPriority($order = Criteria::ASC) Order by the priority column
+ * @method TargetQuery orderByTargetSilver($order = Criteria::ASC) Order by the target_silver column
+ * @method TargetQuery orderByTargetSk($order = Criteria::ASC) Order by the target_sk column
+ * @method TargetQuery orderByTargetBs($order = Criteria::ASC) Order by the target_bs column
+ * @method TargetQuery orderByTargetLr($order = Criteria::ASC) Order by the target_lr column
+ * @method TargetQuery orderByTotalSilver($order = Criteria::ASC) Order by the total_silver column
+ * @method TargetQuery orderByTotalSt($order = Criteria::ASC) Order by the total_st column
+ * @method TargetQuery orderByTotalSk($order = Criteria::ASC) Order by the total_sk column
+ * @method TargetQuery orderByTotalBs($order = Criteria::ASC) Order by the total_bs column
+ * @method TargetQuery orderByTotalAs($order = Criteria::ASC) Order by the total_as column
+ * @method TargetQuery orderByTotalPr($order = Criteria::ASC) Order by the total_pr column
+ * @method TargetQuery orderByTotalLr($order = Criteria::ASC) Order by the total_lr column
  * @method TargetQuery orderByCreatedAt($order = Criteria::ASC) Order by the created_at column
  * @method TargetQuery orderByUpdatedAt($order = Criteria::ASC) Order by the updated_at column
  *
@@ -18,7 +40,29 @@
  * @method TargetQuery groupByUserId() Group by the user_id column
  * @method TargetQuery groupByName() Group by the name column
  * @method TargetQuery groupByCoordinates() Group by the coordinates column
- * @method TargetQuery groupByAttackTime() Group by the attack_time column
+ * @method TargetQuery groupByDate() Group by the date column
+ * @method TargetQuery groupByTime() Group by the time column
+ * @method TargetQuery groupByStartTime() Group by the start_time column
+ * @method TargetQuery groupByUseMissionTroops() Group by the use_mission_troops column
+ * @method TargetQuery groupByFilterCastlesOff() Group by the filter_Castles_Off column
+ * @method TargetQuery groupByFilterCastlesDef() Group by the filter_Castles_Def column
+ * @method TargetQuery groupByFilterCastlesMix() Group by the filter_Castles_Mix column
+ * @method TargetQuery groupByFilterTroopsMarker() Group by the filter_Troops_Marker column
+ * @method TargetQuery groupByFilterTroopsOff() Group by the filter_Troops_Off column
+ * @method TargetQuery groupByFilterTroopsDef() Group by the filter_Troops_Def column
+ * @method TargetQuery groupBySort() Group by the sort column
+ * @method TargetQuery groupByPriority() Group by the priority column
+ * @method TargetQuery groupByTargetSilver() Group by the target_silver column
+ * @method TargetQuery groupByTargetSk() Group by the target_sk column
+ * @method TargetQuery groupByTargetBs() Group by the target_bs column
+ * @method TargetQuery groupByTargetLr() Group by the target_lr column
+ * @method TargetQuery groupByTotalSilver() Group by the total_silver column
+ * @method TargetQuery groupByTotalSt() Group by the total_st column
+ * @method TargetQuery groupByTotalSk() Group by the total_sk column
+ * @method TargetQuery groupByTotalBs() Group by the total_bs column
+ * @method TargetQuery groupByTotalAs() Group by the total_as column
+ * @method TargetQuery groupByTotalPr() Group by the total_pr column
+ * @method TargetQuery groupByTotalLr() Group by the total_lr column
  * @method TargetQuery groupByCreatedAt() Group by the created_at column
  * @method TargetQuery groupByUpdatedAt() Group by the updated_at column
  *
@@ -30,13 +74,39 @@
  * @method TargetQuery rightJoinUser($relationAlias = null) Adds a RIGHT JOIN clause to the query using the User relation
  * @method TargetQuery innerJoinUser($relationAlias = null) Adds a INNER JOIN clause to the query using the User relation
  *
+ * @method TargetQuery leftJoinTargetActions($relationAlias = null) Adds a LEFT JOIN clause to the query using the TargetActions relation
+ * @method TargetQuery rightJoinTargetActions($relationAlias = null) Adds a RIGHT JOIN clause to the query using the TargetActions relation
+ * @method TargetQuery innerJoinTargetActions($relationAlias = null) Adds a INNER JOIN clause to the query using the TargetActions relation
+ *
  * @method Target findOne(PropelPDO $con = null) Return the first Target matching the query
  * @method Target findOneOrCreate(PropelPDO $con = null) Return the first Target matching the query, or a new Target object populated from the query conditions when no match is found
  *
  * @method Target findOneByUserId(int $user_id) Return the first Target filtered by the user_id column
  * @method Target findOneByName(string $name) Return the first Target filtered by the name column
  * @method Target findOneByCoordinates(string $coordinates) Return the first Target filtered by the coordinates column
- * @method Target findOneByAttackTime(string $attack_time) Return the first Target filtered by the attack_time column
+ * @method Target findOneByDate(string $date) Return the first Target filtered by the date column
+ * @method Target findOneByTime(string $time) Return the first Target filtered by the time column
+ * @method Target findOneByStartTime(boolean $start_time) Return the first Target filtered by the start_time column
+ * @method Target findOneByUseMissionTroops(boolean $use_mission_troops) Return the first Target filtered by the use_mission_troops column
+ * @method Target findOneByFilterCastlesOff(boolean $filter_Castles_Off) Return the first Target filtered by the filter_Castles_Off column
+ * @method Target findOneByFilterCastlesDef(boolean $filter_Castles_Def) Return the first Target filtered by the filter_Castles_Def column
+ * @method Target findOneByFilterCastlesMix(boolean $filter_Castles_Mix) Return the first Target filtered by the filter_Castles_Mix column
+ * @method Target findOneByFilterTroopsMarker(boolean $filter_Troops_Marker) Return the first Target filtered by the filter_Troops_Marker column
+ * @method Target findOneByFilterTroopsOff(boolean $filter_Troops_Off) Return the first Target filtered by the filter_Troops_Off column
+ * @method Target findOneByFilterTroopsDef(boolean $filter_Troops_Def) Return the first Target filtered by the filter_Troops_Def column
+ * @method Target findOneBySort(string $sort) Return the first Target filtered by the sort column
+ * @method Target findOneByPriority(string $priority) Return the first Target filtered by the priority column
+ * @method Target findOneByTargetSilver(int $target_silver) Return the first Target filtered by the target_silver column
+ * @method Target findOneByTargetSk(int $target_sk) Return the first Target filtered by the target_sk column
+ * @method Target findOneByTargetBs(int $target_bs) Return the first Target filtered by the target_bs column
+ * @method Target findOneByTargetLr(int $target_lr) Return the first Target filtered by the target_lr column
+ * @method Target findOneByTotalSilver(int $total_silver) Return the first Target filtered by the total_silver column
+ * @method Target findOneByTotalSt(int $total_st) Return the first Target filtered by the total_st column
+ * @method Target findOneByTotalSk(int $total_sk) Return the first Target filtered by the total_sk column
+ * @method Target findOneByTotalBs(int $total_bs) Return the first Target filtered by the total_bs column
+ * @method Target findOneByTotalAs(int $total_as) Return the first Target filtered by the total_as column
+ * @method Target findOneByTotalPr(int $total_pr) Return the first Target filtered by the total_pr column
+ * @method Target findOneByTotalLr(int $total_lr) Return the first Target filtered by the total_lr column
  * @method Target findOneByCreatedAt(string $created_at) Return the first Target filtered by the created_at column
  * @method Target findOneByUpdatedAt(string $updated_at) Return the first Target filtered by the updated_at column
  *
@@ -44,7 +114,29 @@
  * @method array findByUserId(int $user_id) Return Target objects filtered by the user_id column
  * @method array findByName(string $name) Return Target objects filtered by the name column
  * @method array findByCoordinates(string $coordinates) Return Target objects filtered by the coordinates column
- * @method array findByAttackTime(string $attack_time) Return Target objects filtered by the attack_time column
+ * @method array findByDate(string $date) Return Target objects filtered by the date column
+ * @method array findByTime(string $time) Return Target objects filtered by the time column
+ * @method array findByStartTime(boolean $start_time) Return Target objects filtered by the start_time column
+ * @method array findByUseMissionTroops(boolean $use_mission_troops) Return Target objects filtered by the use_mission_troops column
+ * @method array findByFilterCastlesOff(boolean $filter_Castles_Off) Return Target objects filtered by the filter_Castles_Off column
+ * @method array findByFilterCastlesDef(boolean $filter_Castles_Def) Return Target objects filtered by the filter_Castles_Def column
+ * @method array findByFilterCastlesMix(boolean $filter_Castles_Mix) Return Target objects filtered by the filter_Castles_Mix column
+ * @method array findByFilterTroopsMarker(boolean $filter_Troops_Marker) Return Target objects filtered by the filter_Troops_Marker column
+ * @method array findByFilterTroopsOff(boolean $filter_Troops_Off) Return Target objects filtered by the filter_Troops_Off column
+ * @method array findByFilterTroopsDef(boolean $filter_Troops_Def) Return Target objects filtered by the filter_Troops_Def column
+ * @method array findBySort(string $sort) Return Target objects filtered by the sort column
+ * @method array findByPriority(string $priority) Return Target objects filtered by the priority column
+ * @method array findByTargetSilver(int $target_silver) Return Target objects filtered by the target_silver column
+ * @method array findByTargetSk(int $target_sk) Return Target objects filtered by the target_sk column
+ * @method array findByTargetBs(int $target_bs) Return Target objects filtered by the target_bs column
+ * @method array findByTargetLr(int $target_lr) Return Target objects filtered by the target_lr column
+ * @method array findByTotalSilver(int $total_silver) Return Target objects filtered by the total_silver column
+ * @method array findByTotalSt(int $total_st) Return Target objects filtered by the total_st column
+ * @method array findByTotalSk(int $total_sk) Return Target objects filtered by the total_sk column
+ * @method array findByTotalBs(int $total_bs) Return Target objects filtered by the total_bs column
+ * @method array findByTotalAs(int $total_as) Return Target objects filtered by the total_as column
+ * @method array findByTotalPr(int $total_pr) Return Target objects filtered by the total_pr column
+ * @method array findByTotalLr(int $total_lr) Return Target objects filtered by the total_lr column
  * @method array findByCreatedAt(string $created_at) Return Target objects filtered by the created_at column
  * @method array findByUpdatedAt(string $updated_at) Return Target objects filtered by the updated_at column
  *
@@ -154,7 +246,7 @@ abstract class BaseTargetQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `id`, `user_id`, `name`, `coordinates`, `attack_time`, `created_at`, `updated_at` FROM `target` WHERE `id` = :p0';
+        $sql = 'SELECT `id`, `user_id`, `name`, `coordinates`, `date`, `time`, `start_time`, `use_mission_troops`, `filter_Castles_Off`, `filter_Castles_Def`, `filter_Castles_Mix`, `filter_Troops_Marker`, `filter_Troops_Off`, `filter_Troops_Def`, `sort`, `priority`, `target_silver`, `target_sk`, `target_bs`, `target_lr`, `total_silver`, `total_st`, `total_sk`, `total_bs`, `total_as`, `total_pr`, `total_lr`, `created_at`, `updated_at` FROM `target` WHERE `id` = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -388,18 +480,349 @@ abstract class BaseTargetQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the attack_time column
+     * Filter the query on the date column
      *
      * Example usage:
      * <code>
-     * $query->filterByAttackTime('2011-03-14'); // WHERE attack_time = '2011-03-14'
-     * $query->filterByAttackTime('now'); // WHERE attack_time = '2011-03-14'
-     * $query->filterByAttackTime(array('max' => 'yesterday')); // WHERE attack_time < '2011-03-13'
+     * $query->filterByDate('fooValue');   // WHERE date = 'fooValue'
+     * $query->filterByDate('%fooValue%'); // WHERE date LIKE '%fooValue%'
      * </code>
      *
-     * @param     mixed $attackTime The value to use as filter.
-     *              Values can be integers (unix timestamps), DateTime objects, or strings.
-     *              Empty strings are treated as NULL.
+     * @param     string $date The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return TargetQuery The current query, for fluid interface
+     */
+    public function filterByDate($date = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($date)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $date)) {
+                $date = str_replace('*', '%', $date);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(TargetPeer::DATE, $date, $comparison);
+    }
+
+    /**
+     * Filter the query on the time column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByTime('fooValue');   // WHERE time = 'fooValue'
+     * $query->filterByTime('%fooValue%'); // WHERE time LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $time The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return TargetQuery The current query, for fluid interface
+     */
+    public function filterByTime($time = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($time)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $time)) {
+                $time = str_replace('*', '%', $time);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(TargetPeer::TIME, $time, $comparison);
+    }
+
+    /**
+     * Filter the query on the start_time column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByStartTime(true); // WHERE start_time = true
+     * $query->filterByStartTime('yes'); // WHERE start_time = true
+     * </code>
+     *
+     * @param     boolean|string $startTime The value to use as filter.
+     *              Non-boolean arguments are converted using the following rules:
+     *                * 1, '1', 'true',  'on',  and 'yes' are converted to boolean true
+     *                * 0, '0', 'false', 'off', and 'no'  are converted to boolean false
+     *              Check on string values is case insensitive (so 'FaLsE' is seen as 'false').
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return TargetQuery The current query, for fluid interface
+     */
+    public function filterByStartTime($startTime = null, $comparison = null)
+    {
+        if (is_string($startTime)) {
+            $startTime = in_array(strtolower($startTime), array('false', 'off', '-', 'no', 'n', '0', '')) ? false : true;
+        }
+
+        return $this->addUsingAlias(TargetPeer::START_TIME, $startTime, $comparison);
+    }
+
+    /**
+     * Filter the query on the use_mission_troops column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByUseMissionTroops(true); // WHERE use_mission_troops = true
+     * $query->filterByUseMissionTroops('yes'); // WHERE use_mission_troops = true
+     * </code>
+     *
+     * @param     boolean|string $useMissionTroops The value to use as filter.
+     *              Non-boolean arguments are converted using the following rules:
+     *                * 1, '1', 'true',  'on',  and 'yes' are converted to boolean true
+     *                * 0, '0', 'false', 'off', and 'no'  are converted to boolean false
+     *              Check on string values is case insensitive (so 'FaLsE' is seen as 'false').
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return TargetQuery The current query, for fluid interface
+     */
+    public function filterByUseMissionTroops($useMissionTroops = null, $comparison = null)
+    {
+        if (is_string($useMissionTroops)) {
+            $useMissionTroops = in_array(strtolower($useMissionTroops), array('false', 'off', '-', 'no', 'n', '0', '')) ? false : true;
+        }
+
+        return $this->addUsingAlias(TargetPeer::USE_MISSION_TROOPS, $useMissionTroops, $comparison);
+    }
+
+    /**
+     * Filter the query on the filter_Castles_Off column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByFilterCastlesOff(true); // WHERE filter_Castles_Off = true
+     * $query->filterByFilterCastlesOff('yes'); // WHERE filter_Castles_Off = true
+     * </code>
+     *
+     * @param     boolean|string $filterCastlesOff The value to use as filter.
+     *              Non-boolean arguments are converted using the following rules:
+     *                * 1, '1', 'true',  'on',  and 'yes' are converted to boolean true
+     *                * 0, '0', 'false', 'off', and 'no'  are converted to boolean false
+     *              Check on string values is case insensitive (so 'FaLsE' is seen as 'false').
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return TargetQuery The current query, for fluid interface
+     */
+    public function filterByFilterCastlesOff($filterCastlesOff = null, $comparison = null)
+    {
+        if (is_string($filterCastlesOff)) {
+            $filterCastlesOff = in_array(strtolower($filterCastlesOff), array('false', 'off', '-', 'no', 'n', '0', '')) ? false : true;
+        }
+
+        return $this->addUsingAlias(TargetPeer::FILTER_CASTLES_OFF, $filterCastlesOff, $comparison);
+    }
+
+    /**
+     * Filter the query on the filter_Castles_Def column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByFilterCastlesDef(true); // WHERE filter_Castles_Def = true
+     * $query->filterByFilterCastlesDef('yes'); // WHERE filter_Castles_Def = true
+     * </code>
+     *
+     * @param     boolean|string $filterCastlesDef The value to use as filter.
+     *              Non-boolean arguments are converted using the following rules:
+     *                * 1, '1', 'true',  'on',  and 'yes' are converted to boolean true
+     *                * 0, '0', 'false', 'off', and 'no'  are converted to boolean false
+     *              Check on string values is case insensitive (so 'FaLsE' is seen as 'false').
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return TargetQuery The current query, for fluid interface
+     */
+    public function filterByFilterCastlesDef($filterCastlesDef = null, $comparison = null)
+    {
+        if (is_string($filterCastlesDef)) {
+            $filterCastlesDef = in_array(strtolower($filterCastlesDef), array('false', 'off', '-', 'no', 'n', '0', '')) ? false : true;
+        }
+
+        return $this->addUsingAlias(TargetPeer::FILTER_CASTLES_DEF, $filterCastlesDef, $comparison);
+    }
+
+    /**
+     * Filter the query on the filter_Castles_Mix column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByFilterCastlesMix(true); // WHERE filter_Castles_Mix = true
+     * $query->filterByFilterCastlesMix('yes'); // WHERE filter_Castles_Mix = true
+     * </code>
+     *
+     * @param     boolean|string $filterCastlesMix The value to use as filter.
+     *              Non-boolean arguments are converted using the following rules:
+     *                * 1, '1', 'true',  'on',  and 'yes' are converted to boolean true
+     *                * 0, '0', 'false', 'off', and 'no'  are converted to boolean false
+     *              Check on string values is case insensitive (so 'FaLsE' is seen as 'false').
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return TargetQuery The current query, for fluid interface
+     */
+    public function filterByFilterCastlesMix($filterCastlesMix = null, $comparison = null)
+    {
+        if (is_string($filterCastlesMix)) {
+            $filterCastlesMix = in_array(strtolower($filterCastlesMix), array('false', 'off', '-', 'no', 'n', '0', '')) ? false : true;
+        }
+
+        return $this->addUsingAlias(TargetPeer::FILTER_CASTLES_MIX, $filterCastlesMix, $comparison);
+    }
+
+    /**
+     * Filter the query on the filter_Troops_Marker column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByFilterTroopsMarker(true); // WHERE filter_Troops_Marker = true
+     * $query->filterByFilterTroopsMarker('yes'); // WHERE filter_Troops_Marker = true
+     * </code>
+     *
+     * @param     boolean|string $filterTroopsMarker The value to use as filter.
+     *              Non-boolean arguments are converted using the following rules:
+     *                * 1, '1', 'true',  'on',  and 'yes' are converted to boolean true
+     *                * 0, '0', 'false', 'off', and 'no'  are converted to boolean false
+     *              Check on string values is case insensitive (so 'FaLsE' is seen as 'false').
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return TargetQuery The current query, for fluid interface
+     */
+    public function filterByFilterTroopsMarker($filterTroopsMarker = null, $comparison = null)
+    {
+        if (is_string($filterTroopsMarker)) {
+            $filterTroopsMarker = in_array(strtolower($filterTroopsMarker), array('false', 'off', '-', 'no', 'n', '0', '')) ? false : true;
+        }
+
+        return $this->addUsingAlias(TargetPeer::FILTER_TROOPS_MARKER, $filterTroopsMarker, $comparison);
+    }
+
+    /**
+     * Filter the query on the filter_Troops_Off column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByFilterTroopsOff(true); // WHERE filter_Troops_Off = true
+     * $query->filterByFilterTroopsOff('yes'); // WHERE filter_Troops_Off = true
+     * </code>
+     *
+     * @param     boolean|string $filterTroopsOff The value to use as filter.
+     *              Non-boolean arguments are converted using the following rules:
+     *                * 1, '1', 'true',  'on',  and 'yes' are converted to boolean true
+     *                * 0, '0', 'false', 'off', and 'no'  are converted to boolean false
+     *              Check on string values is case insensitive (so 'FaLsE' is seen as 'false').
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return TargetQuery The current query, for fluid interface
+     */
+    public function filterByFilterTroopsOff($filterTroopsOff = null, $comparison = null)
+    {
+        if (is_string($filterTroopsOff)) {
+            $filterTroopsOff = in_array(strtolower($filterTroopsOff), array('false', 'off', '-', 'no', 'n', '0', '')) ? false : true;
+        }
+
+        return $this->addUsingAlias(TargetPeer::FILTER_TROOPS_OFF, $filterTroopsOff, $comparison);
+    }
+
+    /**
+     * Filter the query on the filter_Troops_Def column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByFilterTroopsDef(true); // WHERE filter_Troops_Def = true
+     * $query->filterByFilterTroopsDef('yes'); // WHERE filter_Troops_Def = true
+     * </code>
+     *
+     * @param     boolean|string $filterTroopsDef The value to use as filter.
+     *              Non-boolean arguments are converted using the following rules:
+     *                * 1, '1', 'true',  'on',  and 'yes' are converted to boolean true
+     *                * 0, '0', 'false', 'off', and 'no'  are converted to boolean false
+     *              Check on string values is case insensitive (so 'FaLsE' is seen as 'false').
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return TargetQuery The current query, for fluid interface
+     */
+    public function filterByFilterTroopsDef($filterTroopsDef = null, $comparison = null)
+    {
+        if (is_string($filterTroopsDef)) {
+            $filterTroopsDef = in_array(strtolower($filterTroopsDef), array('false', 'off', '-', 'no', 'n', '0', '')) ? false : true;
+        }
+
+        return $this->addUsingAlias(TargetPeer::FILTER_TROOPS_DEF, $filterTroopsDef, $comparison);
+    }
+
+    /**
+     * Filter the query on the sort column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterBySort('fooValue');   // WHERE sort = 'fooValue'
+     * $query->filterBySort('%fooValue%'); // WHERE sort LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $sort The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return TargetQuery The current query, for fluid interface
+     */
+    public function filterBySort($sort = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($sort)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $sort)) {
+                $sort = str_replace('*', '%', $sort);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(TargetPeer::SORT, $sort, $comparison);
+    }
+
+    /**
+     * Filter the query on the priority column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByPriority('fooValue');   // WHERE priority = 'fooValue'
+     * $query->filterByPriority('%fooValue%'); // WHERE priority LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $priority The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return TargetQuery The current query, for fluid interface
+     */
+    public function filterByPriority($priority = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($priority)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $priority)) {
+                $priority = str_replace('*', '%', $priority);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(TargetPeer::PRIORITY, $priority, $comparison);
+    }
+
+    /**
+     * Filter the query on the target_silver column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByTargetSilver(1234); // WHERE target_silver = 1234
+     * $query->filterByTargetSilver(array(12, 34)); // WHERE target_silver IN (12, 34)
+     * $query->filterByTargetSilver(array('min' => 12)); // WHERE target_silver >= 12
+     * $query->filterByTargetSilver(array('max' => 12)); // WHERE target_silver <= 12
+     * </code>
+     *
+     * @param     mixed $targetSilver The value to use as filter.
      *              Use scalar values for equality.
      *              Use array values for in_array() equivalent.
      *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
@@ -407,16 +830,16 @@ abstract class BaseTargetQuery extends ModelCriteria
      *
      * @return TargetQuery The current query, for fluid interface
      */
-    public function filterByAttackTime($attackTime = null, $comparison = null)
+    public function filterByTargetSilver($targetSilver = null, $comparison = null)
     {
-        if (is_array($attackTime)) {
+        if (is_array($targetSilver)) {
             $useMinMax = false;
-            if (isset($attackTime['min'])) {
-                $this->addUsingAlias(TargetPeer::ATTACK_TIME, $attackTime['min'], Criteria::GREATER_EQUAL);
+            if (isset($targetSilver['min'])) {
+                $this->addUsingAlias(TargetPeer::TARGET_SILVER, $targetSilver['min'], Criteria::GREATER_EQUAL);
                 $useMinMax = true;
             }
-            if (isset($attackTime['max'])) {
-                $this->addUsingAlias(TargetPeer::ATTACK_TIME, $attackTime['max'], Criteria::LESS_EQUAL);
+            if (isset($targetSilver['max'])) {
+                $this->addUsingAlias(TargetPeer::TARGET_SILVER, $targetSilver['max'], Criteria::LESS_EQUAL);
                 $useMinMax = true;
             }
             if ($useMinMax) {
@@ -427,7 +850,427 @@ abstract class BaseTargetQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(TargetPeer::ATTACK_TIME, $attackTime, $comparison);
+        return $this->addUsingAlias(TargetPeer::TARGET_SILVER, $targetSilver, $comparison);
+    }
+
+    /**
+     * Filter the query on the target_sk column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByTargetSk(1234); // WHERE target_sk = 1234
+     * $query->filterByTargetSk(array(12, 34)); // WHERE target_sk IN (12, 34)
+     * $query->filterByTargetSk(array('min' => 12)); // WHERE target_sk >= 12
+     * $query->filterByTargetSk(array('max' => 12)); // WHERE target_sk <= 12
+     * </code>
+     *
+     * @param     mixed $targetSk The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return TargetQuery The current query, for fluid interface
+     */
+    public function filterByTargetSk($targetSk = null, $comparison = null)
+    {
+        if (is_array($targetSk)) {
+            $useMinMax = false;
+            if (isset($targetSk['min'])) {
+                $this->addUsingAlias(TargetPeer::TARGET_SK, $targetSk['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($targetSk['max'])) {
+                $this->addUsingAlias(TargetPeer::TARGET_SK, $targetSk['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(TargetPeer::TARGET_SK, $targetSk, $comparison);
+    }
+
+    /**
+     * Filter the query on the target_bs column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByTargetBs(1234); // WHERE target_bs = 1234
+     * $query->filterByTargetBs(array(12, 34)); // WHERE target_bs IN (12, 34)
+     * $query->filterByTargetBs(array('min' => 12)); // WHERE target_bs >= 12
+     * $query->filterByTargetBs(array('max' => 12)); // WHERE target_bs <= 12
+     * </code>
+     *
+     * @param     mixed $targetBs The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return TargetQuery The current query, for fluid interface
+     */
+    public function filterByTargetBs($targetBs = null, $comparison = null)
+    {
+        if (is_array($targetBs)) {
+            $useMinMax = false;
+            if (isset($targetBs['min'])) {
+                $this->addUsingAlias(TargetPeer::TARGET_BS, $targetBs['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($targetBs['max'])) {
+                $this->addUsingAlias(TargetPeer::TARGET_BS, $targetBs['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(TargetPeer::TARGET_BS, $targetBs, $comparison);
+    }
+
+    /**
+     * Filter the query on the target_lr column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByTargetLr(1234); // WHERE target_lr = 1234
+     * $query->filterByTargetLr(array(12, 34)); // WHERE target_lr IN (12, 34)
+     * $query->filterByTargetLr(array('min' => 12)); // WHERE target_lr >= 12
+     * $query->filterByTargetLr(array('max' => 12)); // WHERE target_lr <= 12
+     * </code>
+     *
+     * @param     mixed $targetLr The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return TargetQuery The current query, for fluid interface
+     */
+    public function filterByTargetLr($targetLr = null, $comparison = null)
+    {
+        if (is_array($targetLr)) {
+            $useMinMax = false;
+            if (isset($targetLr['min'])) {
+                $this->addUsingAlias(TargetPeer::TARGET_LR, $targetLr['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($targetLr['max'])) {
+                $this->addUsingAlias(TargetPeer::TARGET_LR, $targetLr['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(TargetPeer::TARGET_LR, $targetLr, $comparison);
+    }
+
+    /**
+     * Filter the query on the total_silver column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByTotalSilver(1234); // WHERE total_silver = 1234
+     * $query->filterByTotalSilver(array(12, 34)); // WHERE total_silver IN (12, 34)
+     * $query->filterByTotalSilver(array('min' => 12)); // WHERE total_silver >= 12
+     * $query->filterByTotalSilver(array('max' => 12)); // WHERE total_silver <= 12
+     * </code>
+     *
+     * @param     mixed $totalSilver The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return TargetQuery The current query, for fluid interface
+     */
+    public function filterByTotalSilver($totalSilver = null, $comparison = null)
+    {
+        if (is_array($totalSilver)) {
+            $useMinMax = false;
+            if (isset($totalSilver['min'])) {
+                $this->addUsingAlias(TargetPeer::TOTAL_SILVER, $totalSilver['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($totalSilver['max'])) {
+                $this->addUsingAlias(TargetPeer::TOTAL_SILVER, $totalSilver['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(TargetPeer::TOTAL_SILVER, $totalSilver, $comparison);
+    }
+
+    /**
+     * Filter the query on the total_st column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByTotalSt(1234); // WHERE total_st = 1234
+     * $query->filterByTotalSt(array(12, 34)); // WHERE total_st IN (12, 34)
+     * $query->filterByTotalSt(array('min' => 12)); // WHERE total_st >= 12
+     * $query->filterByTotalSt(array('max' => 12)); // WHERE total_st <= 12
+     * </code>
+     *
+     * @param     mixed $totalSt The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return TargetQuery The current query, for fluid interface
+     */
+    public function filterByTotalSt($totalSt = null, $comparison = null)
+    {
+        if (is_array($totalSt)) {
+            $useMinMax = false;
+            if (isset($totalSt['min'])) {
+                $this->addUsingAlias(TargetPeer::TOTAL_ST, $totalSt['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($totalSt['max'])) {
+                $this->addUsingAlias(TargetPeer::TOTAL_ST, $totalSt['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(TargetPeer::TOTAL_ST, $totalSt, $comparison);
+    }
+
+    /**
+     * Filter the query on the total_sk column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByTotalSk(1234); // WHERE total_sk = 1234
+     * $query->filterByTotalSk(array(12, 34)); // WHERE total_sk IN (12, 34)
+     * $query->filterByTotalSk(array('min' => 12)); // WHERE total_sk >= 12
+     * $query->filterByTotalSk(array('max' => 12)); // WHERE total_sk <= 12
+     * </code>
+     *
+     * @param     mixed $totalSk The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return TargetQuery The current query, for fluid interface
+     */
+    public function filterByTotalSk($totalSk = null, $comparison = null)
+    {
+        if (is_array($totalSk)) {
+            $useMinMax = false;
+            if (isset($totalSk['min'])) {
+                $this->addUsingAlias(TargetPeer::TOTAL_SK, $totalSk['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($totalSk['max'])) {
+                $this->addUsingAlias(TargetPeer::TOTAL_SK, $totalSk['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(TargetPeer::TOTAL_SK, $totalSk, $comparison);
+    }
+
+    /**
+     * Filter the query on the total_bs column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByTotalBs(1234); // WHERE total_bs = 1234
+     * $query->filterByTotalBs(array(12, 34)); // WHERE total_bs IN (12, 34)
+     * $query->filterByTotalBs(array('min' => 12)); // WHERE total_bs >= 12
+     * $query->filterByTotalBs(array('max' => 12)); // WHERE total_bs <= 12
+     * </code>
+     *
+     * @param     mixed $totalBs The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return TargetQuery The current query, for fluid interface
+     */
+    public function filterByTotalBs($totalBs = null, $comparison = null)
+    {
+        if (is_array($totalBs)) {
+            $useMinMax = false;
+            if (isset($totalBs['min'])) {
+                $this->addUsingAlias(TargetPeer::TOTAL_BS, $totalBs['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($totalBs['max'])) {
+                $this->addUsingAlias(TargetPeer::TOTAL_BS, $totalBs['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(TargetPeer::TOTAL_BS, $totalBs, $comparison);
+    }
+
+    /**
+     * Filter the query on the total_as column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByTotalAs(1234); // WHERE total_as = 1234
+     * $query->filterByTotalAs(array(12, 34)); // WHERE total_as IN (12, 34)
+     * $query->filterByTotalAs(array('min' => 12)); // WHERE total_as >= 12
+     * $query->filterByTotalAs(array('max' => 12)); // WHERE total_as <= 12
+     * </code>
+     *
+     * @param     mixed $totalAs The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return TargetQuery The current query, for fluid interface
+     */
+    public function filterByTotalAs($totalAs = null, $comparison = null)
+    {
+        if (is_array($totalAs)) {
+            $useMinMax = false;
+            if (isset($totalAs['min'])) {
+                $this->addUsingAlias(TargetPeer::TOTAL_AS, $totalAs['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($totalAs['max'])) {
+                $this->addUsingAlias(TargetPeer::TOTAL_AS, $totalAs['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(TargetPeer::TOTAL_AS, $totalAs, $comparison);
+    }
+
+    /**
+     * Filter the query on the total_pr column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByTotalPr(1234); // WHERE total_pr = 1234
+     * $query->filterByTotalPr(array(12, 34)); // WHERE total_pr IN (12, 34)
+     * $query->filterByTotalPr(array('min' => 12)); // WHERE total_pr >= 12
+     * $query->filterByTotalPr(array('max' => 12)); // WHERE total_pr <= 12
+     * </code>
+     *
+     * @param     mixed $totalPr The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return TargetQuery The current query, for fluid interface
+     */
+    public function filterByTotalPr($totalPr = null, $comparison = null)
+    {
+        if (is_array($totalPr)) {
+            $useMinMax = false;
+            if (isset($totalPr['min'])) {
+                $this->addUsingAlias(TargetPeer::TOTAL_PR, $totalPr['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($totalPr['max'])) {
+                $this->addUsingAlias(TargetPeer::TOTAL_PR, $totalPr['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(TargetPeer::TOTAL_PR, $totalPr, $comparison);
+    }
+
+    /**
+     * Filter the query on the total_lr column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByTotalLr(1234); // WHERE total_lr = 1234
+     * $query->filterByTotalLr(array(12, 34)); // WHERE total_lr IN (12, 34)
+     * $query->filterByTotalLr(array('min' => 12)); // WHERE total_lr >= 12
+     * $query->filterByTotalLr(array('max' => 12)); // WHERE total_lr <= 12
+     * </code>
+     *
+     * @param     mixed $totalLr The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return TargetQuery The current query, for fluid interface
+     */
+    public function filterByTotalLr($totalLr = null, $comparison = null)
+    {
+        if (is_array($totalLr)) {
+            $useMinMax = false;
+            if (isset($totalLr['min'])) {
+                $this->addUsingAlias(TargetPeer::TOTAL_LR, $totalLr['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($totalLr['max'])) {
+                $this->addUsingAlias(TargetPeer::TOTAL_LR, $totalLr['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(TargetPeer::TOTAL_LR, $totalLr, $comparison);
     }
 
     /**
@@ -590,6 +1433,80 @@ abstract class BaseTargetQuery extends ModelCriteria
         return $this
             ->joinUser($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'User', 'UserQuery');
+    }
+
+    /**
+     * Filter the query by a related TargetActions object
+     *
+     * @param   TargetActions|PropelObjectCollection $targetActions  the related object to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return                 TargetQuery The current query, for fluid interface
+     * @throws PropelException - if the provided filter is invalid.
+     */
+    public function filterByTargetActions($targetActions, $comparison = null)
+    {
+        if ($targetActions instanceof TargetActions) {
+            return $this
+                ->addUsingAlias(TargetPeer::ID, $targetActions->getTargetId(), $comparison);
+        } elseif ($targetActions instanceof PropelObjectCollection) {
+            return $this
+                ->useTargetActionsQuery()
+                ->filterByPrimaryKeys($targetActions->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByTargetActions() only accepts arguments of type TargetActions or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the TargetActions relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return TargetQuery The current query, for fluid interface
+     */
+    public function joinTargetActions($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('TargetActions');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'TargetActions');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the TargetActions relation TargetActions object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   TargetActionsQuery A secondary query class using the current class as primary query
+     */
+    public function useTargetActionsQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        return $this
+            ->joinTargetActions($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'TargetActions', 'TargetActionsQuery');
     }
 
     /**

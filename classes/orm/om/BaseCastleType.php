@@ -60,18 +60,6 @@ abstract class BaseCastleType extends BaseObject implements Persistent
     protected $total_st;
 
     /**
-     * The value for the total_as field.
-     * @var        int
-     */
-    protected $total_as;
-
-    /**
-     * The value for the total_pr field.
-     * @var        int
-     */
-    protected $total_pr;
-
-    /**
      * The value for the total_sk field.
      * @var        int
      */
@@ -82,6 +70,18 @@ abstract class BaseCastleType extends BaseObject implements Persistent
      * @var        int
      */
     protected $total_bs;
+
+    /**
+     * The value for the total_as field.
+     * @var        int
+     */
+    protected $total_as;
+
+    /**
+     * The value for the total_pr field.
+     * @var        int
+     */
+    protected $total_pr;
 
     /**
      * The value for the total_lr field.
@@ -108,18 +108,6 @@ abstract class BaseCastleType extends BaseObject implements Persistent
     protected $mission_st;
 
     /**
-     * The value for the mission_as field.
-     * @var        int
-     */
-    protected $mission_as;
-
-    /**
-     * The value for the mission_pr field.
-     * @var        int
-     */
-    protected $mission_pr;
-
-    /**
      * The value for the mission_sk field.
      * @var        int
      */
@@ -130,6 +118,18 @@ abstract class BaseCastleType extends BaseObject implements Persistent
      * @var        int
      */
     protected $mission_bs;
+
+    /**
+     * The value for the mission_as field.
+     * @var        int
+     */
+    protected $mission_as;
+
+    /**
+     * The value for the mission_pr field.
+     * @var        int
+     */
+    protected $mission_pr;
 
     /**
      * The value for the mission_lr field.
@@ -452,28 +452,6 @@ abstract class BaseCastleType extends BaseObject implements Persistent
     }
 
     /**
-     * Get the [total_as] column value.
-     *
-     * @return int
-     */
-    public function getTotalAs()
-    {
-
-        return $this->total_as;
-    }
-
-    /**
-     * Get the [total_pr] column value.
-     *
-     * @return int
-     */
-    public function getTotalPr()
-    {
-
-        return $this->total_pr;
-    }
-
-    /**
      * Get the [total_sk] column value.
      *
      * @return int
@@ -493,6 +471,28 @@ abstract class BaseCastleType extends BaseObject implements Persistent
     {
 
         return $this->total_bs;
+    }
+
+    /**
+     * Get the [total_as] column value.
+     *
+     * @return int
+     */
+    public function getTotalAs()
+    {
+
+        return $this->total_as;
+    }
+
+    /**
+     * Get the [total_pr] column value.
+     *
+     * @return int
+     */
+    public function getTotalPr()
+    {
+
+        return $this->total_pr;
     }
 
     /**
@@ -540,28 +540,6 @@ abstract class BaseCastleType extends BaseObject implements Persistent
     }
 
     /**
-     * Get the [mission_as] column value.
-     *
-     * @return int
-     */
-    public function getMissionAs()
-    {
-
-        return $this->mission_as;
-    }
-
-    /**
-     * Get the [mission_pr] column value.
-     *
-     * @return int
-     */
-    public function getMissionPr()
-    {
-
-        return $this->mission_pr;
-    }
-
-    /**
      * Get the [mission_sk] column value.
      *
      * @return int
@@ -581,6 +559,28 @@ abstract class BaseCastleType extends BaseObject implements Persistent
     {
 
         return $this->mission_bs;
+    }
+
+    /**
+     * Get the [mission_as] column value.
+     *
+     * @return int
+     */
+    public function getMissionAs()
+    {
+
+        return $this->mission_as;
+    }
+
+    /**
+     * Get the [mission_pr] column value.
+     *
+     * @return int
+     */
+    public function getMissionPr()
+    {
+
+        return $this->mission_pr;
     }
 
     /**
@@ -1169,48 +1169,6 @@ abstract class BaseCastleType extends BaseObject implements Persistent
     } // setTotalSt()
 
     /**
-     * Set the value of [total_as] column.
-     *
-     * @param  int $v new value
-     * @return CastleType The current object (for fluent API support)
-     */
-    public function setTotalAs($v)
-    {
-        if ($v !== null && is_numeric($v)) {
-            $v = (int) $v;
-        }
-
-        if ($this->total_as !== $v) {
-            $this->total_as = $v;
-            $this->modifiedColumns[] = CastleTypePeer::TOTAL_AS;
-        }
-
-
-        return $this;
-    } // setTotalAs()
-
-    /**
-     * Set the value of [total_pr] column.
-     *
-     * @param  int $v new value
-     * @return CastleType The current object (for fluent API support)
-     */
-    public function setTotalPr($v)
-    {
-        if ($v !== null && is_numeric($v)) {
-            $v = (int) $v;
-        }
-
-        if ($this->total_pr !== $v) {
-            $this->total_pr = $v;
-            $this->modifiedColumns[] = CastleTypePeer::TOTAL_PR;
-        }
-
-
-        return $this;
-    } // setTotalPr()
-
-    /**
      * Set the value of [total_sk] column.
      *
      * @param  int $v new value
@@ -1251,6 +1209,48 @@ abstract class BaseCastleType extends BaseObject implements Persistent
 
         return $this;
     } // setTotalBs()
+
+    /**
+     * Set the value of [total_as] column.
+     *
+     * @param  int $v new value
+     * @return CastleType The current object (for fluent API support)
+     */
+    public function setTotalAs($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (int) $v;
+        }
+
+        if ($this->total_as !== $v) {
+            $this->total_as = $v;
+            $this->modifiedColumns[] = CastleTypePeer::TOTAL_AS;
+        }
+
+
+        return $this;
+    } // setTotalAs()
+
+    /**
+     * Set the value of [total_pr] column.
+     *
+     * @param  int $v new value
+     * @return CastleType The current object (for fluent API support)
+     */
+    public function setTotalPr($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (int) $v;
+        }
+
+        if ($this->total_pr !== $v) {
+            $this->total_pr = $v;
+            $this->modifiedColumns[] = CastleTypePeer::TOTAL_PR;
+        }
+
+
+        return $this;
+    } // setTotalPr()
 
     /**
      * Set the value of [total_lr] column.
@@ -1337,48 +1337,6 @@ abstract class BaseCastleType extends BaseObject implements Persistent
     } // setMissionSt()
 
     /**
-     * Set the value of [mission_as] column.
-     *
-     * @param  int $v new value
-     * @return CastleType The current object (for fluent API support)
-     */
-    public function setMissionAs($v)
-    {
-        if ($v !== null && is_numeric($v)) {
-            $v = (int) $v;
-        }
-
-        if ($this->mission_as !== $v) {
-            $this->mission_as = $v;
-            $this->modifiedColumns[] = CastleTypePeer::MISSION_AS;
-        }
-
-
-        return $this;
-    } // setMissionAs()
-
-    /**
-     * Set the value of [mission_pr] column.
-     *
-     * @param  int $v new value
-     * @return CastleType The current object (for fluent API support)
-     */
-    public function setMissionPr($v)
-    {
-        if ($v !== null && is_numeric($v)) {
-            $v = (int) $v;
-        }
-
-        if ($this->mission_pr !== $v) {
-            $this->mission_pr = $v;
-            $this->modifiedColumns[] = CastleTypePeer::MISSION_PR;
-        }
-
-
-        return $this;
-    } // setMissionPr()
-
-    /**
      * Set the value of [mission_sk] column.
      *
      * @param  int $v new value
@@ -1419,6 +1377,48 @@ abstract class BaseCastleType extends BaseObject implements Persistent
 
         return $this;
     } // setMissionBs()
+
+    /**
+     * Set the value of [mission_as] column.
+     *
+     * @param  int $v new value
+     * @return CastleType The current object (for fluent API support)
+     */
+    public function setMissionAs($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (int) $v;
+        }
+
+        if ($this->mission_as !== $v) {
+            $this->mission_as = $v;
+            $this->modifiedColumns[] = CastleTypePeer::MISSION_AS;
+        }
+
+
+        return $this;
+    } // setMissionAs()
+
+    /**
+     * Set the value of [mission_pr] column.
+     *
+     * @param  int $v new value
+     * @return CastleType The current object (for fluent API support)
+     */
+    public function setMissionPr($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (int) $v;
+        }
+
+        if ($this->mission_pr !== $v) {
+            $this->mission_pr = $v;
+            $this->modifiedColumns[] = CastleTypePeer::MISSION_PR;
+        }
+
+
+        return $this;
+    } // setMissionPr()
 
     /**
      * Set the value of [mission_lr] column.
@@ -2419,18 +2419,18 @@ abstract class BaseCastleType extends BaseObject implements Persistent
             $this->type = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
             $this->name = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
             $this->total_st = ($row[$startcol + 4] !== null) ? (int) $row[$startcol + 4] : null;
-            $this->total_as = ($row[$startcol + 5] !== null) ? (int) $row[$startcol + 5] : null;
-            $this->total_pr = ($row[$startcol + 6] !== null) ? (int) $row[$startcol + 6] : null;
-            $this->total_sk = ($row[$startcol + 7] !== null) ? (int) $row[$startcol + 7] : null;
-            $this->total_bs = ($row[$startcol + 8] !== null) ? (int) $row[$startcol + 8] : null;
+            $this->total_sk = ($row[$startcol + 5] !== null) ? (int) $row[$startcol + 5] : null;
+            $this->total_bs = ($row[$startcol + 6] !== null) ? (int) $row[$startcol + 6] : null;
+            $this->total_as = ($row[$startcol + 7] !== null) ? (int) $row[$startcol + 7] : null;
+            $this->total_pr = ($row[$startcol + 8] !== null) ? (int) $row[$startcol + 8] : null;
             $this->total_lr = ($row[$startcol + 9] !== null) ? (int) $row[$startcol + 9] : null;
             $this->total_hk = ($row[$startcol + 10] !== null) ? (int) $row[$startcol + 10] : null;
             $this->total_ok = ($row[$startcol + 11] !== null) ? (int) $row[$startcol + 11] : null;
             $this->mission_st = ($row[$startcol + 12] !== null) ? (int) $row[$startcol + 12] : null;
-            $this->mission_as = ($row[$startcol + 13] !== null) ? (int) $row[$startcol + 13] : null;
-            $this->mission_pr = ($row[$startcol + 14] !== null) ? (int) $row[$startcol + 14] : null;
-            $this->mission_sk = ($row[$startcol + 15] !== null) ? (int) $row[$startcol + 15] : null;
-            $this->mission_bs = ($row[$startcol + 16] !== null) ? (int) $row[$startcol + 16] : null;
+            $this->mission_sk = ($row[$startcol + 13] !== null) ? (int) $row[$startcol + 13] : null;
+            $this->mission_bs = ($row[$startcol + 14] !== null) ? (int) $row[$startcol + 14] : null;
+            $this->mission_as = ($row[$startcol + 15] !== null) ? (int) $row[$startcol + 15] : null;
+            $this->mission_pr = ($row[$startcol + 16] !== null) ? (int) $row[$startcol + 16] : null;
             $this->mission_lr = ($row[$startcol + 17] !== null) ? (int) $row[$startcol + 17] : null;
             $this->bergfried = ($row[$startcol + 18] !== null) ? (int) $row[$startcol + 18] : null;
             $this->zeughaus = ($row[$startcol + 19] !== null) ? (int) $row[$startcol + 19] : null;
@@ -2752,17 +2752,17 @@ abstract class BaseCastleType extends BaseObject implements Persistent
         if ($this->isColumnModified(CastleTypePeer::TOTAL_ST)) {
             $modifiedColumns[':p' . $index++]  = '`total_st`';
         }
-        if ($this->isColumnModified(CastleTypePeer::TOTAL_AS)) {
-            $modifiedColumns[':p' . $index++]  = '`total_as`';
-        }
-        if ($this->isColumnModified(CastleTypePeer::TOTAL_PR)) {
-            $modifiedColumns[':p' . $index++]  = '`total_pr`';
-        }
         if ($this->isColumnModified(CastleTypePeer::TOTAL_SK)) {
             $modifiedColumns[':p' . $index++]  = '`total_sk`';
         }
         if ($this->isColumnModified(CastleTypePeer::TOTAL_BS)) {
             $modifiedColumns[':p' . $index++]  = '`total_bs`';
+        }
+        if ($this->isColumnModified(CastleTypePeer::TOTAL_AS)) {
+            $modifiedColumns[':p' . $index++]  = '`total_as`';
+        }
+        if ($this->isColumnModified(CastleTypePeer::TOTAL_PR)) {
+            $modifiedColumns[':p' . $index++]  = '`total_pr`';
         }
         if ($this->isColumnModified(CastleTypePeer::TOTAL_LR)) {
             $modifiedColumns[':p' . $index++]  = '`total_lr`';
@@ -2776,17 +2776,17 @@ abstract class BaseCastleType extends BaseObject implements Persistent
         if ($this->isColumnModified(CastleTypePeer::MISSION_ST)) {
             $modifiedColumns[':p' . $index++]  = '`mission_st`';
         }
-        if ($this->isColumnModified(CastleTypePeer::MISSION_AS)) {
-            $modifiedColumns[':p' . $index++]  = '`mission_as`';
-        }
-        if ($this->isColumnModified(CastleTypePeer::MISSION_PR)) {
-            $modifiedColumns[':p' . $index++]  = '`mission_pr`';
-        }
         if ($this->isColumnModified(CastleTypePeer::MISSION_SK)) {
             $modifiedColumns[':p' . $index++]  = '`mission_sk`';
         }
         if ($this->isColumnModified(CastleTypePeer::MISSION_BS)) {
             $modifiedColumns[':p' . $index++]  = '`mission_bs`';
+        }
+        if ($this->isColumnModified(CastleTypePeer::MISSION_AS)) {
+            $modifiedColumns[':p' . $index++]  = '`mission_as`';
+        }
+        if ($this->isColumnModified(CastleTypePeer::MISSION_PR)) {
+            $modifiedColumns[':p' . $index++]  = '`mission_pr`';
         }
         if ($this->isColumnModified(CastleTypePeer::MISSION_LR)) {
             $modifiedColumns[':p' . $index++]  = '`mission_lr`';
@@ -2928,17 +2928,17 @@ abstract class BaseCastleType extends BaseObject implements Persistent
                     case '`total_st`':
                         $stmt->bindValue($identifier, $this->total_st, PDO::PARAM_INT);
                         break;
-                    case '`total_as`':
-                        $stmt->bindValue($identifier, $this->total_as, PDO::PARAM_INT);
-                        break;
-                    case '`total_pr`':
-                        $stmt->bindValue($identifier, $this->total_pr, PDO::PARAM_INT);
-                        break;
                     case '`total_sk`':
                         $stmt->bindValue($identifier, $this->total_sk, PDO::PARAM_INT);
                         break;
                     case '`total_bs`':
                         $stmt->bindValue($identifier, $this->total_bs, PDO::PARAM_INT);
+                        break;
+                    case '`total_as`':
+                        $stmt->bindValue($identifier, $this->total_as, PDO::PARAM_INT);
+                        break;
+                    case '`total_pr`':
+                        $stmt->bindValue($identifier, $this->total_pr, PDO::PARAM_INT);
                         break;
                     case '`total_lr`':
                         $stmt->bindValue($identifier, $this->total_lr, PDO::PARAM_INT);
@@ -2952,17 +2952,17 @@ abstract class BaseCastleType extends BaseObject implements Persistent
                     case '`mission_st`':
                         $stmt->bindValue($identifier, $this->mission_st, PDO::PARAM_INT);
                         break;
-                    case '`mission_as`':
-                        $stmt->bindValue($identifier, $this->mission_as, PDO::PARAM_INT);
-                        break;
-                    case '`mission_pr`':
-                        $stmt->bindValue($identifier, $this->mission_pr, PDO::PARAM_INT);
-                        break;
                     case '`mission_sk`':
                         $stmt->bindValue($identifier, $this->mission_sk, PDO::PARAM_INT);
                         break;
                     case '`mission_bs`':
                         $stmt->bindValue($identifier, $this->mission_bs, PDO::PARAM_INT);
+                        break;
+                    case '`mission_as`':
+                        $stmt->bindValue($identifier, $this->mission_as, PDO::PARAM_INT);
+                        break;
+                    case '`mission_pr`':
+                        $stmt->bindValue($identifier, $this->mission_pr, PDO::PARAM_INT);
                         break;
                     case '`mission_lr`':
                         $stmt->bindValue($identifier, $this->mission_lr, PDO::PARAM_INT);
@@ -3248,16 +3248,16 @@ abstract class BaseCastleType extends BaseObject implements Persistent
                 return $this->getTotalSt();
                 break;
             case 5:
-                return $this->getTotalAs();
-                break;
-            case 6:
-                return $this->getTotalPr();
-                break;
-            case 7:
                 return $this->getTotalSk();
                 break;
-            case 8:
+            case 6:
                 return $this->getTotalBs();
+                break;
+            case 7:
+                return $this->getTotalAs();
+                break;
+            case 8:
+                return $this->getTotalPr();
                 break;
             case 9:
                 return $this->getTotalLr();
@@ -3272,16 +3272,16 @@ abstract class BaseCastleType extends BaseObject implements Persistent
                 return $this->getMissionSt();
                 break;
             case 13:
-                return $this->getMissionAs();
-                break;
-            case 14:
-                return $this->getMissionPr();
-                break;
-            case 15:
                 return $this->getMissionSk();
                 break;
-            case 16:
+            case 14:
                 return $this->getMissionBs();
+                break;
+            case 15:
+                return $this->getMissionAs();
+                break;
+            case 16:
+                return $this->getMissionPr();
                 break;
             case 17:
                 return $this->getMissionLr();
@@ -3431,18 +3431,18 @@ abstract class BaseCastleType extends BaseObject implements Persistent
             $keys[2] => $this->getType(),
             $keys[3] => $this->getName(),
             $keys[4] => $this->getTotalSt(),
-            $keys[5] => $this->getTotalAs(),
-            $keys[6] => $this->getTotalPr(),
-            $keys[7] => $this->getTotalSk(),
-            $keys[8] => $this->getTotalBs(),
+            $keys[5] => $this->getTotalSk(),
+            $keys[6] => $this->getTotalBs(),
+            $keys[7] => $this->getTotalAs(),
+            $keys[8] => $this->getTotalPr(),
             $keys[9] => $this->getTotalLr(),
             $keys[10] => $this->getTotalHk(),
             $keys[11] => $this->getTotalOk(),
             $keys[12] => $this->getMissionSt(),
-            $keys[13] => $this->getMissionAs(),
-            $keys[14] => $this->getMissionPr(),
-            $keys[15] => $this->getMissionSk(),
-            $keys[16] => $this->getMissionBs(),
+            $keys[13] => $this->getMissionSk(),
+            $keys[14] => $this->getMissionBs(),
+            $keys[15] => $this->getMissionAs(),
+            $keys[16] => $this->getMissionPr(),
             $keys[17] => $this->getMissionLr(),
             $keys[18] => $this->getBergfried(),
             $keys[19] => $this->getZeughaus(),
@@ -3544,16 +3544,16 @@ abstract class BaseCastleType extends BaseObject implements Persistent
                 $this->setTotalSt($value);
                 break;
             case 5:
-                $this->setTotalAs($value);
-                break;
-            case 6:
-                $this->setTotalPr($value);
-                break;
-            case 7:
                 $this->setTotalSk($value);
                 break;
-            case 8:
+            case 6:
                 $this->setTotalBs($value);
+                break;
+            case 7:
+                $this->setTotalAs($value);
+                break;
+            case 8:
+                $this->setTotalPr($value);
                 break;
             case 9:
                 $this->setTotalLr($value);
@@ -3568,16 +3568,16 @@ abstract class BaseCastleType extends BaseObject implements Persistent
                 $this->setMissionSt($value);
                 break;
             case 13:
-                $this->setMissionAs($value);
-                break;
-            case 14:
-                $this->setMissionPr($value);
-                break;
-            case 15:
                 $this->setMissionSk($value);
                 break;
-            case 16:
+            case 14:
                 $this->setMissionBs($value);
+                break;
+            case 15:
+                $this->setMissionAs($value);
+                break;
+            case 16:
+                $this->setMissionPr($value);
                 break;
             case 17:
                 $this->setMissionLr($value);
@@ -3722,18 +3722,18 @@ abstract class BaseCastleType extends BaseObject implements Persistent
         if (array_key_exists($keys[2], $arr)) $this->setType($arr[$keys[2]]);
         if (array_key_exists($keys[3], $arr)) $this->setName($arr[$keys[3]]);
         if (array_key_exists($keys[4], $arr)) $this->setTotalSt($arr[$keys[4]]);
-        if (array_key_exists($keys[5], $arr)) $this->setTotalAs($arr[$keys[5]]);
-        if (array_key_exists($keys[6], $arr)) $this->setTotalPr($arr[$keys[6]]);
-        if (array_key_exists($keys[7], $arr)) $this->setTotalSk($arr[$keys[7]]);
-        if (array_key_exists($keys[8], $arr)) $this->setTotalBs($arr[$keys[8]]);
+        if (array_key_exists($keys[5], $arr)) $this->setTotalSk($arr[$keys[5]]);
+        if (array_key_exists($keys[6], $arr)) $this->setTotalBs($arr[$keys[6]]);
+        if (array_key_exists($keys[7], $arr)) $this->setTotalAs($arr[$keys[7]]);
+        if (array_key_exists($keys[8], $arr)) $this->setTotalPr($arr[$keys[8]]);
         if (array_key_exists($keys[9], $arr)) $this->setTotalLr($arr[$keys[9]]);
         if (array_key_exists($keys[10], $arr)) $this->setTotalHk($arr[$keys[10]]);
         if (array_key_exists($keys[11], $arr)) $this->setTotalOk($arr[$keys[11]]);
         if (array_key_exists($keys[12], $arr)) $this->setMissionSt($arr[$keys[12]]);
-        if (array_key_exists($keys[13], $arr)) $this->setMissionAs($arr[$keys[13]]);
-        if (array_key_exists($keys[14], $arr)) $this->setMissionPr($arr[$keys[14]]);
-        if (array_key_exists($keys[15], $arr)) $this->setMissionSk($arr[$keys[15]]);
-        if (array_key_exists($keys[16], $arr)) $this->setMissionBs($arr[$keys[16]]);
+        if (array_key_exists($keys[13], $arr)) $this->setMissionSk($arr[$keys[13]]);
+        if (array_key_exists($keys[14], $arr)) $this->setMissionBs($arr[$keys[14]]);
+        if (array_key_exists($keys[15], $arr)) $this->setMissionAs($arr[$keys[15]]);
+        if (array_key_exists($keys[16], $arr)) $this->setMissionPr($arr[$keys[16]]);
         if (array_key_exists($keys[17], $arr)) $this->setMissionLr($arr[$keys[17]]);
         if (array_key_exists($keys[18], $arr)) $this->setBergfried($arr[$keys[18]]);
         if (array_key_exists($keys[19], $arr)) $this->setZeughaus($arr[$keys[19]]);
@@ -3788,18 +3788,18 @@ abstract class BaseCastleType extends BaseObject implements Persistent
         if ($this->isColumnModified(CastleTypePeer::TYPE)) $criteria->add(CastleTypePeer::TYPE, $this->type);
         if ($this->isColumnModified(CastleTypePeer::NAME)) $criteria->add(CastleTypePeer::NAME, $this->name);
         if ($this->isColumnModified(CastleTypePeer::TOTAL_ST)) $criteria->add(CastleTypePeer::TOTAL_ST, $this->total_st);
-        if ($this->isColumnModified(CastleTypePeer::TOTAL_AS)) $criteria->add(CastleTypePeer::TOTAL_AS, $this->total_as);
-        if ($this->isColumnModified(CastleTypePeer::TOTAL_PR)) $criteria->add(CastleTypePeer::TOTAL_PR, $this->total_pr);
         if ($this->isColumnModified(CastleTypePeer::TOTAL_SK)) $criteria->add(CastleTypePeer::TOTAL_SK, $this->total_sk);
         if ($this->isColumnModified(CastleTypePeer::TOTAL_BS)) $criteria->add(CastleTypePeer::TOTAL_BS, $this->total_bs);
+        if ($this->isColumnModified(CastleTypePeer::TOTAL_AS)) $criteria->add(CastleTypePeer::TOTAL_AS, $this->total_as);
+        if ($this->isColumnModified(CastleTypePeer::TOTAL_PR)) $criteria->add(CastleTypePeer::TOTAL_PR, $this->total_pr);
         if ($this->isColumnModified(CastleTypePeer::TOTAL_LR)) $criteria->add(CastleTypePeer::TOTAL_LR, $this->total_lr);
         if ($this->isColumnModified(CastleTypePeer::TOTAL_HK)) $criteria->add(CastleTypePeer::TOTAL_HK, $this->total_hk);
         if ($this->isColumnModified(CastleTypePeer::TOTAL_OK)) $criteria->add(CastleTypePeer::TOTAL_OK, $this->total_ok);
         if ($this->isColumnModified(CastleTypePeer::MISSION_ST)) $criteria->add(CastleTypePeer::MISSION_ST, $this->mission_st);
-        if ($this->isColumnModified(CastleTypePeer::MISSION_AS)) $criteria->add(CastleTypePeer::MISSION_AS, $this->mission_as);
-        if ($this->isColumnModified(CastleTypePeer::MISSION_PR)) $criteria->add(CastleTypePeer::MISSION_PR, $this->mission_pr);
         if ($this->isColumnModified(CastleTypePeer::MISSION_SK)) $criteria->add(CastleTypePeer::MISSION_SK, $this->mission_sk);
         if ($this->isColumnModified(CastleTypePeer::MISSION_BS)) $criteria->add(CastleTypePeer::MISSION_BS, $this->mission_bs);
+        if ($this->isColumnModified(CastleTypePeer::MISSION_AS)) $criteria->add(CastleTypePeer::MISSION_AS, $this->mission_as);
+        if ($this->isColumnModified(CastleTypePeer::MISSION_PR)) $criteria->add(CastleTypePeer::MISSION_PR, $this->mission_pr);
         if ($this->isColumnModified(CastleTypePeer::MISSION_LR)) $criteria->add(CastleTypePeer::MISSION_LR, $this->mission_lr);
         if ($this->isColumnModified(CastleTypePeer::BERGFRIED)) $criteria->add(CastleTypePeer::BERGFRIED, $this->bergfried);
         if ($this->isColumnModified(CastleTypePeer::ZEUGHAUS)) $criteria->add(CastleTypePeer::ZEUGHAUS, $this->zeughaus);
@@ -3905,18 +3905,18 @@ abstract class BaseCastleType extends BaseObject implements Persistent
         $copyObj->setType($this->getType());
         $copyObj->setName($this->getName());
         $copyObj->setTotalSt($this->getTotalSt());
-        $copyObj->setTotalAs($this->getTotalAs());
-        $copyObj->setTotalPr($this->getTotalPr());
         $copyObj->setTotalSk($this->getTotalSk());
         $copyObj->setTotalBs($this->getTotalBs());
+        $copyObj->setTotalAs($this->getTotalAs());
+        $copyObj->setTotalPr($this->getTotalPr());
         $copyObj->setTotalLr($this->getTotalLr());
         $copyObj->setTotalHk($this->getTotalHk());
         $copyObj->setTotalOk($this->getTotalOk());
         $copyObj->setMissionSt($this->getMissionSt());
-        $copyObj->setMissionAs($this->getMissionAs());
-        $copyObj->setMissionPr($this->getMissionPr());
         $copyObj->setMissionSk($this->getMissionSk());
         $copyObj->setMissionBs($this->getMissionBs());
+        $copyObj->setMissionAs($this->getMissionAs());
+        $copyObj->setMissionPr($this->getMissionPr());
         $copyObj->setMissionLr($this->getMissionLr());
         $copyObj->setBergfried($this->getBergfried());
         $copyObj->setZeughaus($this->getZeughaus());
@@ -4372,18 +4372,18 @@ abstract class BaseCastleType extends BaseObject implements Persistent
         $this->type = null;
         $this->name = null;
         $this->total_st = null;
-        $this->total_as = null;
-        $this->total_pr = null;
         $this->total_sk = null;
         $this->total_bs = null;
+        $this->total_as = null;
+        $this->total_pr = null;
         $this->total_lr = null;
         $this->total_hk = null;
         $this->total_ok = null;
         $this->mission_st = null;
-        $this->mission_as = null;
-        $this->mission_pr = null;
         $this->mission_sk = null;
         $this->mission_bs = null;
+        $this->mission_as = null;
+        $this->mission_pr = null;
         $this->mission_lr = null;
         $this->bergfried = null;
         $this->zeughaus = null;

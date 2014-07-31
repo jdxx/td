@@ -24,13 +24,13 @@ abstract class BaseTargetPeer
     const TM_CLASS = 'TargetTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 7;
+    const NUM_COLUMNS = 29;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 7;
+    const NUM_HYDRATE_COLUMNS = 29;
 
     /** the column name for the id field */
     const ID = 'target.id';
@@ -44,8 +44,74 @@ abstract class BaseTargetPeer
     /** the column name for the coordinates field */
     const COORDINATES = 'target.coordinates';
 
-    /** the column name for the attack_time field */
-    const ATTACK_TIME = 'target.attack_time';
+    /** the column name for the date field */
+    const DATE = 'target.date';
+
+    /** the column name for the time field */
+    const TIME = 'target.time';
+
+    /** the column name for the start_time field */
+    const START_TIME = 'target.start_time';
+
+    /** the column name for the use_mission_troops field */
+    const USE_MISSION_TROOPS = 'target.use_mission_troops';
+
+    /** the column name for the filter_Castles_Off field */
+    const FILTER_CASTLES_OFF = 'target.filter_Castles_Off';
+
+    /** the column name for the filter_Castles_Def field */
+    const FILTER_CASTLES_DEF = 'target.filter_Castles_Def';
+
+    /** the column name for the filter_Castles_Mix field */
+    const FILTER_CASTLES_MIX = 'target.filter_Castles_Mix';
+
+    /** the column name for the filter_Troops_Marker field */
+    const FILTER_TROOPS_MARKER = 'target.filter_Troops_Marker';
+
+    /** the column name for the filter_Troops_Off field */
+    const FILTER_TROOPS_OFF = 'target.filter_Troops_Off';
+
+    /** the column name for the filter_Troops_Def field */
+    const FILTER_TROOPS_DEF = 'target.filter_Troops_Def';
+
+    /** the column name for the sort field */
+    const SORT = 'target.sort';
+
+    /** the column name for the priority field */
+    const PRIORITY = 'target.priority';
+
+    /** the column name for the target_silver field */
+    const TARGET_SILVER = 'target.target_silver';
+
+    /** the column name for the target_sk field */
+    const TARGET_SK = 'target.target_sk';
+
+    /** the column name for the target_bs field */
+    const TARGET_BS = 'target.target_bs';
+
+    /** the column name for the target_lr field */
+    const TARGET_LR = 'target.target_lr';
+
+    /** the column name for the total_silver field */
+    const TOTAL_SILVER = 'target.total_silver';
+
+    /** the column name for the total_st field */
+    const TOTAL_ST = 'target.total_st';
+
+    /** the column name for the total_sk field */
+    const TOTAL_SK = 'target.total_sk';
+
+    /** the column name for the total_bs field */
+    const TOTAL_BS = 'target.total_bs';
+
+    /** the column name for the total_as field */
+    const TOTAL_AS = 'target.total_as';
+
+    /** the column name for the total_pr field */
+    const TOTAL_PR = 'target.total_pr';
+
+    /** the column name for the total_lr field */
+    const TOTAL_LR = 'target.total_lr';
 
     /** the column name for the created_at field */
     const CREATED_AT = 'target.created_at';
@@ -72,12 +138,12 @@ abstract class BaseTargetPeer
      * e.g. TargetPeer::$fieldNames[TargetPeer::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('Id', 'UserId', 'Name', 'Coordinates', 'AttackTime', 'CreatedAt', 'UpdatedAt', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'userId', 'name', 'coordinates', 'attackTime', 'createdAt', 'updatedAt', ),
-        BasePeer::TYPE_COLNAME => array (TargetPeer::ID, TargetPeer::USER_ID, TargetPeer::NAME, TargetPeer::COORDINATES, TargetPeer::ATTACK_TIME, TargetPeer::CREATED_AT, TargetPeer::UPDATED_AT, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID', 'USER_ID', 'NAME', 'COORDINATES', 'ATTACK_TIME', 'CREATED_AT', 'UPDATED_AT', ),
-        BasePeer::TYPE_FIELDNAME => array ('id', 'user_id', 'name', 'coordinates', 'attack_time', 'created_at', 'updated_at', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+        BasePeer::TYPE_PHPNAME => array ('Id', 'UserId', 'Name', 'Coordinates', 'Date', 'Time', 'StartTime', 'UseMissionTroops', 'FilterCastlesOff', 'FilterCastlesDef', 'FilterCastlesMix', 'FilterTroopsMarker', 'FilterTroopsOff', 'FilterTroopsDef', 'Sort', 'Priority', 'TargetSilver', 'TargetSk', 'TargetBs', 'TargetLr', 'TotalSilver', 'TotalSt', 'TotalSk', 'TotalBs', 'TotalAs', 'TotalPr', 'TotalLr', 'CreatedAt', 'UpdatedAt', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'userId', 'name', 'coordinates', 'date', 'time', 'startTime', 'useMissionTroops', 'filterCastlesOff', 'filterCastlesDef', 'filterCastlesMix', 'filterTroopsMarker', 'filterTroopsOff', 'filterTroopsDef', 'sort', 'priority', 'targetSilver', 'targetSk', 'targetBs', 'targetLr', 'totalSilver', 'totalSt', 'totalSk', 'totalBs', 'totalAs', 'totalPr', 'totalLr', 'createdAt', 'updatedAt', ),
+        BasePeer::TYPE_COLNAME => array (TargetPeer::ID, TargetPeer::USER_ID, TargetPeer::NAME, TargetPeer::COORDINATES, TargetPeer::DATE, TargetPeer::TIME, TargetPeer::START_TIME, TargetPeer::USE_MISSION_TROOPS, TargetPeer::FILTER_CASTLES_OFF, TargetPeer::FILTER_CASTLES_DEF, TargetPeer::FILTER_CASTLES_MIX, TargetPeer::FILTER_TROOPS_MARKER, TargetPeer::FILTER_TROOPS_OFF, TargetPeer::FILTER_TROOPS_DEF, TargetPeer::SORT, TargetPeer::PRIORITY, TargetPeer::TARGET_SILVER, TargetPeer::TARGET_SK, TargetPeer::TARGET_BS, TargetPeer::TARGET_LR, TargetPeer::TOTAL_SILVER, TargetPeer::TOTAL_ST, TargetPeer::TOTAL_SK, TargetPeer::TOTAL_BS, TargetPeer::TOTAL_AS, TargetPeer::TOTAL_PR, TargetPeer::TOTAL_LR, TargetPeer::CREATED_AT, TargetPeer::UPDATED_AT, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID', 'USER_ID', 'NAME', 'COORDINATES', 'DATE', 'TIME', 'START_TIME', 'USE_MISSION_TROOPS', 'FILTER_CASTLES_OFF', 'FILTER_CASTLES_DEF', 'FILTER_CASTLES_MIX', 'FILTER_TROOPS_MARKER', 'FILTER_TROOPS_OFF', 'FILTER_TROOPS_DEF', 'SORT', 'PRIORITY', 'TARGET_SILVER', 'TARGET_SK', 'TARGET_BS', 'TARGET_LR', 'TOTAL_SILVER', 'TOTAL_ST', 'TOTAL_SK', 'TOTAL_BS', 'TOTAL_AS', 'TOTAL_PR', 'TOTAL_LR', 'CREATED_AT', 'UPDATED_AT', ),
+        BasePeer::TYPE_FIELDNAME => array ('id', 'user_id', 'name', 'coordinates', 'date', 'time', 'start_time', 'use_mission_troops', 'filter_Castles_Off', 'filter_Castles_Def', 'filter_Castles_Mix', 'filter_Troops_Marker', 'filter_Troops_Off', 'filter_Troops_Def', 'sort', 'priority', 'target_silver', 'target_sk', 'target_bs', 'target_lr', 'total_silver', 'total_st', 'total_sk', 'total_bs', 'total_as', 'total_pr', 'total_lr', 'created_at', 'updated_at', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, )
     );
 
     /**
@@ -87,12 +153,12 @@ abstract class BaseTargetPeer
      * e.g. TargetPeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'UserId' => 1, 'Name' => 2, 'Coordinates' => 3, 'AttackTime' => 4, 'CreatedAt' => 5, 'UpdatedAt' => 6, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'userId' => 1, 'name' => 2, 'coordinates' => 3, 'attackTime' => 4, 'createdAt' => 5, 'updatedAt' => 6, ),
-        BasePeer::TYPE_COLNAME => array (TargetPeer::ID => 0, TargetPeer::USER_ID => 1, TargetPeer::NAME => 2, TargetPeer::COORDINATES => 3, TargetPeer::ATTACK_TIME => 4, TargetPeer::CREATED_AT => 5, TargetPeer::UPDATED_AT => 6, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID' => 0, 'USER_ID' => 1, 'NAME' => 2, 'COORDINATES' => 3, 'ATTACK_TIME' => 4, 'CREATED_AT' => 5, 'UPDATED_AT' => 6, ),
-        BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'user_id' => 1, 'name' => 2, 'coordinates' => 3, 'attack_time' => 4, 'created_at' => 5, 'updated_at' => 6, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+        BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'UserId' => 1, 'Name' => 2, 'Coordinates' => 3, 'Date' => 4, 'Time' => 5, 'StartTime' => 6, 'UseMissionTroops' => 7, 'FilterCastlesOff' => 8, 'FilterCastlesDef' => 9, 'FilterCastlesMix' => 10, 'FilterTroopsMarker' => 11, 'FilterTroopsOff' => 12, 'FilterTroopsDef' => 13, 'Sort' => 14, 'Priority' => 15, 'TargetSilver' => 16, 'TargetSk' => 17, 'TargetBs' => 18, 'TargetLr' => 19, 'TotalSilver' => 20, 'TotalSt' => 21, 'TotalSk' => 22, 'TotalBs' => 23, 'TotalAs' => 24, 'TotalPr' => 25, 'TotalLr' => 26, 'CreatedAt' => 27, 'UpdatedAt' => 28, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'userId' => 1, 'name' => 2, 'coordinates' => 3, 'date' => 4, 'time' => 5, 'startTime' => 6, 'useMissionTroops' => 7, 'filterCastlesOff' => 8, 'filterCastlesDef' => 9, 'filterCastlesMix' => 10, 'filterTroopsMarker' => 11, 'filterTroopsOff' => 12, 'filterTroopsDef' => 13, 'sort' => 14, 'priority' => 15, 'targetSilver' => 16, 'targetSk' => 17, 'targetBs' => 18, 'targetLr' => 19, 'totalSilver' => 20, 'totalSt' => 21, 'totalSk' => 22, 'totalBs' => 23, 'totalAs' => 24, 'totalPr' => 25, 'totalLr' => 26, 'createdAt' => 27, 'updatedAt' => 28, ),
+        BasePeer::TYPE_COLNAME => array (TargetPeer::ID => 0, TargetPeer::USER_ID => 1, TargetPeer::NAME => 2, TargetPeer::COORDINATES => 3, TargetPeer::DATE => 4, TargetPeer::TIME => 5, TargetPeer::START_TIME => 6, TargetPeer::USE_MISSION_TROOPS => 7, TargetPeer::FILTER_CASTLES_OFF => 8, TargetPeer::FILTER_CASTLES_DEF => 9, TargetPeer::FILTER_CASTLES_MIX => 10, TargetPeer::FILTER_TROOPS_MARKER => 11, TargetPeer::FILTER_TROOPS_OFF => 12, TargetPeer::FILTER_TROOPS_DEF => 13, TargetPeer::SORT => 14, TargetPeer::PRIORITY => 15, TargetPeer::TARGET_SILVER => 16, TargetPeer::TARGET_SK => 17, TargetPeer::TARGET_BS => 18, TargetPeer::TARGET_LR => 19, TargetPeer::TOTAL_SILVER => 20, TargetPeer::TOTAL_ST => 21, TargetPeer::TOTAL_SK => 22, TargetPeer::TOTAL_BS => 23, TargetPeer::TOTAL_AS => 24, TargetPeer::TOTAL_PR => 25, TargetPeer::TOTAL_LR => 26, TargetPeer::CREATED_AT => 27, TargetPeer::UPDATED_AT => 28, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID' => 0, 'USER_ID' => 1, 'NAME' => 2, 'COORDINATES' => 3, 'DATE' => 4, 'TIME' => 5, 'START_TIME' => 6, 'USE_MISSION_TROOPS' => 7, 'FILTER_CASTLES_OFF' => 8, 'FILTER_CASTLES_DEF' => 9, 'FILTER_CASTLES_MIX' => 10, 'FILTER_TROOPS_MARKER' => 11, 'FILTER_TROOPS_OFF' => 12, 'FILTER_TROOPS_DEF' => 13, 'SORT' => 14, 'PRIORITY' => 15, 'TARGET_SILVER' => 16, 'TARGET_SK' => 17, 'TARGET_BS' => 18, 'TARGET_LR' => 19, 'TOTAL_SILVER' => 20, 'TOTAL_ST' => 21, 'TOTAL_SK' => 22, 'TOTAL_BS' => 23, 'TOTAL_AS' => 24, 'TOTAL_PR' => 25, 'TOTAL_LR' => 26, 'CREATED_AT' => 27, 'UPDATED_AT' => 28, ),
+        BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'user_id' => 1, 'name' => 2, 'coordinates' => 3, 'date' => 4, 'time' => 5, 'start_time' => 6, 'use_mission_troops' => 7, 'filter_Castles_Off' => 8, 'filter_Castles_Def' => 9, 'filter_Castles_Mix' => 10, 'filter_Troops_Marker' => 11, 'filter_Troops_Off' => 12, 'filter_Troops_Def' => 13, 'sort' => 14, 'priority' => 15, 'target_silver' => 16, 'target_sk' => 17, 'target_bs' => 18, 'target_lr' => 19, 'total_silver' => 20, 'total_st' => 21, 'total_sk' => 22, 'total_bs' => 23, 'total_as' => 24, 'total_pr' => 25, 'total_lr' => 26, 'created_at' => 27, 'updated_at' => 28, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, )
     );
 
     /**
@@ -170,7 +236,29 @@ abstract class BaseTargetPeer
             $criteria->addSelectColumn(TargetPeer::USER_ID);
             $criteria->addSelectColumn(TargetPeer::NAME);
             $criteria->addSelectColumn(TargetPeer::COORDINATES);
-            $criteria->addSelectColumn(TargetPeer::ATTACK_TIME);
+            $criteria->addSelectColumn(TargetPeer::DATE);
+            $criteria->addSelectColumn(TargetPeer::TIME);
+            $criteria->addSelectColumn(TargetPeer::START_TIME);
+            $criteria->addSelectColumn(TargetPeer::USE_MISSION_TROOPS);
+            $criteria->addSelectColumn(TargetPeer::FILTER_CASTLES_OFF);
+            $criteria->addSelectColumn(TargetPeer::FILTER_CASTLES_DEF);
+            $criteria->addSelectColumn(TargetPeer::FILTER_CASTLES_MIX);
+            $criteria->addSelectColumn(TargetPeer::FILTER_TROOPS_MARKER);
+            $criteria->addSelectColumn(TargetPeer::FILTER_TROOPS_OFF);
+            $criteria->addSelectColumn(TargetPeer::FILTER_TROOPS_DEF);
+            $criteria->addSelectColumn(TargetPeer::SORT);
+            $criteria->addSelectColumn(TargetPeer::PRIORITY);
+            $criteria->addSelectColumn(TargetPeer::TARGET_SILVER);
+            $criteria->addSelectColumn(TargetPeer::TARGET_SK);
+            $criteria->addSelectColumn(TargetPeer::TARGET_BS);
+            $criteria->addSelectColumn(TargetPeer::TARGET_LR);
+            $criteria->addSelectColumn(TargetPeer::TOTAL_SILVER);
+            $criteria->addSelectColumn(TargetPeer::TOTAL_ST);
+            $criteria->addSelectColumn(TargetPeer::TOTAL_SK);
+            $criteria->addSelectColumn(TargetPeer::TOTAL_BS);
+            $criteria->addSelectColumn(TargetPeer::TOTAL_AS);
+            $criteria->addSelectColumn(TargetPeer::TOTAL_PR);
+            $criteria->addSelectColumn(TargetPeer::TOTAL_LR);
             $criteria->addSelectColumn(TargetPeer::CREATED_AT);
             $criteria->addSelectColumn(TargetPeer::UPDATED_AT);
         } else {
@@ -178,7 +266,29 @@ abstract class BaseTargetPeer
             $criteria->addSelectColumn($alias . '.user_id');
             $criteria->addSelectColumn($alias . '.name');
             $criteria->addSelectColumn($alias . '.coordinates');
-            $criteria->addSelectColumn($alias . '.attack_time');
+            $criteria->addSelectColumn($alias . '.date');
+            $criteria->addSelectColumn($alias . '.time');
+            $criteria->addSelectColumn($alias . '.start_time');
+            $criteria->addSelectColumn($alias . '.use_mission_troops');
+            $criteria->addSelectColumn($alias . '.filter_Castles_Off');
+            $criteria->addSelectColumn($alias . '.filter_Castles_Def');
+            $criteria->addSelectColumn($alias . '.filter_Castles_Mix');
+            $criteria->addSelectColumn($alias . '.filter_Troops_Marker');
+            $criteria->addSelectColumn($alias . '.filter_Troops_Off');
+            $criteria->addSelectColumn($alias . '.filter_Troops_Def');
+            $criteria->addSelectColumn($alias . '.sort');
+            $criteria->addSelectColumn($alias . '.priority');
+            $criteria->addSelectColumn($alias . '.target_silver');
+            $criteria->addSelectColumn($alias . '.target_sk');
+            $criteria->addSelectColumn($alias . '.target_bs');
+            $criteria->addSelectColumn($alias . '.target_lr');
+            $criteria->addSelectColumn($alias . '.total_silver');
+            $criteria->addSelectColumn($alias . '.total_st');
+            $criteria->addSelectColumn($alias . '.total_sk');
+            $criteria->addSelectColumn($alias . '.total_bs');
+            $criteria->addSelectColumn($alias . '.total_as');
+            $criteria->addSelectColumn($alias . '.total_pr');
+            $criteria->addSelectColumn($alias . '.total_lr');
             $criteria->addSelectColumn($alias . '.created_at');
             $criteria->addSelectColumn($alias . '.updated_at');
         }

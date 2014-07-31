@@ -11,18 +11,18 @@
  * @method CastleTypeQuery orderByType($order = Criteria::ASC) Order by the type column
  * @method CastleTypeQuery orderByName($order = Criteria::ASC) Order by the name column
  * @method CastleTypeQuery orderByTotalSt($order = Criteria::ASC) Order by the total_st column
- * @method CastleTypeQuery orderByTotalAs($order = Criteria::ASC) Order by the total_as column
- * @method CastleTypeQuery orderByTotalPr($order = Criteria::ASC) Order by the total_pr column
  * @method CastleTypeQuery orderByTotalSk($order = Criteria::ASC) Order by the total_sk column
  * @method CastleTypeQuery orderByTotalBs($order = Criteria::ASC) Order by the total_bs column
+ * @method CastleTypeQuery orderByTotalAs($order = Criteria::ASC) Order by the total_as column
+ * @method CastleTypeQuery orderByTotalPr($order = Criteria::ASC) Order by the total_pr column
  * @method CastleTypeQuery orderByTotalLr($order = Criteria::ASC) Order by the total_lr column
  * @method CastleTypeQuery orderByTotalHk($order = Criteria::ASC) Order by the total_hk column
  * @method CastleTypeQuery orderByTotalOk($order = Criteria::ASC) Order by the total_ok column
  * @method CastleTypeQuery orderByMissionSt($order = Criteria::ASC) Order by the mission_st column
- * @method CastleTypeQuery orderByMissionAs($order = Criteria::ASC) Order by the mission_as column
- * @method CastleTypeQuery orderByMissionPr($order = Criteria::ASC) Order by the mission_pr column
  * @method CastleTypeQuery orderByMissionSk($order = Criteria::ASC) Order by the mission_sk column
  * @method CastleTypeQuery orderByMissionBs($order = Criteria::ASC) Order by the mission_bs column
+ * @method CastleTypeQuery orderByMissionAs($order = Criteria::ASC) Order by the mission_as column
+ * @method CastleTypeQuery orderByMissionPr($order = Criteria::ASC) Order by the mission_pr column
  * @method CastleTypeQuery orderByMissionLr($order = Criteria::ASC) Order by the mission_lr column
  * @method CastleTypeQuery orderByBergfried($order = Criteria::ASC) Order by the bergfried column
  * @method CastleTypeQuery orderByZeughaus($order = Criteria::ASC) Order by the zeughaus column
@@ -67,18 +67,18 @@
  * @method CastleTypeQuery groupByType() Group by the type column
  * @method CastleTypeQuery groupByName() Group by the name column
  * @method CastleTypeQuery groupByTotalSt() Group by the total_st column
- * @method CastleTypeQuery groupByTotalAs() Group by the total_as column
- * @method CastleTypeQuery groupByTotalPr() Group by the total_pr column
  * @method CastleTypeQuery groupByTotalSk() Group by the total_sk column
  * @method CastleTypeQuery groupByTotalBs() Group by the total_bs column
+ * @method CastleTypeQuery groupByTotalAs() Group by the total_as column
+ * @method CastleTypeQuery groupByTotalPr() Group by the total_pr column
  * @method CastleTypeQuery groupByTotalLr() Group by the total_lr column
  * @method CastleTypeQuery groupByTotalHk() Group by the total_hk column
  * @method CastleTypeQuery groupByTotalOk() Group by the total_ok column
  * @method CastleTypeQuery groupByMissionSt() Group by the mission_st column
- * @method CastleTypeQuery groupByMissionAs() Group by the mission_as column
- * @method CastleTypeQuery groupByMissionPr() Group by the mission_pr column
  * @method CastleTypeQuery groupByMissionSk() Group by the mission_sk column
  * @method CastleTypeQuery groupByMissionBs() Group by the mission_bs column
+ * @method CastleTypeQuery groupByMissionAs() Group by the mission_as column
+ * @method CastleTypeQuery groupByMissionPr() Group by the mission_pr column
  * @method CastleTypeQuery groupByMissionLr() Group by the mission_lr column
  * @method CastleTypeQuery groupByBergfried() Group by the bergfried column
  * @method CastleTypeQuery groupByZeughaus() Group by the zeughaus column
@@ -137,18 +137,18 @@
  * @method CastleType findOneByType(string $type) Return the first CastleType filtered by the type column
  * @method CastleType findOneByName(string $name) Return the first CastleType filtered by the name column
  * @method CastleType findOneByTotalSt(int $total_st) Return the first CastleType filtered by the total_st column
- * @method CastleType findOneByTotalAs(int $total_as) Return the first CastleType filtered by the total_as column
- * @method CastleType findOneByTotalPr(int $total_pr) Return the first CastleType filtered by the total_pr column
  * @method CastleType findOneByTotalSk(int $total_sk) Return the first CastleType filtered by the total_sk column
  * @method CastleType findOneByTotalBs(int $total_bs) Return the first CastleType filtered by the total_bs column
+ * @method CastleType findOneByTotalAs(int $total_as) Return the first CastleType filtered by the total_as column
+ * @method CastleType findOneByTotalPr(int $total_pr) Return the first CastleType filtered by the total_pr column
  * @method CastleType findOneByTotalLr(int $total_lr) Return the first CastleType filtered by the total_lr column
  * @method CastleType findOneByTotalHk(int $total_hk) Return the first CastleType filtered by the total_hk column
  * @method CastleType findOneByTotalOk(int $total_ok) Return the first CastleType filtered by the total_ok column
  * @method CastleType findOneByMissionSt(int $mission_st) Return the first CastleType filtered by the mission_st column
- * @method CastleType findOneByMissionAs(int $mission_as) Return the first CastleType filtered by the mission_as column
- * @method CastleType findOneByMissionPr(int $mission_pr) Return the first CastleType filtered by the mission_pr column
  * @method CastleType findOneByMissionSk(int $mission_sk) Return the first CastleType filtered by the mission_sk column
  * @method CastleType findOneByMissionBs(int $mission_bs) Return the first CastleType filtered by the mission_bs column
+ * @method CastleType findOneByMissionAs(int $mission_as) Return the first CastleType filtered by the mission_as column
+ * @method CastleType findOneByMissionPr(int $mission_pr) Return the first CastleType filtered by the mission_pr column
  * @method CastleType findOneByMissionLr(int $mission_lr) Return the first CastleType filtered by the mission_lr column
  * @method CastleType findOneByBergfried(int $bergfried) Return the first CastleType filtered by the bergfried column
  * @method CastleType findOneByZeughaus(int $zeughaus) Return the first CastleType filtered by the zeughaus column
@@ -193,18 +193,18 @@
  * @method array findByType(string $type) Return CastleType objects filtered by the type column
  * @method array findByName(string $name) Return CastleType objects filtered by the name column
  * @method array findByTotalSt(int $total_st) Return CastleType objects filtered by the total_st column
- * @method array findByTotalAs(int $total_as) Return CastleType objects filtered by the total_as column
- * @method array findByTotalPr(int $total_pr) Return CastleType objects filtered by the total_pr column
  * @method array findByTotalSk(int $total_sk) Return CastleType objects filtered by the total_sk column
  * @method array findByTotalBs(int $total_bs) Return CastleType objects filtered by the total_bs column
+ * @method array findByTotalAs(int $total_as) Return CastleType objects filtered by the total_as column
+ * @method array findByTotalPr(int $total_pr) Return CastleType objects filtered by the total_pr column
  * @method array findByTotalLr(int $total_lr) Return CastleType objects filtered by the total_lr column
  * @method array findByTotalHk(int $total_hk) Return CastleType objects filtered by the total_hk column
  * @method array findByTotalOk(int $total_ok) Return CastleType objects filtered by the total_ok column
  * @method array findByMissionSt(int $mission_st) Return CastleType objects filtered by the mission_st column
- * @method array findByMissionAs(int $mission_as) Return CastleType objects filtered by the mission_as column
- * @method array findByMissionPr(int $mission_pr) Return CastleType objects filtered by the mission_pr column
  * @method array findByMissionSk(int $mission_sk) Return CastleType objects filtered by the mission_sk column
  * @method array findByMissionBs(int $mission_bs) Return CastleType objects filtered by the mission_bs column
+ * @method array findByMissionAs(int $mission_as) Return CastleType objects filtered by the mission_as column
+ * @method array findByMissionPr(int $mission_pr) Return CastleType objects filtered by the mission_pr column
  * @method array findByMissionLr(int $mission_lr) Return CastleType objects filtered by the mission_lr column
  * @method array findByBergfried(int $bergfried) Return CastleType objects filtered by the bergfried column
  * @method array findByZeughaus(int $zeughaus) Return CastleType objects filtered by the zeughaus column
@@ -350,7 +350,7 @@ abstract class BaseCastleTypeQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `id`, `user_id`, `type`, `name`, `total_st`, `total_as`, `total_pr`, `total_sk`, `total_bs`, `total_lr`, `total_hk`, `total_ok`, `mission_st`, `mission_as`, `mission_pr`, `mission_sk`, `mission_bs`, `mission_lr`, `bergfried`, `zeughaus`, `taverne`, `bibliothek`, `wehranlage`, `markt`, `bauernhof`, `holzfaeller`, `holzlager`, `steinbruch`, `steinlager`, `erzmine`, `erzlager`, `langbogen`, `dreifelderwirtschaft`, `kummet`, `vorratskeller`, `steigbuegel`, `waffenschmied`, `ruestungsschmied`, `bierpruefer`, `schwertschmied`, `eisenhaertung`, `armbrust`, `giftpfeile`, `pferdezucht`, `waffenherstellung`, `pferdepanzerung`, `schubkarren`, `brandpfeile`, `hufschmied`, `umgebungskarte`, `zisterne`, `max_population`, `free_population`, `created_at`, `updated_at` FROM `castle_type` WHERE `id` = :p0';
+        $sql = 'SELECT `id`, `user_id`, `type`, `name`, `total_st`, `total_sk`, `total_bs`, `total_as`, `total_pr`, `total_lr`, `total_hk`, `total_ok`, `mission_st`, `mission_sk`, `mission_bs`, `mission_as`, `mission_pr`, `mission_lr`, `bergfried`, `zeughaus`, `taverne`, `bibliothek`, `wehranlage`, `markt`, `bauernhof`, `holzfaeller`, `holzlager`, `steinbruch`, `steinlager`, `erzmine`, `erzlager`, `langbogen`, `dreifelderwirtschaft`, `kummet`, `vorratskeller`, `steigbuegel`, `waffenschmied`, `ruestungsschmied`, `bierpruefer`, `schwertschmied`, `eisenhaertung`, `armbrust`, `giftpfeile`, `pferdezucht`, `waffenherstellung`, `pferdepanzerung`, `schubkarren`, `brandpfeile`, `hufschmied`, `umgebungskarte`, `zisterne`, `max_population`, `free_population`, `created_at`, `updated_at` FROM `castle_type` WHERE `id` = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -626,90 +626,6 @@ abstract class BaseCastleTypeQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the total_as column
-     *
-     * Example usage:
-     * <code>
-     * $query->filterByTotalAs(1234); // WHERE total_as = 1234
-     * $query->filterByTotalAs(array(12, 34)); // WHERE total_as IN (12, 34)
-     * $query->filterByTotalAs(array('min' => 12)); // WHERE total_as >= 12
-     * $query->filterByTotalAs(array('max' => 12)); // WHERE total_as <= 12
-     * </code>
-     *
-     * @param     mixed $totalAs The value to use as filter.
-     *              Use scalar values for equality.
-     *              Use array values for in_array() equivalent.
-     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return CastleTypeQuery The current query, for fluid interface
-     */
-    public function filterByTotalAs($totalAs = null, $comparison = null)
-    {
-        if (is_array($totalAs)) {
-            $useMinMax = false;
-            if (isset($totalAs['min'])) {
-                $this->addUsingAlias(CastleTypePeer::TOTAL_AS, $totalAs['min'], Criteria::GREATER_EQUAL);
-                $useMinMax = true;
-            }
-            if (isset($totalAs['max'])) {
-                $this->addUsingAlias(CastleTypePeer::TOTAL_AS, $totalAs['max'], Criteria::LESS_EQUAL);
-                $useMinMax = true;
-            }
-            if ($useMinMax) {
-                return $this;
-            }
-            if (null === $comparison) {
-                $comparison = Criteria::IN;
-            }
-        }
-
-        return $this->addUsingAlias(CastleTypePeer::TOTAL_AS, $totalAs, $comparison);
-    }
-
-    /**
-     * Filter the query on the total_pr column
-     *
-     * Example usage:
-     * <code>
-     * $query->filterByTotalPr(1234); // WHERE total_pr = 1234
-     * $query->filterByTotalPr(array(12, 34)); // WHERE total_pr IN (12, 34)
-     * $query->filterByTotalPr(array('min' => 12)); // WHERE total_pr >= 12
-     * $query->filterByTotalPr(array('max' => 12)); // WHERE total_pr <= 12
-     * </code>
-     *
-     * @param     mixed $totalPr The value to use as filter.
-     *              Use scalar values for equality.
-     *              Use array values for in_array() equivalent.
-     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return CastleTypeQuery The current query, for fluid interface
-     */
-    public function filterByTotalPr($totalPr = null, $comparison = null)
-    {
-        if (is_array($totalPr)) {
-            $useMinMax = false;
-            if (isset($totalPr['min'])) {
-                $this->addUsingAlias(CastleTypePeer::TOTAL_PR, $totalPr['min'], Criteria::GREATER_EQUAL);
-                $useMinMax = true;
-            }
-            if (isset($totalPr['max'])) {
-                $this->addUsingAlias(CastleTypePeer::TOTAL_PR, $totalPr['max'], Criteria::LESS_EQUAL);
-                $useMinMax = true;
-            }
-            if ($useMinMax) {
-                return $this;
-            }
-            if (null === $comparison) {
-                $comparison = Criteria::IN;
-            }
-        }
-
-        return $this->addUsingAlias(CastleTypePeer::TOTAL_PR, $totalPr, $comparison);
-    }
-
-    /**
      * Filter the query on the total_sk column
      *
      * Example usage:
@@ -791,6 +707,90 @@ abstract class BaseCastleTypeQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(CastleTypePeer::TOTAL_BS, $totalBs, $comparison);
+    }
+
+    /**
+     * Filter the query on the total_as column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByTotalAs(1234); // WHERE total_as = 1234
+     * $query->filterByTotalAs(array(12, 34)); // WHERE total_as IN (12, 34)
+     * $query->filterByTotalAs(array('min' => 12)); // WHERE total_as >= 12
+     * $query->filterByTotalAs(array('max' => 12)); // WHERE total_as <= 12
+     * </code>
+     *
+     * @param     mixed $totalAs The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return CastleTypeQuery The current query, for fluid interface
+     */
+    public function filterByTotalAs($totalAs = null, $comparison = null)
+    {
+        if (is_array($totalAs)) {
+            $useMinMax = false;
+            if (isset($totalAs['min'])) {
+                $this->addUsingAlias(CastleTypePeer::TOTAL_AS, $totalAs['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($totalAs['max'])) {
+                $this->addUsingAlias(CastleTypePeer::TOTAL_AS, $totalAs['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(CastleTypePeer::TOTAL_AS, $totalAs, $comparison);
+    }
+
+    /**
+     * Filter the query on the total_pr column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByTotalPr(1234); // WHERE total_pr = 1234
+     * $query->filterByTotalPr(array(12, 34)); // WHERE total_pr IN (12, 34)
+     * $query->filterByTotalPr(array('min' => 12)); // WHERE total_pr >= 12
+     * $query->filterByTotalPr(array('max' => 12)); // WHERE total_pr <= 12
+     * </code>
+     *
+     * @param     mixed $totalPr The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return CastleTypeQuery The current query, for fluid interface
+     */
+    public function filterByTotalPr($totalPr = null, $comparison = null)
+    {
+        if (is_array($totalPr)) {
+            $useMinMax = false;
+            if (isset($totalPr['min'])) {
+                $this->addUsingAlias(CastleTypePeer::TOTAL_PR, $totalPr['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($totalPr['max'])) {
+                $this->addUsingAlias(CastleTypePeer::TOTAL_PR, $totalPr['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(CastleTypePeer::TOTAL_PR, $totalPr, $comparison);
     }
 
     /**
@@ -962,90 +962,6 @@ abstract class BaseCastleTypeQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the mission_as column
-     *
-     * Example usage:
-     * <code>
-     * $query->filterByMissionAs(1234); // WHERE mission_as = 1234
-     * $query->filterByMissionAs(array(12, 34)); // WHERE mission_as IN (12, 34)
-     * $query->filterByMissionAs(array('min' => 12)); // WHERE mission_as >= 12
-     * $query->filterByMissionAs(array('max' => 12)); // WHERE mission_as <= 12
-     * </code>
-     *
-     * @param     mixed $missionAs The value to use as filter.
-     *              Use scalar values for equality.
-     *              Use array values for in_array() equivalent.
-     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return CastleTypeQuery The current query, for fluid interface
-     */
-    public function filterByMissionAs($missionAs = null, $comparison = null)
-    {
-        if (is_array($missionAs)) {
-            $useMinMax = false;
-            if (isset($missionAs['min'])) {
-                $this->addUsingAlias(CastleTypePeer::MISSION_AS, $missionAs['min'], Criteria::GREATER_EQUAL);
-                $useMinMax = true;
-            }
-            if (isset($missionAs['max'])) {
-                $this->addUsingAlias(CastleTypePeer::MISSION_AS, $missionAs['max'], Criteria::LESS_EQUAL);
-                $useMinMax = true;
-            }
-            if ($useMinMax) {
-                return $this;
-            }
-            if (null === $comparison) {
-                $comparison = Criteria::IN;
-            }
-        }
-
-        return $this->addUsingAlias(CastleTypePeer::MISSION_AS, $missionAs, $comparison);
-    }
-
-    /**
-     * Filter the query on the mission_pr column
-     *
-     * Example usage:
-     * <code>
-     * $query->filterByMissionPr(1234); // WHERE mission_pr = 1234
-     * $query->filterByMissionPr(array(12, 34)); // WHERE mission_pr IN (12, 34)
-     * $query->filterByMissionPr(array('min' => 12)); // WHERE mission_pr >= 12
-     * $query->filterByMissionPr(array('max' => 12)); // WHERE mission_pr <= 12
-     * </code>
-     *
-     * @param     mixed $missionPr The value to use as filter.
-     *              Use scalar values for equality.
-     *              Use array values for in_array() equivalent.
-     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return CastleTypeQuery The current query, for fluid interface
-     */
-    public function filterByMissionPr($missionPr = null, $comparison = null)
-    {
-        if (is_array($missionPr)) {
-            $useMinMax = false;
-            if (isset($missionPr['min'])) {
-                $this->addUsingAlias(CastleTypePeer::MISSION_PR, $missionPr['min'], Criteria::GREATER_EQUAL);
-                $useMinMax = true;
-            }
-            if (isset($missionPr['max'])) {
-                $this->addUsingAlias(CastleTypePeer::MISSION_PR, $missionPr['max'], Criteria::LESS_EQUAL);
-                $useMinMax = true;
-            }
-            if ($useMinMax) {
-                return $this;
-            }
-            if (null === $comparison) {
-                $comparison = Criteria::IN;
-            }
-        }
-
-        return $this->addUsingAlias(CastleTypePeer::MISSION_PR, $missionPr, $comparison);
-    }
-
-    /**
      * Filter the query on the mission_sk column
      *
      * Example usage:
@@ -1127,6 +1043,90 @@ abstract class BaseCastleTypeQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(CastleTypePeer::MISSION_BS, $missionBs, $comparison);
+    }
+
+    /**
+     * Filter the query on the mission_as column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByMissionAs(1234); // WHERE mission_as = 1234
+     * $query->filterByMissionAs(array(12, 34)); // WHERE mission_as IN (12, 34)
+     * $query->filterByMissionAs(array('min' => 12)); // WHERE mission_as >= 12
+     * $query->filterByMissionAs(array('max' => 12)); // WHERE mission_as <= 12
+     * </code>
+     *
+     * @param     mixed $missionAs The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return CastleTypeQuery The current query, for fluid interface
+     */
+    public function filterByMissionAs($missionAs = null, $comparison = null)
+    {
+        if (is_array($missionAs)) {
+            $useMinMax = false;
+            if (isset($missionAs['min'])) {
+                $this->addUsingAlias(CastleTypePeer::MISSION_AS, $missionAs['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($missionAs['max'])) {
+                $this->addUsingAlias(CastleTypePeer::MISSION_AS, $missionAs['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(CastleTypePeer::MISSION_AS, $missionAs, $comparison);
+    }
+
+    /**
+     * Filter the query on the mission_pr column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByMissionPr(1234); // WHERE mission_pr = 1234
+     * $query->filterByMissionPr(array(12, 34)); // WHERE mission_pr IN (12, 34)
+     * $query->filterByMissionPr(array('min' => 12)); // WHERE mission_pr >= 12
+     * $query->filterByMissionPr(array('max' => 12)); // WHERE mission_pr <= 12
+     * </code>
+     *
+     * @param     mixed $missionPr The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return CastleTypeQuery The current query, for fluid interface
+     */
+    public function filterByMissionPr($missionPr = null, $comparison = null)
+    {
+        if (is_array($missionPr)) {
+            $useMinMax = false;
+            if (isset($missionPr['min'])) {
+                $this->addUsingAlias(CastleTypePeer::MISSION_PR, $missionPr['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($missionPr['max'])) {
+                $this->addUsingAlias(CastleTypePeer::MISSION_PR, $missionPr['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(CastleTypePeer::MISSION_PR, $missionPr, $comparison);
     }
 
     /**

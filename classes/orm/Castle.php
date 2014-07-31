@@ -17,7 +17,9 @@ class Castle extends BaseCastle
 {
 	public function __construct()
 	{
-		$this->setUser(0);
+		$user = UserQuery::create()->findPk(1);
+
+		$this->setUser($user);
 		$this->setCastleTypeId(0);
 		$this->setCastleLocationId(0);
 		$this->setX(0);

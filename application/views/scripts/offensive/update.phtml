@@ -1,0 +1,107 @@
+<form method="post" action="">
+	<div class="ui-grid-b">
+		<div class="ui-block-a td-block-a">
+			<div class="ui-field-contain td-field-contain">
+				<label for="name">Name</label>
+				<input type="text" name="Name" id="name" value="<?php echo $this->target->getName(); ?>">
+			</div>
+
+			<label for="coordinates">Koordinaten</label>
+			<input type="text" name="Coordinates" id="coordinates" value="<?php echo $this->target->getCoordinates(); ?>">
+			
+			<div class="ui-field-contain td-field-contain-troops">
+				<label for="date">Datum</label>
+				<input data-role="date" type="text" id="date" data-inline="false" name="Date" class="date-input" data-wrapper-class="number-10d" value="<?php echo $this->target->getDate() ?>">
+			</div>
+			<div class="clockpicker ui-field-contain td-field-contain-troops" data-autoclose="true">
+				<label for="time">Zeit</label>
+				<input name="Time" type="text" id="time" data-wrapper-class="form-control number-10d" value="<?php echo $this->target->getTime(); ?>">
+			</div>
+			<fieldset data-role="controlgroup">
+		        <input name="StartTime" id="starttime1a" value="1" <?php echo ($this->target->getStartTime() == true) ? 'checked="checked"' : '';?> type="radio">
+		        <label for="starttime1a">Startzeitpunkt</label>
+		        <input name="StartTime" id="starttime1b" value="0" <?php echo ($this->target->getStartTime() == false) ? 'checked="checked"' : '';?> type="radio">
+		        <label for="starttime1b">Endzeitpunkt</label>
+		    </fieldset>	
+			<fieldset data-role="controlgroup">
+		        <input name="UseMissionTroops" id="use_mission_troops" type="checkbox" value="1" <?php if($this->target->getUseMissionTroops()): echo "checked"; endif; ?>>
+		        <label for="use_mission_troops">Missionstruppen einsetzen</label>
+	        </fieldset>
+        </div>
+		
+		<div class="ui-block-b td-block-b">
+			<h3 class="ui-bar ui-bar-a">Auto-Calc Vorgaben</h3>
+			<fieldset data-role="controlgroup">
+		        <legend>Priorit&auml;t:</legend>
+		        <input name="Priority" id="priority1a" value="silver" <?php echo ($this->target->getPriority() == 'silver') ? 'checked="checked"' : '';?> type="radio">
+		        <label for="priority1a">Maximales Silber</label>
+		        <input name="Priority" id="priority1b" value="runtime" <?php echo ($this->target->getPriority() == 'runtime') ? 'checked="checked"' : '';?> type="radio">
+		        <label for="priority1b">K&uuml;rzeste Laufzeiten</label>
+		    </fieldset>	
+			<div class="ui-field-contain td-field-contain-troops">
+		         <label for="target_silver">Silber</label>
+		         <input name="TargetSilver" id="target_silver" data-wrapper-class="number-10d" value="<?php echo $this->target->getTargetSilver(); ?>" type="number">
+		    </div>
+		    <div class="ui-field-contain td-field-contain-troops">
+		         <label for="target_sk">Schwertk&auml;mpfer</label>
+		         <input name="TargetSk" id="target_sk" data-wrapper-class="number-10d" value="<?php echo $this->target->getTargetSk(); ?>" type="number">
+		    </div>
+		    <div class="ui-field-contain td-field-contain-troops">
+		         <label for="target_bs">Bogensch&uuml;tzen</label>
+		         <input name="TargetBs" id="target_bs" data-wrapper-class="number-10d" value="<?php echo $this->target->getTargetBs(); ?>" type="number">
+		    </div>
+		    <div class="ui-field-contain td-field-contain-troops">
+		         <label for="target_lr">Lanzenreiter</label>
+		         <input name="TargetLr" id="target_lr" data-wrapper-class="number-10d" value="<?php echo $this->target->getTargetLr(); ?>" type="number">
+		    </div>
+		</div>
+		    
+    	<div class="ui-block-c td-block-c">		
+			<h3 class="ui-bar ui-bar-a">Zugeordnete Resourcen</h3>
+			<div class="ui-field-contain td-field-contain-troops">
+		         <label for="total_silver">Silber</label>
+		         <input name="TotalSilver" id="total_silver" data-wrapper-class="number-10d"  disabled="disabled" value="<?php echo $this->target->getTotalSilver(); ?>" type="number">
+		    </div>
+		    <div class="ui-field-contain td-field-contain-troops">
+		         <label for="total_st">Speertr&auml;ger</label>
+		         <input name="TotalSt" id="total_st" data-wrapper-class="number-10d"  disabled="disabled" value="<?php echo $this->target->getTotalSt(); ?>" type="number">
+		    </div>
+		    <div class="ui-field-contain td-field-contain-troops">
+		         <label for="total_sk">Schwertk&auml;mpfer</label>
+		         <input name="TotalSk" id="total_sk" data-wrapper-class="number-10d"  disabled="disabled" value="<?php echo $this->target->getTotalSk(); ?>" type="number">
+		    </div>
+		    <div class="ui-field-contain td-field-contain-troops">
+		         <label for="total_bs">Bogensch&uuml;tzen</label>
+		         <input name="TotalBs" id="total_bs" data-wrapper-class="number-10d"  disabled="disabled" value="<?php echo $this->target->getTotalBs(); ?>" type="number">
+		    </div>
+		    <div class="ui-field-contain td-field-contain-troops">
+		         <label for="total_as">Armbrustsch&uuml;tzen</label>
+		         <input name="TotalAs" id="total_as" data-wrapper-class="number-10d"  disabled="disabled" value="<?php echo $this->target->getTotalAs(); ?>" type="number">
+		    </div>
+		    <div class="ui-field-contain td-field-contain-troops">
+		         <label for="total_pr">Lanzenreiter</label>
+		         <input name="TotalPr" id="total_pr" data-wrapper-class="number-10d"  disabled="disabled" value="<?php echo $this->target->getTotalPr(); ?>" type="number">
+		    </div>
+		    <div class="ui-field-contain td-field-contain-troops">
+		         <label for="total_lr">Lanzenreiter</label>
+		         <input name="TotalLr" id="total_lr" data-wrapper-class="number-10d"  disabled="disabled" value="<?php echo $this->target->getTotalLr(); ?>" type="number">
+		    </div>
+		    <div class="td-right">
+			    <div class="ui-input-btn ui-btn ui-btn-b ui-btn-inline ui-corner-all ui-shadow">
+			    	Resourcen
+			    	<input name="save+activities" type="submit">
+			    </div>
+		    </div>
+		    <div class="td-right">
+				<div class="ui-input-btn ui-btn ui-btn-b ui-btn-inline ui-corner-all ui-shadow">
+			    	Sichern
+			    	<input name="save" type="submit">
+			    </div> 
+			    <div class="ui-input-btn ui-btn ui-btn-b ui-btn-inline ui-corner-all ui-shadow">
+			    	Abbruch
+			    	<input name="cancel" type="submit">
+			    </div> 
+		    </div>    
+	    </div>
+	</div>
+</form>

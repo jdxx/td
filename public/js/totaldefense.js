@@ -18,6 +18,25 @@ $(document).on( "mobileinit", function() {
 //	});
 //});
 
+$(document).on('pageinit', function() 
+	    { 
+//			alert("ABC");
+//			$('.date-input').date({ dateFormat: "dd.mm.yy" });
+			$('.clockpicker').clockpicker();
+			
+//			$("#table-custom-2").tablesorter(); 
+	    } 
+	); 
+
+$(document).on('pagebeforecreate', function() 
+	    { 
+//			alert("ABC");
+			$('.date-input').date({ dateFormat: "dd.mm.yy" });
+			$('.date-input').date({ defaultDate: +1 });
+			$('.date-input').date({ firstDay: 1 });
+			$('.date-input').datepicker({ showButtonPanel: true });
+	    }); 
+
 $(document).on('pageinit', '#td-castletype-update-1', function( event ) {
     calcPopulation();
     

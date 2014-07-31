@@ -38,23 +38,23 @@ class CastleTypeTableMap extends TableMap
         $this->setPackage('orm');
         $this->setUseIdGenerator(true);
         // columns
-        $this->addPrimaryKey('id', 'Id', 'INTEGER', true, 6, null);
+        $this->addPrimaryKey('id', 'Id', 'INTEGER', true, null, null);
         $this->addForeignKey('user_id', 'UserId', 'INTEGER', 'user', 'id', false, null, null);
         $this->addColumn('type', 'Type', 'CHAR', false, 3, null);
         $this->addColumn('name', 'Name', 'VARCHAR', false, 50, null);
         $this->addColumn('total_st', 'TotalSt', 'INTEGER', false, 4, null);
-        $this->addColumn('total_as', 'TotalAs', 'INTEGER', false, 4, null);
-        $this->addColumn('total_pr', 'TotalPr', 'INTEGER', false, 4, null);
         $this->addColumn('total_sk', 'TotalSk', 'INTEGER', false, 4, null);
         $this->addColumn('total_bs', 'TotalBs', 'INTEGER', false, 4, null);
+        $this->addColumn('total_as', 'TotalAs', 'INTEGER', false, 4, null);
+        $this->addColumn('total_pr', 'TotalPr', 'INTEGER', false, 4, null);
         $this->addColumn('total_lr', 'TotalLr', 'INTEGER', false, 4, null);
         $this->addColumn('total_hk', 'TotalHk', 'INTEGER', false, 4, null);
         $this->addColumn('total_ok', 'TotalOk', 'INTEGER', false, 4, null);
         $this->addColumn('mission_st', 'MissionSt', 'INTEGER', false, 4, null);
-        $this->addColumn('mission_as', 'MissionAs', 'INTEGER', false, 4, null);
-        $this->addColumn('mission_pr', 'MissionPr', 'INTEGER', false, 4, null);
         $this->addColumn('mission_sk', 'MissionSk', 'INTEGER', false, 4, null);
         $this->addColumn('mission_bs', 'MissionBs', 'INTEGER', false, 4, null);
+        $this->addColumn('mission_as', 'MissionAs', 'INTEGER', false, 4, null);
+        $this->addColumn('mission_pr', 'MissionPr', 'INTEGER', false, 4, null);
         $this->addColumn('mission_lr', 'MissionLr', 'INTEGER', false, 4, null);
         $this->addColumn('bergfried', 'Bergfried', 'INTEGER', false, 2, null);
         $this->addColumn('zeughaus', 'Zeughaus', 'INTEGER', false, 2, null);

@@ -17,7 +17,6 @@ class CastleLocation extends BaseCastleLocation
 {
 	public function __construct()
 	{
-		$this->setName('a');
 		$this->setParentId(0);
 	}
 }

@@ -1,0 +1,13 @@
+<form method="post" action="">
+	<div class="ui-grid-0">
+		<div class="ui-block-a">
+			<ul data-role="listview">
+				<?php 
+				foreach($this->targets as $target): ?>
+					<li><a href="/offensive/update/<?php echo $target->getid(); ?>"><?php echo $target->getName(); ?></a></li>
+					<?php 
+				endforeach; ?>
+			</ul>
+		</div>
+	</div>
+</form>

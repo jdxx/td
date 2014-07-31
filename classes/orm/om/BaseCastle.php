@@ -96,18 +96,6 @@ abstract class BaseCastle extends BaseObject implements Persistent
     protected $current_st;
 
     /**
-     * The value for the current_as field.
-     * @var        int
-     */
-    protected $current_as;
-
-    /**
-     * The value for the current_pr field.
-     * @var        int
-     */
-    protected $current_pr;
-
-    /**
      * The value for the current_sk field.
      * @var        int
      */
@@ -118,6 +106,18 @@ abstract class BaseCastle extends BaseObject implements Persistent
      * @var        int
      */
     protected $current_bs;
+
+    /**
+     * The value for the current_as field.
+     * @var        int
+     */
+    protected $current_as;
+
+    /**
+     * The value for the current_pr field.
+     * @var        int
+     */
+    protected $current_pr;
 
     /**
      * The value for the current_lr field.
@@ -144,18 +144,6 @@ abstract class BaseCastle extends BaseObject implements Persistent
     protected $mission_st;
 
     /**
-     * The value for the mission_as field.
-     * @var        int
-     */
-    protected $mission_as;
-
-    /**
-     * The value for the mission_pr field.
-     * @var        int
-     */
-    protected $mission_pr;
-
-    /**
      * The value for the mission_sk field.
      * @var        int
      */
@@ -166,6 +154,18 @@ abstract class BaseCastle extends BaseObject implements Persistent
      * @var        int
      */
     protected $mission_bs;
+
+    /**
+     * The value for the mission_as field.
+     * @var        int
+     */
+    protected $mission_as;
+
+    /**
+     * The value for the mission_pr field.
+     * @var        int
+     */
+    protected $mission_pr;
 
     /**
      * The value for the mission_lr field.
@@ -267,6 +267,12 @@ abstract class BaseCastle extends BaseObject implements Persistent
     protected $collAttack2castlesPartial;
 
     /**
+     * @var        PropelObjectCollection|TargetActions[] Collection to store aggregation of TargetActions objects.
+     */
+    protected $collTargetActionss;
+    protected $collTargetActionssPartial;
+
+    /**
      * @var        PropelObjectCollection|Attack[] Collection to store aggregation of Attack objects.
      */
     protected $collAttacks;
@@ -302,6 +308,12 @@ abstract class BaseCastle extends BaseObject implements Persistent
      * @var		PropelObjectCollection
      */
     protected $attack2castlesScheduledForDeletion = null;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var		PropelObjectCollection
+     */
+    protected $targetActionssScheduledForDeletion = null;
 
     /**
      * Get the [id] column value.
@@ -425,28 +437,6 @@ abstract class BaseCastle extends BaseObject implements Persistent
     }
 
     /**
-     * Get the [current_as] column value.
-     *
-     * @return int
-     */
-    public function getCurrentAs()
-    {
-
-        return $this->current_as;
-    }
-
-    /**
-     * Get the [current_pr] column value.
-     *
-     * @return int
-     */
-    public function getCurrentPr()
-    {
-
-        return $this->current_pr;
-    }
-
-    /**
      * Get the [current_sk] column value.
      *
      * @return int
@@ -466,6 +456,28 @@ abstract class BaseCastle extends BaseObject implements Persistent
     {
 
         return $this->current_bs;
+    }
+
+    /**
+     * Get the [current_as] column value.
+     *
+     * @return int
+     */
+    public function getCurrentAs()
+    {
+
+        return $this->current_as;
+    }
+
+    /**
+     * Get the [current_pr] column value.
+     *
+     * @return int
+     */
+    public function getCurrentPr()
+    {
+
+        return $this->current_pr;
     }
 
     /**
@@ -513,28 +525,6 @@ abstract class BaseCastle extends BaseObject implements Persistent
     }
 
     /**
-     * Get the [mission_as] column value.
-     *
-     * @return int
-     */
-    public function getMissionAs()
-    {
-
-        return $this->mission_as;
-    }
-
-    /**
-     * Get the [mission_pr] column value.
-     *
-     * @return int
-     */
-    public function getMissionPr()
-    {
-
-        return $this->mission_pr;
-    }
-
-    /**
      * Get the [mission_sk] column value.
      *
      * @return int
@@ -554,6 +544,28 @@ abstract class BaseCastle extends BaseObject implements Persistent
     {
 
         return $this->mission_bs;
+    }
+
+    /**
+     * Get the [mission_as] column value.
+     *
+     * @return int
+     */
+    public function getMissionAs()
+    {
+
+        return $this->mission_as;
+    }
+
+    /**
+     * Get the [mission_pr] column value.
+     *
+     * @return int
+     */
+    public function getMissionPr()
+    {
+
+        return $this->mission_pr;
     }
 
     /**
@@ -1030,48 +1042,6 @@ abstract class BaseCastle extends BaseObject implements Persistent
     } // setCurrentSt()
 
     /**
-     * Set the value of [current_as] column.
-     *
-     * @param  int $v new value
-     * @return Castle The current object (for fluent API support)
-     */
-    public function setCurrentAs($v)
-    {
-        if ($v !== null && is_numeric($v)) {
-            $v = (int) $v;
-        }
-
-        if ($this->current_as !== $v) {
-            $this->current_as = $v;
-            $this->modifiedColumns[] = CastlePeer::CURRENT_AS;
-        }
-
-
-        return $this;
-    } // setCurrentAs()
-
-    /**
-     * Set the value of [current_pr] column.
-     *
-     * @param  int $v new value
-     * @return Castle The current object (for fluent API support)
-     */
-    public function setCurrentPr($v)
-    {
-        if ($v !== null && is_numeric($v)) {
-            $v = (int) $v;
-        }
-
-        if ($this->current_pr !== $v) {
-            $this->current_pr = $v;
-            $this->modifiedColumns[] = CastlePeer::CURRENT_PR;
-        }
-
-
-        return $this;
-    } // setCurrentPr()
-
-    /**
      * Set the value of [current_sk] column.
      *
      * @param  int $v new value
@@ -1112,6 +1082,48 @@ abstract class BaseCastle extends BaseObject implements Persistent
 
         return $this;
     } // setCurrentBs()
+
+    /**
+     * Set the value of [current_as] column.
+     *
+     * @param  int $v new value
+     * @return Castle The current object (for fluent API support)
+     */
+    public function setCurrentAs($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (int) $v;
+        }
+
+        if ($this->current_as !== $v) {
+            $this->current_as = $v;
+            $this->modifiedColumns[] = CastlePeer::CURRENT_AS;
+        }
+
+
+        return $this;
+    } // setCurrentAs()
+
+    /**
+     * Set the value of [current_pr] column.
+     *
+     * @param  int $v new value
+     * @return Castle The current object (for fluent API support)
+     */
+    public function setCurrentPr($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (int) $v;
+        }
+
+        if ($this->current_pr !== $v) {
+            $this->current_pr = $v;
+            $this->modifiedColumns[] = CastlePeer::CURRENT_PR;
+        }
+
+
+        return $this;
+    } // setCurrentPr()
 
     /**
      * Set the value of [current_lr] column.
@@ -1198,48 +1210,6 @@ abstract class BaseCastle extends BaseObject implements Persistent
     } // setMissionSt()
 
     /**
-     * Set the value of [mission_as] column.
-     *
-     * @param  int $v new value
-     * @return Castle The current object (for fluent API support)
-     */
-    public function setMissionAs($v)
-    {
-        if ($v !== null && is_numeric($v)) {
-            $v = (int) $v;
-        }
-
-        if ($this->mission_as !== $v) {
-            $this->mission_as = $v;
-            $this->modifiedColumns[] = CastlePeer::MISSION_AS;
-        }
-
-
-        return $this;
-    } // setMissionAs()
-
-    /**
-     * Set the value of [mission_pr] column.
-     *
-     * @param  int $v new value
-     * @return Castle The current object (for fluent API support)
-     */
-    public function setMissionPr($v)
-    {
-        if ($v !== null && is_numeric($v)) {
-            $v = (int) $v;
-        }
-
-        if ($this->mission_pr !== $v) {
-            $this->mission_pr = $v;
-            $this->modifiedColumns[] = CastlePeer::MISSION_PR;
-        }
-
-
-        return $this;
-    } // setMissionPr()
-
-    /**
      * Set the value of [mission_sk] column.
      *
      * @param  int $v new value
@@ -1280,6 +1250,48 @@ abstract class BaseCastle extends BaseObject implements Persistent
 
         return $this;
     } // setMissionBs()
+
+    /**
+     * Set the value of [mission_as] column.
+     *
+     * @param  int $v new value
+     * @return Castle The current object (for fluent API support)
+     */
+    public function setMissionAs($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (int) $v;
+        }
+
+        if ($this->mission_as !== $v) {
+            $this->mission_as = $v;
+            $this->modifiedColumns[] = CastlePeer::MISSION_AS;
+        }
+
+
+        return $this;
+    } // setMissionAs()
+
+    /**
+     * Set the value of [mission_pr] column.
+     *
+     * @param  int $v new value
+     * @return Castle The current object (for fluent API support)
+     */
+    public function setMissionPr($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (int) $v;
+        }
+
+        if ($this->mission_pr !== $v) {
+            $this->mission_pr = $v;
+            $this->modifiedColumns[] = CastlePeer::MISSION_PR;
+        }
+
+
+        return $this;
+    } // setMissionPr()
 
     /**
      * Set the value of [mission_lr] column.
@@ -1635,18 +1647,18 @@ abstract class BaseCastle extends BaseObject implements Persistent
             $this->silver = ($row[$startcol + 8] !== null) ? (int) $row[$startcol + 8] : null;
             $this->copper = ($row[$startcol + 9] !== null) ? (int) $row[$startcol + 9] : null;
             $this->current_st = ($row[$startcol + 10] !== null) ? (int) $row[$startcol + 10] : null;
-            $this->current_as = ($row[$startcol + 11] !== null) ? (int) $row[$startcol + 11] : null;
-            $this->current_pr = ($row[$startcol + 12] !== null) ? (int) $row[$startcol + 12] : null;
-            $this->current_sk = ($row[$startcol + 13] !== null) ? (int) $row[$startcol + 13] : null;
-            $this->current_bs = ($row[$startcol + 14] !== null) ? (int) $row[$startcol + 14] : null;
+            $this->current_sk = ($row[$startcol + 11] !== null) ? (int) $row[$startcol + 11] : null;
+            $this->current_bs = ($row[$startcol + 12] !== null) ? (int) $row[$startcol + 12] : null;
+            $this->current_as = ($row[$startcol + 13] !== null) ? (int) $row[$startcol + 13] : null;
+            $this->current_pr = ($row[$startcol + 14] !== null) ? (int) $row[$startcol + 14] : null;
             $this->current_lr = ($row[$startcol + 15] !== null) ? (int) $row[$startcol + 15] : null;
             $this->current_hk = ($row[$startcol + 16] !== null) ? (int) $row[$startcol + 16] : null;
             $this->current_ok = ($row[$startcol + 17] !== null) ? (int) $row[$startcol + 17] : null;
             $this->mission_st = ($row[$startcol + 18] !== null) ? (int) $row[$startcol + 18] : null;
-            $this->mission_as = ($row[$startcol + 19] !== null) ? (int) $row[$startcol + 19] : null;
-            $this->mission_pr = ($row[$startcol + 20] !== null) ? (int) $row[$startcol + 20] : null;
-            $this->mission_sk = ($row[$startcol + 21] !== null) ? (int) $row[$startcol + 21] : null;
-            $this->mission_bs = ($row[$startcol + 22] !== null) ? (int) $row[$startcol + 22] : null;
+            $this->mission_sk = ($row[$startcol + 19] !== null) ? (int) $row[$startcol + 19] : null;
+            $this->mission_bs = ($row[$startcol + 20] !== null) ? (int) $row[$startcol + 20] : null;
+            $this->mission_as = ($row[$startcol + 21] !== null) ? (int) $row[$startcol + 21] : null;
+            $this->mission_pr = ($row[$startcol + 22] !== null) ? (int) $row[$startcol + 22] : null;
             $this->mission_lr = ($row[$startcol + 23] !== null) ? (int) $row[$startcol + 23] : null;
             $this->usage_off = ($row[$startcol + 24] !== null) ? (boolean) $row[$startcol + 24] : null;
             $this->usage_def = ($row[$startcol + 25] !== null) ? (boolean) $row[$startcol + 25] : null;
@@ -1744,6 +1756,8 @@ abstract class BaseCastle extends BaseObject implements Persistent
             $this->aCastleLocation = null;
             $this->aUser = null;
             $this->collAttack2castles = null;
+
+            $this->collTargetActionss = null;
 
             $this->collAttacks = null;
         } // if (deep)
@@ -1950,6 +1964,24 @@ abstract class BaseCastle extends BaseObject implements Persistent
                 }
             }
 
+            if ($this->targetActionssScheduledForDeletion !== null) {
+                if (!$this->targetActionssScheduledForDeletion->isEmpty()) {
+                    foreach ($this->targetActionssScheduledForDeletion as $targetActions) {
+                        // need to save related object because we set the relation to null
+                        $targetActions->save($con);
+                    }
+                    $this->targetActionssScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collTargetActionss !== null) {
+                foreach ($this->collTargetActionss as $referrerFK) {
+                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
             $this->alreadyInSave = false;
 
         }
@@ -2009,17 +2041,17 @@ abstract class BaseCastle extends BaseObject implements Persistent
         if ($this->isColumnModified(CastlePeer::CURRENT_ST)) {
             $modifiedColumns[':p' . $index++]  = '`current_st`';
         }
-        if ($this->isColumnModified(CastlePeer::CURRENT_AS)) {
-            $modifiedColumns[':p' . $index++]  = '`current_as`';
-        }
-        if ($this->isColumnModified(CastlePeer::CURRENT_PR)) {
-            $modifiedColumns[':p' . $index++]  = '`current_pr`';
-        }
         if ($this->isColumnModified(CastlePeer::CURRENT_SK)) {
             $modifiedColumns[':p' . $index++]  = '`current_sk`';
         }
         if ($this->isColumnModified(CastlePeer::CURRENT_BS)) {
             $modifiedColumns[':p' . $index++]  = '`current_bs`';
+        }
+        if ($this->isColumnModified(CastlePeer::CURRENT_AS)) {
+            $modifiedColumns[':p' . $index++]  = '`current_as`';
+        }
+        if ($this->isColumnModified(CastlePeer::CURRENT_PR)) {
+            $modifiedColumns[':p' . $index++]  = '`current_pr`';
         }
         if ($this->isColumnModified(CastlePeer::CURRENT_LR)) {
             $modifiedColumns[':p' . $index++]  = '`current_lr`';
@@ -2033,17 +2065,17 @@ abstract class BaseCastle extends BaseObject implements Persistent
         if ($this->isColumnModified(CastlePeer::MISSION_ST)) {
             $modifiedColumns[':p' . $index++]  = '`mission_st`';
         }
-        if ($this->isColumnModified(CastlePeer::MISSION_AS)) {
-            $modifiedColumns[':p' . $index++]  = '`mission_as`';
-        }
-        if ($this->isColumnModified(CastlePeer::MISSION_PR)) {
-            $modifiedColumns[':p' . $index++]  = '`mission_pr`';
-        }
         if ($this->isColumnModified(CastlePeer::MISSION_SK)) {
             $modifiedColumns[':p' . $index++]  = '`mission_sk`';
         }
         if ($this->isColumnModified(CastlePeer::MISSION_BS)) {
             $modifiedColumns[':p' . $index++]  = '`mission_bs`';
+        }
+        if ($this->isColumnModified(CastlePeer::MISSION_AS)) {
+            $modifiedColumns[':p' . $index++]  = '`mission_as`';
+        }
+        if ($this->isColumnModified(CastlePeer::MISSION_PR)) {
+            $modifiedColumns[':p' . $index++]  = '`mission_pr`';
         }
         if ($this->isColumnModified(CastlePeer::MISSION_LR)) {
             $modifiedColumns[':p' . $index++]  = '`mission_lr`';
@@ -2128,17 +2160,17 @@ abstract class BaseCastle extends BaseObject implements Persistent
                     case '`current_st`':
                         $stmt->bindValue($identifier, $this->current_st, PDO::PARAM_INT);
                         break;
-                    case '`current_as`':
-                        $stmt->bindValue($identifier, $this->current_as, PDO::PARAM_INT);
-                        break;
-                    case '`current_pr`':
-                        $stmt->bindValue($identifier, $this->current_pr, PDO::PARAM_INT);
-                        break;
                     case '`current_sk`':
                         $stmt->bindValue($identifier, $this->current_sk, PDO::PARAM_INT);
                         break;
                     case '`current_bs`':
                         $stmt->bindValue($identifier, $this->current_bs, PDO::PARAM_INT);
+                        break;
+                    case '`current_as`':
+                        $stmt->bindValue($identifier, $this->current_as, PDO::PARAM_INT);
+                        break;
+                    case '`current_pr`':
+                        $stmt->bindValue($identifier, $this->current_pr, PDO::PARAM_INT);
                         break;
                     case '`current_lr`':
                         $stmt->bindValue($identifier, $this->current_lr, PDO::PARAM_INT);
@@ -2152,17 +2184,17 @@ abstract class BaseCastle extends BaseObject implements Persistent
                     case '`mission_st`':
                         $stmt->bindValue($identifier, $this->mission_st, PDO::PARAM_INT);
                         break;
-                    case '`mission_as`':
-                        $stmt->bindValue($identifier, $this->mission_as, PDO::PARAM_INT);
-                        break;
-                    case '`mission_pr`':
-                        $stmt->bindValue($identifier, $this->mission_pr, PDO::PARAM_INT);
-                        break;
                     case '`mission_sk`':
                         $stmt->bindValue($identifier, $this->mission_sk, PDO::PARAM_INT);
                         break;
                     case '`mission_bs`':
                         $stmt->bindValue($identifier, $this->mission_bs, PDO::PARAM_INT);
+                        break;
+                    case '`mission_as`':
+                        $stmt->bindValue($identifier, $this->mission_as, PDO::PARAM_INT);
+                        break;
+                    case '`mission_pr`':
+                        $stmt->bindValue($identifier, $this->mission_pr, PDO::PARAM_INT);
                         break;
                     case '`mission_lr`':
                         $stmt->bindValue($identifier, $this->mission_lr, PDO::PARAM_INT);
@@ -2334,6 +2366,14 @@ abstract class BaseCastle extends BaseObject implements Persistent
                     }
                 }
 
+                if ($this->collTargetActionss !== null) {
+                    foreach ($this->collTargetActionss as $referrerFK) {
+                        if (!$referrerFK->validate($columns)) {
+                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+                        }
+                    }
+                }
+
 
             $this->alreadyInValidation = false;
         }
@@ -2403,16 +2443,16 @@ abstract class BaseCastle extends BaseObject implements Persistent
                 return $this->getCurrentSt();
                 break;
             case 11:
-                return $this->getCurrentAs();
-                break;
-            case 12:
-                return $this->getCurrentPr();
-                break;
-            case 13:
                 return $this->getCurrentSk();
                 break;
-            case 14:
+            case 12:
                 return $this->getCurrentBs();
+                break;
+            case 13:
+                return $this->getCurrentAs();
+                break;
+            case 14:
+                return $this->getCurrentPr();
                 break;
             case 15:
                 return $this->getCurrentLr();
@@ -2427,16 +2467,16 @@ abstract class BaseCastle extends BaseObject implements Persistent
                 return $this->getMissionSt();
                 break;
             case 19:
-                return $this->getMissionAs();
-                break;
-            case 20:
-                return $this->getMissionPr();
-                break;
-            case 21:
                 return $this->getMissionSk();
                 break;
-            case 22:
+            case 20:
                 return $this->getMissionBs();
+                break;
+            case 21:
+                return $this->getMissionAs();
+                break;
+            case 22:
+                return $this->getMissionPr();
                 break;
             case 23:
                 return $this->getMissionLr();
@@ -2517,18 +2557,18 @@ abstract class BaseCastle extends BaseObject implements Persistent
             $keys[8] => $this->getSilver(),
             $keys[9] => $this->getCopper(),
             $keys[10] => $this->getCurrentSt(),
-            $keys[11] => $this->getCurrentAs(),
-            $keys[12] => $this->getCurrentPr(),
-            $keys[13] => $this->getCurrentSk(),
-            $keys[14] => $this->getCurrentBs(),
+            $keys[11] => $this->getCurrentSk(),
+            $keys[12] => $this->getCurrentBs(),
+            $keys[13] => $this->getCurrentAs(),
+            $keys[14] => $this->getCurrentPr(),
             $keys[15] => $this->getCurrentLr(),
             $keys[16] => $this->getCurrentHk(),
             $keys[17] => $this->getCurrentOk(),
             $keys[18] => $this->getMissionSt(),
-            $keys[19] => $this->getMissionAs(),
-            $keys[20] => $this->getMissionPr(),
-            $keys[21] => $this->getMissionSk(),
-            $keys[22] => $this->getMissionBs(),
+            $keys[19] => $this->getMissionSk(),
+            $keys[20] => $this->getMissionBs(),
+            $keys[21] => $this->getMissionAs(),
+            $keys[22] => $this->getMissionPr(),
             $keys[23] => $this->getMissionLr(),
             $keys[24] => $this->getUsageOff(),
             $keys[25] => $this->getUsageDef(),
@@ -2560,6 +2600,9 @@ abstract class BaseCastle extends BaseObject implements Persistent
             }
             if (null !== $this->collAttack2castles) {
                 $result['Attack2castles'] = $this->collAttack2castles->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collTargetActionss) {
+                $result['TargetActionss'] = $this->collTargetActionss->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
         }
 
@@ -2629,16 +2672,16 @@ abstract class BaseCastle extends BaseObject implements Persistent
                 $this->setCurrentSt($value);
                 break;
             case 11:
-                $this->setCurrentAs($value);
-                break;
-            case 12:
-                $this->setCurrentPr($value);
-                break;
-            case 13:
                 $this->setCurrentSk($value);
                 break;
-            case 14:
+            case 12:
                 $this->setCurrentBs($value);
+                break;
+            case 13:
+                $this->setCurrentAs($value);
+                break;
+            case 14:
+                $this->setCurrentPr($value);
                 break;
             case 15:
                 $this->setCurrentLr($value);
@@ -2653,16 +2696,16 @@ abstract class BaseCastle extends BaseObject implements Persistent
                 $this->setMissionSt($value);
                 break;
             case 19:
-                $this->setMissionAs($value);
-                break;
-            case 20:
-                $this->setMissionPr($value);
-                break;
-            case 21:
                 $this->setMissionSk($value);
                 break;
-            case 22:
+            case 20:
                 $this->setMissionBs($value);
+                break;
+            case 21:
+                $this->setMissionAs($value);
+                break;
+            case 22:
+                $this->setMissionPr($value);
                 break;
             case 23:
                 $this->setMissionLr($value);
@@ -2738,18 +2781,18 @@ abstract class BaseCastle extends BaseObject implements Persistent
         if (array_key_exists($keys[8], $arr)) $this->setSilver($arr[$keys[8]]);
         if (array_key_exists($keys[9], $arr)) $this->setCopper($arr[$keys[9]]);
         if (array_key_exists($keys[10], $arr)) $this->setCurrentSt($arr[$keys[10]]);
-        if (array_key_exists($keys[11], $arr)) $this->setCurrentAs($arr[$keys[11]]);
-        if (array_key_exists($keys[12], $arr)) $this->setCurrentPr($arr[$keys[12]]);
-        if (array_key_exists($keys[13], $arr)) $this->setCurrentSk($arr[$keys[13]]);
-        if (array_key_exists($keys[14], $arr)) $this->setCurrentBs($arr[$keys[14]]);
+        if (array_key_exists($keys[11], $arr)) $this->setCurrentSk($arr[$keys[11]]);
+        if (array_key_exists($keys[12], $arr)) $this->setCurrentBs($arr[$keys[12]]);
+        if (array_key_exists($keys[13], $arr)) $this->setCurrentAs($arr[$keys[13]]);
+        if (array_key_exists($keys[14], $arr)) $this->setCurrentPr($arr[$keys[14]]);
         if (array_key_exists($keys[15], $arr)) $this->setCurrentLr($arr[$keys[15]]);
         if (array_key_exists($keys[16], $arr)) $this->setCurrentHk($arr[$keys[16]]);
         if (array_key_exists($keys[17], $arr)) $this->setCurrentOk($arr[$keys[17]]);
         if (array_key_exists($keys[18], $arr)) $this->setMissionSt($arr[$keys[18]]);
-        if (array_key_exists($keys[19], $arr)) $this->setMissionAs($arr[$keys[19]]);
-        if (array_key_exists($keys[20], $arr)) $this->setMissionPr($arr[$keys[20]]);
-        if (array_key_exists($keys[21], $arr)) $this->setMissionSk($arr[$keys[21]]);
-        if (array_key_exists($keys[22], $arr)) $this->setMissionBs($arr[$keys[22]]);
+        if (array_key_exists($keys[19], $arr)) $this->setMissionSk($arr[$keys[19]]);
+        if (array_key_exists($keys[20], $arr)) $this->setMissionBs($arr[$keys[20]]);
+        if (array_key_exists($keys[21], $arr)) $this->setMissionAs($arr[$keys[21]]);
+        if (array_key_exists($keys[22], $arr)) $this->setMissionPr($arr[$keys[22]]);
         if (array_key_exists($keys[23], $arr)) $this->setMissionLr($arr[$keys[23]]);
         if (array_key_exists($keys[24], $arr)) $this->setUsageOff($arr[$keys[24]]);
         if (array_key_exists($keys[25], $arr)) $this->setUsageDef($arr[$keys[25]]);
@@ -2785,18 +2828,18 @@ abstract class BaseCastle extends BaseObject implements Persistent
         if ($this->isColumnModified(CastlePeer::SILVER)) $criteria->add(CastlePeer::SILVER, $this->silver);
         if ($this->isColumnModified(CastlePeer::COPPER)) $criteria->add(CastlePeer::COPPER, $this->copper);
         if ($this->isColumnModified(CastlePeer::CURRENT_ST)) $criteria->add(CastlePeer::CURRENT_ST, $this->current_st);
-        if ($this->isColumnModified(CastlePeer::CURRENT_AS)) $criteria->add(CastlePeer::CURRENT_AS, $this->current_as);
-        if ($this->isColumnModified(CastlePeer::CURRENT_PR)) $criteria->add(CastlePeer::CURRENT_PR, $this->current_pr);
         if ($this->isColumnModified(CastlePeer::CURRENT_SK)) $criteria->add(CastlePeer::CURRENT_SK, $this->current_sk);
         if ($this->isColumnModified(CastlePeer::CURRENT_BS)) $criteria->add(CastlePeer::CURRENT_BS, $this->current_bs);
+        if ($this->isColumnModified(CastlePeer::CURRENT_AS)) $criteria->add(CastlePeer::CURRENT_AS, $this->current_as);
+        if ($this->isColumnModified(CastlePeer::CURRENT_PR)) $criteria->add(CastlePeer::CURRENT_PR, $this->current_pr);
         if ($this->isColumnModified(CastlePeer::CURRENT_LR)) $criteria->add(CastlePeer::CURRENT_LR, $this->current_lr);
         if ($this->isColumnModified(CastlePeer::CURRENT_HK)) $criteria->add(CastlePeer::CURRENT_HK, $this->current_hk);
         if ($this->isColumnModified(CastlePeer::CURRENT_OK)) $criteria->add(CastlePeer::CURRENT_OK, $this->current_ok);
         if ($this->isColumnModified(CastlePeer::MISSION_ST)) $criteria->add(CastlePeer::MISSION_ST, $this->mission_st);
-        if ($this->isColumnModified(CastlePeer::MISSION_AS)) $criteria->add(CastlePeer::MISSION_AS, $this->mission_as);
-        if ($this->isColumnModified(CastlePeer::MISSION_PR)) $criteria->add(CastlePeer::MISSION_PR, $this->mission_pr);
         if ($this->isColumnModified(CastlePeer::MISSION_SK)) $criteria->add(CastlePeer::MISSION_SK, $this->mission_sk);
         if ($this->isColumnModified(CastlePeer::MISSION_BS)) $criteria->add(CastlePeer::MISSION_BS, $this->mission_bs);
+        if ($this->isColumnModified(CastlePeer::MISSION_AS)) $criteria->add(CastlePeer::MISSION_AS, $this->mission_as);
+        if ($this->isColumnModified(CastlePeer::MISSION_PR)) $criteria->add(CastlePeer::MISSION_PR, $this->mission_pr);
         if ($this->isColumnModified(CastlePeer::MISSION_LR)) $criteria->add(CastlePeer::MISSION_LR, $this->mission_lr);
         if ($this->isColumnModified(CastlePeer::USAGE_OFF)) $criteria->add(CastlePeer::USAGE_OFF, $this->usage_off);
         if ($this->isColumnModified(CastlePeer::USAGE_DEF)) $criteria->add(CastlePeer::USAGE_DEF, $this->usage_def);
@@ -2883,18 +2926,18 @@ abstract class BaseCastle extends BaseObject implements Persistent
         $copyObj->setSilver($this->getSilver());
         $copyObj->setCopper($this->getCopper());
         $copyObj->setCurrentSt($this->getCurrentSt());
-        $copyObj->setCurrentAs($this->getCurrentAs());
-        $copyObj->setCurrentPr($this->getCurrentPr());
         $copyObj->setCurrentSk($this->getCurrentSk());
         $copyObj->setCurrentBs($this->getCurrentBs());
+        $copyObj->setCurrentAs($this->getCurrentAs());
+        $copyObj->setCurrentPr($this->getCurrentPr());
         $copyObj->setCurrentLr($this->getCurrentLr());
         $copyObj->setCurrentHk($this->getCurrentHk());
         $copyObj->setCurrentOk($this->getCurrentOk());
         $copyObj->setMissionSt($this->getMissionSt());
-        $copyObj->setMissionAs($this->getMissionAs());
-        $copyObj->setMissionPr($this->getMissionPr());
         $copyObj->setMissionSk($this->getMissionSk());
         $copyObj->setMissionBs($this->getMissionBs());
+        $copyObj->setMissionAs($this->getMissionAs());
+        $copyObj->setMissionPr($this->getMissionPr());
         $copyObj->setMissionLr($this->getMissionLr());
         $copyObj->setUsageOff($this->getUsageOff());
         $copyObj->setUsageDef($this->getUsageDef());
@@ -2919,6 +2962,12 @@ abstract class BaseCastle extends BaseObject implements Persistent
             foreach ($this->getAttack2castles() as $relObj) {
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
                     $copyObj->addAttack2castle($relObj->copy($deepCopy));
+                }
+            }
+
+            foreach ($this->getTargetActionss() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addTargetActions($relObj->copy($deepCopy));
                 }
             }
 
@@ -3141,6 +3190,9 @@ abstract class BaseCastle extends BaseObject implements Persistent
     {
         if ('Attack2castle' == $relationName) {
             $this->initAttack2castles();
+        }
+        if ('TargetActions' == $relationName) {
+            $this->initTargetActionss();
         }
     }
 
@@ -3398,6 +3450,256 @@ abstract class BaseCastle extends BaseObject implements Persistent
     }
 
     /**
+     * Clears out the collTargetActionss collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return Castle The current object (for fluent API support)
+     * @see        addTargetActionss()
+     */
+    public function clearTargetActionss()
+    {
+        $this->collTargetActionss = null; // important to set this to null since that means it is uninitialized
+        $this->collTargetActionssPartial = null;
+
+        return $this;
+    }
+
+    /**
+     * reset is the collTargetActionss collection loaded partially
+     *
+     * @return void
+     */
+    public function resetPartialTargetActionss($v = true)
+    {
+        $this->collTargetActionssPartial = $v;
+    }
+
+    /**
+     * Initializes the collTargetActionss collection.
+     *
+     * By default this just sets the collTargetActionss collection to an empty array (like clearcollTargetActionss());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initTargetActionss($overrideExisting = true)
+    {
+        if (null !== $this->collTargetActionss && !$overrideExisting) {
+            return;
+        }
+        $this->collTargetActionss = new PropelObjectCollection();
+        $this->collTargetActionss->setModel('TargetActions');
+    }
+
+    /**
+     * Gets an array of TargetActions objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this Castle is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param Criteria $criteria optional Criteria object to narrow the query
+     * @param PropelPDO $con optional connection object
+     * @return PropelObjectCollection|TargetActions[] List of TargetActions objects
+     * @throws PropelException
+     */
+    public function getTargetActionss($criteria = null, PropelPDO $con = null)
+    {
+        $partial = $this->collTargetActionssPartial && !$this->isNew();
+        if (null === $this->collTargetActionss || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collTargetActionss) {
+                // return empty collection
+                $this->initTargetActionss();
+            } else {
+                $collTargetActionss = TargetActionsQuery::create(null, $criteria)
+                    ->filterByCastle($this)
+                    ->find($con);
+                if (null !== $criteria) {
+                    if (false !== $this->collTargetActionssPartial && count($collTargetActionss)) {
+                      $this->initTargetActionss(false);
+
+                      foreach ($collTargetActionss as $obj) {
+                        if (false == $this->collTargetActionss->contains($obj)) {
+                          $this->collTargetActionss->append($obj);
+                        }
+                      }
+
+                      $this->collTargetActionssPartial = true;
+                    }
+
+                    $collTargetActionss->getInternalIterator()->rewind();
+
+                    return $collTargetActionss;
+                }
+
+                if ($partial && $this->collTargetActionss) {
+                    foreach ($this->collTargetActionss as $obj) {
+                        if ($obj->isNew()) {
+                            $collTargetActionss[] = $obj;
+                        }
+                    }
+                }
+
+                $this->collTargetActionss = $collTargetActionss;
+                $this->collTargetActionssPartial = false;
+            }
+        }
+
+        return $this->collTargetActionss;
+    }
+
+    /**
+     * Sets a collection of TargetActions objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param PropelCollection $targetActionss A Propel collection.
+     * @param PropelPDO $con Optional connection object
+     * @return Castle The current object (for fluent API support)
+     */
+    public function setTargetActionss(PropelCollection $targetActionss, PropelPDO $con = null)
+    {
+        $targetActionssToDelete = $this->getTargetActionss(new Criteria(), $con)->diff($targetActionss);
+
+
+        $this->targetActionssScheduledForDeletion = $targetActionssToDelete;
+
+        foreach ($targetActionssToDelete as $targetActionsRemoved) {
+            $targetActionsRemoved->setCastle(null);
+        }
+
+        $this->collTargetActionss = null;
+        foreach ($targetActionss as $targetActions) {
+            $this->addTargetActions($targetActions);
+        }
+
+        $this->collTargetActionss = $targetActionss;
+        $this->collTargetActionssPartial = false;
+
+        return $this;
+    }
+
+    /**
+     * Returns the number of related TargetActions objects.
+     *
+     * @param Criteria $criteria
+     * @param boolean $distinct
+     * @param PropelPDO $con
+     * @return int             Count of related TargetActions objects.
+     * @throws PropelException
+     */
+    public function countTargetActionss(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    {
+        $partial = $this->collTargetActionssPartial && !$this->isNew();
+        if (null === $this->collTargetActionss || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collTargetActionss) {
+                return 0;
+            }
+
+            if ($partial && !$criteria) {
+                return count($this->getTargetActionss());
+            }
+            $query = TargetActionsQuery::create(null, $criteria);
+            if ($distinct) {
+                $query->distinct();
+            }
+
+            return $query
+                ->filterByCastle($this)
+                ->count($con);
+        }
+
+        return count($this->collTargetActionss);
+    }
+
+    /**
+     * Method called to associate a TargetActions object to this object
+     * through the TargetActions foreign key attribute.
+     *
+     * @param    TargetActions $l TargetActions
+     * @return Castle The current object (for fluent API support)
+     */
+    public function addTargetActions(TargetActions $l)
+    {
+        if ($this->collTargetActionss === null) {
+            $this->initTargetActionss();
+            $this->collTargetActionssPartial = true;
+        }
+
+        if (!in_array($l, $this->collTargetActionss->getArrayCopy(), true)) { // only add it if the **same** object is not already associated
+            $this->doAddTargetActions($l);
+
+            if ($this->targetActionssScheduledForDeletion and $this->targetActionssScheduledForDeletion->contains($l)) {
+                $this->targetActionssScheduledForDeletion->remove($this->targetActionssScheduledForDeletion->search($l));
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param	TargetActions $targetActions The targetActions object to add.
+     */
+    protected function doAddTargetActions($targetActions)
+    {
+        $this->collTargetActionss[]= $targetActions;
+        $targetActions->setCastle($this);
+    }
+
+    /**
+     * @param	TargetActions $targetActions The targetActions object to remove.
+     * @return Castle The current object (for fluent API support)
+     */
+    public function removeTargetActions($targetActions)
+    {
+        if ($this->getTargetActionss()->contains($targetActions)) {
+            $this->collTargetActionss->remove($this->collTargetActionss->search($targetActions));
+            if (null === $this->targetActionssScheduledForDeletion) {
+                $this->targetActionssScheduledForDeletion = clone $this->collTargetActionss;
+                $this->targetActionssScheduledForDeletion->clear();
+            }
+            $this->targetActionssScheduledForDeletion[]= $targetActions;
+            $targetActions->setCastle(null);
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this Castle is new, it will return
+     * an empty collection; or if this Castle has previously
+     * been saved, it will retrieve related TargetActionss from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in Castle.
+     *
+     * @param Criteria $criteria optional Criteria object to narrow the query
+     * @param PropelPDO $con optional connection object
+     * @param string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|TargetActions[] List of TargetActions objects
+     */
+    public function getTargetActionssJoinTarget($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = TargetActionsQuery::create(null, $criteria);
+        $query->joinWith('Target', $join_behavior);
+
+        return $this->getTargetActionss($query, $con);
+    }
+
+    /**
      * Clears out the collAttacks collection
      *
      * This does not modify the database; however, it will remove any associated objects, causing
@@ -3600,18 +3902,18 @@ abstract class BaseCastle extends BaseObject implements Persistent
         $this->silver = null;
         $this->copper = null;
         $this->current_st = null;
-        $this->current_as = null;
-        $this->current_pr = null;
         $this->current_sk = null;
         $this->current_bs = null;
+        $this->current_as = null;
+        $this->current_pr = null;
         $this->current_lr = null;
         $this->current_hk = null;
         $this->current_ok = null;
         $this->mission_st = null;
-        $this->mission_as = null;
-        $this->mission_pr = null;
         $this->mission_sk = null;
         $this->mission_bs = null;
+        $this->mission_as = null;
+        $this->mission_pr = null;
         $this->mission_lr = null;
         $this->usage_off = null;
         $this->usage_def = null;
@@ -3652,6 +3954,11 @@ abstract class BaseCastle extends BaseObject implements Persistent
                     $o->clearAllReferences($deep);
                 }
             }
+            if ($this->collTargetActionss) {
+                foreach ($this->collTargetActionss as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
             if ($this->collAttacks) {
                 foreach ($this->collAttacks as $o) {
                     $o->clearAllReferences($deep);
@@ -3674,6 +3981,10 @@ abstract class BaseCastle extends BaseObject implements Persistent
             $this->collAttack2castles->clearIterator();
         }
         $this->collAttack2castles = null;
+        if ($this->collTargetActionss instanceof PropelCollection) {
+            $this->collTargetActionss->clearIterator();
+        }
+        $this->collTargetActionss = null;
         if ($this->collAttacks instanceof PropelCollection) {
             $this->collAttacks->clearIterator();
         }

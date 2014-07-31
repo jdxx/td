@@ -4,7 +4,11 @@
 			<ul id="swipeDelete" data-role="listview">
 				<?php 
 				foreach($this->castleTypes as $castleType): ?>
-					<li data-swipeurl="/castletype/delete/<?php echo $castleType->getId(); ?>"><a href="/castletype/update/<?php echo $castleType->getId(); ?>"><?php echo $castleType->getType(); if($castleType->getName() != '') { echo " - " . $castleType->getName(); } ?></a></li>
+					<li data-swipeurl="/castletype/delete/<?php echo $castleType->getId(); ?>">
+						<a href="/castletype/update/<?php echo $castleType->getId(); ?>">
+							<?php echo $castleType->getType(); if($castleType->getName() != '') { echo " - " . $castleType->getName(); } ?>
+						</a>
+					</li>
 					<?php 
 				endforeach; ?>
 			</ul>

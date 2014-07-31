@@ -17,18 +17,18 @@
  * @method CastleQuery orderBySilver($order = Criteria::ASC) Order by the silver column
  * @method CastleQuery orderByCopper($order = Criteria::ASC) Order by the copper column
  * @method CastleQuery orderByCurrentSt($order = Criteria::ASC) Order by the current_st column
- * @method CastleQuery orderByCurrentAs($order = Criteria::ASC) Order by the current_as column
- * @method CastleQuery orderByCurrentPr($order = Criteria::ASC) Order by the current_pr column
  * @method CastleQuery orderByCurrentSk($order = Criteria::ASC) Order by the current_sk column
  * @method CastleQuery orderByCurrentBs($order = Criteria::ASC) Order by the current_bs column
+ * @method CastleQuery orderByCurrentAs($order = Criteria::ASC) Order by the current_as column
+ * @method CastleQuery orderByCurrentPr($order = Criteria::ASC) Order by the current_pr column
  * @method CastleQuery orderByCurrentLr($order = Criteria::ASC) Order by the current_lr column
  * @method CastleQuery orderByCurrentHk($order = Criteria::ASC) Order by the current_hk column
  * @method CastleQuery orderByCurrentOk($order = Criteria::ASC) Order by the current_ok column
  * @method CastleQuery orderByMissionSt($order = Criteria::ASC) Order by the mission_st column
- * @method CastleQuery orderByMissionAs($order = Criteria::ASC) Order by the mission_as column
- * @method CastleQuery orderByMissionPr($order = Criteria::ASC) Order by the mission_pr column
  * @method CastleQuery orderByMissionSk($order = Criteria::ASC) Order by the mission_sk column
  * @method CastleQuery orderByMissionBs($order = Criteria::ASC) Order by the mission_bs column
+ * @method CastleQuery orderByMissionAs($order = Criteria::ASC) Order by the mission_as column
+ * @method CastleQuery orderByMissionPr($order = Criteria::ASC) Order by the mission_pr column
  * @method CastleQuery orderByMissionLr($order = Criteria::ASC) Order by the mission_lr column
  * @method CastleQuery orderByUsageOff($order = Criteria::ASC) Order by the usage_off column
  * @method CastleQuery orderByUsageDef($order = Criteria::ASC) Order by the usage_def column
@@ -54,18 +54,18 @@
  * @method CastleQuery groupBySilver() Group by the silver column
  * @method CastleQuery groupByCopper() Group by the copper column
  * @method CastleQuery groupByCurrentSt() Group by the current_st column
- * @method CastleQuery groupByCurrentAs() Group by the current_as column
- * @method CastleQuery groupByCurrentPr() Group by the current_pr column
  * @method CastleQuery groupByCurrentSk() Group by the current_sk column
  * @method CastleQuery groupByCurrentBs() Group by the current_bs column
+ * @method CastleQuery groupByCurrentAs() Group by the current_as column
+ * @method CastleQuery groupByCurrentPr() Group by the current_pr column
  * @method CastleQuery groupByCurrentLr() Group by the current_lr column
  * @method CastleQuery groupByCurrentHk() Group by the current_hk column
  * @method CastleQuery groupByCurrentOk() Group by the current_ok column
  * @method CastleQuery groupByMissionSt() Group by the mission_st column
- * @method CastleQuery groupByMissionAs() Group by the mission_as column
- * @method CastleQuery groupByMissionPr() Group by the mission_pr column
  * @method CastleQuery groupByMissionSk() Group by the mission_sk column
  * @method CastleQuery groupByMissionBs() Group by the mission_bs column
+ * @method CastleQuery groupByMissionAs() Group by the mission_as column
+ * @method CastleQuery groupByMissionPr() Group by the mission_pr column
  * @method CastleQuery groupByMissionLr() Group by the mission_lr column
  * @method CastleQuery groupByUsageOff() Group by the usage_off column
  * @method CastleQuery groupByUsageDef() Group by the usage_def column
@@ -100,6 +100,10 @@
  * @method CastleQuery rightJoinAttack2castle($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Attack2castle relation
  * @method CastleQuery innerJoinAttack2castle($relationAlias = null) Adds a INNER JOIN clause to the query using the Attack2castle relation
  *
+ * @method CastleQuery leftJoinTargetActions($relationAlias = null) Adds a LEFT JOIN clause to the query using the TargetActions relation
+ * @method CastleQuery rightJoinTargetActions($relationAlias = null) Adds a RIGHT JOIN clause to the query using the TargetActions relation
+ * @method CastleQuery innerJoinTargetActions($relationAlias = null) Adds a INNER JOIN clause to the query using the TargetActions relation
+ *
  * @method Castle findOne(PropelPDO $con = null) Return the first Castle matching the query
  * @method Castle findOneOrCreate(PropelPDO $con = null) Return the first Castle matching the query, or a new Castle object populated from the query conditions when no match is found
  *
@@ -113,18 +117,18 @@
  * @method Castle findOneBySilver(int $silver) Return the first Castle filtered by the silver column
  * @method Castle findOneByCopper(int $copper) Return the first Castle filtered by the copper column
  * @method Castle findOneByCurrentSt(int $current_st) Return the first Castle filtered by the current_st column
- * @method Castle findOneByCurrentAs(int $current_as) Return the first Castle filtered by the current_as column
- * @method Castle findOneByCurrentPr(int $current_pr) Return the first Castle filtered by the current_pr column
  * @method Castle findOneByCurrentSk(int $current_sk) Return the first Castle filtered by the current_sk column
  * @method Castle findOneByCurrentBs(int $current_bs) Return the first Castle filtered by the current_bs column
+ * @method Castle findOneByCurrentAs(int $current_as) Return the first Castle filtered by the current_as column
+ * @method Castle findOneByCurrentPr(int $current_pr) Return the first Castle filtered by the current_pr column
  * @method Castle findOneByCurrentLr(int $current_lr) Return the first Castle filtered by the current_lr column
  * @method Castle findOneByCurrentHk(int $current_hk) Return the first Castle filtered by the current_hk column
  * @method Castle findOneByCurrentOk(int $current_ok) Return the first Castle filtered by the current_ok column
  * @method Castle findOneByMissionSt(int $mission_st) Return the first Castle filtered by the mission_st column
- * @method Castle findOneByMissionAs(int $mission_as) Return the first Castle filtered by the mission_as column
- * @method Castle findOneByMissionPr(int $mission_pr) Return the first Castle filtered by the mission_pr column
  * @method Castle findOneByMissionSk(int $mission_sk) Return the first Castle filtered by the mission_sk column
  * @method Castle findOneByMissionBs(int $mission_bs) Return the first Castle filtered by the mission_bs column
+ * @method Castle findOneByMissionAs(int $mission_as) Return the first Castle filtered by the mission_as column
+ * @method Castle findOneByMissionPr(int $mission_pr) Return the first Castle filtered by the mission_pr column
  * @method Castle findOneByMissionLr(int $mission_lr) Return the first Castle filtered by the mission_lr column
  * @method Castle findOneByUsageOff(boolean $usage_off) Return the first Castle filtered by the usage_off column
  * @method Castle findOneByUsageDef(boolean $usage_def) Return the first Castle filtered by the usage_def column
@@ -150,18 +154,18 @@
  * @method array findBySilver(int $silver) Return Castle objects filtered by the silver column
  * @method array findByCopper(int $copper) Return Castle objects filtered by the copper column
  * @method array findByCurrentSt(int $current_st) Return Castle objects filtered by the current_st column
- * @method array findByCurrentAs(int $current_as) Return Castle objects filtered by the current_as column
- * @method array findByCurrentPr(int $current_pr) Return Castle objects filtered by the current_pr column
  * @method array findByCurrentSk(int $current_sk) Return Castle objects filtered by the current_sk column
  * @method array findByCurrentBs(int $current_bs) Return Castle objects filtered by the current_bs column
+ * @method array findByCurrentAs(int $current_as) Return Castle objects filtered by the current_as column
+ * @method array findByCurrentPr(int $current_pr) Return Castle objects filtered by the current_pr column
  * @method array findByCurrentLr(int $current_lr) Return Castle objects filtered by the current_lr column
  * @method array findByCurrentHk(int $current_hk) Return Castle objects filtered by the current_hk column
  * @method array findByCurrentOk(int $current_ok) Return Castle objects filtered by the current_ok column
  * @method array findByMissionSt(int $mission_st) Return Castle objects filtered by the mission_st column
- * @method array findByMissionAs(int $mission_as) Return Castle objects filtered by the mission_as column
- * @method array findByMissionPr(int $mission_pr) Return Castle objects filtered by the mission_pr column
  * @method array findByMissionSk(int $mission_sk) Return Castle objects filtered by the mission_sk column
  * @method array findByMissionBs(int $mission_bs) Return Castle objects filtered by the mission_bs column
+ * @method array findByMissionAs(int $mission_as) Return Castle objects filtered by the mission_as column
+ * @method array findByMissionPr(int $mission_pr) Return Castle objects filtered by the mission_pr column
  * @method array findByMissionLr(int $mission_lr) Return Castle objects filtered by the mission_lr column
  * @method array findByUsageOff(boolean $usage_off) Return Castle objects filtered by the usage_off column
  * @method array findByUsageDef(boolean $usage_def) Return Castle objects filtered by the usage_def column
@@ -282,7 +286,7 @@ abstract class BaseCastleQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `id`, `user_id`, `name`, `castle_type_id`, `castle_location_id`, `coordinates`, `X`, `Y`, `silver`, `copper`, `current_st`, `current_as`, `current_pr`, `current_sk`, `current_bs`, `current_lr`, `current_hk`, `current_ok`, `mission_st`, `mission_as`, `mission_pr`, `mission_sk`, `mission_bs`, `mission_lr`, `usage_off`, `usage_def`, `mission_priority`, `environment_card`, `autodef_coordinates`, `autodef_X`, `autodef_Y`, `points`, `free_population`, `last_import`, `created_at`, `updated_at` FROM `castle` WHERE `id` = :p0';
+        $sql = 'SELECT `id`, `user_id`, `name`, `castle_type_id`, `castle_location_id`, `coordinates`, `X`, `Y`, `silver`, `copper`, `current_st`, `current_sk`, `current_bs`, `current_as`, `current_pr`, `current_lr`, `current_hk`, `current_ok`, `mission_st`, `mission_sk`, `mission_bs`, `mission_as`, `mission_pr`, `mission_lr`, `usage_off`, `usage_def`, `mission_priority`, `environment_card`, `autodef_coordinates`, `autodef_X`, `autodef_Y`, `points`, `free_population`, `last_import`, `created_at`, `updated_at` FROM `castle` WHERE `id` = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -814,90 +818,6 @@ abstract class BaseCastleQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the current_as column
-     *
-     * Example usage:
-     * <code>
-     * $query->filterByCurrentAs(1234); // WHERE current_as = 1234
-     * $query->filterByCurrentAs(array(12, 34)); // WHERE current_as IN (12, 34)
-     * $query->filterByCurrentAs(array('min' => 12)); // WHERE current_as >= 12
-     * $query->filterByCurrentAs(array('max' => 12)); // WHERE current_as <= 12
-     * </code>
-     *
-     * @param     mixed $currentAs The value to use as filter.
-     *              Use scalar values for equality.
-     *              Use array values for in_array() equivalent.
-     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return CastleQuery The current query, for fluid interface
-     */
-    public function filterByCurrentAs($currentAs = null, $comparison = null)
-    {
-        if (is_array($currentAs)) {
-            $useMinMax = false;
-            if (isset($currentAs['min'])) {
-                $this->addUsingAlias(CastlePeer::CURRENT_AS, $currentAs['min'], Criteria::GREATER_EQUAL);
-                $useMinMax = true;
-            }
-            if (isset($currentAs['max'])) {
-                $this->addUsingAlias(CastlePeer::CURRENT_AS, $currentAs['max'], Criteria::LESS_EQUAL);
-                $useMinMax = true;
-            }
-            if ($useMinMax) {
-                return $this;
-            }
-            if (null === $comparison) {
-                $comparison = Criteria::IN;
-            }
-        }
-
-        return $this->addUsingAlias(CastlePeer::CURRENT_AS, $currentAs, $comparison);
-    }
-
-    /**
-     * Filter the query on the current_pr column
-     *
-     * Example usage:
-     * <code>
-     * $query->filterByCurrentPr(1234); // WHERE current_pr = 1234
-     * $query->filterByCurrentPr(array(12, 34)); // WHERE current_pr IN (12, 34)
-     * $query->filterByCurrentPr(array('min' => 12)); // WHERE current_pr >= 12
-     * $query->filterByCurrentPr(array('max' => 12)); // WHERE current_pr <= 12
-     * </code>
-     *
-     * @param     mixed $currentPr The value to use as filter.
-     *              Use scalar values for equality.
-     *              Use array values for in_array() equivalent.
-     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return CastleQuery The current query, for fluid interface
-     */
-    public function filterByCurrentPr($currentPr = null, $comparison = null)
-    {
-        if (is_array($currentPr)) {
-            $useMinMax = false;
-            if (isset($currentPr['min'])) {
-                $this->addUsingAlias(CastlePeer::CURRENT_PR, $currentPr['min'], Criteria::GREATER_EQUAL);
-                $useMinMax = true;
-            }
-            if (isset($currentPr['max'])) {
-                $this->addUsingAlias(CastlePeer::CURRENT_PR, $currentPr['max'], Criteria::LESS_EQUAL);
-                $useMinMax = true;
-            }
-            if ($useMinMax) {
-                return $this;
-            }
-            if (null === $comparison) {
-                $comparison = Criteria::IN;
-            }
-        }
-
-        return $this->addUsingAlias(CastlePeer::CURRENT_PR, $currentPr, $comparison);
-    }
-
-    /**
      * Filter the query on the current_sk column
      *
      * Example usage:
@@ -979,6 +899,90 @@ abstract class BaseCastleQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(CastlePeer::CURRENT_BS, $currentBs, $comparison);
+    }
+
+    /**
+     * Filter the query on the current_as column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByCurrentAs(1234); // WHERE current_as = 1234
+     * $query->filterByCurrentAs(array(12, 34)); // WHERE current_as IN (12, 34)
+     * $query->filterByCurrentAs(array('min' => 12)); // WHERE current_as >= 12
+     * $query->filterByCurrentAs(array('max' => 12)); // WHERE current_as <= 12
+     * </code>
+     *
+     * @param     mixed $currentAs The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return CastleQuery The current query, for fluid interface
+     */
+    public function filterByCurrentAs($currentAs = null, $comparison = null)
+    {
+        if (is_array($currentAs)) {
+            $useMinMax = false;
+            if (isset($currentAs['min'])) {
+                $this->addUsingAlias(CastlePeer::CURRENT_AS, $currentAs['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($currentAs['max'])) {
+                $this->addUsingAlias(CastlePeer::CURRENT_AS, $currentAs['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(CastlePeer::CURRENT_AS, $currentAs, $comparison);
+    }
+
+    /**
+     * Filter the query on the current_pr column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByCurrentPr(1234); // WHERE current_pr = 1234
+     * $query->filterByCurrentPr(array(12, 34)); // WHERE current_pr IN (12, 34)
+     * $query->filterByCurrentPr(array('min' => 12)); // WHERE current_pr >= 12
+     * $query->filterByCurrentPr(array('max' => 12)); // WHERE current_pr <= 12
+     * </code>
+     *
+     * @param     mixed $currentPr The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return CastleQuery The current query, for fluid interface
+     */
+    public function filterByCurrentPr($currentPr = null, $comparison = null)
+    {
+        if (is_array($currentPr)) {
+            $useMinMax = false;
+            if (isset($currentPr['min'])) {
+                $this->addUsingAlias(CastlePeer::CURRENT_PR, $currentPr['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($currentPr['max'])) {
+                $this->addUsingAlias(CastlePeer::CURRENT_PR, $currentPr['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(CastlePeer::CURRENT_PR, $currentPr, $comparison);
     }
 
     /**
@@ -1150,90 +1154,6 @@ abstract class BaseCastleQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the mission_as column
-     *
-     * Example usage:
-     * <code>
-     * $query->filterByMissionAs(1234); // WHERE mission_as = 1234
-     * $query->filterByMissionAs(array(12, 34)); // WHERE mission_as IN (12, 34)
-     * $query->filterByMissionAs(array('min' => 12)); // WHERE mission_as >= 12
-     * $query->filterByMissionAs(array('max' => 12)); // WHERE mission_as <= 12
-     * </code>
-     *
-     * @param     mixed $missionAs The value to use as filter.
-     *              Use scalar values for equality.
-     *              Use array values for in_array() equivalent.
-     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return CastleQuery The current query, for fluid interface
-     */
-    public function filterByMissionAs($missionAs = null, $comparison = null)
-    {
-        if (is_array($missionAs)) {
-            $useMinMax = false;
-            if (isset($missionAs['min'])) {
-                $this->addUsingAlias(CastlePeer::MISSION_AS, $missionAs['min'], Criteria::GREATER_EQUAL);
-                $useMinMax = true;
-            }
-            if (isset($missionAs['max'])) {
-                $this->addUsingAlias(CastlePeer::MISSION_AS, $missionAs['max'], Criteria::LESS_EQUAL);
-                $useMinMax = true;
-            }
-            if ($useMinMax) {
-                return $this;
-            }
-            if (null === $comparison) {
-                $comparison = Criteria::IN;
-            }
-        }
-
-        return $this->addUsingAlias(CastlePeer::MISSION_AS, $missionAs, $comparison);
-    }
-
-    /**
-     * Filter the query on the mission_pr column
-     *
-     * Example usage:
-     * <code>
-     * $query->filterByMissionPr(1234); // WHERE mission_pr = 1234
-     * $query->filterByMissionPr(array(12, 34)); // WHERE mission_pr IN (12, 34)
-     * $query->filterByMissionPr(array('min' => 12)); // WHERE mission_pr >= 12
-     * $query->filterByMissionPr(array('max' => 12)); // WHERE mission_pr <= 12
-     * </code>
-     *
-     * @param     mixed $missionPr The value to use as filter.
-     *              Use scalar values for equality.
-     *              Use array values for in_array() equivalent.
-     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return CastleQuery The current query, for fluid interface
-     */
-    public function filterByMissionPr($missionPr = null, $comparison = null)
-    {
-        if (is_array($missionPr)) {
-            $useMinMax = false;
-            if (isset($missionPr['min'])) {
-                $this->addUsingAlias(CastlePeer::MISSION_PR, $missionPr['min'], Criteria::GREATER_EQUAL);
-                $useMinMax = true;
-            }
-            if (isset($missionPr['max'])) {
-                $this->addUsingAlias(CastlePeer::MISSION_PR, $missionPr['max'], Criteria::LESS_EQUAL);
-                $useMinMax = true;
-            }
-            if ($useMinMax) {
-                return $this;
-            }
-            if (null === $comparison) {
-                $comparison = Criteria::IN;
-            }
-        }
-
-        return $this->addUsingAlias(CastlePeer::MISSION_PR, $missionPr, $comparison);
-    }
-
-    /**
      * Filter the query on the mission_sk column
      *
      * Example usage:
@@ -1315,6 +1235,90 @@ abstract class BaseCastleQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(CastlePeer::MISSION_BS, $missionBs, $comparison);
+    }
+
+    /**
+     * Filter the query on the mission_as column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByMissionAs(1234); // WHERE mission_as = 1234
+     * $query->filterByMissionAs(array(12, 34)); // WHERE mission_as IN (12, 34)
+     * $query->filterByMissionAs(array('min' => 12)); // WHERE mission_as >= 12
+     * $query->filterByMissionAs(array('max' => 12)); // WHERE mission_as <= 12
+     * </code>
+     *
+     * @param     mixed $missionAs The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return CastleQuery The current query, for fluid interface
+     */
+    public function filterByMissionAs($missionAs = null, $comparison = null)
+    {
+        if (is_array($missionAs)) {
+            $useMinMax = false;
+            if (isset($missionAs['min'])) {
+                $this->addUsingAlias(CastlePeer::MISSION_AS, $missionAs['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($missionAs['max'])) {
+                $this->addUsingAlias(CastlePeer::MISSION_AS, $missionAs['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(CastlePeer::MISSION_AS, $missionAs, $comparison);
+    }
+
+    /**
+     * Filter the query on the mission_pr column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByMissionPr(1234); // WHERE mission_pr = 1234
+     * $query->filterByMissionPr(array(12, 34)); // WHERE mission_pr IN (12, 34)
+     * $query->filterByMissionPr(array('min' => 12)); // WHERE mission_pr >= 12
+     * $query->filterByMissionPr(array('max' => 12)); // WHERE mission_pr <= 12
+     * </code>
+     *
+     * @param     mixed $missionPr The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return CastleQuery The current query, for fluid interface
+     */
+    public function filterByMissionPr($missionPr = null, $comparison = null)
+    {
+        if (is_array($missionPr)) {
+            $useMinMax = false;
+            if (isset($missionPr['min'])) {
+                $this->addUsingAlias(CastlePeer::MISSION_PR, $missionPr['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($missionPr['max'])) {
+                $this->addUsingAlias(CastlePeer::MISSION_PR, $missionPr['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(CastlePeer::MISSION_PR, $missionPr, $comparison);
     }
 
     /**
@@ -2093,6 +2097,80 @@ abstract class BaseCastleQuery extends ModelCriteria
         return $this
             ->joinAttack2castle($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'Attack2castle', 'Attack2castleQuery');
+    }
+
+    /**
+     * Filter the query by a related TargetActions object
+     *
+     * @param   TargetActions|PropelObjectCollection $targetActions  the related object to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return                 CastleQuery The current query, for fluid interface
+     * @throws PropelException - if the provided filter is invalid.
+     */
+    public function filterByTargetActions($targetActions, $comparison = null)
+    {
+        if ($targetActions instanceof TargetActions) {
+            return $this
+                ->addUsingAlias(CastlePeer::ID, $targetActions->getCastleId(), $comparison);
+        } elseif ($targetActions instanceof PropelObjectCollection) {
+            return $this
+                ->useTargetActionsQuery()
+                ->filterByPrimaryKeys($targetActions->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByTargetActions() only accepts arguments of type TargetActions or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the TargetActions relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return CastleQuery The current query, for fluid interface
+     */
+    public function joinTargetActions($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('TargetActions');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'TargetActions');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the TargetActions relation TargetActions object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   TargetActionsQuery A secondary query class using the current class as primary query
+     */
+    public function useTargetActionsQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        return $this
+            ->joinTargetActions($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'TargetActions', 'TargetActionsQuery');
     }
 
     /**

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <database name="TotalDefense">
   <table name="castle">
-    <column name="id" type="Integer" size="10" autoIncrement="true" primaryKey="true"/>
+    <column name="id" type="Integer" autoIncrement="true" primaryKey="true"/>
     <column name="user_id" type="Integer"/>
     <column name="name" type="Varchar" size="50"/>
     <column name="castle_type_id" type="Integer" size="6"/>
@@ -12,18 +12,18 @@
     <column name="silver" type="Integer" size="5"/>
     <column name="copper" type="Integer" size="5"/>
     <column name="current_st" type="Integer" size="4"/>
-    <column name="current_as" type="Integer" size="4"/>
-    <column name="current_pr" type="Integer" size="4"/>
     <column name="current_sk" type="Integer" size="4"/>
     <column name="current_bs" type="Integer" size="4"/>
+    <column name="current_as" type="Integer" size="4"/>
+    <column name="current_pr" type="Integer" size="4"/>
     <column name="current_lr" type="Integer" size="4"/>
     <column name="current_hk" type="Integer" size="4"/>
     <column name="current_ok" type="Integer" size="4"/>
     <column name="mission_st" type="Integer" size="4"/>
-    <column name="mission_as" type="Integer" size="4"/>
-    <column name="mission_pr" type="Integer" size="4"/>
     <column name="mission_sk" type="Integer" size="4"/>
     <column name="mission_bs" type="Integer" size="4"/>
+    <column name="mission_as" type="Integer" size="4"/>
+    <column name="mission_pr" type="Integer" size="4"/>
     <column name="mission_lr" type="Integer" size="4"/>
     <column name="usage_off" type="Boolean"/>
     <column name="usage_def" type="Boolean"/>
@@ -47,23 +47,23 @@
     <behavior name="timestampable"/>
   </table>
   <table name="castle_type">
-    <column name="id" type="Integer" size="6" autoIncrement="true" primaryKey="true"/>
+    <column name="id" type="Integer" autoIncrement="true" primaryKey="true"/>
     <column name="user_id" type="Integer"/>
     <column name="type" description="Off, Def, Mix" type="Char" size="3"/>
     <column name="name" type="Varchar" size="50"/>
     <column name="total_st" type="Integer" size="4"/>
-    <column name="total_as" type="Integer" size="4"/>
-    <column name="total_pr" type="Integer" size="4"/>
     <column name="total_sk" type="Integer" size="4"/>
     <column name="total_bs" type="Integer" size="4"/>
+    <column name="total_as" type="Integer" size="4"/>
+    <column name="total_pr" type="Integer" size="4"/>
     <column name="total_lr" type="Integer" size="4"/>
     <column name="total_hk" type="Integer" size="4"/>
     <column name="total_ok" type="Integer" size="4"/>
     <column name="mission_st" type="Integer" size="4"/>
-    <column name="mission_as" type="Integer" size="4"/>
-    <column name="mission_pr" type="Integer" size="4"/>
     <column name="mission_sk" type="Integer" size="4"/>
     <column name="mission_bs" type="Integer" size="4"/>
+    <column name="mission_as" type="Integer" size="4"/>
+    <column name="mission_pr" type="Integer" size="4"/>
     <column name="mission_lr" type="Integer" size="4"/>
     <column name="bergfried" type="Integer" size="2"/>
     <column name="zeughaus" type="Integer" size="2"/>
@@ -110,7 +110,7 @@
     <behavior name="timestampable"/>
   </table>
   <table name="attack">
-    <column name="id" type="Integer" size="6" autoIncrement="true" primaryKey="true"/>
+    <column name="id" type="Integer" autoIncrement="true" primaryKey="true"/>
     <column name="user" type="Integer" size="6"/>
     <column name="attack_time" type="Timestamp"/>
     <column name="duration" description="&lt;998 = Anzahl Stunden; 998: bis zum Nachtmodus; 999: unendlich" type="Integer" size="4"/>
@@ -139,7 +139,7 @@
     </foreign-key>
   </table>
   <table name="castle_location">
-    <column name="id" type="Integer" size="6" autoIncrement="true" primaryKey="true"/>
+    <column name="id" type="Integer" autoIncrement="true" primaryKey="true"/>
     <column name="user_id" type="Integer"/>
     <column name="name" type="Varchar" size="50"/>
     <column name="parent_id" type="Integer" size="6"/>
@@ -156,21 +156,66 @@
     <column name="id" type="Integer" autoIncrement="true" primaryKey="true"/>
     <column name="user_id" type="Integer"/>
     <column name="name" type="Varchar" size="50"/>
-    <column name="coordinates" type="Char" size="12"/>
-    <column name="attack_time" type="Timestamp"/>
+    <column name="coordinates" type="Varchar" size="40"/>
+    <column name="date" type="Char" size="10"/>
+    <column name="time" type="Char" size="5"/>
+    <column name="start_time" type="Boolean"/>
+    <column name="use_mission_troops" type="Boolean"/>
+    <column name="filter_Castles_Off" type="Boolean"/>
+    <column name="filter_Castles_Def" type="Boolean"/>
+    <column name="filter_Castles_Mix" type="Boolean"/>
+    <column name="filter_Troops_Marker" type="Boolean"/>
+    <column name="filter_Troops_Off" type="Boolean"/>
+    <column name="filter_Troops_Def" type="Boolean"/>
+    <column name="sort" description="time, silver, sk, bs, lr" type="Char" size="10"/>
+    <column name="priority" description="silver; runtime" type="Char" size="10"/>
+    <column name="target_silver" type="Integer" size="8"/>
+    <column name="target_sk" type="Integer" size="8"/>
+    <column name="target_bs" type="Integer" size="8"/>
+    <column name="target_lr" type="Integer" size="8"/>
+    <column name="total_silver" type="Integer" size="8"/>
+    <column name="total_st" type="Integer" size="8"/>
+    <column name="total_sk" type="Integer" size="8"/>
+    <column name="total_bs" type="Integer" size="8"/>
+    <column name="total_as" type="Integer" size="8"/>
+    <column name="total_pr" type="Integer" size="8"/>
+    <column name="total_lr" type="Integer" size="8"/>
     <foreign-key foreignTable="user">
       <reference foreign="id" local="user_id"/>
     </foreign-key>
     <behavior name="timestampable"/>
   </table>
   <table name="attack2castle" isCrossRef="true">
-    <column name="attack_id" type="Integer" size="6" required="true" primaryKey="true"/>
-    <column name="castle_id" type="Integer" size="10" required="true" primaryKey="true"/>
+    <column name="attack_id" type="Integer" required="true" primaryKey="true"/>
+    <column name="castle_id" type="Integer" required="true" primaryKey="true"/>
     <foreign-key foreignTable="castle">
       <reference local="castle_id" foreign="id"/>
     </foreign-key>
     <foreign-key foreignTable="attack">
       <reference local="attack_id" foreign="id"/>
+    </foreign-key>
+  </table>
+  <table name="target_actions">
+    <column name="id" type="Integer" required="true" autoIncrement="true" primaryKey="true"/>
+    <column name="target_id" type="Integer"/>
+    <column name="castle_id" type="Integer" size="10"/>
+    <column name="attack_silver" type="Integer" size="5"/>
+    <column name="attack_st" type="Boolean"/>
+    <column name="attack_sk" type="Boolean"/>
+    <column name="attack_bs" type="Boolean"/>
+    <column name="attack_as" type="Boolean"/>
+    <column name="attack_pr" type="Boolean"/>
+    <column name="attack_lr" type="Boolean"/>
+    <column name="attack_hk" type="Boolean"/>
+    <column name="attack_ok" type="Boolean"/>
+    <unique name="IX_UQ_target_actions_id">
+      <unique-column name="id"/>
+    </unique>
+    <foreign-key foreignTable="target">
+      <reference foreign="id" local="target_id"/>
+    </foreign-key>
+    <foreign-key foreignTable="castle">
+      <reference foreign="id" local="castle_id"/>
     </foreign-key>
   </table>
 </database>

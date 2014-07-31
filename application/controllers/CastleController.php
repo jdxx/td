@@ -180,16 +180,16 @@ class CastleController extends Zend_Controller_Action
 				else
 				{
 					$castle = CastleQuery::create()->findOneByName($_source_array[1]);
+				}
 					
-					if(is_null($castle))
-					{
-						$castle = new Castle();
-					}
+				if(!is_object($castle))
+				{
+					$castle = new Castle();
 				}
 				
 				$castle->setName($_source_array[1]);
 				$castle->setPoints($_source_array[2]);
-				$castle->setOpenPopulation($_source_array[7]);
+				$castle->setFreePopulation($_source_array[7]);
 				$castle->setCopper($_source_array[8]);
 				$castle->setSilver($_source_array[9]);
 				$castle->setCurrentSt($_source_array[10]);
@@ -206,8 +206,8 @@ class CastleController extends Zend_Controller_Action
 				{	
 					$castle->setCoordinates($coord);
 					preg_match("/([0-9]{1,5}),([0-9]{1,5})/", $coord, $coordXY);
-					$castle->setX($coordXY[0]);
 					$castle->setX($coordXY[1]);
+					$castle->setY($coordXY[2]);
 				}
 
 				$castle->save();

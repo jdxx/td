@@ -7,25 +7,28 @@
 			</div>
 			
 			<div class="ui-field-contain td-field-contain">
-			    <label for="select-native-1">Typ</label>
-			    <select name="CastleTypeId" id="select-native-1">
-			        <option value="1">Off</option>
-			        <option value="2">Def</option>
-			        <option value="3">Def 276a</option>
-			        <option value="4">Def 278a</option>
-			        <option value="5">Mix</option>
+			    <label for="castletype">Standort</label>
+			    <select name="CastleTypeId" id="castletype">
+				    <?php 
+					foreach($this->castleTypes as $castleTypes):?>
+			        	<option value="<?php echo $castleTypes->getId(); ?>">
+			        		<?php echo $castleType->getType(); if($castleType->getName() != '') { echo " - " . $castleType->getName(); } ?>
+		        		</option>
+						<?php 
+					endforeach; ?>
 			    </select>
 			</div>
 			
 			<div class="ui-field-contain td-field-contain">
-			    <label for="select-native-1">Standort</label>
-			    <select name="CastleLocationId" id="select-native-1">
-			        <option value="0">Zentrum</option>
-			        <option value="1">01</option>
-			        <option value="2">01-10</option>
-			        <option value="3">01-20</option>
-			        <option value="4">02</option>
-			        <option value="5">02-20</option>
+			    <label for="standort">Standort</label>
+			    <select name="CastleLocationId" id="standort">
+				    <?php 
+					foreach($this->castleLocations as $castleLocation):?>
+			        	<option value="<?php echo $castleLocation->getId(); ?>">
+			        		<?php echo $castleLocation->getName(); ?>
+		        		</option>
+						<?php 
+					endforeach; ?>
 			    </select>
 			</div>
 
@@ -82,10 +85,6 @@
 		         <label for="total-ok">Ochsenkarren</label>
 		         <input name="TotalOk" id="total-ok" data-wrapper-class="number-4d" value="<?php echo $this->castle->getCurrentOk(); ?>" type="number">
 		    </div>
-		    
-		    <div class="ui-field-contain td-link-margin-top">			
-				<a href="/castletype/create/p2">Bev&ouml;lkerungslimit berechnen</a>
-			</div>
 			
 	    </div>
     

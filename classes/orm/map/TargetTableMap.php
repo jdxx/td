@@ -41,8 +41,30 @@ class TargetTableMap extends TableMap
         $this->addPrimaryKey('id', 'Id', 'INTEGER', true, null, null);
         $this->addForeignKey('user_id', 'UserId', 'INTEGER', 'user', 'id', false, null, null);
         $this->addColumn('name', 'Name', 'VARCHAR', false, 50, null);
-        $this->addColumn('coordinates', 'Coordinates', 'CHAR', false, 12, null);
-        $this->addColumn('attack_time', 'AttackTime', 'TIMESTAMP', false, null, null);
+        $this->addColumn('coordinates', 'Coordinates', 'VARCHAR', false, 40, null);
+        $this->addColumn('date', 'Date', 'CHAR', false, 10, null);
+        $this->addColumn('time', 'Time', 'CHAR', false, 5, null);
+        $this->addColumn('start_time', 'StartTime', 'BOOLEAN', false, 1, null);
+        $this->addColumn('use_mission_troops', 'UseMissionTroops', 'BOOLEAN', false, 1, null);
+        $this->addColumn('filter_Castles_Off', 'FilterCastlesOff', 'BOOLEAN', false, 1, null);
+        $this->addColumn('filter_Castles_Def', 'FilterCastlesDef', 'BOOLEAN', false, 1, null);
+        $this->addColumn('filter_Castles_Mix', 'FilterCastlesMix', 'BOOLEAN', false, 1, null);
+        $this->addColumn('filter_Troops_Marker', 'FilterTroopsMarker', 'BOOLEAN', false, 1, null);
+        $this->addColumn('filter_Troops_Off', 'FilterTroopsOff', 'BOOLEAN', false, 1, null);
+        $this->addColumn('filter_Troops_Def', 'FilterTroopsDef', 'BOOLEAN', false, 1, null);
+        $this->addColumn('sort', 'Sort', 'CHAR', false, 10, null);
+        $this->addColumn('priority', 'Priority', 'CHAR', false, 10, null);
+        $this->addColumn('target_silver', 'TargetSilver', 'INTEGER', false, 8, null);
+        $this->addColumn('target_sk', 'TargetSk', 'INTEGER', false, 8, null);
+        $this->addColumn('target_bs', 'TargetBs', 'INTEGER', false, 8, null);
+        $this->addColumn('target_lr', 'TargetLr', 'INTEGER', false, 8, null);
+        $this->addColumn('total_silver', 'TotalSilver', 'INTEGER', false, 8, null);
+        $this->addColumn('total_st', 'TotalSt', 'INTEGER', false, 8, null);
+        $this->addColumn('total_sk', 'TotalSk', 'INTEGER', false, 8, null);
+        $this->addColumn('total_bs', 'TotalBs', 'INTEGER', false, 8, null);
+        $this->addColumn('total_as', 'TotalAs', 'INTEGER', false, 8, null);
+        $this->addColumn('total_pr', 'TotalPr', 'INTEGER', false, 8, null);
+        $this->addColumn('total_lr', 'TotalLr', 'INTEGER', false, 8, null);
         $this->addColumn('created_at', 'CreatedAt', 'TIMESTAMP', false, null, null);
         $this->addColumn('updated_at', 'UpdatedAt', 'TIMESTAMP', false, null, null);
         // validators
@@ -54,6 +76,7 @@ class TargetTableMap extends TableMap
     public function buildRelations()
     {
         $this->addRelation('User', 'User', RelationMap::MANY_TO_ONE, array('user_id' => 'id', ), null, null);
+        $this->addRelation('TargetActions', 'TargetActions', RelationMap::ONE_TO_MANY, array('id' => 'target_id', ), null, null, 'TargetActionss');
     } // buildRelations()
 
     /**

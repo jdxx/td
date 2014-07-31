@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS `castle`;
 
 CREATE TABLE `castle`
 (
-    `id` INTEGER(10) NOT NULL AUTO_INCREMENT,
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
     `user_id` INTEGER,
     `name` VARCHAR(50),
     `castle_type_id` INTEGER(6),
@@ -22,18 +22,18 @@ CREATE TABLE `castle`
     `silver` INTEGER(5),
     `copper` INTEGER(5),
     `current_st` INTEGER(4),
-    `current_as` INTEGER(4),
-    `current_pr` INTEGER(4),
     `current_sk` INTEGER(4),
     `current_bs` INTEGER(4),
+    `current_as` INTEGER(4),
+    `current_pr` INTEGER(4),
     `current_lr` INTEGER(4),
     `current_hk` INTEGER(4),
     `current_ok` INTEGER(4),
     `mission_st` INTEGER(4),
-    `mission_as` INTEGER(4),
-    `mission_pr` INTEGER(4),
     `mission_sk` INTEGER(4),
     `mission_bs` INTEGER(4),
+    `mission_as` INTEGER(4),
+    `mission_pr` INTEGER(4),
     `mission_lr` INTEGER(4),
     `usage_off` TINYINT(1),
     `usage_def` TINYINT(1),
@@ -61,23 +61,23 @@ DROP TABLE IF EXISTS `castle_type`;
 
 CREATE TABLE `castle_type`
 (
-    `id` INTEGER(6) NOT NULL AUTO_INCREMENT,
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
     `user_id` INTEGER,
     `type` CHAR(3) COMMENT 'Off, Def, Mix',
     `name` VARCHAR(50),
     `total_st` INTEGER(4),
-    `total_as` INTEGER(4),
-    `total_pr` INTEGER(4),
     `total_sk` INTEGER(4),
     `total_bs` INTEGER(4),
+    `total_as` INTEGER(4),
+    `total_pr` INTEGER(4),
     `total_lr` INTEGER(4),
     `total_hk` INTEGER(4),
     `total_ok` INTEGER(4),
     `mission_st` INTEGER(4),
-    `mission_as` INTEGER(4),
-    `mission_pr` INTEGER(4),
     `mission_sk` INTEGER(4),
     `mission_bs` INTEGER(4),
+    `mission_as` INTEGER(4),
+    `mission_pr` INTEGER(4),
     `mission_lr` INTEGER(4),
     `bergfried` INTEGER(2),
     `zeughaus` INTEGER(2),
@@ -129,7 +129,7 @@ DROP TABLE IF EXISTS `attack`;
 
 CREATE TABLE `attack`
 (
-    `id` INTEGER(6) NOT NULL AUTO_INCREMENT,
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
     `user` INTEGER(6),
     `attack_time` DATETIME,
     `duration` INTEGER(4) COMMENT '<998 = Anzahl Stunden; 998: bis zum Nachtmodus; 999: unendlich',
@@ -184,7 +184,7 @@ DROP TABLE IF EXISTS `castle_location`;
 
 CREATE TABLE `castle_location`
 (
-    `id` INTEGER(6) NOT NULL AUTO_INCREMENT,
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
     `user_id` INTEGER,
     `name` VARCHAR(50),
     `parent_id` INTEGER(6),
@@ -208,8 +208,30 @@ CREATE TABLE `target`
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `user_id` INTEGER,
     `name` VARCHAR(50),
-    `coordinates` CHAR(12),
-    `attack_time` DATETIME,
+    `coordinates` VARCHAR(40),
+    `date` CHAR(10),
+    `time` CHAR(5),
+    `start_time` TINYINT(1),
+    `use_mission_troops` TINYINT(1),
+    `filter_Castles_Off` TINYINT(1),
+    `filter_Castles_Def` TINYINT(1),
+    `filter_Castles_Mix` TINYINT(1),
+    `filter_Troops_Marker` TINYINT(1),
+    `filter_Troops_Off` TINYINT(1),
+    `filter_Troops_Def` TINYINT(1),
+    `sort` CHAR(10) COMMENT 'time, silver, sk, bs, lr',
+    `priority` CHAR(10) COMMENT 'silver; runtime',
+    `target_silver` INTEGER(8),
+    `target_sk` INTEGER(8),
+    `target_bs` INTEGER(8),
+    `target_lr` INTEGER(8),
+    `total_silver` INTEGER(8),
+    `total_st` INTEGER(8),
+    `total_sk` INTEGER(8),
+    `total_bs` INTEGER(8),
+    `total_as` INTEGER(8),
+    `total_pr` INTEGER(8),
+    `total_lr` INTEGER(8),
     `created_at` DATETIME,
     `updated_at` DATETIME,
     PRIMARY KEY (`id`),
@@ -224,10 +246,36 @@ DROP TABLE IF EXISTS `attack2castle`;
 
 CREATE TABLE `attack2castle`
 (
-    `attack_id` INTEGER(6) NOT NULL,
-    `castle_id` INTEGER(10) NOT NULL,
+    `attack_id` INTEGER NOT NULL,
+    `castle_id` INTEGER NOT NULL,
     PRIMARY KEY (`attack_id`,`castle_id`),
     INDEX `attack2castle_FI_1` (`castle_id`)
+) ENGINE=MyISAM;
+
+-- ---------------------------------------------------------------------
+-- target_actions
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `target_actions`;
+
+CREATE TABLE `target_actions`
+(
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `target_id` INTEGER,
+    `castle_id` INTEGER(10),
+    `attack_silver` INTEGER(5),
+    `attack_st` TINYINT(1),
+    `attack_sk` TINYINT(1),
+    `attack_bs` TINYINT(1),
+    `attack_as` TINYINT(1),
+    `attack_pr` TINYINT(1),
+    `attack_lr` TINYINT(1),
+    `attack_hk` TINYINT(1),
+    `attack_ok` TINYINT(1),
+    PRIMARY KEY (`id`),
+    UNIQUE INDEX `IX_UQ_target_actions_id` (`id`),
+    INDEX `target_actions_FI_1` (`target_id`),
+    INDEX `target_actions_FI_2` (`castle_id`)
 ) ENGINE=MyISAM;
 
 # This restores the fkey checks, after having unset them earlier

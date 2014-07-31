@@ -65,17 +65,17 @@ abstract class BaseCastlePeer
     /** the column name for the current_st field */
     const CURRENT_ST = 'castle.current_st';
 
-    /** the column name for the current_as field */
-    const CURRENT_AS = 'castle.current_as';
-
-    /** the column name for the current_pr field */
-    const CURRENT_PR = 'castle.current_pr';
-
     /** the column name for the current_sk field */
     const CURRENT_SK = 'castle.current_sk';
 
     /** the column name for the current_bs field */
     const CURRENT_BS = 'castle.current_bs';
+
+    /** the column name for the current_as field */
+    const CURRENT_AS = 'castle.current_as';
+
+    /** the column name for the current_pr field */
+    const CURRENT_PR = 'castle.current_pr';
 
     /** the column name for the current_lr field */
     const CURRENT_LR = 'castle.current_lr';
@@ -89,17 +89,17 @@ abstract class BaseCastlePeer
     /** the column name for the mission_st field */
     const MISSION_ST = 'castle.mission_st';
 
-    /** the column name for the mission_as field */
-    const MISSION_AS = 'castle.mission_as';
-
-    /** the column name for the mission_pr field */
-    const MISSION_PR = 'castle.mission_pr';
-
     /** the column name for the mission_sk field */
     const MISSION_SK = 'castle.mission_sk';
 
     /** the column name for the mission_bs field */
     const MISSION_BS = 'castle.mission_bs';
+
+    /** the column name for the mission_as field */
+    const MISSION_AS = 'castle.mission_as';
+
+    /** the column name for the mission_pr field */
+    const MISSION_PR = 'castle.mission_pr';
 
     /** the column name for the mission_lr field */
     const MISSION_LR = 'castle.mission_lr';
@@ -159,11 +159,11 @@ abstract class BaseCastlePeer
      * e.g. CastlePeer::$fieldNames[CastlePeer::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('Id', 'UserId', 'Name', 'CastleTypeId', 'CastleLocationId', 'Coordinates', 'X', 'Y', 'Silver', 'Copper', 'CurrentSt', 'CurrentAs', 'CurrentPr', 'CurrentSk', 'CurrentBs', 'CurrentLr', 'CurrentHk', 'CurrentOk', 'MissionSt', 'MissionAs', 'MissionPr', 'MissionSk', 'MissionBs', 'MissionLr', 'UsageOff', 'UsageDef', 'MissionPriority', 'EnvironmentCard', 'AutodefCoordinates', 'AutodefX', 'AutodefY', 'Points', 'FreePopulation', 'LastImport', 'CreatedAt', 'UpdatedAt', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'userId', 'name', 'castleTypeId', 'castleLocationId', 'coordinates', 'x', 'y', 'silver', 'copper', 'currentSt', 'currentAs', 'currentPr', 'currentSk', 'currentBs', 'currentLr', 'currentHk', 'currentOk', 'missionSt', 'missionAs', 'missionPr', 'missionSk', 'missionBs', 'missionLr', 'usageOff', 'usageDef', 'missionPriority', 'environmentCard', 'autodefCoordinates', 'autodefX', 'autodefY', 'points', 'freePopulation', 'lastImport', 'createdAt', 'updatedAt', ),
-        BasePeer::TYPE_COLNAME => array (CastlePeer::ID, CastlePeer::USER_ID, CastlePeer::NAME, CastlePeer::CASTLE_TYPE_ID, CastlePeer::CASTLE_LOCATION_ID, CastlePeer::COORDINATES, CastlePeer::X, CastlePeer::Y, CastlePeer::SILVER, CastlePeer::COPPER, CastlePeer::CURRENT_ST, CastlePeer::CURRENT_AS, CastlePeer::CURRENT_PR, CastlePeer::CURRENT_SK, CastlePeer::CURRENT_BS, CastlePeer::CURRENT_LR, CastlePeer::CURRENT_HK, CastlePeer::CURRENT_OK, CastlePeer::MISSION_ST, CastlePeer::MISSION_AS, CastlePeer::MISSION_PR, CastlePeer::MISSION_SK, CastlePeer::MISSION_BS, CastlePeer::MISSION_LR, CastlePeer::USAGE_OFF, CastlePeer::USAGE_DEF, CastlePeer::MISSION_PRIORITY, CastlePeer::ENVIRONMENT_CARD, CastlePeer::AUTODEF_COORDINATES, CastlePeer::AUTODEF_X, CastlePeer::AUTODEF_Y, CastlePeer::POINTS, CastlePeer::FREE_POPULATION, CastlePeer::LAST_IMPORT, CastlePeer::CREATED_AT, CastlePeer::UPDATED_AT, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID', 'USER_ID', 'NAME', 'CASTLE_TYPE_ID', 'CASTLE_LOCATION_ID', 'COORDINATES', 'X', 'Y', 'SILVER', 'COPPER', 'CURRENT_ST', 'CURRENT_AS', 'CURRENT_PR', 'CURRENT_SK', 'CURRENT_BS', 'CURRENT_LR', 'CURRENT_HK', 'CURRENT_OK', 'MISSION_ST', 'MISSION_AS', 'MISSION_PR', 'MISSION_SK', 'MISSION_BS', 'MISSION_LR', 'USAGE_OFF', 'USAGE_DEF', 'MISSION_PRIORITY', 'ENVIRONMENT_CARD', 'AUTODEF_COORDINATES', 'AUTODEF_X', 'AUTODEF_Y', 'POINTS', 'FREE_POPULATION', 'LAST_IMPORT', 'CREATED_AT', 'UPDATED_AT', ),
-        BasePeer::TYPE_FIELDNAME => array ('id', 'user_id', 'name', 'castle_type_id', 'castle_location_id', 'coordinates', 'X', 'Y', 'silver', 'copper', 'current_st', 'current_as', 'current_pr', 'current_sk', 'current_bs', 'current_lr', 'current_hk', 'current_ok', 'mission_st', 'mission_as', 'mission_pr', 'mission_sk', 'mission_bs', 'mission_lr', 'usage_off', 'usage_def', 'mission_priority', 'environment_card', 'autodef_coordinates', 'autodef_X', 'autodef_Y', 'points', 'free_population', 'last_import', 'created_at', 'updated_at', ),
+        BasePeer::TYPE_PHPNAME => array ('Id', 'UserId', 'Name', 'CastleTypeId', 'CastleLocationId', 'Coordinates', 'X', 'Y', 'Silver', 'Copper', 'CurrentSt', 'CurrentSk', 'CurrentBs', 'CurrentAs', 'CurrentPr', 'CurrentLr', 'CurrentHk', 'CurrentOk', 'MissionSt', 'MissionSk', 'MissionBs', 'MissionAs', 'MissionPr', 'MissionLr', 'UsageOff', 'UsageDef', 'MissionPriority', 'EnvironmentCard', 'AutodefCoordinates', 'AutodefX', 'AutodefY', 'Points', 'FreePopulation', 'LastImport', 'CreatedAt', 'UpdatedAt', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'userId', 'name', 'castleTypeId', 'castleLocationId', 'coordinates', 'x', 'y', 'silver', 'copper', 'currentSt', 'currentSk', 'currentBs', 'currentAs', 'currentPr', 'currentLr', 'currentHk', 'currentOk', 'missionSt', 'missionSk', 'missionBs', 'missionAs', 'missionPr', 'missionLr', 'usageOff', 'usageDef', 'missionPriority', 'environmentCard', 'autodefCoordinates', 'autodefX', 'autodefY', 'points', 'freePopulation', 'lastImport', 'createdAt', 'updatedAt', ),
+        BasePeer::TYPE_COLNAME => array (CastlePeer::ID, CastlePeer::USER_ID, CastlePeer::NAME, CastlePeer::CASTLE_TYPE_ID, CastlePeer::CASTLE_LOCATION_ID, CastlePeer::COORDINATES, CastlePeer::X, CastlePeer::Y, CastlePeer::SILVER, CastlePeer::COPPER, CastlePeer::CURRENT_ST, CastlePeer::CURRENT_SK, CastlePeer::CURRENT_BS, CastlePeer::CURRENT_AS, CastlePeer::CURRENT_PR, CastlePeer::CURRENT_LR, CastlePeer::CURRENT_HK, CastlePeer::CURRENT_OK, CastlePeer::MISSION_ST, CastlePeer::MISSION_SK, CastlePeer::MISSION_BS, CastlePeer::MISSION_AS, CastlePeer::MISSION_PR, CastlePeer::MISSION_LR, CastlePeer::USAGE_OFF, CastlePeer::USAGE_DEF, CastlePeer::MISSION_PRIORITY, CastlePeer::ENVIRONMENT_CARD, CastlePeer::AUTODEF_COORDINATES, CastlePeer::AUTODEF_X, CastlePeer::AUTODEF_Y, CastlePeer::POINTS, CastlePeer::FREE_POPULATION, CastlePeer::LAST_IMPORT, CastlePeer::CREATED_AT, CastlePeer::UPDATED_AT, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID', 'USER_ID', 'NAME', 'CASTLE_TYPE_ID', 'CASTLE_LOCATION_ID', 'COORDINATES', 'X', 'Y', 'SILVER', 'COPPER', 'CURRENT_ST', 'CURRENT_SK', 'CURRENT_BS', 'CURRENT_AS', 'CURRENT_PR', 'CURRENT_LR', 'CURRENT_HK', 'CURRENT_OK', 'MISSION_ST', 'MISSION_SK', 'MISSION_BS', 'MISSION_AS', 'MISSION_PR', 'MISSION_LR', 'USAGE_OFF', 'USAGE_DEF', 'MISSION_PRIORITY', 'ENVIRONMENT_CARD', 'AUTODEF_COORDINATES', 'AUTODEF_X', 'AUTODEF_Y', 'POINTS', 'FREE_POPULATION', 'LAST_IMPORT', 'CREATED_AT', 'UPDATED_AT', ),
+        BasePeer::TYPE_FIELDNAME => array ('id', 'user_id', 'name', 'castle_type_id', 'castle_location_id', 'coordinates', 'X', 'Y', 'silver', 'copper', 'current_st', 'current_sk', 'current_bs', 'current_as', 'current_pr', 'current_lr', 'current_hk', 'current_ok', 'mission_st', 'mission_sk', 'mission_bs', 'mission_as', 'mission_pr', 'mission_lr', 'usage_off', 'usage_def', 'mission_priority', 'environment_card', 'autodef_coordinates', 'autodef_X', 'autodef_Y', 'points', 'free_population', 'last_import', 'created_at', 'updated_at', ),
         BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, )
     );
 
@@ -174,11 +174,11 @@ abstract class BaseCastlePeer
      * e.g. CastlePeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'UserId' => 1, 'Name' => 2, 'CastleTypeId' => 3, 'CastleLocationId' => 4, 'Coordinates' => 5, 'X' => 6, 'Y' => 7, 'Silver' => 8, 'Copper' => 9, 'CurrentSt' => 10, 'CurrentAs' => 11, 'CurrentPr' => 12, 'CurrentSk' => 13, 'CurrentBs' => 14, 'CurrentLr' => 15, 'CurrentHk' => 16, 'CurrentOk' => 17, 'MissionSt' => 18, 'MissionAs' => 19, 'MissionPr' => 20, 'MissionSk' => 21, 'MissionBs' => 22, 'MissionLr' => 23, 'UsageOff' => 24, 'UsageDef' => 25, 'MissionPriority' => 26, 'EnvironmentCard' => 27, 'AutodefCoordinates' => 28, 'AutodefX' => 29, 'AutodefY' => 30, 'Points' => 31, 'FreePopulation' => 32, 'LastImport' => 33, 'CreatedAt' => 34, 'UpdatedAt' => 35, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'userId' => 1, 'name' => 2, 'castleTypeId' => 3, 'castleLocationId' => 4, 'coordinates' => 5, 'x' => 6, 'y' => 7, 'silver' => 8, 'copper' => 9, 'currentSt' => 10, 'currentAs' => 11, 'currentPr' => 12, 'currentSk' => 13, 'currentBs' => 14, 'currentLr' => 15, 'currentHk' => 16, 'currentOk' => 17, 'missionSt' => 18, 'missionAs' => 19, 'missionPr' => 20, 'missionSk' => 21, 'missionBs' => 22, 'missionLr' => 23, 'usageOff' => 24, 'usageDef' => 25, 'missionPriority' => 26, 'environmentCard' => 27, 'autodefCoordinates' => 28, 'autodefX' => 29, 'autodefY' => 30, 'points' => 31, 'freePopulation' => 32, 'lastImport' => 33, 'createdAt' => 34, 'updatedAt' => 35, ),
-        BasePeer::TYPE_COLNAME => array (CastlePeer::ID => 0, CastlePeer::USER_ID => 1, CastlePeer::NAME => 2, CastlePeer::CASTLE_TYPE_ID => 3, CastlePeer::CASTLE_LOCATION_ID => 4, CastlePeer::COORDINATES => 5, CastlePeer::X => 6, CastlePeer::Y => 7, CastlePeer::SILVER => 8, CastlePeer::COPPER => 9, CastlePeer::CURRENT_ST => 10, CastlePeer::CURRENT_AS => 11, CastlePeer::CURRENT_PR => 12, CastlePeer::CURRENT_SK => 13, CastlePeer::CURRENT_BS => 14, CastlePeer::CURRENT_LR => 15, CastlePeer::CURRENT_HK => 16, CastlePeer::CURRENT_OK => 17, CastlePeer::MISSION_ST => 18, CastlePeer::MISSION_AS => 19, CastlePeer::MISSION_PR => 20, CastlePeer::MISSION_SK => 21, CastlePeer::MISSION_BS => 22, CastlePeer::MISSION_LR => 23, CastlePeer::USAGE_OFF => 24, CastlePeer::USAGE_DEF => 25, CastlePeer::MISSION_PRIORITY => 26, CastlePeer::ENVIRONMENT_CARD => 27, CastlePeer::AUTODEF_COORDINATES => 28, CastlePeer::AUTODEF_X => 29, CastlePeer::AUTODEF_Y => 30, CastlePeer::POINTS => 31, CastlePeer::FREE_POPULATION => 32, CastlePeer::LAST_IMPORT => 33, CastlePeer::CREATED_AT => 34, CastlePeer::UPDATED_AT => 35, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID' => 0, 'USER_ID' => 1, 'NAME' => 2, 'CASTLE_TYPE_ID' => 3, 'CASTLE_LOCATION_ID' => 4, 'COORDINATES' => 5, 'X' => 6, 'Y' => 7, 'SILVER' => 8, 'COPPER' => 9, 'CURRENT_ST' => 10, 'CURRENT_AS' => 11, 'CURRENT_PR' => 12, 'CURRENT_SK' => 13, 'CURRENT_BS' => 14, 'CURRENT_LR' => 15, 'CURRENT_HK' => 16, 'CURRENT_OK' => 17, 'MISSION_ST' => 18, 'MISSION_AS' => 19, 'MISSION_PR' => 20, 'MISSION_SK' => 21, 'MISSION_BS' => 22, 'MISSION_LR' => 23, 'USAGE_OFF' => 24, 'USAGE_DEF' => 25, 'MISSION_PRIORITY' => 26, 'ENVIRONMENT_CARD' => 27, 'AUTODEF_COORDINATES' => 28, 'AUTODEF_X' => 29, 'AUTODEF_Y' => 30, 'POINTS' => 31, 'FREE_POPULATION' => 32, 'LAST_IMPORT' => 33, 'CREATED_AT' => 34, 'UPDATED_AT' => 35, ),
-        BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'user_id' => 1, 'name' => 2, 'castle_type_id' => 3, 'castle_location_id' => 4, 'coordinates' => 5, 'X' => 6, 'Y' => 7, 'silver' => 8, 'copper' => 9, 'current_st' => 10, 'current_as' => 11, 'current_pr' => 12, 'current_sk' => 13, 'current_bs' => 14, 'current_lr' => 15, 'current_hk' => 16, 'current_ok' => 17, 'mission_st' => 18, 'mission_as' => 19, 'mission_pr' => 20, 'mission_sk' => 21, 'mission_bs' => 22, 'mission_lr' => 23, 'usage_off' => 24, 'usage_def' => 25, 'mission_priority' => 26, 'environment_card' => 27, 'autodef_coordinates' => 28, 'autodef_X' => 29, 'autodef_Y' => 30, 'points' => 31, 'free_population' => 32, 'last_import' => 33, 'created_at' => 34, 'updated_at' => 35, ),
+        BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'UserId' => 1, 'Name' => 2, 'CastleTypeId' => 3, 'CastleLocationId' => 4, 'Coordinates' => 5, 'X' => 6, 'Y' => 7, 'Silver' => 8, 'Copper' => 9, 'CurrentSt' => 10, 'CurrentSk' => 11, 'CurrentBs' => 12, 'CurrentAs' => 13, 'CurrentPr' => 14, 'CurrentLr' => 15, 'CurrentHk' => 16, 'CurrentOk' => 17, 'MissionSt' => 18, 'MissionSk' => 19, 'MissionBs' => 20, 'MissionAs' => 21, 'MissionPr' => 22, 'MissionLr' => 23, 'UsageOff' => 24, 'UsageDef' => 25, 'MissionPriority' => 26, 'EnvironmentCard' => 27, 'AutodefCoordinates' => 28, 'AutodefX' => 29, 'AutodefY' => 30, 'Points' => 31, 'FreePopulation' => 32, 'LastImport' => 33, 'CreatedAt' => 34, 'UpdatedAt' => 35, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'userId' => 1, 'name' => 2, 'castleTypeId' => 3, 'castleLocationId' => 4, 'coordinates' => 5, 'x' => 6, 'y' => 7, 'silver' => 8, 'copper' => 9, 'currentSt' => 10, 'currentSk' => 11, 'currentBs' => 12, 'currentAs' => 13, 'currentPr' => 14, 'currentLr' => 15, 'currentHk' => 16, 'currentOk' => 17, 'missionSt' => 18, 'missionSk' => 19, 'missionBs' => 20, 'missionAs' => 21, 'missionPr' => 22, 'missionLr' => 23, 'usageOff' => 24, 'usageDef' => 25, 'missionPriority' => 26, 'environmentCard' => 27, 'autodefCoordinates' => 28, 'autodefX' => 29, 'autodefY' => 30, 'points' => 31, 'freePopulation' => 32, 'lastImport' => 33, 'createdAt' => 34, 'updatedAt' => 35, ),
+        BasePeer::TYPE_COLNAME => array (CastlePeer::ID => 0, CastlePeer::USER_ID => 1, CastlePeer::NAME => 2, CastlePeer::CASTLE_TYPE_ID => 3, CastlePeer::CASTLE_LOCATION_ID => 4, CastlePeer::COORDINATES => 5, CastlePeer::X => 6, CastlePeer::Y => 7, CastlePeer::SILVER => 8, CastlePeer::COPPER => 9, CastlePeer::CURRENT_ST => 10, CastlePeer::CURRENT_SK => 11, CastlePeer::CURRENT_BS => 12, CastlePeer::CURRENT_AS => 13, CastlePeer::CURRENT_PR => 14, CastlePeer::CURRENT_LR => 15, CastlePeer::CURRENT_HK => 16, CastlePeer::CURRENT_OK => 17, CastlePeer::MISSION_ST => 18, CastlePeer::MISSION_SK => 19, CastlePeer::MISSION_BS => 20, CastlePeer::MISSION_AS => 21, CastlePeer::MISSION_PR => 22, CastlePeer::MISSION_LR => 23, CastlePeer::USAGE_OFF => 24, CastlePeer::USAGE_DEF => 25, CastlePeer::MISSION_PRIORITY => 26, CastlePeer::ENVIRONMENT_CARD => 27, CastlePeer::AUTODEF_COORDINATES => 28, CastlePeer::AUTODEF_X => 29, CastlePeer::AUTODEF_Y => 30, CastlePeer::POINTS => 31, CastlePeer::FREE_POPULATION => 32, CastlePeer::LAST_IMPORT => 33, CastlePeer::CREATED_AT => 34, CastlePeer::UPDATED_AT => 35, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID' => 0, 'USER_ID' => 1, 'NAME' => 2, 'CASTLE_TYPE_ID' => 3, 'CASTLE_LOCATION_ID' => 4, 'COORDINATES' => 5, 'X' => 6, 'Y' => 7, 'SILVER' => 8, 'COPPER' => 9, 'CURRENT_ST' => 10, 'CURRENT_SK' => 11, 'CURRENT_BS' => 12, 'CURRENT_AS' => 13, 'CURRENT_PR' => 14, 'CURRENT_LR' => 15, 'CURRENT_HK' => 16, 'CURRENT_OK' => 17, 'MISSION_ST' => 18, 'MISSION_SK' => 19, 'MISSION_BS' => 20, 'MISSION_AS' => 21, 'MISSION_PR' => 22, 'MISSION_LR' => 23, 'USAGE_OFF' => 24, 'USAGE_DEF' => 25, 'MISSION_PRIORITY' => 26, 'ENVIRONMENT_CARD' => 27, 'AUTODEF_COORDINATES' => 28, 'AUTODEF_X' => 29, 'AUTODEF_Y' => 30, 'POINTS' => 31, 'FREE_POPULATION' => 32, 'LAST_IMPORT' => 33, 'CREATED_AT' => 34, 'UPDATED_AT' => 35, ),
+        BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'user_id' => 1, 'name' => 2, 'castle_type_id' => 3, 'castle_location_id' => 4, 'coordinates' => 5, 'X' => 6, 'Y' => 7, 'silver' => 8, 'copper' => 9, 'current_st' => 10, 'current_sk' => 11, 'current_bs' => 12, 'current_as' => 13, 'current_pr' => 14, 'current_lr' => 15, 'current_hk' => 16, 'current_ok' => 17, 'mission_st' => 18, 'mission_sk' => 19, 'mission_bs' => 20, 'mission_as' => 21, 'mission_pr' => 22, 'mission_lr' => 23, 'usage_off' => 24, 'usage_def' => 25, 'mission_priority' => 26, 'environment_card' => 27, 'autodef_coordinates' => 28, 'autodef_X' => 29, 'autodef_Y' => 30, 'points' => 31, 'free_population' => 32, 'last_import' => 33, 'created_at' => 34, 'updated_at' => 35, ),
         BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, )
     );
 
@@ -264,18 +264,18 @@ abstract class BaseCastlePeer
             $criteria->addSelectColumn(CastlePeer::SILVER);
             $criteria->addSelectColumn(CastlePeer::COPPER);
             $criteria->addSelectColumn(CastlePeer::CURRENT_ST);
-            $criteria->addSelectColumn(CastlePeer::CURRENT_AS);
-            $criteria->addSelectColumn(CastlePeer::CURRENT_PR);
             $criteria->addSelectColumn(CastlePeer::CURRENT_SK);
             $criteria->addSelectColumn(CastlePeer::CURRENT_BS);
+            $criteria->addSelectColumn(CastlePeer::CURRENT_AS);
+            $criteria->addSelectColumn(CastlePeer::CURRENT_PR);
             $criteria->addSelectColumn(CastlePeer::CURRENT_LR);
             $criteria->addSelectColumn(CastlePeer::CURRENT_HK);
             $criteria->addSelectColumn(CastlePeer::CURRENT_OK);
             $criteria->addSelectColumn(CastlePeer::MISSION_ST);
-            $criteria->addSelectColumn(CastlePeer::MISSION_AS);
-            $criteria->addSelectColumn(CastlePeer::MISSION_PR);
             $criteria->addSelectColumn(CastlePeer::MISSION_SK);
             $criteria->addSelectColumn(CastlePeer::MISSION_BS);
+            $criteria->addSelectColumn(CastlePeer::MISSION_AS);
+            $criteria->addSelectColumn(CastlePeer::MISSION_PR);
             $criteria->addSelectColumn(CastlePeer::MISSION_LR);
             $criteria->addSelectColumn(CastlePeer::USAGE_OFF);
             $criteria->addSelectColumn(CastlePeer::USAGE_DEF);
@@ -301,18 +301,18 @@ abstract class BaseCastlePeer
             $criteria->addSelectColumn($alias . '.silver');
             $criteria->addSelectColumn($alias . '.copper');
             $criteria->addSelectColumn($alias . '.current_st');
-            $criteria->addSelectColumn($alias . '.current_as');
-            $criteria->addSelectColumn($alias . '.current_pr');
             $criteria->addSelectColumn($alias . '.current_sk');
             $criteria->addSelectColumn($alias . '.current_bs');
+            $criteria->addSelectColumn($alias . '.current_as');
+            $criteria->addSelectColumn($alias . '.current_pr');
             $criteria->addSelectColumn($alias . '.current_lr');
             $criteria->addSelectColumn($alias . '.current_hk');
             $criteria->addSelectColumn($alias . '.current_ok');
             $criteria->addSelectColumn($alias . '.mission_st');
-            $criteria->addSelectColumn($alias . '.mission_as');
-            $criteria->addSelectColumn($alias . '.mission_pr');
             $criteria->addSelectColumn($alias . '.mission_sk');
             $criteria->addSelectColumn($alias . '.mission_bs');
+            $criteria->addSelectColumn($alias . '.mission_as');
+            $criteria->addSelectColumn($alias . '.mission_pr');
             $criteria->addSelectColumn($alias . '.mission_lr');
             $criteria->addSelectColumn($alias . '.usage_off');
             $criteria->addSelectColumn($alias . '.usage_def');

@@ -29,12 +29,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		define("POPULATION_MAX", 	4300);		
 	}
 	
-	protected function _initAuth()
-	{
-		$this->bootstrap('frontController');
-		$auth = Zend_Auth::getInstance();
-		$acl = Plugin_Auth_Acl::getInstance();
-		$this->getResource('frontController')->registerPlugin(new Plugin_Auth_AccessControl($auth, $acl))->setParam('auth', $auth);
-	}
+// 	protected function _initAuth()
+// 	{
+// 		$this->bootstrap('frontController');
+// 		$auth = Zend_Auth::getInstance();
+// 		$acl = Plugin_Auth_Acl::getInstance();
+// 		$this->getResource('frontController')->registerPlugin(new Plugin_Auth_AccessControl($auth, $acl))->setParam('auth', $auth);
+// 	}
 	
 }

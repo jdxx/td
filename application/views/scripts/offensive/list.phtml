@@ -1,0 +1,91 @@
+<form method="post" action="">
+	<h3 class="td-h3">
+		<?php 
+		echo ($this->target->getStartTime()) ? 'Startzeit: ' : 'Einschlag: ';
+		echo $this->target->getDate() . ' / ' . $this->target->getTime() . ' Uhr'; ?>
+	</h3>
+	<div class="ui-grid-b">
+		<div class="ui-block-a td-block-a">
+		    <div>
+			    <legend>Typ:</legend>
+		    </div>
+			<fieldset data-role="controlgroup" data-type="horizontal">
+		        <input name="FilterCastlesOff" id="fco" value="1" <?php echo ($this->target->getFilterCastlesOff() == true) ? 'checked="checked"' : '';?> type="checkbox">
+		        <label for="fco">Off</label>
+		        <input name="FilterCastlesDef" id="fcd" value="1" <?php echo ($this->target->getFilterCastlesDef() == true) ? 'checked="checked"' : '';?> type="checkbox">
+		        <label for="fcd">Def</label>
+		        <input name="FilterCastlesMix" id="fcm" value="1" <?php echo ($this->target->getFilterCastlesMix() == true) ? 'checked="checked"' : '';?> type="checkbox">
+		        <label for="fcm">Mix</label>
+		    </fieldset>
+    	</div>
+    	<div class="ui-block-b td-block-b">
+		    <fieldset data-role="controlgroup" data-type="horizontal">
+		        <legend>Einheiten:</legend>
+		        <input name="FilterTroopsMarker" id="ftm" value="1" <?php echo ($this->target->getFilterTroopsMarker() == true) ? 'checked="checked"' : '';?> type="checkbox">
+		        <label for="ftm">Takt</label>
+		        <input name="FilterTroopsOff" id="fto" value="1" <?php echo ($this->target->getFilterTroopsOff() == true) ? 'checked="checked"' : '';?> type="checkbox">
+		        <label for="fto">Off</label>
+		        <input name="FilterTroopsDef" id="ftd" value="1" <?php echo ($this->target->getFilterTroopsDef() == true) ? 'checked="checked"' : '';?> type="checkbox">
+		        <label for="ftd">Def</label>
+		    </fieldset>
+	    </div>
+    	<div class="ui-block-b td-block-c">
+		    <div class="ui-field-contain td-field-contain">
+			    <label for="castletype">Sortierung</label>
+			    <select name="CastleTypeId" id="castletype">
+		        	<option value="time">Laufzeit</option>
+		        	<option value="silver">Silber</option>
+		        	<option value="sk">Anzahl Sk</option>
+		        	<option value="bs">Anzahl Bs</option>
+		        	<option value="lr">Anzahl Lr</option>
+			    </select>
+			</div>			
+		</div>
+	</div>
+	<table data-role="table" id="table-custom-2" class="tablesorter ui-body-d ui-shadow table-stripe ui-responsive" data-column-btn-theme="b" data-column-btn-text="Columns to display..." data-column-popup-theme="a">
+         <thead>
+           <tr class="ui-bar-d">
+             <th data-priority="6">Nr.</th>
+             <th>Burg</th>
+             <th data-priority="6">Silber</th>
+             <th data-priority="2">Ochsenkarren</th>
+             <th data-priority="6">Handkarren</th>
+             <th data-priority="2">Schwert</th>
+             <th data-priority="4">Speer</th>
+             <th data-priority="4">Armbrust</th>
+             <th data-priority="2">Bogen</th>
+             <th data-priority="2">Lanzen</th>
+             <th data-priority="4">Panzer</th>
+           </tr>
+         </thead>
+         <tbody>
+         	<?php
+         	$no = 0;
+//         	echo "<xmp>"; var_dump($this->castles); exit;
+         	foreach($this->castles as $castle): 
+         		$no++;?>
+            	<tr class="<?php echo $castle->getCastleTypeId(); ?>">
+            		<td><?php echo $no; ?></td>
+		            <td><a href="/castle/update/<?php echo $castle->getid(); ?>"><?php echo $castle->getName(); ?></a></td>
+		            <td><?php echo $castle->getSilver(); ?></td>
+		            <?php 
+		            echo $this->ListEntry('ok', 'takt', $castle->getId(), $castle->date_ok, $castle->time_ok, $castle->color_ok, $castle->getCurrentOk(), 'Ochsenkarren');
+		            echo $this->ListEntry('hk', 'takt', $castle->getId(), $castle->date_hk, $castle->time_hk, $castle->color_hk, $castle->getCurrentHk(), 'Handkarren');
+		            echo $this->ListEntry('sk', 'off', $castle->getId(), $castle->date_sk, $castle->time_sk, $castle->color_sk, $castle->getCurrentSk(), 'Schwertk&auml;mpfer');
+		            echo $this->ListEntry('st', 'def', $castle->getId(), $castle->date_st, $castle->time_st, $castle->color_st, $castle->getCurrentSt(), 'Speertr&auml;ger');
+		            echo $this->ListEntry('as', 'def', $castle->getId(), $castle->date_as, $castle->time_as, $castle->color_as, $castle->getCurrentAs(), 'Armbrustsch&uuml;tzen');
+		            echo $this->ListEntry('bs', 'off', $castle->getId(), $castle->date_bs, $castle->time_bs, $castle->color_bs, $castle->getCurrentBs(), 'Bogensch&uuml;tzen');
+		            echo $this->ListEntry('lr', 'off', $castle->getId(), $castle->date_lr, $castle->time_lr, $castle->color_lr, $castle->getCurrentLr(), 'Lanzenreiter');
+	            	echo $this->ListEntry('pr', 'def', $castle->getId(), $castle->date_pr, $castle->time_pr, $castle->color_pr, $castle->getCurrentPr(), 'Panzerreiter');?>
+           		</tr>
+           		<?php 
+			endforeach; ?>
+    	</tbody>
+	</table>	
+    <div class="td-right">
+		<div class="ui-input-btn ui-btn ui-btn-b ui-btn-inline ui-corner-all ui-shadow">
+	    	Bearbeiten
+	    	<input name="update" type="submit">
+	    </div> 
+	</div>    
+</form>

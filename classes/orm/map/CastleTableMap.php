@@ -38,7 +38,7 @@ class CastleTableMap extends TableMap
         $this->setPackage('orm');
         $this->setUseIdGenerator(true);
         // columns
-        $this->addPrimaryKey('id', 'Id', 'INTEGER', true, 10, null);
+        $this->addPrimaryKey('id', 'Id', 'INTEGER', true, null, null);
         $this->addForeignKey('user_id', 'UserId', 'INTEGER', 'user', 'id', false, null, null);
         $this->addColumn('name', 'Name', 'VARCHAR', false, 50, null);
         $this->addForeignKey('castle_type_id', 'CastleTypeId', 'INTEGER', 'castle_type', 'id', false, 6, null);
@@ -49,18 +49,18 @@ class CastleTableMap extends TableMap
         $this->addColumn('silver', 'Silver', 'INTEGER', false, 5, null);
         $this->addColumn('copper', 'Copper', 'INTEGER', false, 5, null);
         $this->addColumn('current_st', 'CurrentSt', 'INTEGER', false, 4, null);
-        $this->addColumn('current_as', 'CurrentAs', 'INTEGER', false, 4, null);
-        $this->addColumn('current_pr', 'CurrentPr', 'INTEGER', false, 4, null);
         $this->addColumn('current_sk', 'CurrentSk', 'INTEGER', false, 4, null);
         $this->addColumn('current_bs', 'CurrentBs', 'INTEGER', false, 4, null);
+        $this->addColumn('current_as', 'CurrentAs', 'INTEGER', false, 4, null);
+        $this->addColumn('current_pr', 'CurrentPr', 'INTEGER', false, 4, null);
         $this->addColumn('current_lr', 'CurrentLr', 'INTEGER', false, 4, null);
         $this->addColumn('current_hk', 'CurrentHk', 'INTEGER', false, 4, null);
         $this->addColumn('current_ok', 'CurrentOk', 'INTEGER', false, 4, null);
         $this->addColumn('mission_st', 'MissionSt', 'INTEGER', false, 4, null);
-        $this->addColumn('mission_as', 'MissionAs', 'INTEGER', false, 4, null);
-        $this->addColumn('mission_pr', 'MissionPr', 'INTEGER', false, 4, null);
         $this->addColumn('mission_sk', 'MissionSk', 'INTEGER', false, 4, null);
         $this->addColumn('mission_bs', 'MissionBs', 'INTEGER', false, 4, null);
+        $this->addColumn('mission_as', 'MissionAs', 'INTEGER', false, 4, null);
+        $this->addColumn('mission_pr', 'MissionPr', 'INTEGER', false, 4, null);
         $this->addColumn('mission_lr', 'MissionLr', 'INTEGER', false, 4, null);
         $this->addColumn('usage_off', 'UsageOff', 'BOOLEAN', false, 1, null);
         $this->addColumn('usage_def', 'UsageDef', 'BOOLEAN', false, 1, null);
@@ -86,6 +86,7 @@ class CastleTableMap extends TableMap
         $this->addRelation('CastleLocation', 'CastleLocation', RelationMap::MANY_TO_ONE, array('castle_location_id' => 'id', ), null, null);
         $this->addRelation('User', 'User', RelationMap::MANY_TO_ONE, array('user_id' => 'id', ), null, null);
         $this->addRelation('Attack2castle', 'Attack2castle', RelationMap::ONE_TO_MANY, array('id' => 'castle_id', ), null, null, 'Attack2castles');
+        $this->addRelation('TargetActions', 'TargetActions', RelationMap::ONE_TO_MANY, array('id' => 'castle_id', ), null, null, 'TargetActionss');
         $this->addRelation('Attack', 'Attack', RelationMap::MANY_TO_MANY, array(), null, null, 'Attacks');
     } // buildRelations()
 

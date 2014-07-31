@@ -38,7 +38,7 @@ class CastleLocationTableMap extends TableMap
         $this->setPackage('orm');
         $this->setUseIdGenerator(true);
         // columns
-        $this->addPrimaryKey('id', 'Id', 'INTEGER', true, 6, null);
+        $this->addPrimaryKey('id', 'Id', 'INTEGER', true, null, null);
         $this->addForeignKey('user_id', 'UserId', 'INTEGER', 'user', 'id', false, null, null);
         $this->addColumn('name', 'Name', 'VARCHAR', false, 50, null);
         $this->addColumn('parent_id', 'ParentId', 'INTEGER', false, 6, null);
