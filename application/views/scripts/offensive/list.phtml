@@ -1,4 +1,4 @@
-<form method="post" action="">
+<form method="post" action="" class="attack-result">
 	<h3 class="td-h3">
 		<?php 
 		echo ($this->target->getStartTime()) ? 'Startzeit: ' : 'Einschlag: ';
@@ -6,10 +6,8 @@
 	</h3>
 	<div class="ui-grid-b">
 		<div class="ui-block-a td-block-a">
-		    <div>
-			    <legend>Typ:</legend>
-		    </div>
 			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend class="td-legend-left">Typ:</legend>
 		        <input name="FilterCastlesOff" id="fco" value="1" <?php echo ($this->target->getFilterCastlesOff() == true) ? 'checked="checked"' : '';?> type="checkbox">
 		        <label for="fco">Off</label>
 		        <input name="FilterCastlesDef" id="fcd" value="1" <?php echo ($this->target->getFilterCastlesDef() == true) ? 'checked="checked"' : '';?> type="checkbox">
@@ -20,7 +18,7 @@
     	</div>
     	<div class="ui-block-b td-block-b">
 		    <fieldset data-role="controlgroup" data-type="horizontal">
-		        <legend>Einheiten:</legend>
+				<legend class="td-legend-left">Einheit:</legend>
 		        <input name="FilterTroopsMarker" id="ftm" value="1" <?php echo ($this->target->getFilterTroopsMarker() == true) ? 'checked="checked"' : '';?> type="checkbox">
 		        <label for="ftm">Takt</label>
 		        <input name="FilterTroopsOff" id="fto" value="1" <?php echo ($this->target->getFilterTroopsOff() == true) ? 'checked="checked"' : '';?> type="checkbox">
@@ -30,8 +28,8 @@
 		    </fieldset>
 	    </div>
     	<div class="ui-block-b td-block-c">
-		    <div class="ui-field-contain td-field-contain">
-			    <label for="castletype">Sortierung</label>
+		    <div class="ui-field-contain td-field-contain td-topmargin-9">
+				<legend class="td-legend-left">Sortierung:</legend>
 			    <select name="CastleTypeId" id="castletype">
 		        	<option value="time">Laufzeit</option>
 		        	<option value="silver">Silber</option>
@@ -42,20 +40,40 @@
 			</div>			
 		</div>
 	</div>
+	
+	<div>
+		<div class="ui-field-contain td-field-contain-troops">
+        	<label for="total-silver">Silber</label>
+			<input name="TotalSilver" id="total_silver" data-wrapper-class="number-6dx"  disabled="disabled" value="<?php echo $this->target->getTotalSilver(); ?>" type="number">
+		</div>
+		<div class="ui-field-contain td-field-contain-troops">
+        	<label for="total-st">Speertr&auml;ger</label>
+			<input name="TotalSt" id="total_st" data-wrapper-class="number-6dx"  disabled="disabled" value="<?php echo $this->target->getTotalSt(); ?>" type="number">
+        </div>
+        <div class="ui-field-contain td-field-contain-troops">
+        	<label for="total-sk">Schwertk&auml;mpfer</label>
+        	<input name="TotalSk" id="total_sk" data-wrapper-class="number-6dx"  disabled="disabled" value="<?php echo $this->target->getTotalSk(); ?>" type="number">
+        </div>
+        <input name="TotalBs" id="total_bs" data-wrapper-class="number-6dx"  disabled="disabled" value="<?php echo $this->target->getTotalBs(); ?>" type="number">
+        <input name="TotalAs" id="total_as" data-wrapper-class="number-6dx"  disabled="disabled" value="<?php echo $this->target->getTotalAs(); ?>" type="number">
+        <input name="TotalPr" id="total_pr" data-wrapper-class="number-6dx"  disabled="disabled" value="<?php echo $this->target->getTotalPr(); ?>" type="number">
+        <input name="TotalLr" id="total_lr" data-wrapper-class="number-6dx"  disabled="disabled" value="<?php echo $this->target->getTotalLr(); ?>" type="number">
+    </div>
+	
 	<table data-role="table" id="table-custom-2" class="tablesorter ui-body-d ui-shadow table-stripe ui-responsive" data-column-btn-theme="b" data-column-btn-text="Columns to display..." data-column-popup-theme="a">
          <thead>
            <tr class="ui-bar-d">
-             <th data-priority="6">Nr.</th>
+             <th>Nr.</th>
              <th>Burg</th>
-             <th data-priority="6">Silber</th>
-             <th data-priority="2">Ochsenkarren</th>
-             <th data-priority="6">Handkarren</th>
-             <th data-priority="2">Schwert</th>
-             <th data-priority="4">Speer</th>
-             <th data-priority="4">Armbrust</th>
-             <th data-priority="2">Bogen</th>
-             <th data-priority="2">Lanzen</th>
-             <th data-priority="4">Panzer</th>
+             <th>Silber</th>
+             <th class="takt">Ochsenkarren</th>
+             <th class="takt">Handkarren</th>
+             <th class="off">Schwert</th>
+             <th class="def">Speer</th>
+             <th class="def">Armbrust</th>
+             <th class="off">Bogen</th>
+             <th class="off">Lanzen</th>
+             <th class="def">Panzer</th>
            </tr>
          </thead>
          <tbody>
@@ -64,10 +82,12 @@
 //         	echo "<xmp>"; var_dump($this->castles); exit;
          	foreach($this->castles as $castle): 
          		$no++;?>
-            	<tr class="<?php echo $castle->getCastleTypeId(); ?>">
+            	<tr class="castle<?php $castleType = $castle->getCastleType(); //echo $castleType->getType(); ?>">
             		<td><?php echo $no; ?></td>
 		            <td><a href="/castle/update/<?php echo $castle->getid(); ?>"><?php echo $castle->getName(); ?></a></td>
-		            <td><?php echo $castle->getSilver(); ?></td>
+		            <td>
+						<input type="text" name="silver<?php echo $castle->getId(); ?>" value="<?php echo $castle->getSilver(); ?>">
+					</td>
 		            <?php 
 		            echo $this->ListEntry('ok', 'takt', $castle->getId(), $castle->date_ok, $castle->time_ok, $castle->color_ok, $castle->getCurrentOk(), 'Ochsenkarren');
 		            echo $this->ListEntry('hk', 'takt', $castle->getId(), $castle->date_hk, $castle->time_hk, $castle->color_hk, $castle->getCurrentHk(), 'Handkarren');
