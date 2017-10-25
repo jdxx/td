@@ -26,7 +26,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	{
 		define("APP_NAME", 			"TotalDefense v0.1");
 		define("APP_TITLE", 		"TotalDefense");
-		define("POPULATION_MAX", 	4300);		
+		define("POPULATION_MAX", 	4312);		
 	}
 	
 // 	protected function _initAuth()
